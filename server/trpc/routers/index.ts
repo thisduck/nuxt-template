@@ -1,5 +1,5 @@
-import { baseProcedure, createTRPCRouter } from '~/server/trpc/init'
-import { z } from 'zod'
+import { z } from 'zod';
+import { baseProcedure, createTRPCRouter } from '~/server/trpc/init';
 
 export const appRouter = createTRPCRouter({
   hello: baseProcedure

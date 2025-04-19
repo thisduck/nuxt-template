@@ -1,4 +1,4 @@
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from '@tailwindcss/vite';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -11,7 +11,7 @@ export default defineNuxtConfig({
   ],
 
   build: {
-    transpile: ['trpc-nuxt']
+    transpile: ['trpc-nuxt'],
   },
 
   vite: {
@@ -21,4 +21,4 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
-})
+});

@@ -1,10 +1,10 @@
-import { initTRPC } from '@trpc/server';
 import type { H3Event } from 'h3';
+import { initTRPC } from '@trpc/server';
 
-export const createTRPCContext = async (event: H3Event) => {
+export async function createTRPCContext(event: H3Event) {
   /**
-  * @see: https://trpc.io/docs/server/context
-  */
+   * @see: https://trpc.io/docs/server/context
+   */
   return { auth: event.context.auth };
 }
 
@@ -14,8 +14,8 @@ export const createTRPCContext = async (event: H3Event) => {
 // is common in i18n libraries.
 const t = initTRPC.create({
   /**
-  * @see https://trpc.io/docs/server/data-transformers
-  */
+   * @see https://trpc.io/docs/server/data-transformers
+   */
   // transformer: superjson,
 });
 
