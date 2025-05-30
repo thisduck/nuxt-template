@@ -1,25 +1,52 @@
-import User from '../models/user';
+import { db } from '../environment/kysely';
 
 const tasks = {
   insert: async () => {
-    await User.create({
-      name: 'John Doe',
-      email: 'john@doe.com',
+    const result = await db.transaction().execute(async (tx) => {
+      const user = await tx.insertInto('users').values({
+        name: 'Some Dude',
+        email: 'lala@lala.com',
+      }).returningAll().executeTakeFirstOrThrow();
+
+      // eslint-disable-next-line no-console
+      console.log('User inserted:', user);
+
+      return user;
     });
+
+    return result;
   },
-  find: async () => {
-    const users = await User.findAll();
+  findAll: async () => {
+    const users = await db.selectFrom('users').selectAll().execute();
     return users;
   },
+  findById: async (id: number) => {
+    const user = await db.selectFrom('users')
+      .selectAll()
+      .where('id', '=', id)
+      .executeTakeFirst();
+
+    if (!user) {
+      throw new Error(`User with id ${id} not found`);
+    }
+
+    return user;
+  },
   update: async () => {
-    const user = await User.findOne({
-      where: {
-        email: 'john@doe.com',
-      },
-    });
+    const user = await db.selectFrom('users').where('email', '=', 'lala@lala.com').selectAll().executeTakeFirst();
+
     if (user) {
-      user.name = 'Jane Doe';
-      await user.save();
+      const updatedUser = await db.updateTable('users')
+        .set({
+          name: 'Updated Dude',
+          email: 'hello@example.com',
+        })
+        .where('id', '=', user.id)
+        .returningAll()
+        .executeTakeFirstOrThrow();
+
+      // eslint-disable-next-line no-console
+      console.log('User updated:', updatedUser);
     }
   },
 };
