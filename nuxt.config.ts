@@ -59,7 +59,14 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/test-utils/module',
     '@primevue/nuxt-module',
+    '@nuxtjs/google-fonts',
   ],
+
+  googleFonts: {
+    families: {
+      Inter: [400, 500, 600, 700], // Specify the weights you need
+    },
+  },
 
   app: {
     head: {
