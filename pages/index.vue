@@ -11,7 +11,7 @@ const visible = ref(false);
       <div>{{ hello?.greeting }}</div>
     </h1>
 
-    <div class="card flex justify-center">
+    <div class="card flex">
       <Button label="Show" @click="visible = true" />
       <Dialog v-model:visible="visible" modal header="Edit Profile" :style="{ width: '25rem' }">
         <span class="text-surface-500 dark:text-surface-400 block mb-8">Update your information.</span>
@@ -30,19 +30,19 @@ const visible = ref(false);
       </Dialog>
     </div>
 
-    <div class="card flex flex-col items-center gap-4">
-      <div class="flex flex-wrap gap-4 justify-center">
+    <div class="card flex flex-col gap-4">
+      <div class="flex flex-wrap gap-4">
         <Button icon="pi pi-home" aria-label="Save" />
         <Button label="Profile" icon="pi pi-user" />
         <Button label="Save" icon="pi pi-check" icon-pos="right" />
       </div>
-      <div class="flex flex-wrap gap-4 justify-center">
+      <div class="flex flex-wrap gap-4">
         <Button label="Search" icon="pi pi-search" icon-pos="top" />
         <Button label="Update" icon="pi pi-refresh" icon-pos="bottom" />
       </div>
     </div>
 
-    <div class="card flex flex-wrap gap-4 justify-center">
+    <div class="card flex flex-wrap gap-4">
       <Message severity="success">
         Success Message
       </Message>
