@@ -60,6 +60,7 @@ export default defineNuxtConfig({
     '@nuxt/test-utils/module',
     '@primevue/nuxt-module',
     '@nuxtjs/google-fonts',
+    '@nuxt/icon',
   ],
 
   googleFonts: {

@@ -32,13 +32,42 @@ const visible = ref(false);
 
     <div class="card flex flex-col gap-4">
       <div class="flex flex-wrap gap-4">
-        <Button icon="pi pi-home" aria-label="Save" />
-        <Button label="Profile" icon="pi pi-user" />
-        <Button label="Save" icon="pi pi-check" icon-pos="right" />
+        <Button aria-label="Home">
+          <Icon name="lucide:home" size="16" />
+        </Button>
+        <Button label="Profile">
+          <template #icon>
+            <Icon name="lucide:user" size="16" />
+          </template>
+        </Button>
+        <Button label="Save">
+          <template #icon>
+            <Icon name="lucide:check" size="16" />
+          </template>
+        </Button>
       </div>
       <div class="flex flex-wrap gap-4">
-        <Button label="Search" icon="pi pi-search" icon-pos="top" />
-        <Button label="Update" icon="pi pi-refresh" icon-pos="bottom" />
+        <Button label="Search">
+          <template #icon>
+            <Icon name="lucide:search" size="16" />
+          </template>
+        </Button>
+        <Button label="Update">
+          <template #icon>
+            <Icon name="lucide:refresh-cw" size="16" />
+          </template>
+        </Button>
+      </div>
+    </div>
+
+    <div class="card flex flex-col gap-4">
+      <h2 class="text-xl font-semibold">Lucide Icon Examples</h2>
+      <div class="flex flex-wrap gap-4 items-center">
+        <Icon name="lucide:github" class="text-2xl" />
+        <Icon name="lucide:twitter" class="text-2xl text-blue-500" />
+        <Icon name="lucide:heart" class="text-2xl text-red-500" />
+        <Icon name="lucide:star" class="text-2xl text-yellow-500" />
+        <Icon name="lucide:home" class="text-2xl text-green-500" />
       </div>
     </div>
 
