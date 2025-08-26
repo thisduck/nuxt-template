@@ -26,3 +26,5 @@ logs
 # Database files
 *.sqlite3
 *.db
+
+.claude
