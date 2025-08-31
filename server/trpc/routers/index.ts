@@ -89,6 +89,45 @@ export const appRouter = createTRPCRouter({
         product.category.toLowerCase().includes(opts.input.filter.toLowerCase())
       );
     }),
+  getFilteredTags: baseProcedure
+    .input(
+      z.object({
+        filter: z.string().optional(),
+      }),
+    )
+    .query((opts) => {
+      const tags = [
+        { id: 1, name: 'React', category: 'Frontend', color: '#61DAFB' },
+        { id: 2, name: 'Vue.js', category: 'Frontend', color: '#4FC08D' },
+        { id: 3, name: 'Angular', category: 'Frontend', color: '#DD0031' },
+        { id: 4, name: 'Svelte', category: 'Frontend', color: '#FF3E00' },
+        { id: 5, name: 'Node.js', category: 'Backend', color: '#339933' },
+        { id: 6, name: 'Express.js', category: 'Backend', color: '#000000' },
+        { id: 7, name: 'Fastify', category: 'Backend', color: '#000000' },
+        { id: 8, name: 'PostgreSQL', category: 'Database', color: '#336791' },
+        { id: 9, name: 'MongoDB', category: 'Database', color: '#47A248' },
+        { id: 10, name: 'Redis', category: 'Database', color: '#DC382D' },
+        { id: 11, name: 'TypeScript', category: 'Language', color: '#3178C6' },
+        { id: 12, name: 'JavaScript', category: 'Language', color: '#F7DF1E' },
+        { id: 13, name: 'Python', category: 'Language', color: '#3776AB' },
+        { id: 14, name: 'Docker', category: 'DevOps', color: '#2496ED' },
+        { id: 15, name: 'Kubernetes', category: 'DevOps', color: '#326CE5' },
+        { id: 16, name: 'AWS', category: 'Cloud', color: '#FF9900' },
+        { id: 17, name: 'Azure', category: 'Cloud', color: '#0078D4' },
+        { id: 18, name: 'GraphQL', category: 'API', color: '#E10098' },
+        { id: 19, name: 'REST API', category: 'API', color: '#02569B' },
+        { id: 20, name: 'tRPC', category: 'API', color: '#398CCB' },
+      ];
+
+      if (!opts.input.filter?.trim()) {
+        return tags;
+      }
+
+      return tags.filter(tag =>
+        tag.name.toLowerCase().includes(opts.input.filter.toLowerCase()) ||
+        tag.category.toLowerCase().includes(opts.input.filter.toLowerCase())
+      );
+    }),
 });
 
 // export type definition of API

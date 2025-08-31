@@ -84,7 +84,6 @@ const selectedLazyItems = ref([]);
 // States
 const selectedDisabled = ref([{ name: 'Paris', code: 'PRS' }, { name: 'London', code: 'LDN' }]);
 const selectedInvalid = ref([]);
-const selectedReadonly = ref([{ name: 'Tokyo', code: 'TKY' }]);
 
 // Sizes
 const selectedSmall = ref([]);
@@ -96,6 +95,71 @@ const selectedAllCities = ref([]);
 
 // Custom Header/Footer
 const _selectedHeaderCities = ref([]);
+
+// Forms
+const selectedFormCities = ref([]);
+
+// Clear Icon
+const selectedClearCities = ref([]);
+
+// Loading State
+const isLoading = ref(false);
+const selectedLoadingCities = ref([]);
+
+// Filled Variant
+const selectedFilledCities = ref([]);
+
+// Select All with Events
+const selectedAllEventCities = ref([]);
+const selectAll = ref(false);
+
+// tRPC Backend
+const { $trpc } = useNuxtApp();
+const selectedTags = ref([]);
+const filteredTags = ref([]);
+const filterDebounceTimeout = ref(null);
+
+// Load initial tags
+onMounted(async () => {
+  try {
+    filteredTags.value = await $trpc.getFilteredTags.query({ filter: '' });
+  } catch (error) {
+    console.error('Failed to load tags:', error);
+  }
+});
+
+// Custom filter function for tRPC backend
+async function onFilterTags(event) {
+  // Clear existing timeout
+  if (filterDebounceTimeout.value) {
+    clearTimeout(filterDebounceTimeout.value);
+  }
+  
+  // Debounce the API call
+  filterDebounceTimeout.value = setTimeout(async () => {
+    try {
+      filteredTags.value = await $trpc.getFilteredTags.query({ 
+        filter: event.value || '' 
+      });
+    } catch (error) {
+      console.error('Failed to filter tags:', error);
+    }
+  }, 300);
+}
+
+function onSelectAllChange(event) {
+  selectAll.value = event.checked;
+  if (event.checked) {
+    selectedAllEventCities.value = [...cities.value];
+  } else {
+    selectedAllEventCities.value = [];
+  }
+}
+
+function onChange(event) {
+  // Update select all state based on selection
+  selectAll.value = event.value?.length === cities.value.length;
+}
 </script>
 
 <template>
@@ -134,6 +198,7 @@ const _selectedHeaderCities = ref([]);
             :options="cities"
             option-label="name"
             placeholder="Select Cities"
+            :max-selected-labels="3"
             class="w-full"
           />
           <small class="text-surface-600 dark:text-surface-300">
@@ -162,6 +227,7 @@ const _selectedHeaderCities = ref([]);
             option-label="name"
             placeholder="Select Cities"
             display="chip"
+            :max-selected-labels="3"
             class="w-full"
           />
           <small class="text-surface-600 dark:text-surface-300">
@@ -190,6 +256,7 @@ const _selectedHeaderCities = ref([]);
             option-label="name"
             placeholder="Search and select cities"
             filter
+            :max-selected-labels="3"
             class="w-full"
           />
           <small class="text-surface-600 dark:text-surface-300">
@@ -220,8 +287,16 @@ const _selectedHeaderCities = ref([]);
             option-group-label="label"
             option-group-children="items"
             placeholder="Select Cities by Country"
+            :max-selected-labels="3"
             class="w-full"
-          />
+          >
+            <template #optiongroup="slotProps">
+              <div class="flex items-center gap-2 p-2 font-medium">
+                <i class="pi pi-globe text-primary-500" />
+                <span>{{ slotProps.option.label }}</span>
+              </div>
+            </template>
+          </MultiSelect>
           <small class="text-surface-600 dark:text-surface-300">
             Options grouped by country for easier selection
           </small>
@@ -275,6 +350,7 @@ const _selectedHeaderCities = ref([]);
             :options="countries"
             option-label="name"
             placeholder="Select Countries"
+            :max-selected-labels="3"
             class="w-full"
           >
             <template #value="slotProps">
@@ -299,6 +375,23 @@ const _selectedHeaderCities = ref([]);
                 >
                 <span>{{ slotProps.option.name }}</span>
               </div>
+            </template>
+            <template #header>
+              <div class="font-medium px-3 py-2 border-b border-surface-200 dark:border-surface-700">
+                Available Countries
+              </div>
+            </template>
+            <template #footer>
+              <div class="p-3 border-t border-surface-200 dark:border-surface-700 flex justify-between">
+                <Button label="Add New" severity="secondary" text size="small" icon="pi pi-plus" />
+                <Button label="Remove All" severity="danger" text size="small" icon="pi pi-times" />
+              </div>
+            </template>
+            <template #dropdownicon>
+              <i class="pi pi-map" />
+            </template>
+            <template #filtericon>
+              <i class="pi pi-map-marker" />
             </template>
           </MultiSelect>
           <small class="text-surface-600 dark:text-surface-300">
@@ -326,7 +419,10 @@ const _selectedHeaderCities = ref([]);
             :options="cities"
             option-label="name"
             placeholder="Select Cities"
-            :select-all="true"
+            :select-all="selectAll"
+            :max-selected-labels="3"
+            @selectall-change="onSelectAllChange"
+            @change="onChange"
             class="w-full"
           />
           <small class="text-surface-600 dark:text-surface-300">
@@ -394,7 +490,7 @@ const _selectedHeaderCities = ref([]);
         Different states can be applied to indicate validation status or user interaction constraints.
       </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
             <h3 class="font-semibold text-surface-900 dark:text-surface-0">
@@ -428,20 +524,191 @@ const _selectedHeaderCities = ref([]);
           </div>
         </div>
 
-        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
-          <div class="flex flex-col gap-4">
-            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
-              Readonly
-            </h3>
-            <MultiSelect
-              v-model="selectedReadonly"
-              :options="cities"
-              option-label="name"
-              readonly
-              class="w-full"
+      </div>
+    </div>
+
+    <!-- Forms Integration -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Forms Integration
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        MultiSelect integrates with form validation and provides error handling.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-col gap-4">
+          <label for="form-multiselect" class="font-semibold text-surface-900 dark:text-surface-0">Cities (Required)</label>
+          <MultiSelect
+            id="form-multiselect"
+            v-model="selectedFormCities"
+            :options="cities"
+            option-label="name"
+            :invalid="selectedFormCities.length === 0"
+            filter
+            :max-selected-labels="3"
+            placeholder="Select Cities"
+          />
+          <Message v-if="selectedFormCities.length === 0" severity="error" size="small">
+            At least one city selection is required
+          </Message>
+          <small class="text-surface-600 dark:text-surface-300">
+            Form integration with validation and error messages
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clear Icon -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Clear Icon
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        Add a clear icon to reset all selections.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-col gap-4">
+          <label for="clear-multiselect" class="font-semibold text-surface-900 dark:text-surface-0">Cities with Clear</label>
+          <MultiSelect
+            id="clear-multiselect"
+            v-model="selectedClearCities"
+            :options="cities"
+            option-label="name"
+            placeholder="Select Cities"
+            show-clear
+            filter
+            :max-selected-labels="3"
+          />
+          <small class="text-surface-600 dark:text-surface-300">
+            Click the X icon to clear all selections
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Loading State
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        Display loading indicator while data is being fetched.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-2">
+            <label for="loading-multiselect" class="font-semibold text-surface-900 dark:text-surface-0">Loading Example</label>
+            <Button
+              @click="isLoading = !isLoading"
+              :label="isLoading ? 'Stop Loading' : 'Start Loading'"
+              size="small"
+              severity="secondary"
             />
-            <small class="text-surface-600 dark:text-surface-300">This field is readonly.</small>
           </div>
+          <MultiSelect
+            id="loading-multiselect"
+            v-model="selectedLoadingCities"
+            :options="cities"
+            option-label="name"
+            placeholder="Loading..."
+            :loading="isLoading"
+            :max-selected-labels="3"
+          />
+          <small class="text-surface-600 dark:text-surface-300">
+            Toggle loading state with the button above
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filled Variant -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Filled Variant
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        Use the filled variant for higher visual emphasis.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-col gap-4">
+          <label for="filled-multiselect" class="font-semibold text-surface-900 dark:text-surface-0">Cities (Filled)</label>
+          <MultiSelect
+            id="filled-multiselect"
+            v-model="selectedFilledCities"
+            :options="cities"
+            option-label="name"
+            placeholder="Filled variant style"
+            variant="filled"
+            filter
+            :max-selected-labels="3"
+          />
+          <small class="text-surface-600 dark:text-surface-300">
+            Enhanced visual emphasis with filled background
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- tRPC Backend -->
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center gap-2">
+        <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+          tRPC Backend
+        </h2>
+        <Tag value="Real API" severity="info" />
+      </div>
+      <p class="text-surface-600 dark:text-surface-300">
+        MultiSelect with dynamic filtering using tRPC backend for type-safe API integration.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-col gap-4">
+          <label for="trpc-multiselect" class="font-semibold text-surface-900 dark:text-surface-0">Technology Tags</label>
+          <MultiSelect
+            id="trpc-multiselect"
+            v-model="selectedTags"
+            :options="filteredTags"
+            option-label="name"
+            placeholder="Search and select technologies..."
+            display="chip"
+            filter
+            @filter="onFilterTags"
+            :max-selected-labels="5"
+          >
+            <template #option="slotProps">
+              <div class="flex items-center justify-between p-2 w-full">
+                <div class="flex items-center gap-2">
+                  <div 
+                    class="w-4 h-4 rounded"
+                    :style="{ backgroundColor: slotProps.option.color }"
+                  ></div>
+                  <div class="flex flex-col">
+                    <span class="font-medium">{{ slotProps.option.name }}</span>
+                    <small class="text-surface-500">{{ slotProps.option.category }}</small>
+                  </div>
+                </div>
+              </div>
+            </template>
+            <template #chip="slotProps">
+              <div class="flex items-center gap-1 px-2 py-1">
+                <div 
+                  class="w-3 h-3 rounded"
+                  :style="{ backgroundColor: slotProps.value.color }"
+                ></div>
+                <span>{{ slotProps.value.name }}</span>
+              </div>
+            </template>
+          </MultiSelect>
+          <small class="text-surface-600 dark:text-surface-300">
+            Selected: {{ selectedTags.length }} tags
+          </small>
+          <small class="text-surface-500 dark:text-surface-400">
+            Real-time filtering via tRPC backend with debounced API calls
+          </small>
         </div>
       </div>
     </div>
@@ -465,12 +732,11 @@ const _selectedHeaderCities = ref([]);
             option-label="label"
             placeholder="Select from 100k items"
             filter
-            virtual-scroller-options="{ itemSize: 38 }"
-            :selection-limit="10"
-            class="w-full"
+            :virtual-scroller-options="{ itemSize: 44 }"
+            :max-selected-labels="10"
           />
           <small class="text-surface-600 dark:text-surface-300">
-            Efficiently handles large datasets with virtual scrolling (max 10 selections)
+            Efficiently handles large datasets with virtual scrolling
           </small>
         </div>
       </div>
