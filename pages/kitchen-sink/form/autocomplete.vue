@@ -25,6 +25,63 @@ const filteredCountries = ref([]);
 
 // Object Values
 const selectedCity = ref(null);
+
+// Group
+const selectedGroupCity = ref(null);
+const groupedCities = ref([
+  {
+    label: 'United States',
+    code: 'us',
+    items: [
+      { label: 'New York', value: 'New York' },
+      { label: 'Los Angeles', value: 'Los Angeles' },
+      { label: 'Chicago', value: 'Chicago' }
+    ]
+  },
+  {
+    label: 'United Kingdom', 
+    code: 'gb',
+    items: [
+      { label: 'London', value: 'London' },
+      { label: 'Manchester', value: 'Manchester' },
+      { label: 'Birmingham', value: 'Birmingham' }
+    ]
+  },
+  {
+    label: 'Australia',
+    code: 'au', 
+    items: [
+      { label: 'Sydney', value: 'Sydney' },
+      { label: 'Melbourne', value: 'Melbourne' },
+      { label: 'Brisbane', value: 'Brisbane' }
+    ]
+  }
+]);
+const filteredGroupedCities = ref([]);
+
+// Forms
+const selectedFormCountry = ref(null);
+const filteredFormCountries = ref([]);
+
+// Sizes
+const selectedSmall = ref('');
+const selectedNormal = ref('');
+const selectedLarge = ref('');
+const filteredSizeCountries = ref([]);
+
+// Multiple with typeahead control
+const selectedWithTypeahead = ref([]);
+const selectedWithoutTypeahead = ref([]);
+const filteredTypeaheadItems = ref([]);
+
+// Variant filled
+const selectedFilled = ref('');
+const filteredFilledCountries = ref([]);
+
+// tRPC Backend
+const { $trpc } = useNuxtApp();
+const selectedProduct = ref(null);
+const productSuggestions = ref([]);
 const cities = ref([
   { name: 'New York', code: 'NY', country: 'USA' },
   { name: 'Rome', code: 'RM', country: 'Italy' },
@@ -158,6 +215,79 @@ function searchLazyItems(event) {
     }
   }, 250);
 }
+
+function searchGroupedCities(event) {
+  setTimeout(() => {
+    if (!event.query.trim().length) {
+      filteredGroupedCities.value = [...groupedCities.value];
+    } else {
+      filteredGroupedCities.value = groupedCities.value.map(group => ({
+        ...group,
+        items: group.items.filter(city => 
+          city.label.toLowerCase().includes(event.query.toLowerCase())
+        )
+      })).filter(group => group.items.length > 0);
+    }
+  }, 250);
+}
+
+function searchFormCountries(event) {
+  setTimeout(() => {
+    if (!event.query.trim().length) {
+      filteredFormCountries.value = [...cities.value];
+    } else {
+      filteredFormCountries.value = cities.value.filter((city) => {
+        return city.name.toLowerCase().includes(event.query.toLowerCase());
+      });
+    }
+  }, 250);
+}
+
+function searchSizeCountries(event) {
+  setTimeout(() => {
+    if (!event.query.trim().length) {
+      filteredSizeCountries.value = [...countries.value];
+    } else {
+      filteredSizeCountries.value = countries.value.filter((country) => {
+        return country.toLowerCase().includes(event.query.toLowerCase());
+      });
+    }
+  }, 250);
+}
+
+function searchTypeaheadItems(event) {
+  setTimeout(() => {
+    if (!event.query.trim().length) {
+      filteredTypeaheadItems.value = [...countries.value];
+    } else {
+      filteredTypeaheadItems.value = countries.value.filter((country) => {
+        return country.toLowerCase().includes(event.query.toLowerCase());
+      });
+    }
+  }, 250);
+}
+
+function searchFilledCountries(event) {
+  setTimeout(() => {
+    if (!event.query.trim().length) {
+      filteredFilledCountries.value = [...countries.value];
+    } else {
+      filteredFilledCountries.value = countries.value.filter((country) => {
+        return country.toLowerCase().includes(event.query.toLowerCase());
+      });
+    }
+  }, 250);
+}
+
+async function searchProducts(event) {
+  try {
+    const results = await $trpc.searchProducts.query({ query: event.query });
+    productSuggestions.value = results;
+  } catch (error) {
+    console.error('Failed to search products:', error);
+    productSuggestions.value = [];
+  }
+}
 </script>
 
 <template>
@@ -282,17 +412,27 @@ function searchLazyItems(event) {
             class="w-full"
             @complete="searchUsers"
           >
-            <template #item="slotProps">
+            <template #option="slotProps">
               <div class="flex items-center gap-3 p-2">
                 <img
-                  :alt="slotProps.item.name"
-                  :src="slotProps.item.avatar"
+                  :alt="slotProps.option.name"
+                  :src="slotProps.option.avatar"
                   class="w-8 h-8 rounded-full"
                 >
                 <div class="flex flex-col">
-                  <span class="font-medium">{{ slotProps.item.name }}</span>
-                  <small class="text-surface-500">{{ slotProps.item.email }}</small>
+                  <span class="font-medium">{{ slotProps.option.name }}</span>
+                  <small class="text-surface-500">{{ slotProps.option.email }}</small>
                 </div>
+              </div>
+            </template>
+            <template #header>
+              <div class="font-medium px-3 py-2 border-b border-surface-200 dark:border-surface-700">
+                Available Users
+              </div>
+            </template>
+            <template #footer>
+              <div class="px-3 py-3 border-t border-surface-200 dark:border-surface-700">
+                <Button label="Add New User" fluid severity="secondary" text size="small" icon="pi pi-plus" />
               </div>
             </template>
           </AutoComplete>
@@ -415,6 +555,234 @@ function searchLazyItems(event) {
             />
             <small class="text-surface-600 dark:text-surface-300">This field is readonly.</small>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Group Support -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Group Support
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        Options can be grouped using option-group-label and option-group-children properties.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-col gap-4">
+          <label for="group-autocomplete" class="font-semibold text-surface-900 dark:text-surface-0">Cities by Country</label>
+          <AutoComplete
+            id="group-autocomplete"
+            v-model="selectedGroupCity"
+            :suggestions="filteredGroupedCities"
+            option-label="label"
+            option-group-label="label"
+            option-group-children="items"
+            placeholder="Type 'a' to see groups"
+            class="w-full"
+            @complete="searchGroupedCities"
+          >
+            <template #optiongroup="slotProps">
+              <div class="flex items-center gap-2 p-2 font-medium">
+                <i class="pi pi-globe text-primary-500" />
+                <span>{{ slotProps.option.label }}</span>
+              </div>
+            </template>
+          </AutoComplete>
+          <small class="text-surface-600 dark:text-surface-300">
+            Options grouped by country with custom group template
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Forms Integration -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Forms Integration
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        AutoComplete integrates with form validation and provides error handling.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-col gap-4">
+          <label for="form-autocomplete" class="font-semibold text-surface-900 dark:text-surface-0">City (Required)</label>
+          <AutoComplete
+            id="form-autocomplete"
+            v-model="selectedFormCountry"
+            :suggestions="filteredFormCountries"
+            option-label="name"
+            :invalid="!selectedFormCountry"
+            fluid
+            placeholder="Select a city"
+            @complete="searchFormCountries"
+          />
+          <Message v-if="!selectedFormCountry" severity="error" size="small">
+            City selection is required
+          </Message>
+          <small class="text-surface-600 dark:text-surface-300">
+            Form integration with validation and error messages
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sizes -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Sizes
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        AutoComplete supports small and large sizes as alternatives to the default.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="flex flex-col gap-2">
+            <label class="font-semibold text-surface-900 dark:text-surface-0">Small</label>
+            <AutoComplete
+              v-model="selectedSmall"
+              :suggestions="filteredSizeCountries"
+              size="small"
+              dropdown
+              placeholder="Small"
+              @complete="searchSizeCountries"
+            />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label class="font-semibold text-surface-900 dark:text-surface-0">Normal</label>
+            <AutoComplete
+              v-model="selectedNormal"
+              :suggestions="filteredSizeCountries"
+              dropdown
+              placeholder="Normal"
+              @complete="searchSizeCountries"
+            />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label class="font-semibold text-surface-900 dark:text-surface-0">Large</label>
+            <AutoComplete
+              v-model="selectedLarge"
+              :suggestions="filteredSizeCountries"
+              size="large"
+              dropdown
+              placeholder="Large"
+              @complete="searchSizeCountries"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Multiple with Typeahead Control -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Multiple with Typeahead Control
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        Control typeahead behavior in multiple selection mode.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="flex flex-col gap-4">
+            <label for="with-typeahead" class="font-semibold text-surface-900 dark:text-surface-0">With Typeahead</label>
+            <AutoComplete
+              id="with-typeahead"
+              v-model="selectedWithTypeahead"
+              :suggestions="filteredTypeaheadItems"
+              multiple
+              fluid
+              placeholder="Type to search"
+              @complete="searchTypeaheadItems"
+            />
+          </div>
+          <div class="flex flex-col gap-4">
+            <label for="without-typeahead" class="font-semibold text-surface-900 dark:text-surface-0">Without Typeahead</label>
+            <AutoComplete
+              id="without-typeahead"
+              v-model="selectedWithoutTypeahead"
+              :suggestions="filteredTypeaheadItems"
+              multiple
+              fluid
+              :typeahead="false"
+              placeholder="Select from dropdown"
+              @complete="searchTypeaheadItems"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Variant Filled -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Filled Variant
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        Use the filled variant for higher visual emphasis.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-col gap-4">
+          <label for="filled-autocomplete" class="font-semibold text-surface-900 dark:text-surface-0">Country (Filled)</label>
+          <AutoComplete
+            id="filled-autocomplete"
+            v-model="selectedFilled"
+            :suggestions="filteredFilledCountries"
+            variant="filled"
+            placeholder="Filled variant style"
+            class="w-full"
+            @complete="searchFilledCountries"
+          />
+          <small class="text-surface-600 dark:text-surface-300">
+            Enhanced visual emphasis with filled background
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- tRPC Backend -->
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center gap-2">
+        <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+          tRPC Backend
+        </h2>
+        <Tag value="Real API" severity="info" />
+      </div>
+      <p class="text-surface-600 dark:text-surface-300">
+        AutoComplete with real-time backend search using tRPC for type-safe API calls.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-col gap-4">
+          <label for="trpc-autocomplete" class="font-semibold text-surface-900 dark:text-surface-0">Product Search</label>
+          <AutoComplete
+            id="trpc-autocomplete"
+            v-model="selectedProduct"
+            :suggestions="productSuggestions"
+            option-label="name"
+            placeholder="Search products (e.g., iPhone, Nike, etc.)"
+            class="w-full"
+            @complete="searchProducts"
+          >
+            <template #option="slotProps">
+              <div class="flex items-center justify-between p-2 w-full">
+                <div class="flex flex-col">
+                  <span class="font-medium">{{ slotProps.option.name }}</span>
+                  <small class="text-surface-500">{{ slotProps.option.category }}</small>
+                </div>
+                <span class="font-semibold text-primary-500">${{ slotProps.option.price }}</span>
+              </div>
+            </template>
+          </AutoComplete>
+          <small class="text-surface-600 dark:text-surface-300">
+            Selected: {{ selectedProduct ? `${selectedProduct.name} - $${selectedProduct.price}` : 'None' }}
+          </small>
+          <small class="text-surface-500 dark:text-surface-400">
+            Real-time search using tRPC backend with type safety
+          </small>
         </div>
       </div>
     </div>

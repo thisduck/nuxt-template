@@ -19,3 +19,9 @@ Returns structured JSON with:
 - Documentation sections (Basic, Advanced, States, etc.)
 - Real Vue component examples from PrimeVue docs
 - Code snippets and usage patterns
+
+## Component Implementation Notes
+
+### AutoComplete
+- Skip FloatLabel and IftaLabel wrapper examples (label wrapper components not needed for kitchen sink demos)
+- Use kebab-case for props (option-label, force-selection, virtual-scroller-options) as required by ESLint
