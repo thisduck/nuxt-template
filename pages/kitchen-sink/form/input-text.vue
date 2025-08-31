@@ -52,6 +52,22 @@ const multipleAddonsValue = ref('');
 const checkboxValue = ref('');
 const dropdownValue = ref('Website');
 const urlValue = ref('');
+
+// InputMask
+const phoneValue = ref('');
+const ssnValue = ref('');
+const dateValue = ref('');
+
+// InputNumber
+const basicNumberValue = ref(42);
+const currencyValue = ref(1234.56);
+const percentageValue = ref(50);
+const minMaxValue = ref(25);
+
+// InputOtp
+const otpValue = ref('');
+const maskedOtpValue = ref('');
+const customOtpValue = ref('');
 </script>
 
 <template>
@@ -337,6 +353,173 @@ const urlValue = ref('');
           <small class="text-surface-600 dark:text-surface-300">
             Enter the email address associated with your account.
           </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- InputMask -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        InputMask
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        InputMask is used to enforce a specific format during user input by applying predefined patterns.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+          <div class="flex flex-col gap-4">
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Phone Number
+            </h3>
+            <InputMask v-model="phoneValue" mask="(999) 999-9999" placeholder="(999) 999-9999" fluid />
+            <small class="text-surface-600 dark:text-surface-300">
+              Pattern: (999) 999-9999
+            </small>
+          </div>
+        </div>
+
+        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+          <div class="flex flex-col gap-4">
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Social Security Number
+            </h3>
+            <InputMask v-model="ssnValue" mask="999-99-9999" placeholder="999-99-9999" fluid />
+            <small class="text-surface-600 dark:text-surface-300">
+              Pattern: 999-99-9999
+            </small>
+          </div>
+        </div>
+
+        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+          <div class="flex flex-col gap-4">
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Date
+            </h3>
+            <InputMask v-model="dateValue" mask="99/99/9999" placeholder="mm/dd/yyyy" fluid />
+            <small class="text-surface-600 dark:text-surface-300">
+              Pattern: 99/99/9999
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- InputNumber -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        InputNumber
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        InputNumber is a specialized input component for numeric values with formatting, validation, and increment/decrement controls.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+          <div class="flex flex-col gap-4">
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Basic Number
+            </h3>
+            <InputNumber v-model="basicNumberValue" placeholder="Enter number" showButtons fluid />
+            <small class="text-surface-600 dark:text-surface-300">
+              Current value: {{ basicNumberValue }}
+            </small>
+          </div>
+        </div>
+
+        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+          <div class="flex flex-col gap-4">
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Currency
+            </h3>
+            <InputNumber v-model="currencyValue" mode="currency" currency="USD" locale="en-US" placeholder="0.00" fluid />
+            <small class="text-surface-600 dark:text-surface-300">
+              Value: {{ currencyValue }}
+            </small>
+          </div>
+        </div>
+
+        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+          <div class="flex flex-col gap-4">
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Percentage
+            </h3>
+            <InputNumber v-model="percentageValue" mode="decimal" suffix="%" :min="0" :max="100" placeholder="0%" fluid />
+            <small class="text-surface-600 dark:text-surface-300">
+              Percentage: {{ percentageValue }}%
+            </small>
+          </div>
+        </div>
+
+        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+          <div class="flex flex-col gap-4">
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Min/Max Range
+            </h3>
+            <InputNumber v-model="minMaxValue" :min="0" :max="100" showButtons placeholder="0-100" fluid />
+            <small class="text-surface-600 dark:text-surface-300">
+              Range: 0-100, Current: {{ minMaxValue }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- InputOtp -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        InputOtp
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        InputOtp is used to enter one-time passwords with individual character inputs for enhanced security and user experience.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+          <div class="flex flex-col gap-4">
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Basic OTP
+            </h3>
+            <InputOtp v-model="otpValue" :length="6" />
+            <small class="text-surface-600 dark:text-surface-300">
+              6-digit verification code
+            </small>
+          </div>
+        </div>
+
+        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+          <div class="flex flex-col gap-4">
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Masked OTP
+            </h3>
+            <InputOtp v-model="maskedOtpValue" :length="4" mask />
+            <small class="text-surface-600 dark:text-surface-300">
+              4-digit masked PIN
+            </small>
+          </div>
+        </div>
+
+        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+          <div class="flex flex-col gap-4">
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Custom Template
+            </h3>
+            <div class="flex justify-center">
+              <InputOtp v-model="customOtpValue">
+                <template #default="{ attrs, events }">
+                  <input 
+                    type="text" 
+                    v-bind="attrs" 
+                    v-on="events" 
+                    class="w-10 text-4xl border-0 bg-transparent text-center transition-all duration-200 border-b-2 border-surface-300 dark:border-surface-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400"
+                  />
+                </template>
+              </InputOtp>
+            </div>
+            <small class="text-surface-600 dark:text-surface-300">
+              Custom styled inputs
+            </small>
+          </div>
         </div>
       </div>
     </div>
