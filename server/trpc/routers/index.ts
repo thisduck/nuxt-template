@@ -128,6 +128,15 @@ export const appRouter = createTRPCRouter({
         tag.category.toLowerCase().includes(opts.input.filter.toLowerCase())
       );
     }),
+  getPriorities: baseProcedure
+    .query(() => {
+      return [
+        { id: 1, name: 'Low', description: 'Not urgent, can be done later', color: '#10B981' },
+        { id: 2, name: 'Medium', description: 'Important but not critical', color: '#F59E0B' },
+        { id: 3, name: 'High', description: 'Needs attention soon', color: '#EF4444' },
+        { id: 4, name: 'Critical', description: 'Urgent and important', color: '#DC2626' },
+      ];
+    }),
 });
 
 // export type definition of API

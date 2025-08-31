@@ -14,13 +14,8 @@ const navigationItems = ref([
       { label: 'AutoComplete', path: '/kitchen-sink/form/autocomplete', icon: 'pi pi-search' },
       { label: 'Select', path: '/kitchen-sink/form/select', icon: 'pi pi-chevron-down' },
       { label: 'MultiSelect', path: '/kitchen-sink/form/multiselect', icon: 'pi pi-check-square' },
-      { label: 'Password', path: '/kitchen-sink/form/password', icon: 'pi pi-key' },
-      { label: 'Dropdown', path: '/kitchen-sink/form/dropdown', icon: 'pi pi-chevron-down' },
-      { label: 'Calendar', path: '/kitchen-sink/form/calendar', icon: 'pi pi-calendar' },
       { label: 'Checkbox', path: '/kitchen-sink/form/checkbox', icon: 'pi pi-check' },
       { label: 'RadioButton', path: '/kitchen-sink/form/radiobutton', icon: 'pi pi-circle' },
-      { label: 'Slider', path: '/kitchen-sink/form/slider', icon: 'pi pi-sliders-h' },
-      { label: 'Button', path: '/kitchen-sink/form/button', icon: 'pi pi-play' },
     ],
   },
   {
