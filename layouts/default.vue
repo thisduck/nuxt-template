@@ -16,6 +16,11 @@ const navs = ref([
     icon: 'pi pi-bookmark',
     to: '/kitchen-sink',
   },
+  {
+    label: 'Examples',
+    icon: 'pi pi-code',
+    to: '/examples',
+  },
 ]);
 
 const selectedNav = ref('Home');
