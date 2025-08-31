@@ -137,6 +137,31 @@ export const appRouter = createTRPCRouter({
         { id: 4, name: 'Critical', description: 'Urgent and important', color: '#DC2626' },
       ];
     }),
+  getUserSettings: baseProcedure
+    .query(() => {
+      return {
+        notifications: true,
+        darkMode: false,
+        autoSave: true,
+        emailAlerts: false,
+        soundEffects: true,
+      };
+    }),
+  updateUserSettings: baseProcedure
+    .input(
+      z.object({
+        notifications: z.boolean(),
+        darkMode: z.boolean(),
+        autoSave: z.boolean(),
+        emailAlerts: z.boolean(),
+        soundEffects: z.boolean(),
+      }),
+    )
+    .mutation((opts) => {
+      // In a real app, this would save to database
+      console.log('Updating user settings:', opts.input);
+      return { success: true, settings: opts.input };
+    }),
 });
 
 // export type definition of API
