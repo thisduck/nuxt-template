@@ -10,6 +10,7 @@ const navigationItems = ref([
     expanded: true,
     items: [
       { label: 'Button', path: '/kitchen-sink/form/button', icon: 'pi pi-play' },
+      { label: 'SplitButton', path: '/kitchen-sink/form/splitbutton', icon: 'pi pi-th-large' },
       { label: 'Input Text', path: '/kitchen-sink/form/input-text', icon: 'pi pi-pencil' },
       { label: 'Textarea', path: '/kitchen-sink/form/textarea', icon: 'pi pi-align-left' },
       { label: 'AutoComplete', path: '/kitchen-sink/form/autocomplete', icon: 'pi pi-search' },
