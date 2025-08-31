@@ -97,9 +97,7 @@ const selectedNav = ref('Home');
     </div>
 
     <div class="p-7 flex flex-col flex-auto">
-      <div class="flex-auto bg-surface-0 dark:bg-surface-900 rounded-xl border-2 border-dashed border-surface-200 dark:border-surface-700 p-2">
-        <NuxtPage />
-      </div>
+      <NuxtPage />
     </div>
   </div>
 </template>
