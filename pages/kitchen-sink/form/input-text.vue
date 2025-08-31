@@ -21,20 +21,20 @@ const leftIconValue = ref('');
 const rightIconValue = ref('');
 const multipleIconValue = ref('');
 const templateIconValue = ref('');
-const emailIconValue = ref('');
-const phoneIconValue = ref('');
-const searchIconValue = ref('');
-const passwordIconValue = ref('');
-const locationIconValue = ref('');
-const calendarIconValue = ref('');
-const linkIconValue = ref('');
-const tagIconValue = ref('');
+const _emailIconValue = ref('');
+const _phoneIconValue = ref('');
+const _searchIconValue = ref('');
+const _passwordIconValue = ref('');
+const _locationIconValue = ref('');
+const _calendarIconValue = ref('');
+const _linkIconValue = ref('');
+const _tagIconValue = ref('');
 const clearIconValue = ref('');
-const copyIconValue = ref('');
-const editIconValue = ref('');
-const validateIconValue = ref('');
-const infoIconValue = ref('');
-const sendIconValue = ref('');
+const _copyIconValue = ref('');
+const _editIconValue = ref('');
+const _validateIconValue = ref('');
+const _infoIconValue = ref('');
+const _sendIconValue = ref('');
 
 // Float Label
 const floatLabelValue = ref('');
@@ -431,7 +431,7 @@ const regexValue = ref('');
             <h3 class="font-semibold text-surface-900 dark:text-surface-0">
               Basic Number
             </h3>
-            <InputNumber v-model="basicNumberValue" placeholder="Enter number" showButtons fluid />
+            <InputNumber v-model="basicNumberValue" placeholder="Enter number" show-buttons fluid />
             <small class="text-surface-600 dark:text-surface-300">
               Current value: {{ basicNumberValue }}
             </small>
@@ -467,7 +467,7 @@ const regexValue = ref('');
             <h3 class="font-semibold text-surface-900 dark:text-surface-0">
               Min/Max Range
             </h3>
-            <InputNumber v-model="minMaxValue" :min="0" :max="100" showButtons placeholder="0-100" fluid />
+            <InputNumber v-model="minMaxValue" :min="0" :max="100" show-buttons placeholder="0-100" fluid />
             <small class="text-surface-600 dark:text-surface-300">
               Range: 0-100, Current: {{ minMaxValue }}
             </small>
@@ -518,12 +518,12 @@ const regexValue = ref('');
             <div class="flex justify-center">
               <InputOtp v-model="customOtpValue">
                 <template #default="{ attrs, events }">
-                  <input 
-                    type="text" 
-                    v-bind="attrs" 
-                    v-on="events" 
-                    class="w-10 text-4xl border-0 bg-transparent text-center transition-all duration-200 border-b-2 border-surface-300 dark:border-surface-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400"
-                  />
+                  <input
+                    type="text"
+                    v-bind="attrs"
+                    style="width: 2.5rem; height: 2.5rem; font-size: 2.25rem; border: 0; background: transparent; text-align: center; transition: all 0.2s; border-bottom: 2px solid var(--p-surface-300); outline: none;"
+                    v-on="events"
+                  >
                 </template>
               </InputOtp>
             </div>
@@ -562,7 +562,7 @@ const regexValue = ref('');
             <h3 class="font-semibold text-surface-900 dark:text-surface-0">
               Strength Meter
             </h3>
-            <Password v-model="strengthPasswordValue" :feedback="true" placeholder="Strong password" fluid />
+            <Password v-model="strengthPasswordValue" placeholder="Strong password" fluid />
             <small class="text-surface-600 dark:text-surface-300">
               Password with strength indicator
             </small>
@@ -574,7 +574,7 @@ const regexValue = ref('');
             <h3 class="font-semibold text-surface-900 dark:text-surface-0">
               Toggle Mask
             </h3>
-            <Password v-model="togglePasswordValue" :toggleMask="true" placeholder="Toggle visibility" fluid />
+            <Password v-model="togglePasswordValue" toggle-mask placeholder="Toggle visibility" fluid />
             <small class="text-surface-600 dark:text-surface-300">
               Password with show/hide toggle
             </small>
@@ -598,7 +598,7 @@ const regexValue = ref('');
             <h3 class="font-semibold text-surface-900 dark:text-surface-0">
               Numbers Only
             </h3>
-            <InputText v-model="numbersOnlyValue" v-keyfilter="'num'" placeholder="Enter numbers only" fluid />
+            <InputText v-model="numbersOnlyValue" v-keyfilter.num placeholder="Enter numbers only" fluid />
             <small class="text-surface-600 dark:text-surface-300">
               Filter: 'num' - Only numeric characters (0-9)
             </small>
@@ -610,7 +610,7 @@ const regexValue = ref('');
             <h3 class="font-semibold text-surface-900 dark:text-surface-0">
               Letters Only
             </h3>
-            <InputText v-model="lettersOnlyValue" v-keyfilter="'alpha'" placeholder="Enter letters only" fluid />
+            <InputText v-model="lettersOnlyValue" v-keyfilter.alpha placeholder="Enter letters only" fluid />
             <small class="text-surface-600 dark:text-surface-300">
               Filter: 'alpha' - Only alphabetic characters (a-z, A-Z)
             </small>
@@ -622,7 +622,7 @@ const regexValue = ref('');
             <h3 class="font-semibold text-surface-900 dark:text-surface-0">
               Alphanumeric
             </h3>
-            <InputText v-model="alphanumericValue" v-keyfilter="'alphanum'" placeholder="Letters and numbers" fluid />
+            <InputText v-model="alphanumericValue" v-keyfilter.alphanum placeholder="Letters and numbers" fluid />
             <small class="text-surface-600 dark:text-surface-300">
               Filter: 'alphanum' - Letters and numbers only
             </small>

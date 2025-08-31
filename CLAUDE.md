@@ -16,6 +16,6 @@ npm run extract-docs https://primevue.org/checkbox/
 
 Returns structured JSON with:
 - Component title and description
-- Documentation sections (Basic, Advanced, States, etc.)  
+- Documentation sections (Basic, Advanced, States, etc.)
 - Real Vue component examples from PrimeVue docs
 - Code snippets and usage patterns

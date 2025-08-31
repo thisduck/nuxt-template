@@ -26,17 +26,18 @@ const navs = ref([
 ]);
 
 // Determine which nav item is active based on the current route
-const isNavActive = (item: any) => {
-  if (!item.to) return false;
-  
+function isNavActive(item: any) {
+  if (!item.to)
+    return false;
+
   // For home, check exact match
   if (item.to === '/') {
     return route.path === '/';
   }
-  
+
   // For other routes, check if current path starts with the nav item's path
   return route.path.startsWith(item.to);
-};
+}
 </script>
 
 <template>

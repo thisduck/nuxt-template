@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const router = useRouter();
 
-function navigateToForm() {
+function _navigateToForm() {
   router.push('/kitchen-sink/form');
 }
 </script>
@@ -27,4 +27,3 @@ function navigateToForm() {
     </div>
   </div>
 </template>
-

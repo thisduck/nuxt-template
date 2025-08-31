@@ -2,9 +2,24 @@
 // Basic
 const selectedCountry = ref('');
 const countries = ref([
-  'Argentina', 'Australia', 'Brazil', 'Canada', 'China', 'Egypt', 'France', 
-  'Germany', 'India', 'Italy', 'Japan', 'Mexico', 'Netherlands', 'Russia', 
-  'Spain', 'Turkey', 'United Kingdom', 'United States'
+  'Argentina',
+  'Australia',
+  'Brazil',
+  'Canada',
+  'China',
+  'Egypt',
+  'France',
+  'Germany',
+  'India',
+  'Italy',
+  'Japan',
+  'Mexico',
+  'Netherlands',
+  'Russia',
+  'Spain',
+  'Turkey',
+  'United Kingdom',
+  'United States',
 ]);
 const filteredCountries = ref([]);
 
@@ -20,7 +35,7 @@ const cities = ref([
   { name: 'Berlin', code: 'BRL', country: 'Germany' },
   { name: 'Sydney', code: 'SYD', country: 'Australia' },
   { name: 'Barcelona', code: 'BCN', country: 'Spain' },
-  { name: 'Amsterdam', code: 'AMS', country: 'Netherlands' }
+  { name: 'Amsterdam', code: 'AMS', country: 'Netherlands' },
 ]);
 const filteredCities = ref([]);
 
@@ -36,7 +51,7 @@ const users = ref([
   { name: 'Bob Johnson', email: 'bob@example.com', avatar: 'https://i.pravatar.cc/150?img=3' },
   { name: 'Alice Brown', email: 'alice@example.com', avatar: 'https://i.pravatar.cc/150?img=4' },
   { name: 'Charlie Wilson', email: 'charlie@example.com', avatar: 'https://i.pravatar.cc/150?img=5' },
-  { name: 'Diana Davis', email: 'diana@example.com', avatar: 'https://i.pravatar.cc/150?img=6' }
+  { name: 'Diana Davis', email: 'diana@example.com', avatar: 'https://i.pravatar.cc/150?img=6' },
 ]);
 const filteredUsers = ref([]);
 
@@ -59,7 +74,7 @@ const selectedLazyItem = ref('');
 const filteredLazyItems = ref([]);
 
 // Search methods
-const search = (event) => {
+function search(event) {
   setTimeout(() => {
     if (!event.query.trim().length) {
       filteredCountries.value = [...countries.value];
@@ -69,9 +84,9 @@ const search = (event) => {
       });
     }
   }, 250);
-};
+}
 
-const searchCities = (event) => {
+function searchCities(event) {
   setTimeout(() => {
     if (!event.query.trim().length) {
       filteredCities.value = [...cities.value];
@@ -81,9 +96,9 @@ const searchCities = (event) => {
       });
     }
   }, 250);
-};
+}
 
-const searchItems = (event) => {
+function searchItems(event) {
   setTimeout(() => {
     if (!event.query.trim().length) {
       filteredItems.value = [...countries.value];
@@ -93,22 +108,22 @@ const searchItems = (event) => {
       });
     }
   }, 250);
-};
+}
 
-const searchUsers = (event) => {
+function searchUsers(event) {
   setTimeout(() => {
     if (!event.query.trim().length) {
       filteredUsers.value = [...users.value];
     } else {
       filteredUsers.value = users.value.filter((user) => {
-        return user.name.toLowerCase().includes(event.query.toLowerCase()) ||
-               user.email.toLowerCase().includes(event.query.toLowerCase());
+        return user.name.toLowerCase().includes(event.query.toLowerCase())
+          || user.email.toLowerCase().includes(event.query.toLowerCase());
       });
     }
   }, 250);
-};
+}
 
-const searchForceCountries = (event) => {
+function searchForceCountries(event) {
   setTimeout(() => {
     if (!event.query.trim().length) {
       filteredForceCountries.value = [...cities.value];
@@ -118,9 +133,9 @@ const searchForceCountries = (event) => {
       });
     }
   }, 250);
-};
+}
 
-const searchDropdownCountries = (event) => {
+function searchDropdownCountries(event) {
   setTimeout(() => {
     if (!event.query.trim().length) {
       filteredDropdownCountries.value = [...countries.value];
@@ -130,19 +145,19 @@ const searchDropdownCountries = (event) => {
       });
     }
   }, 250);
-};
+}
 
-const searchLazyItems = (event) => {
+function searchLazyItems(event) {
   setTimeout(() => {
     if (!event.query.trim().length) {
       filteredLazyItems.value = lazyItems.value.slice(0, 1000);
     } else {
       filteredLazyItems.value = lazyItems.value
-        .filter((item) => item.toLowerCase().includes(event.query.toLowerCase()))
+        .filter(item => item.toLowerCase().includes(event.query.toLowerCase()))
         .slice(0, 1000);
     }
   }, 250);
-};
+}
 </script>
 
 <template>
@@ -151,7 +166,9 @@ const searchLazyItems = (event) => {
     <div class="flex flex-col gap-3 border-b border-surface-200 dark:border-surface-700 pb-6">
       <div class="flex items-center gap-3">
         <i class="pi pi-search text-3xl text-primary-500" />
-        <h1 class="text-3xl font-bold text-surface-900 dark:text-surface-0">AutoComplete</h1>
+        <h1 class="text-3xl font-bold text-surface-900 dark:text-surface-0">
+          AutoComplete
+        </h1>
       </div>
       <p class="text-surface-600 dark:text-surface-300 max-w-3xl">
         AutoComplete provides suggestions while typing in the input field. It supports single and multiple selection modes, custom templates, and various data sources for flexible auto-completion functionality.
@@ -161,21 +178,25 @@ const searchLazyItems = (event) => {
     <!-- Basic -->
     <div class="flex flex-col gap-4">
       <div class="flex items-center gap-2">
-        <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Basic</h2>
+        <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+          Basic
+        </h2>
         <Tag value="Most Common" severity="success" />
       </div>
-      <p class="text-surface-600 dark:text-surface-300">Basic AutoComplete with string values and custom search logic.</p>
-      
+      <p class="text-surface-600 dark:text-surface-300">
+        Basic AutoComplete with string values and custom search logic.
+      </p>
+
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label for="basic-autocomplete" class="font-semibold text-surface-900 dark:text-surface-0">Country</label>
-          <AutoComplete 
-            id="basic-autocomplete" 
-            v-model="selectedCountry" 
+          <AutoComplete
+            id="basic-autocomplete"
+            v-model="selectedCountry"
             :suggestions="filteredCountries"
-            @complete="search"
-            placeholder="Start typing a country name" 
+            placeholder="Start typing a country name"
             class="w-full"
+            @complete="search"
           />
           <small class="text-surface-600 dark:text-surface-300">
             Selected: {{ selectedCountry || 'None' }}
@@ -186,20 +207,24 @@ const searchLazyItems = (event) => {
 
     <!-- Object Values -->
     <div class="flex flex-col gap-4">
-      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Object Values</h2>
-      <p class="text-surface-600 dark:text-surface-300">AutoComplete can work with object values using the optionLabel property.</p>
-      
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Object Values
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        AutoComplete can work with object values using the optionLabel property.
+      </p>
+
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label for="object-autocomplete" class="font-semibold text-surface-900 dark:text-surface-0">City</label>
-          <AutoComplete 
-            id="object-autocomplete" 
-            v-model="selectedCity" 
+          <AutoComplete
+            id="object-autocomplete"
+            v-model="selectedCity"
             :suggestions="filteredCities"
-            @complete="searchCities"
-            optionLabel="name"
-            placeholder="Search for a city" 
+            option-label="name"
+            placeholder="Search for a city"
             class="w-full"
+            @complete="searchCities"
           />
           <small class="text-surface-600 dark:text-surface-300">
             Selected: {{ selectedCity ? `${selectedCity.name} (${selectedCity.country})` : 'None' }}
@@ -210,20 +235,24 @@ const searchLazyItems = (event) => {
 
     <!-- Multiple Selection -->
     <div class="flex flex-col gap-4">
-      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Multiple Selection</h2>
-      <p class="text-surface-600 dark:text-surface-300">Multiple items can be selected using the multiple property.</p>
-      
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Multiple Selection
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        Multiple items can be selected using the multiple property.
+      </p>
+
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label for="multiple-autocomplete" class="font-semibold text-surface-900 dark:text-surface-0">Countries</label>
-          <AutoComplete 
-            id="multiple-autocomplete" 
-            v-model="selectedItems" 
+          <AutoComplete
+            id="multiple-autocomplete"
+            v-model="selectedItems"
             :suggestions="filteredItems"
-            @complete="searchItems"
             multiple
-            placeholder="Select multiple countries" 
+            placeholder="Select multiple countries"
             class="w-full"
+            @complete="searchItems"
           />
           <small class="text-surface-600 dark:text-surface-300">
             Selected: {{ selectedItems.length }} countries
@@ -234,28 +263,32 @@ const searchLazyItems = (event) => {
 
     <!-- Custom Templates -->
     <div class="flex flex-col gap-4">
-      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Custom Templates</h2>
-      <p class="text-surface-600 dark:text-surface-300">Suggestions can be customized using templates for richer presentation.</p>
-      
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Custom Templates
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        Suggestions can be customized using templates for richer presentation.
+      </p>
+
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label for="template-autocomplete" class="font-semibold text-surface-900 dark:text-surface-0">User Search</label>
-          <AutoComplete 
-            id="template-autocomplete" 
-            v-model="selectedUser" 
+          <AutoComplete
+            id="template-autocomplete"
+            v-model="selectedUser"
             :suggestions="filteredUsers"
-            @complete="searchUsers"
-            optionLabel="name"
-            placeholder="Search for users by name or email" 
+            option-label="name"
+            placeholder="Search for users by name or email"
             class="w-full"
+            @complete="searchUsers"
           >
             <template #item="slotProps">
               <div class="flex items-center gap-3 p-2">
-                <img 
-                  :alt="slotProps.item.name" 
-                  :src="slotProps.item.avatar" 
-                  class="w-8 h-8 rounded-full" 
-                />
+                <img
+                  :alt="slotProps.item.name"
+                  :src="slotProps.item.avatar"
+                  class="w-8 h-8 rounded-full"
+                >
                 <div class="flex flex-col">
                   <span class="font-medium">{{ slotProps.item.name }}</span>
                   <small class="text-surface-500">{{ slotProps.item.email }}</small>
@@ -272,21 +305,25 @@ const searchLazyItems = (event) => {
 
     <!-- Force Selection -->
     <div class="flex flex-col gap-4">
-      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Force Selection</h2>
-      <p class="text-surface-600 dark:text-surface-300">When forceSelection is enabled, only values from suggestions are accepted.</p>
-      
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Force Selection
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        When forceSelection is enabled, only values from suggestions are accepted.
+      </p>
+
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label for="force-autocomplete" class="font-semibold text-surface-900 dark:text-surface-0">City (Force Selection)</label>
-          <AutoComplete 
-            id="force-autocomplete" 
-            v-model="selectedForceCountry" 
+          <AutoComplete
+            id="force-autocomplete"
+            v-model="selectedForceCountry"
             :suggestions="filteredForceCountries"
-            @complete="searchForceCountries"
-            optionLabel="name"
-            forceSelection
-            placeholder="Only suggested cities are accepted" 
+            option-label="name"
+            force-selection
+            placeholder="Only suggested cities are accepted"
             class="w-full"
+            @complete="searchForceCountries"
           />
           <small class="text-surface-600 dark:text-surface-300">
             Only values from the suggestion list are allowed
@@ -297,20 +334,24 @@ const searchLazyItems = (event) => {
 
     <!-- Dropdown -->
     <div class="flex flex-col gap-4">
-      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Dropdown</h2>
-      <p class="text-surface-600 dark:text-surface-300">AutoComplete can display a dropdown button to show all available suggestions.</p>
-      
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Dropdown
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        AutoComplete can display a dropdown button to show all available suggestions.
+      </p>
+
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label for="dropdown-autocomplete" class="font-semibold text-surface-900 dark:text-surface-0">Country with Dropdown</label>
-          <AutoComplete 
-            id="dropdown-autocomplete" 
-            v-model="selectedDropdownCountry" 
+          <AutoComplete
+            id="dropdown-autocomplete"
+            v-model="selectedDropdownCountry"
             :suggestions="filteredDropdownCountries"
-            @complete="searchDropdownCountries"
             dropdown
-            placeholder="Type or click dropdown" 
+            placeholder="Type or click dropdown"
             class="w-full"
+            @complete="searchDropdownCountries"
           />
           <small class="text-surface-600 dark:text-surface-300">
             Click the dropdown arrow to see all options
@@ -321,45 +362,55 @@ const searchLazyItems = (event) => {
 
     <!-- States -->
     <div class="flex flex-col gap-4">
-      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">States</h2>
-      <p class="text-surface-600 dark:text-surface-300">Different states can be applied to indicate validation status or user interaction constraints.</p>
-      
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        States
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        Different states can be applied to indicate validation status or user interaction constraints.
+      </p>
+
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
-            <h3 class="font-semibold text-surface-900 dark:text-surface-0">Invalid</h3>
-            <AutoComplete 
-              v-model="selectedInvalid" 
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Invalid
+            </h3>
+            <AutoComplete
+              v-model="selectedInvalid"
               :suggestions="filteredCountries"
-              @complete="search"
               invalid
-              placeholder="Invalid state" 
+              placeholder="Invalid state"
               class="w-full"
+              @complete="search"
             />
             <small class="text-red-500">This field has an error.</small>
           </div>
         </div>
-        
+
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
-            <h3 class="font-semibold text-surface-900 dark:text-surface-0">Disabled</h3>
-            <AutoComplete 
-              v-model="selectedDisabled" 
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Disabled
+            </h3>
+            <AutoComplete
+              v-model="selectedDisabled"
               :suggestions="[]"
-              disabled 
+              disabled
               class="w-full"
             />
             <small class="text-surface-600 dark:text-surface-300">This field is disabled.</small>
           </div>
         </div>
-        
+
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
-            <h3 class="font-semibold text-surface-900 dark:text-surface-0">Readonly</h3>
-            <AutoComplete 
-              v-model="selectedReadonly" 
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Readonly
+            </h3>
+            <AutoComplete
+              v-model="selectedReadonly"
               :suggestions="[]"
-              readonly 
+              readonly
               class="w-full"
             />
             <small class="text-surface-600 dark:text-surface-300">This field is readonly.</small>
@@ -370,20 +421,24 @@ const searchLazyItems = (event) => {
 
     <!-- Virtual Scrolling -->
     <div class="flex flex-col gap-4">
-      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Virtual Scrolling</h2>
-      <p class="text-surface-600 dark:text-surface-300">Virtual scrolling efficiently renders large suggestion lists without performance issues.</p>
-      
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Virtual Scrolling
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        Virtual scrolling efficiently renders large suggestion lists without performance issues.
+      </p>
+
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label for="virtual-autocomplete" class="font-semibold text-surface-900 dark:text-surface-0">Large Dataset (100k items)</label>
-          <AutoComplete 
-            id="virtual-autocomplete" 
-            v-model="selectedLazyItem" 
+          <AutoComplete
+            id="virtual-autocomplete"
+            v-model="selectedLazyItem"
             :suggestions="filteredLazyItems"
-            @complete="searchLazyItems"
-            :virtualScrollerOptions="{ itemSize: 38 }"
-            placeholder="Search from 100k items" 
+            :virtual-scroller-options="{ itemSize: 38 }"
+            placeholder="Search from 100k items"
             class="w-full"
+            @complete="searchLazyItems"
           />
           <small class="text-surface-600 dark:text-surface-300">
             Efficiently handles large datasets with virtual scrolling
@@ -394,35 +449,43 @@ const searchLazyItems = (event) => {
 
     <!-- Method Suggestions -->
     <div class="flex flex-col gap-4">
-      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Method Configuration</h2>
-      <p class="text-surface-600 dark:text-surface-300">AutoComplete supports different search methods and suggestion timing configurations.</p>
-      
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Method Configuration
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        AutoComplete supports different search methods and suggestion timing configurations.
+      </p>
+
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="flex flex-col gap-2">
-            <h3 class="font-semibold text-surface-900 dark:text-surface-0">Minimum Query Length</h3>
-            <AutoComplete 
-              v-model="selectedCountry" 
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Minimum Query Length
+            </h3>
+            <AutoComplete
+              v-model="selectedCountry"
               :suggestions="filteredCountries"
-              @complete="search"
-              :minLength="3"
-              placeholder="Start typing (min 3 chars)" 
+              :min-length="3"
+              placeholder="Start typing (min 3 chars)"
               class="w-full"
+              @complete="search"
             />
             <small class="text-surface-600 dark:text-surface-300">
               Suggestions appear after 3 characters
             </small>
           </div>
-          
+
           <div class="flex flex-col gap-2">
-            <h3 class="font-semibold text-surface-900 dark:text-surface-0">Delay</h3>
-            <AutoComplete 
-              v-model="selectedCountry" 
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Delay
+            </h3>
+            <AutoComplete
+              v-model="selectedCountry"
               :suggestions="filteredCountries"
-              @complete="search"
               :delay="1000"
-              placeholder="Delayed suggestions (1s)" 
+              placeholder="Delayed suggestions (1s)"
               class="w-full"
+              @complete="search"
             />
             <small class="text-surface-600 dark:text-surface-300">
               1 second delay before showing suggestions
@@ -431,6 +494,5 @@ const searchLazyItems = (event) => {
         </div>
       </div>
     </div>
-
   </div>
 </template>

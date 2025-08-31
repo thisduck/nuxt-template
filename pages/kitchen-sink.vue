@@ -60,7 +60,7 @@ function isActive(path: string) {
 }
 
 // Check if we're on the main kitchen sink page (no sub-route)
-const isMainPage = computed(() => {
+const _isMainPage = computed(() => {
   return route.path === '/kitchen-sink' || route.path === '/kitchen-sink/';
 });
 </script>

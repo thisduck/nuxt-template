@@ -61,7 +61,9 @@ const visible = ref(false);
     </div>
 
     <div class="card flex flex-col gap-4">
-      <h2 class="text-xl font-semibold">Lucide Icon Examples</h2>
+      <h2 class="text-xl font-semibold">
+        Lucide Icon Examples
+      </h2>
       <div class="flex flex-wrap gap-4 items-center">
         <Icon name="lucide:github" class="text-2xl" />
         <Icon name="lucide:twitter" class="text-2xl text-blue-500" />

@@ -74,4 +74,3 @@ const examples = ref([
     </div>
   </div>
 </template>
-
