@@ -11,9 +11,10 @@ const navigationItems = ref([
     items: [
       { label: 'Input Text', path: '/kitchen-sink/form/input-text', icon: 'pi pi-pencil' },
       { label: 'Textarea', path: '/kitchen-sink/form/textarea', icon: 'pi pi-align-left' },
+      { label: 'Select', path: '/kitchen-sink/form/select', icon: 'pi pi-chevron-down' },
+      { label: 'MultiSelect', path: '/kitchen-sink/form/multiselect', icon: 'pi pi-check-square' },
       { label: 'Password', path: '/kitchen-sink/form/password', icon: 'pi pi-key' },
       { label: 'Dropdown', path: '/kitchen-sink/form/dropdown', icon: 'pi pi-chevron-down' },
-      { label: 'MultiSelect', path: '/kitchen-sink/form/multiselect', icon: 'pi pi-check-square' },
       { label: 'Calendar', path: '/kitchen-sink/form/calendar', icon: 'pi pi-calendar' },
       { label: 'Checkbox', path: '/kitchen-sink/form/checkbox', icon: 'pi pi-check' },
       { label: 'RadioButton', path: '/kitchen-sink/form/radiobutton', icon: 'pi pi-circle' },
