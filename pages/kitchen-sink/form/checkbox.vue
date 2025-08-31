@@ -1,62 +1,39 @@
 <script setup lang="ts">
-// Basic
+// Basic - Binary checkbox
 const checked = ref(false);
 
-// Multiple Values (Array)
-const selectedCategories = ref([]);
+// Group - Multiple checkboxes
+const pizza = ref([]);
+
+// Dynamic - Generated from list
 const categories = ref([
-  { name: 'Technology', key: 'tech' },
-  { name: 'Sports', key: 'sports' },
-  { name: 'Music', key: 'music' },
-  { name: 'Travel', key: 'travel' },
-  { name: 'Food', key: 'food' }
+  { key: 'accounting', name: 'Accounting' },
+  { key: 'marketing', name: 'Marketing' },
+  { key: 'production', name: 'Production' },
+  { key: 'research', name: 'Research' }
 ]);
+const selectedCategories = ref([]);
 
-// Binary (True/False values)
-const binaryValue = ref(null);
+// Indeterminate
+const indeterminateChecked = ref(false);
 
-// States
-const disabledChecked = ref(true);
-const invalidValue = ref(false);
-const readonlyValue = ref(true);
+// Filled variant
+const filledChecked = ref(true);
 
-// Indeterminate State
-const indeterminateValue = ref(null);
+// Sizes
+const size = ref([]);
 
-// Dynamic
-const dynamicOptions = ref([
-  { label: 'Option 1', value: 'opt1' },
-  { label: 'Option 2', value: 'opt2' },
-  { label: 'Option 3', value: 'opt3' },
-  { label: 'Option 4', value: 'opt4' }
-]);
-const selectedDynamic = ref([]);
+// Invalid state
+const invalidChecked = ref(false);
 
-// Custom Icons
-const customIconValue = ref(false);
+// Disabled states
+const disabledChecked1 = ref(false);
+const disabledChecked2 = ref(true);
 
-// Grouped Checkboxes
-const permissions = ref({
-  read: false,
-  write: false,
-  execute: false
-});
-
-const allPermissions = computed({
-  get() {
-    return permissions.value.read && permissions.value.write && permissions.value.execute;
-  },
-  set(value) {
-    permissions.value.read = value;
-    permissions.value.write = value;
-    permissions.value.execute = value;
-  }
-});
-
-// Form Validation Example
+// Form validation example
 const formData = ref({
-  newsletter: false,
   terms: false,
+  newsletter: false,
   privacy: false
 });
 
@@ -74,8 +51,7 @@ const isFormValid = computed(() => {
         <h1 class="text-3xl font-bold text-surface-900 dark:text-surface-0">Checkbox</h1>
       </div>
       <p class="text-surface-600 dark:text-surface-300 max-w-3xl">
-        Checkbox is an extension to standard checkbox element with theming capabilities and advanced features like indeterminate state.
-        It supports binary values, arrays of values, and custom styling options.
+        Checkbox is an extension to standard checkbox element with theming.
       </p>
     </div>
 
@@ -85,13 +61,13 @@ const isFormValid = computed(() => {
         <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Basic</h2>
         <Tag value="Most Common" severity="success" />
       </div>
-      <p class="text-surface-600 dark:text-surface-300">Checkbox is used with the v-model property for two-way data binding.</p>
+      <p class="text-surface-600 dark:text-surface-300">Binary checkbox is used with the v-model for two-way value binding and the binary property.</p>
       
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <div class="flex items-center gap-3">
-            <Checkbox id="basic-checkbox" v-model="checked" />
-            <label for="basic-checkbox" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+            <Checkbox v-model="checked" binary />
+            <label class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
               I agree to the terms and conditions
             </label>
           </div>
@@ -102,20 +78,62 @@ const isFormValid = computed(() => {
       </div>
     </div>
 
-    <!-- Multiple Values -->
+    <!-- Group -->
     <div class="flex flex-col gap-4">
-      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Multiple Values</h2>
-      <p class="text-surface-600 dark:text-surface-300">Multiple checkboxes can be grouped together to work with an array of values.</p>
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Group</h2>
+      <p class="text-surface-600 dark:text-surface-300">Multiple checkboxes can be grouped together.</p>
       
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
-          <h3 class="font-semibold text-surface-900 dark:text-surface-0 mb-2">Select your interests:</h3>
+          <h3 class="font-semibold text-surface-900 dark:text-surface-0 mb-2">Pizza Toppings:</h3>
+          <div class="flex flex-wrap justify-center gap-4">
+            <div class="flex items-center gap-2">
+              <Checkbox v-model="pizza" inputId="ingredient1" name="pizza" value="Cheese" />
+              <label for="ingredient1" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+                Cheese
+              </label>
+            </div>
+            <div class="flex items-center gap-2">
+              <Checkbox v-model="pizza" inputId="ingredient2" name="pizza" value="Mushroom" />
+              <label for="ingredient2" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+                Mushroom
+              </label>
+            </div>
+            <div class="flex items-center gap-2">
+              <Checkbox v-model="pizza" inputId="ingredient3" name="pizza" value="Pepper" />
+              <label for="ingredient3" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+                Pepper
+              </label>
+            </div>
+            <div class="flex items-center gap-2">
+              <Checkbox v-model="pizza" inputId="ingredient4" name="pizza" value="Onion" />
+              <label for="ingredient4" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+                Onion
+              </label>
+            </div>
+          </div>
+          <small class="text-surface-600 dark:text-surface-300">
+            Selected: {{ pizza.length ? pizza.join(', ') : 'None' }}
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Dynamic</h2>
+      <p class="text-surface-600 dark:text-surface-300">Checkboxes can be generated using a list of values.</p>
+      
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-col gap-4">
+          <h3 class="font-semibold text-surface-900 dark:text-surface-0 mb-2">Departments:</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <div v-for="category in categories" :key="category.key" class="flex items-center gap-3">
+            <div v-for="category of categories" :key="category.key" class="flex items-center gap-2">
               <Checkbox 
-                :id="category.key" 
                 v-model="selectedCategories" 
-                :value="category.key" 
+                :inputId="category.key" 
+                name="category" 
+                :value="category.name" 
               />
               <label :for="category.key" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
                 {{ category.name }}
@@ -129,223 +147,200 @@ const isFormValid = computed(() => {
       </div>
     </div>
 
-    <!-- Binary Values -->
+    <!-- Indeterminate -->
     <div class="flex flex-col gap-4">
-      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Binary Values</h2>
-      <p class="text-surface-600 dark:text-surface-300">Checkbox can use custom values instead of boolean with binary-value mode.</p>
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Indeterminate</h2>
+      <p class="text-surface-600 dark:text-surface-300">When indeterminate is present, the checkbox masks the actual value visually.</p>
       
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <div class="flex items-center gap-3">
-            <Checkbox 
-              id="binary-checkbox" 
-              v-model="binaryValue" 
-              binary 
-              trueValue="Yes" 
-              falseValue="No"
-            />
-            <label for="binary-checkbox" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
-              Subscribe to newsletter
-            </label>
-          </div>
-          <small class="text-surface-600 dark:text-surface-300">
-            Value: {{ binaryValue || 'No' }}
-          </small>
-        </div>
-      </div>
-    </div>
-
-    <!-- Indeterminate State -->
-    <div class="flex flex-col gap-4">
-      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Indeterminate State</h2>
-      <p class="text-surface-600 dark:text-surface-300">Checkbox supports an indeterminate state when the value is neither true nor false.</p>
-      
-      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
-        <div class="flex flex-col gap-4">
-          <div class="flex items-center gap-3">
-            <Checkbox 
-              id="indeterminate-checkbox" 
-              v-model="indeterminateValue" 
-              :indeterminate="indeterminateValue === null"
-            />
-            <label for="indeterminate-checkbox" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
-              Partial selection
+            <Checkbox v-model="indeterminateChecked" indeterminate binary />
+            <label class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+              Partial selection state
             </label>
           </div>
           <div class="flex gap-2">
-            <Button @click="indeterminateValue = true" size="small" outlined>Set True</Button>
-            <Button @click="indeterminateValue = false" size="small" outlined>Set False</Button>
-            <Button @click="indeterminateValue = null" size="small" outlined>Set Indeterminate</Button>
+            <Button @click="indeterminateChecked = true" size="small" outlined>Check</Button>
+            <Button @click="indeterminateChecked = false" size="small" outlined>Uncheck</Button>
           </div>
           <small class="text-surface-600 dark:text-surface-300">
-            State: {{ indeterminateValue === null ? 'Indeterminate' : String(indeterminateValue) }}
+            Value: {{ indeterminateChecked }}
           </small>
         </div>
       </div>
     </div>
 
-    <!-- Grouped Checkboxes -->
+    <!-- Filled -->
     <div class="flex flex-col gap-4">
-      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Grouped Checkboxes</h2>
-      <p class="text-surface-600 dark:text-surface-300">Example of grouped checkboxes with a master checkbox that controls all others.</p>
-      
-      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
-        <div class="flex flex-col gap-4">
-          <div class="flex items-center gap-3 pb-3 border-b border-surface-200 dark:border-surface-700">
-            <Checkbox 
-              id="all-permissions" 
-              v-model="allPermissions"
-            />
-            <label for="all-permissions" class="font-semibold text-surface-900 dark:text-surface-0 cursor-pointer">
-              All Permissions
-            </label>
-          </div>
-          
-          <div class="flex flex-col gap-3 ml-6">
-            <div class="flex items-center gap-3">
-              <Checkbox id="read-permission" v-model="permissions.read" />
-              <label for="read-permission" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
-                Read Permission
-              </label>
-            </div>
-            
-            <div class="flex items-center gap-3">
-              <Checkbox id="write-permission" v-model="permissions.write" />
-              <label for="write-permission" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
-                Write Permission
-              </label>
-            </div>
-            
-            <div class="flex items-center gap-3">
-              <Checkbox id="execute-permission" v-model="permissions.execute" />
-              <label for="execute-permission" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
-                Execute Permission
-              </label>
-            </div>
-          </div>
-          
-          <small class="text-surface-600 dark:text-surface-300">
-            Selected permissions: {{ Object.entries(permissions).filter(([key, value]) => value).map(([key]) => key).join(', ') || 'None' }}
-          </small>
-        </div>
-      </div>
-    </div>
-
-    <!-- Dynamic Options -->
-    <div class="flex flex-col gap-4">
-      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Dynamic Options</h2>
-      <p class="text-surface-600 dark:text-surface-300">Checkboxes can be generated dynamically from data arrays.</p>
-      
-      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
-        <div class="flex flex-col gap-4">
-          <h3 class="font-semibold text-surface-900 dark:text-surface-0 mb-2">Available Options:</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <div v-for="option in dynamicOptions" :key="option.value" class="flex items-center gap-3">
-              <Checkbox 
-                :id="option.value" 
-                v-model="selectedDynamic" 
-                :value="option.value" 
-              />
-              <label :for="option.value" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
-                {{ option.label }}
-              </label>
-            </div>
-          </div>
-          <div class="flex gap-2 pt-2">
-            <Button @click="selectedDynamic = []" size="small" outlined>Clear All</Button>
-            <Button @click="selectedDynamic = dynamicOptions.map(o => o.value)" size="small" outlined>Select All</Button>
-          </div>
-          <small class="text-surface-600 dark:text-surface-300">
-            Selected: {{ selectedDynamic.length }} of {{ dynamicOptions.length }} options
-          </small>
-        </div>
-      </div>
-    </div>
-
-    <!-- States -->
-    <div class="flex flex-col gap-4">
-      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">States</h2>
-      <p class="text-surface-600 dark:text-surface-300">Different states can be applied to indicate validation status or user interaction constraints.</p>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
-          <div class="flex flex-col gap-4">
-            <h3 class="font-semibold text-surface-900 dark:text-surface-0">Invalid</h3>
-            <div class="flex items-center gap-3">
-              <Checkbox id="invalid-checkbox" v-model="invalidValue" invalid />
-              <label for="invalid-checkbox" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
-                Invalid checkbox
-              </label>
-            </div>
-            <small class="text-red-500">This field has an error.</small>
-          </div>
-        </div>
-        
-        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
-          <div class="flex flex-col gap-4">
-            <h3 class="font-semibold text-surface-900 dark:text-surface-0">Disabled</h3>
-            <div class="flex items-center gap-3">
-              <Checkbox id="disabled-checkbox" v-model="disabledChecked" disabled />
-              <label for="disabled-checkbox" class="font-medium text-surface-600 dark:text-surface-400">
-                Disabled checkbox
-              </label>
-            </div>
-            <small class="text-surface-600 dark:text-surface-300">This field is disabled.</small>
-          </div>
-        </div>
-        
-        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
-          <div class="flex flex-col gap-4">
-            <h3 class="font-semibold text-surface-900 dark:text-surface-0">Readonly</h3>
-            <div class="flex items-center gap-3">
-              <Checkbox id="readonly-checkbox" v-model="readonlyValue" readonly />
-              <label for="readonly-checkbox" class="font-medium text-surface-900 dark:text-surface-0">
-                Readonly checkbox
-              </label>
-            </div>
-            <small class="text-surface-600 dark:text-surface-300">This field is readonly.</small>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Form Validation -->
-    <div class="flex flex-col gap-4">
-      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Form Validation</h2>
-      <p class="text-surface-600 dark:text-surface-300">Example of using checkboxes in form validation scenarios.</p>
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Filled</h2>
+      <p class="text-surface-600 dark:text-surface-300">Specify the variant property as filled to display the component with a higher visual emphasis than the default outlined style.</p>
       
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <div class="flex items-center gap-3">
-            <Checkbox id="newsletter-checkbox" v-model="formData.newsletter" />
-            <label for="newsletter-checkbox" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
-              Subscribe to our newsletter (optional)
+            <Checkbox v-model="filledChecked" binary variant="filled" />
+            <label class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+              Filled variant checkbox
+            </label>
+          </div>
+          <small class="text-surface-600 dark:text-surface-300">
+            Enhanced visual emphasis with filled styling
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sizes -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Sizes</h2>
+      <p class="text-surface-600 dark:text-surface-300">Checkbox provides small and large sizes as alternatives to the base.</p>
+      
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-wrap justify-center gap-4">
+          <div class="flex items-center gap-2">
+            <Checkbox v-model="size" inputId="size_small" name="size" value="Small" size="small" />
+            <label for="size_small" class="text-sm font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+              Small
+            </label>
+          </div>
+          <div class="flex items-center gap-2">
+            <Checkbox v-model="size" inputId="size_normal" name="size" value="Normal" />
+            <label for="size_normal" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+              Normal
+            </label>
+          </div>
+          <div class="flex items-center gap-2">
+            <Checkbox v-model="size" inputId="size_large" name="size" value="Large" size="large" />
+            <label for="size_large" class="text-lg font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+              Large
+            </label>
+          </div>
+        </div>
+        <small class="text-surface-600 dark:text-surface-300 mt-4">
+          Selected sizes: {{ size.length ? size.join(', ') : 'None' }}
+        </small>
+      </div>
+    </div>
+
+    <!-- Invalid -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Invalid</h2>
+      <p class="text-surface-600 dark:text-surface-300">Invalid state is displayed using the invalid prop to indicate a failed validation. You can use this style when integrating with form validation libraries.</p>
+      
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-3">
+            <Checkbox v-model="invalidChecked" :invalid="!invalidChecked" binary />
+            <label class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+              Required checkbox
+            </label>
+          </div>
+          <small :class="!invalidChecked ? 'text-red-500' : 'text-surface-600 dark:text-surface-300'">
+            {{ !invalidChecked ? 'This field is required.' : 'Validation passed.' }}
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Disabled -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Disabled</h2>
+      <p class="text-surface-600 dark:text-surface-300">When disabled is present, the element cannot be edited and focused.</p>
+      
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-3">
+            <Checkbox v-model="disabledChecked1" binary disabled />
+            <label class="font-medium text-surface-600 dark:text-surface-400">
+              Disabled unchecked
+            </label>
+          </div>
+          <div class="flex items-center gap-3">
+            <Checkbox v-model="disabledChecked2" binary disabled />
+            <label class="font-medium text-surface-600 dark:text-surface-400">
+              Disabled checked
+            </label>
+          </div>
+          <small class="text-surface-600 dark:text-surface-300">
+            These checkboxes cannot be modified
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Accessibility</h2>
+      <p class="text-surface-600 dark:text-surface-300">Proper labeling techniques for screen readers and keyboard navigation support.</p>
+      
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-3">
+            <label for="chkbox1" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+              Remember Me (with inputId)
+            </label>
+            <Checkbox inputId="chkbox1" binary />
+          </div>
+          
+          <div class="flex items-center gap-3">
+            <span id="chkbox2" class="font-medium text-surface-900 dark:text-surface-0">
+              Subscribe (with aria-labelledby)
+            </span>
+            <Checkbox aria-labelledby="chkbox2" binary />
+          </div>
+          
+          <div class="flex items-center gap-3">
+            <Checkbox aria-label="Accept Terms (with aria-label)" binary />
+            <span class="font-medium text-surface-900 dark:text-surface-0">
+              Accept Terms (with aria-label)
+            </span>
+          </div>
+          
+          <small class="text-surface-600 dark:text-surface-300">
+            Keyboard Support: Tab to focus • Space to toggle
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Integration -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">Form Integration</h2>
+      <p class="text-surface-600 dark:text-surface-300">Example of checkboxes used in form validation scenarios.</p>
+      
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-3">
+            <Checkbox v-model="formData.newsletter" binary />
+            <label class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+              Subscribe to newsletter (optional)
             </label>
           </div>
           
           <div class="flex items-center gap-3">
             <Checkbox 
-              id="terms-checkbox" 
               v-model="formData.terms" 
               :invalid="!formData.terms"
+              binary 
             />
-            <label for="terms-checkbox" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+            <label class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
               I agree to the Terms of Service *
             </label>
           </div>
           
           <div class="flex items-center gap-3">
             <Checkbox 
-              id="privacy-checkbox" 
               v-model="formData.privacy" 
               :invalid="!formData.privacy"
+              binary 
             />
-            <label for="privacy-checkbox" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+            <label class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
               I agree to the Privacy Policy *
             </label>
           </div>
           
-          <div class="flex items-center gap-3 pt-3">
+          <div class="flex items-center gap-3 pt-3 border-t border-surface-200 dark:border-surface-700">
             <Button 
               :disabled="!isFormValid" 
               :severity="isFormValid ? 'primary' : 'secondary'"
