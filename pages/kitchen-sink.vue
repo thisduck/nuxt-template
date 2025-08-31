@@ -11,6 +11,7 @@ const navigationItems = ref([
     items: [
       { label: 'Input Text', path: '/kitchen-sink/form/input-text', icon: 'pi pi-pencil' },
       { label: 'Textarea', path: '/kitchen-sink/form/textarea', icon: 'pi pi-align-left' },
+      { label: 'AutoComplete', path: '/kitchen-sink/form/autocomplete', icon: 'pi pi-search' },
       { label: 'Select', path: '/kitchen-sink/form/select', icon: 'pi pi-chevron-down' },
       { label: 'MultiSelect', path: '/kitchen-sink/form/multiselect', icon: 'pi pi-check-square' },
       { label: 'Password', path: '/kitchen-sink/form/password', icon: 'pi pi-key' },
