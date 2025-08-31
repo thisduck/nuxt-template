@@ -1,0 +1,761 @@
+<script setup lang="ts">
+// tRPC Backend Integration
+const { $trpc } = useNuxtApp();
+
+// Basic products data for examples
+const basicProducts = ref([
+  { 
+    id: 1, 
+    name: 'iPhone 15 Pro', 
+    category: 'Smartphone', 
+    price: 999, 
+    rating: 4.8, 
+    inventoryStatus: 'INSTOCK',
+    image: 'iphone-15-pro.jpg',
+    description: 'Latest iPhone with advanced camera system and titanium design'
+  },
+  { 
+    id: 2, 
+    name: 'MacBook Pro', 
+    category: 'Laptop', 
+    price: 2499, 
+    rating: 4.9, 
+    inventoryStatus: 'INSTOCK',
+    image: 'macbook-pro.jpg',
+    description: 'Powerful laptop for professional work and creative tasks'
+  },
+  { 
+    id: 3, 
+    name: 'AirPods Pro', 
+    category: 'Audio', 
+    price: 249, 
+    rating: 4.5, 
+    inventoryStatus: 'LOWSTOCK',
+    image: 'airpods-pro.jpg',
+    description: 'Noise-cancelling wireless earbuds with spatial audio'
+  },
+  { 
+    id: 4, 
+    name: 'iPad Air', 
+    category: 'Tablet', 
+    price: 599, 
+    rating: 4.6, 
+    inventoryStatus: 'OUTOFSTOCK',
+    image: 'ipad-air.jpg',
+    description: 'Versatile tablet for creativity and productivity'
+  },
+  { 
+    id: 5, 
+    name: 'Apple Watch', 
+    category: 'Wearable', 
+    price: 399, 
+    rating: 4.4, 
+    inventoryStatus: 'INSTOCK',
+    image: 'apple-watch.jpg',
+    description: 'Advanced health and fitness tracking with smart features'
+  },
+  { 
+    id: 6, 
+    name: 'Sony Headphones', 
+    category: 'Audio', 
+    price: 299, 
+    rating: 4.7, 
+    inventoryStatus: 'INSTOCK',
+    image: 'sony-headphones.jpg',
+    description: 'Premium noise-cancelling over-ear headphones'
+  }
+]);
+
+// Layout options
+const layout = ref('list');
+const layoutOptions = ref(['list', 'grid']);
+
+// Sorting
+const sortKey = ref();
+const sortOrder = ref();
+const sortField = ref();
+const sortOptions = ref([
+  { label: 'Price High to Low', value: '!price' },
+  { label: 'Price Low to High', value: 'price' },
+  { label: 'Name A-Z', value: 'name' },
+  { label: 'Name Z-A', value: '!name' }
+]);
+
+// Loading state
+const isLoading = ref(false);
+const showSkeleton = ref(false);
+
+// API Products
+const apiProducts = ref([]);
+const isLoadingApi = ref(false);
+
+// Utility functions
+function getSeverity(product) {
+  switch (product.inventoryStatus) {
+    case 'INSTOCK':
+      return 'success';
+    case 'LOWSTOCK':
+      return 'warn';
+    case 'OUTOFSTOCK':
+      return 'danger';
+    default:
+      return null;
+  }
+}
+
+function formatCurrency(value) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  }).format(value);
+}
+
+// Sort change handler
+function onSortChange(event) {
+  const value = event.value.value;
+  const sortValue = event.value;
+
+  if (value.indexOf('!') === 0) {
+    sortOrder.value = -1;
+    sortField.value = value.substring(1, value.length);
+    sortKey.value = sortValue;
+  } else {
+    sortOrder.value = 1;
+    sortField.value = value;
+    sortKey.value = sortValue;
+  }
+}
+
+// Toggle skeleton loading
+function toggleSkeleton() {
+  showSkeleton.value = !showSkeleton.value;
+}
+
+// Load API products
+async function loadApiProducts() {
+  isLoadingApi.value = true;
+  try {
+    const result = await $trpc.getFilteredProducts.query({ size: 12 });
+    apiProducts.value = result.data.map(product => ({
+      ...product,
+      inventoryStatus: product.stock > 50 ? 'INSTOCK' : product.stock > 20 ? 'LOWSTOCK' : 'OUTOFSTOCK',
+      image: `${product.category.toLowerCase()}-${product.id}.jpg`,
+      rating: (Math.random() * 2 + 3).toFixed(1), // Random rating between 3-5
+      description: `Premium ${product.name} in ${product.category} category`
+    }));
+  } catch (error) {
+    console.error('Failed to load products:', error);
+  } finally {
+    isLoadingApi.value = false;
+  }
+}
+
+// Add to wishlist
+function addToWishlist(product) {
+  console.log('Added to wishlist:', product.name);
+}
+
+// Buy product
+function buyProduct(product) {
+  console.log('Buying product:', product.name);
+}
+
+// Load API data on mount
+onMounted(() => {
+  loadApiProducts();
+});
+</script>
+
+<template>
+  <div class="p-6 lg:p-8 flex flex-col gap-8">
+    <!-- Header -->
+    <div class="flex flex-col gap-3 border-b border-surface-200 dark:border-surface-700 pb-6">
+      <div class="flex items-center gap-3">
+        <i class="pi pi-list text-3xl text-primary-500" />
+        <h1 class="text-3xl font-bold text-surface-900 dark:text-surface-0">
+          DataView
+        </h1>
+      </div>
+      <p class="text-surface-600 dark:text-surface-300 max-w-3xl">
+        DataView displays data in grid or list layout with pagination and sorting features. It provides flexible content presentation with customizable templates for different display modes.
+      </p>
+    </div>
+
+    <!-- Basic -->
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center gap-2">
+        <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+          Basic
+        </h2>
+        <Tag value="Most Common" severity="success" />
+      </div>
+      <p class="text-surface-600 dark:text-surface-300">
+        DataView requires a value as data to display along with a list slot for item content.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <DataView :value="basicProducts.slice(0, 3)">
+          <template #list="slotProps">
+            <div class="flex flex-col">
+              <div v-for="(item, index) in slotProps.items" :key="index">
+                <div class="flex flex-col sm:flex-row sm:items-center p-6 gap-4" :class="{ 'border-t border-surface-200 dark:border-surface-700': index !== 0 }">
+                  <div class="md:w-40 relative">
+                    <div class="flex items-center justify-center w-full h-32 bg-surface-100 dark:bg-surface-700 rounded-lg">
+                      <i class="pi pi-image text-4xl text-surface-400" />
+                    </div>
+                    <div class="absolute bg-black/70 rounded-border" style="left: 4px; top: 4px">
+                      <Tag :value="item.inventoryStatus" :severity="getSeverity(item)" />
+                    </div>
+                  </div>
+                  <div class="flex flex-col md:flex-row justify-between md:items-center flex-1 gap-6">
+                    <div class="flex flex-row md:flex-col justify-between items-start gap-2">
+                      <div>
+                        <span class="font-medium text-surface-500 dark:text-surface-400 text-sm">{{ item.category }}</span>
+                        <div class="text-lg font-medium mt-2">{{ item.name }}</div>
+                      </div>
+                      <div class="bg-surface-100 p-1" style="border-radius: 30px">
+                        <div class="bg-surface-0 flex items-center gap-2 justify-center py-1 px-2" style="border-radius: 30px; box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.04), 0px 1px 2px 0px rgba(0, 0, 0, 0.06)">
+                          <span class="text-surface-900 font-medium text-sm">{{ item.rating }}</span>
+                          <i class="pi pi-star-fill text-yellow-500" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex flex-col md:items-end gap-8">
+                      <span class="text-xl font-semibold">{{ formatCurrency(item.price) }}</span>
+                      <div class="flex flex-row-reverse md:flex-row gap-2">
+                        <Button icon="pi pi-heart" variant="outlined" @click="addToWishlist(item)" />
+                        <Button 
+                          icon="pi pi-shopping-cart" 
+                          label="Buy Now" 
+                          :disabled="item.inventoryStatus === 'OUTOFSTOCK'" 
+                          class="flex-auto md:flex-initial whitespace-nowrap"
+                          @click="buyProduct(item)"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+        </DataView>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Pagination
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        Pagination is enabled with the paginator and rows properties for handling large datasets.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <DataView :value="basicProducts" paginator :rows="3">
+          <template #list="slotProps">
+            <div class="flex flex-col">
+              <div v-for="(item, index) in slotProps.items" :key="index">
+                <div class="flex flex-col sm:flex-row sm:items-center p-6 gap-4" :class="{ 'border-t border-surface-200 dark:border-surface-700': index !== 0 }">
+                  <div class="md:w-40 relative">
+                    <div class="flex items-center justify-center w-full h-32 bg-surface-100 dark:bg-surface-700 rounded-lg">
+                      <i class="pi pi-image text-4xl text-surface-400" />
+                    </div>
+                    <div class="absolute bg-black/70 rounded-border" style="left: 4px; top: 4px">
+                      <Tag :value="item.inventoryStatus" :severity="getSeverity(item)" />
+                    </div>
+                  </div>
+                  <div class="flex flex-col md:flex-row justify-between md:items-center flex-1 gap-6">
+                    <div class="flex flex-row md:flex-col justify-between items-start gap-2">
+                      <div>
+                        <span class="font-medium text-surface-500 dark:text-surface-400 text-sm">{{ item.category }}</span>
+                        <div class="text-lg font-medium mt-2">{{ item.name }}</div>
+                      </div>
+                      <div class="bg-surface-100 p-1" style="border-radius: 30px">
+                        <div class="bg-surface-0 flex items-center gap-2 justify-center py-1 px-2" style="border-radius: 30px; box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.04), 0px 1px 2px 0px rgba(0, 0, 0, 0.06)">
+                          <span class="text-surface-900 font-medium text-sm">{{ item.rating }}</span>
+                          <i class="pi pi-star-fill text-yellow-500" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex flex-col md:items-end gap-8">
+                      <span class="text-xl font-semibold">{{ formatCurrency(item.price) }}</span>
+                      <div class="flex flex-row-reverse md:flex-row gap-2">
+                        <Button icon="pi pi-heart" variant="outlined" @click="addToWishlist(item)" />
+                        <Button 
+                          icon="pi pi-shopping-cart" 
+                          label="Buy Now" 
+                          :disabled="item.inventoryStatus === 'OUTOFSTOCK'" 
+                          class="flex-auto md:flex-initial whitespace-nowrap"
+                          @click="buyProduct(item)"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+        </DataView>
+      </div>
+    </div>
+
+    <!-- Sorting -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Sorting
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        Built-in sorting is controlled by sortField and sortOrder properties with custom sorting UI.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <DataView :value="basicProducts" :sortOrder="sortOrder" :sortField="sortField">
+          <template #header>
+            <div class="flex justify-end">
+              <Select v-model="sortKey" :options="sortOptions" option-label="label" placeholder="Sort By Price" @change="onSortChange($event)" />
+            </div>
+          </template>
+          <template #list="slotProps">
+            <div class="flex flex-col">
+              <div v-for="(item, index) in slotProps.items" :key="index">
+                <div class="flex flex-col sm:flex-row sm:items-center p-6 gap-4" :class="{ 'border-t border-surface-200 dark:border-surface-700': index !== 0 }">
+                  <div class="md:w-40 relative">
+                    <div class="flex items-center justify-center w-full h-32 bg-surface-100 dark:bg-surface-700 rounded-lg">
+                      <i class="pi pi-image text-4xl text-surface-400" />
+                    </div>
+                    <div class="absolute bg-black/70 rounded-border" style="left: 4px; top: 4px">
+                      <Tag :value="item.inventoryStatus" :severity="getSeverity(item)" />
+                    </div>
+                  </div>
+                  <div class="flex flex-col md:flex-row justify-between md:items-center flex-1 gap-6">
+                    <div class="flex flex-row md:flex-col justify-between items-start gap-2">
+                      <div>
+                        <span class="font-medium text-surface-500 dark:text-surface-400 text-sm">{{ item.category }}</span>
+                        <div class="text-lg font-medium mt-2">{{ item.name }}</div>
+                      </div>
+                      <div class="bg-surface-100 p-1" style="border-radius: 30px">
+                        <div class="bg-surface-0 flex items-center gap-2 justify-center py-1 px-2" style="border-radius: 30px; box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.04), 0px 1px 2px 0px rgba(0, 0, 0, 0.06)">
+                          <span class="text-surface-900 font-medium text-sm">{{ item.rating }}</span>
+                          <i class="pi pi-star-fill text-yellow-500" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex flex-col md:items-end gap-8">
+                      <span class="text-xl font-semibold">{{ formatCurrency(item.price) }}</span>
+                      <div class="flex flex-row-reverse md:flex-row gap-2">
+                        <Button icon="pi pi-heart" variant="outlined" @click="addToWishlist(item)" />
+                        <Button 
+                          icon="pi pi-shopping-cart" 
+                          label="Buy Now" 
+                          :disabled="item.inventoryStatus === 'OUTOFSTOCK'" 
+                          class="flex-auto md:flex-initial whitespace-nowrap"
+                          @click="buyProduct(item)"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+        </DataView>
+      </div>
+    </div>
+
+    <!-- Layout -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Layout
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        DataView supports list and grid display modes defined with the layout property.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <DataView :value="basicProducts" :layout="layout">
+          <template #header>
+            <div class="flex justify-end">
+              <SelectButton v-model="layout" :options="layoutOptions" :allowEmpty="false">
+                <template #option="{ option }">
+                  <i :class="[option === 'list' ? 'pi pi-bars' : 'pi pi-table']" />
+                </template>
+              </SelectButton>
+            </div>
+          </template>
+
+          <template #list="slotProps">
+            <div class="flex flex-col">
+              <div v-for="(item, index) in slotProps.items" :key="index">
+                <div class="flex flex-col sm:flex-row sm:items-center p-6 gap-4" :class="{ 'border-t border-surface-200 dark:border-surface-700': index !== 0 }">
+                  <div class="md:w-40 relative">
+                    <div class="flex items-center justify-center w-full h-32 bg-surface-100 dark:bg-surface-700 rounded-lg">
+                      <i class="pi pi-image text-4xl text-surface-400" />
+                    </div>
+                    <div class="absolute bg-black/70 rounded-border" style="left: 4px; top: 4px">
+                      <Tag :value="item.inventoryStatus" :severity="getSeverity(item)" />
+                    </div>
+                  </div>
+                  <div class="flex flex-col md:flex-row justify-between md:items-center flex-1 gap-6">
+                    <div class="flex flex-row md:flex-col justify-between items-start gap-2">
+                      <div>
+                        <span class="font-medium text-surface-500 dark:text-surface-400 text-sm">{{ item.category }}</span>
+                        <div class="text-lg font-medium mt-2">{{ item.name }}</div>
+                      </div>
+                      <div class="bg-surface-100 p-1" style="border-radius: 30px">
+                        <div class="bg-surface-0 flex items-center gap-2 justify-center py-1 px-2" style="border-radius: 30px; box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.04), 0px 1px 2px 0px rgba(0, 0, 0, 0.06)">
+                          <span class="text-surface-900 font-medium text-sm">{{ item.rating }}</span>
+                          <i class="pi pi-star-fill text-yellow-500" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex flex-col md:items-end gap-8">
+                      <span class="text-xl font-semibold">{{ formatCurrency(item.price) }}</span>
+                      <div class="flex flex-row-reverse md:flex-row gap-2">
+                        <Button icon="pi pi-heart" variant="outlined" @click="addToWishlist(item)" />
+                        <Button 
+                          icon="pi pi-shopping-cart" 
+                          label="Buy Now" 
+                          :disabled="item.inventoryStatus === 'OUTOFSTOCK'" 
+                          class="flex-auto md:flex-initial whitespace-nowrap"
+                          @click="buyProduct(item)"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+
+          <template #grid="slotProps">
+            <div class="grid grid-cols-12 gap-4">
+              <div v-for="(item, index) in slotProps.items" :key="index" class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-6 p-2">
+                <div class="p-6 border border-surface-200 dark:border-surface-700 bg-surface-0 dark:bg-surface-900 rounded flex flex-col">
+                  <div class="bg-surface-50 flex justify-center rounded p-4">
+                    <div class="relative mx-auto">
+                      <div class="flex items-center justify-center w-full h-48 bg-surface-100 dark:bg-surface-700 rounded-lg">
+                        <i class="pi pi-image text-6xl text-surface-400" />
+                      </div>
+                      <div class="absolute bg-black/70 rounded-border" style="left: 4px; top: 4px">
+                        <Tag :value="item.inventoryStatus" :severity="getSeverity(item)" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pt-6">
+                    <div class="flex flex-row justify-between items-start gap-2">
+                      <div>
+                        <span class="font-medium text-surface-500 dark:text-surface-400 text-sm">{{ item.category }}</span>
+                        <div class="text-lg font-medium mt-1">{{ item.name }}</div>
+                      </div>
+                      <div class="bg-surface-100 p-1" style="border-radius: 30px">
+                        <div class="bg-surface-0 flex items-center gap-2 justify-center py-1 px-2" style="border-radius: 30px; box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.04), 0px 1px 2px 0px rgba(0, 0, 0, 0.06)">
+                          <span class="text-surface-900 font-medium text-sm">{{ item.rating }}</span>
+                          <i class="pi pi-star-fill text-yellow-500" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex flex-col gap-6 mt-6">
+                      <span class="text-2xl font-semibold">{{ formatCurrency(item.price) }}</span>
+                      <div class="flex gap-2">
+                        <Button 
+                          icon="pi pi-shopping-cart" 
+                          label="Buy Now" 
+                          :disabled="item.inventoryStatus === 'OUTOFSTOCK'" 
+                          class="flex-auto whitespace-nowrap"
+                          @click="buyProduct(item)"
+                        />
+                        <Button icon="pi pi-heart" variant="outlined" @click="addToWishlist(item)" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+        </DataView>
+      </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Loading
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        While data is being loaded, Skeleton component may be used to indicate the busy state.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex items-center gap-3 mb-4">
+          <Button 
+            :label="showSkeleton ? 'Hide Loading' : 'Show Loading'" 
+            @click="toggleSkeleton" 
+          />
+        </div>
+
+        <DataView :value="showSkeleton ? [] : basicProducts.slice(0, 3)" :layout="layout">
+          <template #header>
+            <div class="flex justify-end">
+              <SelectButton v-model="layout" :options="layoutOptions" :allowEmpty="false">
+                <template #option="{ option }">
+                  <i :class="[option === 'list' ? 'pi pi-bars' : 'pi pi-table']" />
+                </template>
+              </SelectButton>
+            </div>
+          </template>
+
+          <template #list="slotProps" v-if="!showSkeleton">
+            <div class="flex flex-col">
+              <div v-for="(item, index) in slotProps.items" :key="index">
+                <div class="flex flex-col xl:flex-row xl:items-start p-6 gap-6" :class="{ 'border-t border-surface-200 dark:border-surface-700': index !== 0 }">
+                  <div class="md:w-40 relative">
+                    <div class="flex items-center justify-center w-full h-32 bg-surface-100 dark:bg-surface-700 rounded-lg">
+                      <i class="pi pi-image text-4xl text-surface-400" />
+                    </div>
+                  </div>
+                  <div class="flex flex-col sm:flex-row justify-between items-center xl:items-start flex-1 gap-6">
+                    <div class="flex flex-col items-center sm:items-start gap-4">
+                      <div class="text-lg font-medium">{{ item.name }}</div>
+                      <span class="font-medium text-surface-500 dark:text-surface-400 text-sm">{{ item.category }}</span>
+                      <div class="flex items-center gap-4">
+                        <span class="text-xl font-semibold">{{ formatCurrency(item.price) }}</span>
+                        <span class="text-sm">{{ item.rating }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+
+          <template #list v-if="showSkeleton">
+            <div class="flex flex-col">
+              <div v-for="i in 3" :key="i">
+                <div class="flex flex-col xl:flex-row xl:items-start p-6 gap-6" :class="{ 'border-t border-surface-200 dark:border-surface-700': i !== 1 }">
+                  <Skeleton class="!w-9/12 sm:!w-64 xl:!w-40 !h-24 mx-auto" />
+                  <div class="flex flex-col sm:flex-row justify-between items-center xl:items-start flex-1 gap-6">
+                    <div class="flex flex-col items-center sm:items-start gap-4">
+                      <Skeleton width="8rem" height="2rem" />
+                      <Skeleton width="6rem" height="1rem" />
+                      <div class="flex items-center gap-4">
+                        <Skeleton width="6rem" height="1rem" />
+                        <Skeleton width="3rem" height="1rem" />
+                      </div>
+                    </div>
+                    <div class="flex sm:flex-col items-center sm:items-end gap-4 sm:gap-2">
+                      <Skeleton width="4rem" height="2rem" />
+                      <Skeleton size="3rem" shape="circle" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+
+          <template #grid="slotProps" v-if="!showSkeleton">
+            <div class="grid grid-cols-12 gap-4">
+              <div v-for="(item, index) in slotProps.items" :key="index" class="col-span-12 sm:col-span-6 xl:col-span-4 p-2">
+                <div class="p-6 border border-surface-200 dark:border-surface-700 bg-surface-0 dark:bg-surface-900 rounded">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span class="font-medium text-surface-500 dark:text-surface-400 text-sm">{{ item.category }}</span>
+                    <span class="text-sm">{{ item.rating }}</span>
+                  </div>
+                  <div class="flex flex-col items-center gap-4 py-8">
+                    <div class="flex items-center justify-center w-full h-32 bg-surface-100 dark:bg-surface-700 rounded-lg">
+                      <i class="pi pi-image text-4xl text-surface-400" />
+                    </div>
+                    <div class="text-lg font-medium">{{ item.name }}</div>
+                    <span class="text-xl font-semibold">{{ formatCurrency(item.price) }}</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <Button 
+                      icon="pi pi-shopping-cart" 
+                      label="Buy" 
+                      :disabled="item.inventoryStatus === 'OUTOFSTOCK'" 
+                      size="small"
+                      @click="buyProduct(item)"
+                    />
+                    <Button icon="pi pi-heart" variant="outlined" size="small" @click="addToWishlist(item)" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+
+          <template #grid v-if="showSkeleton">
+            <div class="grid grid-cols-12 gap-4">
+              <div v-for="i in 3" :key="i" class="col-span-12 sm:col-span-6 xl:col-span-4 p-2">
+                <div class="p-6 border border-surface-200 dark:border-surface-700 bg-surface-0 dark:bg-surface-900 rounded">
+                  <div class="flex items-center justify-between">
+                    <Skeleton width="6rem" height="2rem" />
+                    <Skeleton width="3rem" height="1rem" />
+                  </div>
+                  <div class="flex flex-col items-center gap-4 py-8">
+                    <Skeleton width="75%" height="10rem" />
+                    <Skeleton width="8rem" height="2rem" />
+                    <Skeleton width="6rem" height="1rem" />
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <Skeleton width="4rem" height="2rem" />
+                    <Skeleton width="6rem" height="1rem" shape="circle" size="3rem" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+        </DataView>
+      </div>
+    </div>
+
+    <!-- tRPC Integration -->
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center gap-2">
+        <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+          Real API Integration
+        </h2>
+        <Tag value="Live Data" severity="info" />
+      </div>
+      <p class="text-surface-600 dark:text-surface-300">
+        DataView with real backend data integration showing products from the tRPC API.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex items-center justify-between mb-6">
+          <h4 class="font-semibold text-surface-900 dark:text-surface-0">Product Catalog</h4>
+          <div class="flex items-center gap-3">
+            <div v-if="isLoadingApi" class="flex items-center gap-2">
+              <i class="pi pi-spin pi-spinner text-primary-500" />
+              <span class="text-sm text-primary-600">Loading...</span>
+            </div>
+            <Button 
+              icon="pi pi-refresh" 
+              label="Refresh" 
+              severity="secondary" 
+              @click="loadApiProducts"
+              :loading="isLoadingApi"
+            />
+          </div>
+        </div>
+
+        <DataView :value="apiProducts" :layout="layout" paginator :rows="6">
+          <template #header>
+            <div class="flex justify-end">
+              <SelectButton v-model="layout" :options="layoutOptions" :allowEmpty="false">
+                <template #option="{ option }">
+                  <i :class="[option === 'list' ? 'pi pi-bars' : 'pi pi-table']" />
+                </template>
+              </SelectButton>
+            </div>
+          </template>
+
+          <template #empty>
+            <div class="text-center py-8">
+              <i class="pi pi-inbox text-4xl text-surface-400 mb-4" />
+              <p class="text-surface-500">No products available.</p>
+              <Button label="Load Products" icon="pi pi-refresh" @click="loadApiProducts" class="mt-3" />
+            </div>
+          </template>
+
+          <template #list="slotProps">
+            <div class="flex flex-col">
+              <div v-for="(item, index) in slotProps.items" :key="index">
+                <div class="flex flex-col sm:flex-row sm:items-center p-6 gap-4" :class="{ 'border-t border-surface-200 dark:border-surface-700': index !== 0 }">
+                  <div class="md:w-40 relative">
+                    <div class="flex items-center justify-center w-full h-32 bg-surface-100 dark:bg-surface-700 rounded-lg">
+                      <i class="pi pi-image text-4xl text-surface-400" />
+                    </div>
+                    <div class="absolute bg-black/70 rounded-border" style="left: 4px; top: 4px">
+                      <Tag :value="item.inventoryStatus" :severity="getSeverity(item)" />
+                    </div>
+                  </div>
+                  <div class="flex flex-col md:flex-row justify-between md:items-center flex-1 gap-6">
+                    <div class="flex flex-row md:flex-col justify-between items-start gap-2">
+                      <div>
+                        <span class="font-medium text-surface-500 dark:text-surface-400 text-sm">{{ item.category }}</span>
+                        <div class="text-lg font-medium mt-2">{{ item.name }}</div>
+                        <p class="text-sm text-surface-600 dark:text-surface-300 mt-1">{{ item.description }}</p>
+                      </div>
+                      <div class="bg-surface-100 p-1" style="border-radius: 30px">
+                        <div class="bg-surface-0 flex items-center gap-2 justify-center py-1 px-2" style="border-radius: 30px; box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.04), 0px 1px 2px 0px rgba(0, 0, 0, 0.06)">
+                          <span class="text-surface-900 font-medium text-sm">{{ item.rating }}</span>
+                          <i class="pi pi-star-fill text-yellow-500" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex flex-col md:items-end gap-8">
+                      <span class="text-xl font-semibold">{{ formatCurrency(item.price) }}</span>
+                      <div class="flex items-center gap-2 text-sm text-surface-600">
+                        <span>Stock: {{ item.stock }}</span>
+                      </div>
+                      <div class="flex flex-row-reverse md:flex-row gap-2">
+                        <Button icon="pi pi-heart" variant="outlined" @click="addToWishlist(item)" />
+                        <Button 
+                          icon="pi pi-shopping-cart" 
+                          label="Buy Now" 
+                          :disabled="item.inventoryStatus === 'OUTOFSTOCK'" 
+                          class="flex-auto md:flex-initial whitespace-nowrap"
+                          @click="buyProduct(item)"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+
+          <template #grid="slotProps">
+            <div class="grid grid-cols-12 gap-4">
+              <div v-for="(item, index) in slotProps.items" :key="index" class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-6 p-2">
+                <div class="p-6 border border-surface-200 dark:border-surface-700 bg-surface-0 dark:bg-surface-900 rounded flex flex-col h-full">
+                  <div class="bg-surface-50 flex justify-center rounded p-4 mb-4">
+                    <div class="relative mx-auto">
+                      <div class="flex items-center justify-center w-full h-48 bg-surface-100 dark:bg-surface-700 rounded-lg">
+                        <i class="pi pi-image text-6xl text-surface-400" />
+                      </div>
+                      <div class="absolute bg-black/70 rounded-border" style="left: 4px; top: 4px">
+                        <Tag :value="item.inventoryStatus" :severity="getSeverity(item)" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex-1 flex flex-col">
+                    <div class="flex flex-row justify-between items-start gap-2 mb-4">
+                      <div class="flex-1">
+                        <span class="font-medium text-surface-500 dark:text-surface-400 text-sm">{{ item.category }}</span>
+                        <div class="text-lg font-medium mt-1">{{ item.name }}</div>
+                        <p class="text-sm text-surface-600 dark:text-surface-300 mt-2">{{ item.description }}</p>
+                      </div>
+                      <div class="bg-surface-100 p-1" style="border-radius: 30px">
+                        <div class="bg-surface-0 flex items-center gap-2 justify-center py-1 px-2" style="border-radius: 30px; box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.04), 0px 1px 2px 0px rgba(0, 0, 0, 0.06)">
+                          <span class="text-surface-900 font-medium text-sm">{{ item.rating }}</span>
+                          <i class="pi pi-star-fill text-yellow-500" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mt-auto">
+                      <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl font-semibold">{{ formatCurrency(item.price) }}</span>
+                        <span class="text-sm text-surface-600">Stock: {{ item.stock }}</span>
+                      </div>
+                      <div class="flex gap-2">
+                        <Button 
+                          icon="pi pi-shopping-cart" 
+                          label="Buy Now" 
+                          :disabled="item.inventoryStatus === 'OUTOFSTOCK'" 
+                          class="flex-auto whitespace-nowrap"
+                          @click="buyProduct(item)"
+                        />
+                        <Button icon="pi pi-heart" variant="outlined" @click="addToWishlist(item)" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+        </DataView>
+      </div>
+    </div>
+  </div>
+</template>
