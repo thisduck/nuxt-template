@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const route = useRoute();
+
 const navs = ref([
   {
     label: 'Home',
@@ -23,7 +25,18 @@ const navs = ref([
   },
 ]);
 
-const selectedNav = ref('Home');
+// Determine which nav item is active based on the current route
+const isNavActive = (item: any) => {
+  if (!item.to) return false;
+  
+  // For home, check exact match
+  if (item.to === '/') {
+    return route.path === '/';
+  }
+  
+  // For other routes, check if current path starts with the nav item's path
+  return route.path.startsWith(item.to);
+};
 </script>
 
 <template>
@@ -54,12 +67,11 @@ const selectedNav = ref('Home');
               :key="i"
               :to="item.to"
               class="flex items-center gap-2 px-6 py-3 cursor-pointer transition-colors duration-150" :class="[
-                selectedNav === item.label ? 'border-l-2 border-primary-500 dark:border-primary-400' : 'border-l-2 border-transparent hover:border-primary-500 dark:hover:border-primary-400',
+                isNavActive(item) ? 'border-l-2 border-primary-500 dark:border-primary-400' : 'border-l-2 border-transparent hover:border-primary-500 dark:hover:border-primary-400',
               ]"
-              @click="selectedNav = item.label"
             >
-              <i :class="[`${item.icon} text-base! leading-normal!`, selectedNav === item.label ? 'text-surface-900 dark:text-surface-0' : 'text-surface-500 dark:text-surface-400']" />
-              <span class="font-medium" :class="[selectedNav === item.label ? 'text-surface-900 dark:text-surface-0' : 'text-surface-600 dark:text-surface-300']">{{ item.label }}</span>
+              <i :class="[`${item.icon} text-base! leading-normal!`, isNavActive(item) ? 'text-surface-900 dark:text-surface-0' : 'text-surface-500 dark:text-surface-400']" />
+              <span class="font-medium" :class="[isNavActive(item) ? 'text-surface-900 dark:text-surface-0' : 'text-surface-600 dark:text-surface-300']">{{ item.label }}</span>
               <Badge v-if="item.badge" :value="item.badge" severity="primary" class="ml-auto" />
             </NuxtLink>
           </div>
@@ -82,12 +94,11 @@ const selectedNav = ref('Home');
               :key="i"
               :to="item.to"
               class="flex items-center gap-2 h-full px-4 rounded-t-md cursor-pointer transition-colors duration-150" :class="[
-                selectedNav === item.label ? 'border-b-2 border-primary-500 dark:border-primary-400' : 'border-b-2 border-transparent hover:border-primary-500 dark:hover:border-primary-400',
+                isNavActive(item) ? 'border-b-2 border-primary-500 dark:border-primary-400' : 'border-b-2 border-transparent hover:border-primary-500 dark:hover:border-primary-400',
               ]"
-              @click="selectedNav = item.label"
             >
-              <i :class="[`${item.icon} text-base! leading-normal!`, selectedNav === item.label ? 'text-surface-900 dark:text-surface-0' : 'text-surface-500 dark:text-surface-400']" />
-              <span class="font-medium" :class="[selectedNav === item.label ? 'text-surface-900 dark:text-surface-0' : 'text-surface-600 dark:text-surface-300']">{{ item.label }}</span>
+              <i :class="[`${item.icon} text-base! leading-normal!`, isNavActive(item) ? 'text-surface-900 dark:text-surface-0' : 'text-surface-500 dark:text-surface-400']" />
+              <span class="font-medium" :class="[isNavActive(item) ? 'text-surface-900 dark:text-surface-0' : 'text-surface-600 dark:text-surface-300']">{{ item.label }}</span>
               <Badge v-if="item.badge" :value="item.badge" severity="primary" />
             </NuxtLink>
           </div>
