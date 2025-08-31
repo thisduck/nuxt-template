@@ -381,7 +381,7 @@ const searchLazyItems = (event) => {
             v-model="selectedLazyItem" 
             :suggestions="filteredLazyItems"
             @complete="searchLazyItems"
-            virtualScrollerOptions="{ itemSize: 38 }"
+            :virtualScrollerOptions="{ itemSize: 38 }"
             placeholder="Search from 100k items" 
             class="w-full"
           />
