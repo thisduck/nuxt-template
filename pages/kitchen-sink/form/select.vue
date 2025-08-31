@@ -59,8 +59,6 @@ const groupedCities = ref([
   },
 ]);
 
-// Multiple
-const selectedCities = ref([]);
 
 // Filter
 const selectedFilteredCountry = ref(null);
@@ -71,7 +69,6 @@ const selectedTemplateCountry = ref(null);
 // States
 const selectedDisabled = ref({ name: 'Paris', code: 'PRS' });
 const selectedInvalid = ref(null);
-const selectedReadonly = ref({ name: 'London', code: 'LDN' });
 
 // Sizes
 const selectedSmall = ref(null);
@@ -81,6 +78,62 @@ const selectedLarge = ref(null);
 // Virtual Scrolling (for large datasets)
 const lazyItems = ref(Array.from({ length: 100000 }, (_, i) => ({ label: `Item ${i}`, value: i })));
 const selectedLazyItem = ref(null);
+
+// Forms
+const selectedFormCity = ref(null);
+
+// Checkmark
+const selectedCheckmarkCity = ref(null);
+
+// Clear icon
+const selectedClearCity = ref(null);
+
+// Loading state
+const isLoading = ref(false);
+const selectedLoadingCity = ref(null);
+
+// Filled variant
+const selectedFilledCity = ref(null);
+
+// tRPC Backend
+const { $trpc } = useNuxtApp();
+const selectedCategory = ref(null);
+const categories = ref([]);
+
+// tRPC Filterable Products
+const selectedFilteredProduct = ref(null);
+const filteredProducts = ref([]);
+const filterDebounceTimeout = ref(null);
+
+// Load categories on mount
+onMounted(async () => {
+  try {
+    categories.value = await $trpc.getCategories.query();
+    // Load initial products
+    filteredProducts.value = await $trpc.getFilteredProducts.query({ filter: '' });
+  } catch (error) {
+    console.error('Failed to load data:', error);
+  }
+});
+
+// Custom filter function for tRPC backend
+async function onFilterProducts(event) {
+  // Clear existing timeout
+  if (filterDebounceTimeout.value) {
+    clearTimeout(filterDebounceTimeout.value);
+  }
+  
+  // Debounce the API call
+  filterDebounceTimeout.value = setTimeout(async () => {
+    try {
+      filteredProducts.value = await $trpc.getFilteredProducts.query({ 
+        filter: event.value || '' 
+      });
+    } catch (error) {
+      console.error('Failed to filter products:', error);
+    }
+  }, 300);
+}
 </script>
 
 <template>
@@ -179,37 +232,16 @@ const selectedLazyItem = ref(null);
             option-group-children="items"
             placeholder="Select a City"
             class="w-full"
-          />
+          >
+            <template #optiongroup="slotProps">
+              <div class="flex items-center gap-2 p-2 font-medium">
+                <i class="pi pi-globe text-primary-500" />
+                <span>{{ slotProps.option.label }}</span>
+              </div>
+            </template>
+          </Select>
           <small class="text-surface-600 dark:text-surface-300">
             Cities are grouped by country
-          </small>
-        </div>
-      </div>
-    </div>
-
-    <!-- Multiple Selection -->
-    <div class="flex flex-col gap-4">
-      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
-        Multiple Selection
-      </h2>
-      <p class="text-surface-600 dark:text-surface-300">
-        Multiple items can be selected using the multiple property.
-      </p>
-
-      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
-        <div class="flex flex-col gap-4">
-          <label for="multiple-select" class="font-semibold text-surface-900 dark:text-surface-0">Cities</label>
-          <Select
-            id="multiple-select"
-            v-model="selectedCities"
-            :options="cities"
-            option-label="name"
-            placeholder="Select Cities"
-            multiple
-            class="w-full"
-          />
-          <small class="text-surface-600 dark:text-surface-300">
-            Selected: {{ selectedCities.length }} cities
           </small>
         </div>
       </div>
@@ -284,9 +316,22 @@ const selectedLazyItem = ref(null);
                 <span>{{ slotProps.option.name }}</span>
               </div>
             </template>
+            <template #header>
+              <div class="font-medium p-3 border-b border-surface-200 dark:border-surface-700">
+                Available Countries
+              </div>
+            </template>
+            <template #footer>
+              <div class="p-3 border-t border-surface-200 dark:border-surface-700">
+                <Button label="Add New" fluid severity="secondary" text size="small" icon="pi pi-plus" />
+              </div>
+            </template>
+            <template #dropdownicon>
+              <i class="pi pi-map" />
+            </template>
           </Select>
           <small class="text-surface-600 dark:text-surface-300">
-            Options with custom flag icons
+            Custom templates for value, option, header, footer, and dropdown icon
           </small>
         </div>
       </div>
@@ -350,7 +395,7 @@ const selectedLazyItem = ref(null);
         Different states can be applied to indicate validation status or user interaction constraints.
       </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
             <h3 class="font-semibold text-surface-900 dark:text-surface-0">
@@ -384,19 +429,230 @@ const selectedLazyItem = ref(null);
           </div>
         </div>
 
+      </div>
+    </div>
+
+    <!-- Forms Integration -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Forms Integration
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        Select integrates with form validation and provides error handling.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-col gap-4">
+          <label for="form-select" class="font-semibold text-surface-900 dark:text-surface-0">City (Required)</label>
+          <Select
+            id="form-select"
+            v-model="selectedFormCity"
+            :options="cities"
+            option-label="name"
+            :invalid="!selectedFormCity"
+            fluid
+            placeholder="Select a City"
+          />
+          <Message v-if="!selectedFormCity" severity="error" size="small">
+            City selection is required
+          </Message>
+          <small class="text-surface-600 dark:text-surface-300">
+            Form integration with validation and error messages
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Checkmark Mode -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Checkmark Mode
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        Display checkmark for selected option instead of highlighting.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-col gap-4">
+          <label for="checkmark-select" class="font-semibold text-surface-900 dark:text-surface-0">City with Checkmark</label>
+          <Select
+            id="checkmark-select"
+            v-model="selectedCheckmarkCity"
+            :options="cities"
+            option-label="name"
+            placeholder="Select a City"
+            checkmark
+            :highlight-on-select="false"
+            class="w-full"
+          />
+          <small class="text-surface-600 dark:text-surface-300">
+            Selected option shows checkmark instead of highlight
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clear Icon -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Clear Icon
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        Add a clear icon to reset the selection.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-col gap-4">
+          <label for="clear-select" class="font-semibold text-surface-900 dark:text-surface-0">City with Clear</label>
+          <Select
+            id="clear-select"
+            v-model="selectedClearCity"
+            :options="cities"
+            option-label="name"
+            placeholder="Select a City"
+            show-clear
+            class="w-full"
+          />
+          <small class="text-surface-600 dark:text-surface-300">
+            Click the X icon to clear selection
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Loading State
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        Display loading indicator while data is being fetched.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-2">
+            <label for="loading-select" class="font-semibold text-surface-900 dark:text-surface-0">Loading Example</label>
+            <Button
+              @click="isLoading = !isLoading"
+              :label="isLoading ? 'Stop Loading' : 'Start Loading'"
+              size="small"
+              severity="secondary"
+            />
+          </div>
+          <Select
+            id="loading-select"
+            v-model="selectedLoadingCity"
+            :options="cities"
+            option-label="name"
+            placeholder="Loading..."
+            :loading="isLoading"
+            class="w-full"
+          />
+          <small class="text-surface-600 dark:text-surface-300">
+            Toggle loading state with the button above
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filled Variant -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Filled Variant
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        Use the filled variant for higher visual emphasis.
+      </p>
+
+      <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+        <div class="flex flex-col gap-4">
+          <label for="filled-select" class="font-semibold text-surface-900 dark:text-surface-0">City (Filled)</label>
+          <Select
+            id="filled-select"
+            v-model="selectedFilledCity"
+            :options="cities"
+            option-label="name"
+            placeholder="Filled variant style"
+            variant="filled"
+            class="w-full"
+          />
+          <small class="text-surface-600 dark:text-surface-300">
+            Enhanced visual emphasis with filled background
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- tRPC Backend -->
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center gap-2">
+        <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+          tRPC Backend
+        </h2>
+        <Tag value="Real API" severity="info" />
+      </div>
+      <p class="text-surface-600 dark:text-surface-300">
+        Select with data loaded from tRPC backend for type-safe API integration.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
-            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
-              Readonly
-            </h3>
+            <label for="trpc-select" class="font-semibold text-surface-900 dark:text-surface-0">Category</label>
             <Select
-              v-model="selectedReadonly"
-              :options="cities"
+              id="trpc-select"
+              v-model="selectedCategory"
+              :options="categories"
               option-label="name"
-              readonly
+              placeholder="Select a Category"
               class="w-full"
-            />
-            <small class="text-surface-600 dark:text-surface-300">This field is readonly.</small>
+            >
+              <template #option="slotProps">
+                <div class="flex flex-col p-2">
+                  <span class="font-medium">{{ slotProps.option.name }}</span>
+                  <small class="text-surface-500">{{ slotProps.option.description }}</small>
+                </div>
+              </template>
+            </Select>
+            <small class="text-surface-600 dark:text-surface-300">
+              Selected: {{ selectedCategory ? `${selectedCategory.name} - ${selectedCategory.description}` : 'None' }}
+            </small>
+            <small class="text-surface-500 dark:text-surface-400">
+              Static data from tRPC backend
+            </small>
+          </div>
+        </div>
+
+        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+          <div class="flex flex-col gap-4">
+            <label for="trpc-filtered-select" class="font-semibold text-surface-900 dark:text-surface-0">Product (Filtered)</label>
+            <Select
+              id="trpc-filtered-select"
+              v-model="selectedFilteredProduct"
+              :options="filteredProducts"
+              option-label="name"
+              placeholder="Search products..."
+              filter
+              @filter="onFilterProducts"
+              class="w-full"
+            >
+              <template #option="slotProps">
+                <div class="flex items-center justify-between p-2 w-full">
+                  <div class="flex flex-col">
+                    <span class="font-medium">{{ slotProps.option.name }}</span>
+                    <small class="text-surface-500">{{ slotProps.option.category }} • Stock: {{ slotProps.option.stock }}</small>
+                  </div>
+                  <span class="font-semibold text-primary-500">${{ slotProps.option.price }}</span>
+                </div>
+              </template>
+            </Select>
+            <small class="text-surface-600 dark:text-surface-300">
+              Selected: {{ selectedFilteredProduct ? `${selectedFilteredProduct.name} - $${selectedFilteredProduct.price}` : 'None' }}
+            </small>
+            <small class="text-surface-500 dark:text-surface-400">
+              Dynamic filtering via tRPC backend calls
+            </small>
           </div>
         </div>
       </div>

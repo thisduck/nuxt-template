@@ -42,6 +42,53 @@ export const appRouter = createTRPCRouter({
         product.category.toLowerCase().includes(opts.input.query.toLowerCase())
       );
     }),
+  getCategories: baseProcedure
+    .query(() => {
+      return [
+        { id: 1, name: 'Electronics', description: 'Technology and gadgets' },
+        { id: 2, name: 'Clothing', description: 'Fashion and apparel' },
+        { id: 3, name: 'Shoes', description: 'Footwear and accessories' },
+        { id: 4, name: 'Books', description: 'Literature and educational materials' },
+        { id: 5, name: 'Sports', description: 'Athletic equipment and gear' },
+        { id: 6, name: 'Home & Garden', description: 'Home improvement and gardening' },
+        { id: 7, name: 'Automotive', description: 'Car parts and accessories' },
+        { id: 8, name: 'Health & Beauty', description: 'Personal care products' },
+      ];
+    }),
+  getFilteredProducts: baseProcedure
+    .input(
+      z.object({
+        filter: z.string().optional(),
+      }),
+    )
+    .query((opts) => {
+      const products = [
+        { id: 1, name: 'iPhone 15 Pro', category: 'Electronics', price: 999, stock: 45 },
+        { id: 2, name: 'MacBook Pro', category: 'Electronics', price: 2499, stock: 23 },
+        { id: 3, name: 'AirPods Pro', category: 'Electronics', price: 249, stock: 156 },
+        { id: 4, name: 'iPad Air', category: 'Electronics', price: 599, stock: 67 },
+        { id: 5, name: 'Apple Watch', category: 'Electronics', price: 399, stock: 89 },
+        { id: 6, name: 'Nike Air Max', category: 'Shoes', price: 129, stock: 234 },
+        { id: 7, name: 'Adidas Ultraboost', category: 'Shoes', price: 189, stock: 178 },
+        { id: 8, name: 'Levi\'s 501 Jeans', category: 'Clothing', price: 89, stock: 145 },
+        { id: 9, name: 'North Face Jacket', category: 'Clothing', price: 299, stock: 56 },
+        { id: 10, name: 'Sony Headphones', category: 'Electronics', price: 199, stock: 112 },
+        { id: 11, name: 'Samsung Galaxy S24', category: 'Electronics', price: 899, stock: 78 },
+        { id: 12, name: 'Dell XPS 13', category: 'Electronics', price: 1299, stock: 34 },
+        { id: 13, name: 'Beats Studio Buds', category: 'Electronics', price: 149, stock: 203 },
+        { id: 14, name: 'Converse Chuck Taylor', category: 'Shoes', price: 65, stock: 289 },
+        { id: 15, name: 'Patagonia Fleece', category: 'Clothing', price: 179, stock: 91 },
+      ];
+
+      if (!opts.input.filter?.trim()) {
+        return products;
+      }
+
+      return products.filter(product =>
+        product.name.toLowerCase().includes(opts.input.filter.toLowerCase()) ||
+        product.category.toLowerCase().includes(opts.input.filter.toLowerCase())
+      );
+    }),
 });
 
 // export type definition of API
