@@ -162,6 +162,19 @@ export const appRouter = createTRPCRouter({
       console.log('Updating user settings:', opts.input);
       return { success: true, settings: opts.input };
     }),
+  getProgrammingLanguages: baseProcedure
+    .query(() => {
+      return [
+        { id: 1, name: 'JavaScript', category: 'Frontend', popularity: 95, icon: 'pi pi-code' },
+        { id: 2, name: 'TypeScript', category: 'Frontend', popularity: 85, icon: 'pi pi-code' },
+        { id: 3, name: 'Python', category: 'Backend', popularity: 90, icon: 'pi pi-server' },
+        { id: 4, name: 'Java', category: 'Backend', popularity: 80, icon: 'pi pi-server' },
+        { id: 5, name: 'Go', category: 'Backend', popularity: 70, icon: 'pi pi-server' },
+        { id: 6, name: 'Rust', category: 'Systems', popularity: 65, icon: 'pi pi-cog' },
+        { id: 7, name: 'PHP', category: 'Backend', popularity: 75, icon: 'pi pi-server' },
+        { id: 8, name: 'C#', category: 'Backend', popularity: 78, icon: 'pi pi-server' },
+      ];
+    }),
 });
 
 // export type definition of API

@@ -17,6 +17,7 @@ const navigationItems = ref([
       { label: 'Checkbox', path: '/kitchen-sink/form/checkbox', icon: 'pi pi-check' },
       { label: 'RadioButton', path: '/kitchen-sink/form/radiobutton', icon: 'pi pi-circle' },
       { label: 'Toggle', path: '/kitchen-sink/form/toggle', icon: 'pi pi-power-off' },
+      { label: 'SelectButton', path: '/kitchen-sink/form/selectbutton', icon: 'pi pi-stop' },
     ],
   },
   {
