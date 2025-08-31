@@ -66,8 +66,8 @@ const isFormValid = computed(() => {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <div class="flex items-center gap-3">
-            <Checkbox v-model="checked" binary />
-            <label class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+            <Checkbox v-model="checked" inputId="basic-checkbox" binary />
+            <label for="basic-checkbox" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
               I agree to the terms and conditions
             </label>
           </div>
@@ -155,8 +155,8 @@ const isFormValid = computed(() => {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <div class="flex items-center gap-3">
-            <Checkbox v-model="indeterminateChecked" indeterminate binary />
-            <label class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+            <Checkbox v-model="indeterminateChecked" inputId="indeterminate-checkbox" indeterminate binary />
+            <label for="indeterminate-checkbox" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
               Partial selection state
             </label>
           </div>
@@ -179,8 +179,8 @@ const isFormValid = computed(() => {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <div class="flex items-center gap-3">
-            <Checkbox v-model="filledChecked" binary variant="filled" />
-            <label class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+            <Checkbox v-model="filledChecked" inputId="filled-checkbox" binary variant="filled" />
+            <label for="filled-checkbox" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
               Filled variant checkbox
             </label>
           </div>
@@ -231,8 +231,8 @@ const isFormValid = computed(() => {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <div class="flex items-center gap-3">
-            <Checkbox v-model="invalidChecked" :invalid="!invalidChecked" binary />
-            <label class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+            <Checkbox v-model="invalidChecked" inputId="invalid-checkbox" :invalid="!invalidChecked" binary />
+            <label for="invalid-checkbox" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
               Required checkbox
             </label>
           </div>
@@ -251,14 +251,14 @@ const isFormValid = computed(() => {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <div class="flex items-center gap-3">
-            <Checkbox v-model="disabledChecked1" binary disabled />
-            <label class="font-medium text-surface-600 dark:text-surface-400">
+            <Checkbox v-model="disabledChecked1" inputId="disabled-checkbox1" binary disabled />
+            <label for="disabled-checkbox1" class="font-medium text-surface-600 dark:text-surface-400">
               Disabled unchecked
             </label>
           </div>
           <div class="flex items-center gap-3">
-            <Checkbox v-model="disabledChecked2" binary disabled />
-            <label class="font-medium text-surface-600 dark:text-surface-400">
+            <Checkbox v-model="disabledChecked2" inputId="disabled-checkbox2" binary disabled />
+            <label for="disabled-checkbox2" class="font-medium text-surface-600 dark:text-surface-400">
               Disabled checked
             </label>
           </div>
@@ -312,8 +312,8 @@ const isFormValid = computed(() => {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <div class="flex items-center gap-3">
-            <Checkbox v-model="formData.newsletter" binary />
-            <label class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+            <Checkbox v-model="formData.newsletter" inputId="form-newsletter" binary />
+            <label for="form-newsletter" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
               Subscribe to newsletter (optional)
             </label>
           </div>
@@ -321,10 +321,11 @@ const isFormValid = computed(() => {
           <div class="flex items-center gap-3">
             <Checkbox 
               v-model="formData.terms" 
+              inputId="form-terms"
               :invalid="!formData.terms"
               binary 
             />
-            <label class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+            <label for="form-terms" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
               I agree to the Terms of Service *
             </label>
           </div>
@@ -332,10 +333,11 @@ const isFormValid = computed(() => {
           <div class="flex items-center gap-3">
             <Checkbox 
               v-model="formData.privacy" 
+              inputId="form-privacy"
               :invalid="!formData.privacy"
               binary 
             />
-            <label class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
+            <label for="form-privacy" class="font-medium text-surface-900 dark:text-surface-0 cursor-pointer">
               I agree to the Privacy Policy *
             </label>
           </div>
