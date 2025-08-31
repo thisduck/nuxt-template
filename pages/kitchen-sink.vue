@@ -18,6 +18,7 @@ const navigationItems = ref([
       { label: 'RadioButton', path: '/kitchen-sink/form/radiobutton', icon: 'pi pi-circle' },
       { label: 'Toggle', path: '/kitchen-sink/form/toggle', icon: 'pi pi-power-off' },
       { label: 'SelectButton', path: '/kitchen-sink/form/selectbutton', icon: 'pi pi-stop' },
+      { label: 'DatePicker', path: '/kitchen-sink/form/datepicker', icon: 'pi pi-calendar' },
     ],
   },
   {
