@@ -12,7 +12,8 @@
     "task": "tsx --tsconfig ./.nuxt/tsconfig.server.json ./server/tasks/runner.ts",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "db:migrate": "kysely migrate:latest"
+    "db:migrate": "kysely migrate:latest",
+    "extract-docs": "node scripts/extract-primevue-docs.js"
   },
   "dependencies": {
     "@faker-js/faker": "^9.9.0",
@@ -27,6 +28,7 @@
     "better-sqlite3": "^11.10.0",
     "dotenv": "^16.6.1",
     "eslint": "^9.34.0",
+    "jsdom": "^26.1.0",
     "kysely": "^0.28.5",
     "lodash": "^4.17.21",
     "nuxt": "^4.0.3",
