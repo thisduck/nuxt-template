@@ -60,10 +60,6 @@ const helpTextValue = ref('');
         </div>
       </div>
 
-      <!-- Code -->
-      <div class="bg-surface-900 dark:bg-surface-800 p-4 rounded-xl overflow-x-auto">
-        <pre class="text-green-400 text-sm"><code>&lt;InputText v-model="value" placeholder="Enter username" /&gt;</code></pre>
-      </div>
     </div>
 
     <!-- Variants -->
@@ -87,10 +83,6 @@ const helpTextValue = ref('');
         </div>
       </div>
 
-      <!-- Code -->
-      <div class="bg-surface-900 dark:bg-surface-800 p-4 rounded-xl overflow-x-auto">
-        <pre class="text-green-400 text-sm"><code>&lt;InputText variant="filled" placeholder="Filled input" /&gt;</code></pre>
-      </div>
     </div>
 
     <!-- Sizes -->
@@ -117,12 +109,6 @@ const helpTextValue = ref('');
         </div>
       </div>
 
-      <!-- Code -->
-      <div class="bg-surface-900 dark:bg-surface-800 p-4 rounded-xl overflow-x-auto">
-        <pre class="text-green-400 text-sm"><code>&lt;InputText size="small" placeholder="Small size" /&gt;
-&lt;InputText placeholder="Normal size" /&gt;
-&lt;InputText size="large" placeholder="Large size" /&gt;</code></pre>
-      </div>
     </div>
 
     <!-- Icons -->
@@ -152,13 +138,6 @@ const helpTextValue = ref('');
         </div>
       </div>
 
-      <!-- Code -->
-      <div class="bg-surface-900 dark:bg-surface-800 p-4 rounded-xl overflow-x-auto">
-        <pre class="text-green-400 text-sm"><code>&lt;IconField icon-position="left"&gt;
-  &lt;InputIcon class="pi pi-user" /&gt;
-  &lt;InputText placeholder="Username" /&gt;
-&lt;/IconField&gt;</code></pre>
-      </div>
     </div>
 
     <!-- Float Label -->
@@ -185,13 +164,6 @@ const helpTextValue = ref('');
         </div>
       </div>
 
-      <!-- Code -->
-      <div class="bg-surface-900 dark:bg-surface-800 p-4 rounded-xl overflow-x-auto">
-        <pre class="text-green-400 text-sm"><code>&lt;FloatLabel&gt;
-  &lt;InputText id="email" v-model="value" /&gt;
-  &lt;label for="email"&gt;Email Address&lt;/label&gt;
-&lt;/FloatLabel&gt;</code></pre>
-      </div>
     </div>
 
     <!-- States -->
@@ -225,12 +197,6 @@ const helpTextValue = ref('');
         </div>
       </div>
 
-      <!-- Code -->
-      <div class="bg-surface-900 dark:bg-surface-800 p-4 rounded-xl overflow-x-auto">
-        <pre class="text-green-400 text-sm"><code>&lt;InputText invalid placeholder="Invalid state" /&gt;
-&lt;InputText disabled value="Disabled" /&gt;
-&lt;InputText readonly value="Readonly" /&gt;</code></pre>
-      </div>
     </div>
 
     <!-- Fluid -->
@@ -244,10 +210,6 @@ const helpTextValue = ref('');
         </div>
       </div>
 
-      <!-- Code -->
-      <div class="bg-surface-900 dark:bg-surface-800 p-4 rounded-xl overflow-x-auto">
-        <pre class="text-green-400 text-sm"><code>&lt;InputText fluid placeholder="Fluid input spans full width" /&gt;</code></pre>
-      </div>
     </div>
 
     <!-- Help Text -->
@@ -265,12 +227,6 @@ const helpTextValue = ref('');
         </div>
       </div>
 
-      <!-- Code -->
-      <div class="bg-surface-900 dark:bg-surface-800 p-4 rounded-xl overflow-x-auto">
-        <pre class="text-green-400 text-sm"><code>&lt;label for="email"&gt;Email&lt;/label&gt;
-&lt;InputText id="email" v-model="value" /&gt;
-&lt;small&gt;Enter the email address associated with your account.&lt;/small&gt;</code></pre>
-      </div>
     </div>
 
   </div>
