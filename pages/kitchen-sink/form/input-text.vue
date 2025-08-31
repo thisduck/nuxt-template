@@ -68,6 +68,17 @@ const minMaxValue = ref(25);
 const otpValue = ref('');
 const maskedOtpValue = ref('');
 const customOtpValue = ref('');
+
+// Password
+const basicPasswordValue = ref('');
+const strengthPasswordValue = ref('');
+const togglePasswordValue = ref('');
+
+// KeyFilter
+const numbersOnlyValue = ref('');
+const lettersOnlyValue = ref('');
+const alphanumericValue = ref('');
+const regexValue = ref('');
 </script>
 
 <template>
@@ -518,6 +529,114 @@ const customOtpValue = ref('');
             </div>
             <small class="text-surface-600 dark:text-surface-300">
               Custom styled inputs
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        Password
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        Password is a specialized input component for secure password entry with features like strength indicators and visibility toggles.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+          <div class="flex flex-col gap-4">
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Basic Password
+            </h3>
+            <Password v-model="basicPasswordValue" placeholder="Enter password" fluid />
+            <small class="text-surface-600 dark:text-surface-300">
+              Simple password input with visibility toggle
+            </small>
+          </div>
+        </div>
+
+        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+          <div class="flex flex-col gap-4">
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Strength Meter
+            </h3>
+            <Password v-model="strengthPasswordValue" :feedback="true" placeholder="Strong password" fluid />
+            <small class="text-surface-600 dark:text-surface-300">
+              Password with strength indicator
+            </small>
+          </div>
+        </div>
+
+        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+          <div class="flex flex-col gap-4">
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Toggle Mask
+            </h3>
+            <Password v-model="togglePasswordValue" :toggleMask="true" placeholder="Toggle visibility" fluid />
+            <small class="text-surface-600 dark:text-surface-300">
+              Password with show/hide toggle
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KeyFilter -->
+    <div class="flex flex-col gap-4">
+      <h2 class="text-2xl font-semibold text-surface-900 dark:text-surface-0">
+        KeyFilter
+      </h2>
+      <p class="text-surface-600 dark:text-surface-300">
+        KeyFilter restricts user input by filtering keystrokes to only allow specific characters or patterns in real-time.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+          <div class="flex flex-col gap-4">
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Numbers Only
+            </h3>
+            <InputText v-model="numbersOnlyValue" v-keyfilter="'num'" placeholder="Enter numbers only" fluid />
+            <small class="text-surface-600 dark:text-surface-300">
+              Filter: 'num' - Only numeric characters (0-9)
+            </small>
+          </div>
+        </div>
+
+        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+          <div class="flex flex-col gap-4">
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Letters Only
+            </h3>
+            <InputText v-model="lettersOnlyValue" v-keyfilter="'alpha'" placeholder="Enter letters only" fluid />
+            <small class="text-surface-600 dark:text-surface-300">
+              Filter: 'alpha' - Only alphabetic characters (a-z, A-Z)
+            </small>
+          </div>
+        </div>
+
+        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+          <div class="flex flex-col gap-4">
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Alphanumeric
+            </h3>
+            <InputText v-model="alphanumericValue" v-keyfilter="'alphanum'" placeholder="Letters and numbers" fluid />
+            <small class="text-surface-600 dark:text-surface-300">
+              Filter: 'alphanum' - Letters and numbers only
+            </small>
+          </div>
+        </div>
+
+        <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
+          <div class="flex flex-col gap-4">
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Custom Regex
+            </h3>
+            <InputText v-model="regexValue" v-keyfilter="/[0-9.-]/g" placeholder="Decimal numbers" fluid />
+            <small class="text-surface-600 dark:text-surface-300">
+              Filter: /[0-9.-]/g - Numbers with decimal and negative
             </small>
           </div>
         </div>
