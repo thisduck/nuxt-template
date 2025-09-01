@@ -53,6 +53,7 @@ const navigationItems = ref([
     items: [
       { label: 'Divider', path: '/kitchen-sink/misc/divider', icon: 'pi pi-minus' },
       { label: 'Stepper', path: '/kitchen-sink/misc/stepper', icon: 'pi pi-list-check' },
+      { label: 'Toolbar', path: '/kitchen-sink/misc/toolbar', icon: 'pi pi-bars' },
     ],
   },
 ]);
