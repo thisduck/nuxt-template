@@ -65,6 +65,7 @@ const navigationItems = ref([
     icon: 'pi pi-bars',
     expanded: true,
     items: [
+      { label: 'Menu', path: '/kitchen-sink/menu/menu', icon: 'pi pi-bars' },
       { label: 'Breadcrumb', path: '/kitchen-sink/menu/breadcrumb', icon: 'pi pi-angle-right' },
       { label: 'ContextMenu', path: '/kitchen-sink/menu/contextmenu', icon: 'pi pi-list' },
     ],
