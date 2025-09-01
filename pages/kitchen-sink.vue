@@ -47,6 +47,14 @@ const navigationItems = ref([
     ],
   },
   {
+    title: 'Overlay Components',
+    icon: 'pi pi-window-maximize',
+    expanded: true,
+    items: [
+      { label: 'ConfirmDialog', path: '/kitchen-sink/overlay/confirmdialog', icon: 'pi pi-question-circle' },
+    ],
+  },
+  {
     title: 'Misc Components',
     icon: 'pi pi-ellipsis-h',
     expanded: true,
