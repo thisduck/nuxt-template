@@ -25,16 +25,42 @@ export const blogRouter = createTRPCRouter({
       return newPost;
     }),
 
-  // Get all blog posts
+  // Get all blog posts with pagination
   getPosts: baseProcedure
-    .query(async () => {
+    .input(z.object({
+      page: z.number().min(0).default(0),
+      pageSize: z.number().min(1).max(50).default(8),
+    }))
+    .query(async (opts) => {
+      const { page, pageSize } = opts.input;
+      const offset = page * pageSize;
+
+      // Get total count
+      const totalResult = await db
+        .selectFrom('blog_posts')
+        .select(db.fn.count('id').as('count'))
+        .executeTakeFirst();
+
+      const total = Number(totalResult?.count || 0);
+
+      // Get paginated posts
       const posts = await db
         .selectFrom('blog_posts')
         .selectAll()
         .orderBy('created_at', 'desc')
+        .limit(pageSize)
+        .offset(offset)
         .execute();
 
-      return posts;
+      return {
+        posts,
+        pagination: {
+          page,
+          pageSize,
+          total,
+          totalPages: Math.ceil(total / pageSize),
+        },
+      };
     }),
 
   // Get a single blog post by ID
