@@ -4,7 +4,7 @@ const basicItems = ref([
   { label: 'Update', icon: 'pi pi-refresh' },
   { label: 'Delete', icon: 'pi pi-times' },
   { label: 'Vue Website', icon: 'pi pi-external-link', url: 'https://vuejs.org/' },
-  { label: 'Upload', icon: 'pi pi-upload', to: '/fileupload' }
+  { label: 'Upload', icon: 'pi pi-upload', to: '/fileupload' },
 ]);
 
 // Menu items with icons
@@ -12,7 +12,7 @@ const iconItems = ref([
   { label: 'Update', icon: 'pi pi-refresh' },
   { label: 'Delete', icon: 'pi pi-times' },
   { label: 'Archive', icon: 'pi pi-folder' },
-  { label: 'Export', icon: 'pi pi-download' }
+  { label: 'Export', icon: 'pi pi-download' },
 ]);
 
 // Nested menu items
@@ -23,8 +23,8 @@ const nestedItems = ref([
     items: [
       { label: 'New', icon: 'pi pi-plus' },
       { label: 'Open', icon: 'pi pi-folder-open' },
-      { label: 'Save', icon: 'pi pi-save' }
-    ]
+      { label: 'Save', icon: 'pi pi-save' },
+    ],
   },
   {
     label: 'Edit',
@@ -32,17 +32,17 @@ const nestedItems = ref([
     items: [
       { label: 'Copy', icon: 'pi pi-copy' },
       { label: 'Paste', icon: 'pi pi-clone' },
-      { label: 'Undo', icon: 'pi pi-undo' }
-    ]
+      { label: 'Undo', icon: 'pi pi-undo' },
+    ],
   },
   {
     label: 'Tools',
     icon: 'pi pi-cog',
     items: [
       { label: 'Settings', icon: 'pi pi-cog' },
-      { label: 'Preferences', icon: 'pi pi-sliders-h' }
-    ]
-  }
+      { label: 'Preferences', icon: 'pi pi-sliders-h' },
+    ],
+  },
 ]);
 
 // Action handlers
@@ -50,22 +50,22 @@ const lastAction = ref('');
 
 function handleSave() {
   lastAction.value = 'Main Save button clicked';
-  console.log('Save action triggered');
+  // Save action triggered
 }
 
 function handleExport() {
   lastAction.value = 'Export action triggered';
-  console.log('Export action triggered');
+  // Export action triggered
 }
 
 function handlePublish() {
   lastAction.value = 'Publish action triggered';
-  console.log('Publish action triggered');
+  // Publish action triggered
 }
 
 function handleSubmit() {
   lastAction.value = 'Submit action triggered';
-  console.log('Submit action triggered');
+  // Submit action triggered
 }
 
 // tRPC Backend Integration
@@ -80,7 +80,7 @@ const documentItems = ref([
   { label: 'Export PDF', icon: 'pi pi-file-pdf', command: () => handleDocumentAction('pdf') },
   { label: 'Send Email', icon: 'pi pi-envelope', command: () => handleDocumentAction('email') },
   { separator: true },
-  { label: 'Delete', icon: 'pi pi-trash', command: () => handleDocumentAction('delete') }
+  { label: 'Delete', icon: 'pi pi-trash', command: () => handleDocumentAction('delete') },
 ]);
 
 async function handleDocumentSave() {
@@ -90,7 +90,7 @@ async function handleDocumentSave() {
 async function handleDocumentAction(action: string) {
   isProcessing.value = true;
   apiResult.value = '';
-  
+
   try {
     // Simulate API call using existing hello endpoint
     const result = await $trpc.hello.query({ text: `document ${action}` });
@@ -111,7 +111,7 @@ const userItems = ref([
   { label: 'Edit Settings', icon: 'pi pi-cog', command: () => handleUserAction('settings') },
   { label: 'Change Password', icon: 'pi pi-key', command: () => handleUserAction('password') },
   { separator: true },
-  { label: 'Logout', icon: 'pi pi-sign-out', command: () => handleUserAction('logout') }
+  { label: 'Logout', icon: 'pi pi-sign-out', command: () => handleUserAction('logout') },
 ]);
 
 async function handleCreateUser() {
@@ -121,7 +121,7 @@ async function handleCreateUser() {
 async function handleUserAction(action: string) {
   isProcessing.value = true;
   lastAction.value = `Processing user ${action}...`;
-  
+
   try {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 1500));
@@ -134,7 +134,7 @@ async function handleUserAction(action: string) {
 }
 
 // Project management with dynamic menu
-const projectActions = ref([]);
+const _projectActions = ref([]);
 const selectedProject = ref('Project Alpha');
 
 const projectItems = computed(() => [
@@ -142,15 +142,15 @@ const projectItems = computed(() => [
   { label: 'Archive Project', icon: 'pi pi-archive', command: () => handleProjectAction('archive') },
   { label: 'Export Data', icon: 'pi pi-download', command: () => handleProjectAction('export') },
   { separator: true },
-  { 
-    label: 'Switch Project', 
+  {
+    label: 'Switch Project',
     icon: 'pi pi-refresh',
     items: [
       { label: 'Project Alpha', command: () => switchProject('Project Alpha') },
       { label: 'Project Beta', command: () => switchProject('Project Beta') },
-      { label: 'Project Gamma', command: () => switchProject('Project Gamma') }
-    ]
-  }
+      { label: 'Project Gamma', command: () => switchProject('Project Gamma') },
+    ],
+  },
 ]);
 
 function switchProject(project: string) {
@@ -165,7 +165,7 @@ async function handleDeployProject() {
 async function handleProjectAction(action: string) {
   isProcessing.value = true;
   lastAction.value = `${action} ${selectedProject.value}...`;
-  
+
   try {
     await new Promise(resolve => setTimeout(resolve, 2000));
     lastAction.value = `${selectedProject.value} ${action} completed`;
@@ -207,10 +207,10 @@ async function handleProjectAction(action: string) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <div class="flex flex-wrap gap-3">
-            <SplitButton 
-              label="Save" 
-              :model="basicItems" 
-              @click="handleSave" 
+            <SplitButton
+              label="Save"
+              :model="basicItems"
+              @click="handleSave"
             />
           </div>
           <div v-if="lastAction" class="p-3 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 rounded-lg">
@@ -237,12 +237,12 @@ async function handleProjectAction(action: string) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <div class="flex flex-wrap gap-3">
-            <SplitButton 
-              label="Export" 
-              icon="pi pi-download" 
+            <SplitButton
+              label="Export"
+              icon="pi pi-download"
               dropdown-icon="pi pi-cog"
-              :model="iconItems" 
-              @click="handleExport" 
+              :model="iconItems"
+              @click="handleExport"
             />
           </div>
           <small class="text-surface-600 dark:text-surface-300">
@@ -264,11 +264,11 @@ async function handleProjectAction(action: string) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <div class="flex flex-wrap gap-3">
-            <SplitButton 
-              label="Actions" 
+            <SplitButton
+              label="Actions"
               icon="pi pi-bars"
-              :model="nestedItems" 
-              @click="() => lastAction = 'Default action clicked'" 
+              :model="nestedItems"
+              @click="() => lastAction = 'Default action clicked'"
             />
           </div>
           <small class="text-surface-600 dark:text-surface-300">
@@ -291,13 +291,13 @@ async function handleProjectAction(action: string) {
         <div class="flex flex-col gap-4">
           <div class="flex flex-wrap gap-3">
             <SplitButton label="Primary" :model="basicItems" @click="() => lastAction = 'Primary clicked'" />
-            <SplitButton label="Secondary" :model="basicItems" @click="() => lastAction = 'Secondary clicked'" severity="secondary" />
-            <SplitButton label="Success" :model="basicItems" @click="() => lastAction = 'Success clicked'" severity="success" />
-            <SplitButton label="Info" :model="basicItems" @click="() => lastAction = 'Info clicked'" severity="info" />
-            <SplitButton label="Warn" :model="basicItems" @click="() => lastAction = 'Warn clicked'" severity="warn" />
-            <SplitButton label="Help" :model="basicItems" @click="() => lastAction = 'Help clicked'" severity="help" />
-            <SplitButton label="Danger" :model="basicItems" @click="() => lastAction = 'Danger clicked'" severity="danger" />
-            <SplitButton label="Contrast" :model="basicItems" @click="() => lastAction = 'Contrast clicked'" severity="contrast" />
+            <SplitButton label="Secondary" :model="basicItems" severity="secondary" @click="() => lastAction = 'Secondary clicked'" />
+            <SplitButton label="Success" :model="basicItems" severity="success" @click="() => lastAction = 'Success clicked'" />
+            <SplitButton label="Info" :model="basicItems" severity="info" @click="() => lastAction = 'Info clicked'" />
+            <SplitButton label="Warn" :model="basicItems" severity="warn" @click="() => lastAction = 'Warn clicked'" />
+            <SplitButton label="Help" :model="basicItems" severity="help" @click="() => lastAction = 'Help clicked'" />
+            <SplitButton label="Danger" :model="basicItems" severity="danger" @click="() => lastAction = 'Danger clicked'" />
+            <SplitButton label="Contrast" :model="basicItems" severity="contrast" @click="() => lastAction = 'Contrast clicked'" />
           </div>
           <small class="text-surface-600 dark:text-surface-300">
             Eight different severity levels for various action types
@@ -318,15 +318,15 @@ async function handleProjectAction(action: string) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <div class="flex flex-wrap gap-3">
-            <SplitButton 
-              label="Disabled" 
-              :model="basicItems" 
-              disabled 
+            <SplitButton
+              label="Disabled"
+              :model="basicItems"
+              disabled
             />
-            <SplitButton 
-              label="Enabled" 
-              :model="basicItems" 
-              @click="() => lastAction = 'Enabled button clicked'" 
+            <SplitButton
+              label="Enabled"
+              :model="basicItems"
+              @click="() => lastAction = 'Enabled button clicked'"
             />
           </div>
           <small class="text-surface-600 dark:text-surface-300">
@@ -348,12 +348,12 @@ async function handleProjectAction(action: string) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <div class="flex flex-wrap gap-3">
-            <SplitButton label="Primary" :model="basicItems" @click="handlePublish" raised />
-            <SplitButton label="Secondary" :model="basicItems" @click="handlePublish" raised severity="secondary" />
-            <SplitButton label="Success" :model="basicItems" @click="handlePublish" raised severity="success" />
-            <SplitButton label="Info" :model="basicItems" @click="handlePublish" raised severity="info" />
-            <SplitButton label="Warn" :model="basicItems" @click="handlePublish" raised severity="warn" />
-            <SplitButton label="Danger" :model="basicItems" @click="handlePublish" raised severity="danger" />
+            <SplitButton label="Primary" :model="basicItems" raised @click="handlePublish" />
+            <SplitButton label="Secondary" :model="basicItems" raised severity="secondary" @click="handlePublish" />
+            <SplitButton label="Success" :model="basicItems" raised severity="success" @click="handlePublish" />
+            <SplitButton label="Info" :model="basicItems" raised severity="info" @click="handlePublish" />
+            <SplitButton label="Warn" :model="basicItems" raised severity="warn" @click="handlePublish" />
+            <SplitButton label="Danger" :model="basicItems" raised severity="danger" @click="handlePublish" />
           </div>
           <small class="text-surface-600 dark:text-surface-300">
             Elevated appearance with drop shadow effect
@@ -374,12 +374,12 @@ async function handleProjectAction(action: string) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <div class="flex flex-wrap gap-3">
-            <SplitButton label="Primary" :model="basicItems" @click="handleSubmit" rounded />
-            <SplitButton label="Secondary" :model="basicItems" @click="handleSubmit" rounded severity="secondary" />
-            <SplitButton label="Success" :model="basicItems" @click="handleSubmit" rounded severity="success" />
-            <SplitButton label="Info" :model="basicItems" @click="handleSubmit" rounded severity="info" />
-            <SplitButton label="Warn" :model="basicItems" @click="handleSubmit" rounded severity="warn" />
-            <SplitButton label="Danger" :model="basicItems" @click="handleSubmit" rounded severity="danger" />
+            <SplitButton label="Primary" :model="basicItems" rounded @click="handleSubmit" />
+            <SplitButton label="Secondary" :model="basicItems" rounded severity="secondary" @click="handleSubmit" />
+            <SplitButton label="Success" :model="basicItems" rounded severity="success" @click="handleSubmit" />
+            <SplitButton label="Info" :model="basicItems" rounded severity="info" @click="handleSubmit" />
+            <SplitButton label="Warn" :model="basicItems" rounded severity="warn" @click="handleSubmit" />
+            <SplitButton label="Danger" :model="basicItems" rounded severity="danger" @click="handleSubmit" />
           </div>
           <small class="text-surface-600 dark:text-surface-300">
             Fully rounded corners for a pill-shaped appearance
@@ -401,23 +401,27 @@ async function handleProjectAction(action: string) {
         <div class="flex flex-col gap-6">
           <!-- Regular Text -->
           <div class="flex flex-col gap-3">
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0">Text Buttons</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+              Text Buttons
+            </h4>
             <div class="flex flex-wrap gap-3">
-              <SplitButton label="Primary" :model="basicItems" @click="() => lastAction = 'Text Primary'" text />
-              <SplitButton label="Secondary" :model="basicItems" @click="() => lastAction = 'Text Secondary'" text severity="secondary" />
-              <SplitButton label="Success" :model="basicItems" @click="() => lastAction = 'Text Success'" text severity="success" />
-              <SplitButton label="Danger" :model="basicItems" @click="() => lastAction = 'Text Danger'" text severity="danger" />
+              <SplitButton label="Primary" :model="basicItems" text @click="() => lastAction = 'Text Primary'" />
+              <SplitButton label="Secondary" :model="basicItems" text severity="secondary" @click="() => lastAction = 'Text Secondary'" />
+              <SplitButton label="Success" :model="basicItems" text severity="success" @click="() => lastAction = 'Text Success'" />
+              <SplitButton label="Danger" :model="basicItems" text severity="danger" @click="() => lastAction = 'Text Danger'" />
             </div>
           </div>
 
           <!-- Raised Text -->
           <div class="flex flex-col gap-3">
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0">Raised Text Buttons</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+              Raised Text Buttons
+            </h4>
             <div class="flex flex-wrap gap-3">
-              <SplitButton label="Primary" :model="basicItems" @click="() => lastAction = 'Raised Text Primary'" raised text />
-              <SplitButton label="Secondary" :model="basicItems" @click="() => lastAction = 'Raised Text Secondary'" raised text severity="secondary" />
-              <SplitButton label="Success" :model="basicItems" @click="() => lastAction = 'Raised Text Success'" raised text severity="success" />
-              <SplitButton label="Danger" :model="basicItems" @click="() => lastAction = 'Raised Text Danger'" raised text severity="danger" />
+              <SplitButton label="Primary" :model="basicItems" raised text @click="() => lastAction = 'Raised Text Primary'" />
+              <SplitButton label="Secondary" :model="basicItems" raised text severity="secondary" @click="() => lastAction = 'Raised Text Secondary'" />
+              <SplitButton label="Success" :model="basicItems" raised text severity="success" @click="() => lastAction = 'Raised Text Success'" />
+              <SplitButton label="Danger" :model="basicItems" raised text severity="danger" @click="() => lastAction = 'Raised Text Danger'" />
             </div>
           </div>
 
@@ -440,12 +444,12 @@ async function handleProjectAction(action: string) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <div class="flex flex-wrap gap-3">
-            <SplitButton label="Primary" :model="basicItems" @click="() => lastAction = 'Outlined Primary'" outlined />
-            <SplitButton label="Secondary" :model="basicItems" @click="() => lastAction = 'Outlined Secondary'" outlined severity="secondary" />
-            <SplitButton label="Success" :model="basicItems" @click="() => lastAction = 'Outlined Success'" outlined severity="success" />
-            <SplitButton label="Info" :model="basicItems" @click="() => lastAction = 'Outlined Info'" outlined severity="info" />
-            <SplitButton label="Warn" :model="basicItems" @click="() => lastAction = 'Outlined Warn'" outlined severity="warn" />
-            <SplitButton label="Danger" :model="basicItems" @click="() => lastAction = 'Outlined Danger'" outlined severity="danger" />
+            <SplitButton label="Primary" :model="basicItems" outlined @click="() => lastAction = 'Outlined Primary'" />
+            <SplitButton label="Secondary" :model="basicItems" outlined severity="secondary" @click="() => lastAction = 'Outlined Secondary'" />
+            <SplitButton label="Success" :model="basicItems" outlined severity="success" @click="() => lastAction = 'Outlined Success'" />
+            <SplitButton label="Info" :model="basicItems" outlined severity="info" @click="() => lastAction = 'Outlined Info'" />
+            <SplitButton label="Warn" :model="basicItems" outlined severity="warn" @click="() => lastAction = 'Outlined Warn'" />
+            <SplitButton label="Danger" :model="basicItems" outlined severity="danger" @click="() => lastAction = 'Outlined Danger'" />
           </div>
           <small class="text-surface-600 dark:text-surface-300">
             Border-only style for secondary or alternative actions
@@ -466,23 +470,23 @@ async function handleProjectAction(action: string) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <div class="flex flex-wrap items-center gap-3">
-            <SplitButton 
-              label="Small" 
-              :model="basicItems" 
-              icon="pi pi-plus" 
+            <SplitButton
+              label="Small"
+              :model="basicItems"
+              icon="pi pi-plus"
               size="small"
               @click="() => lastAction = 'Small size clicked'"
             />
-            <SplitButton 
-              label="Normal" 
-              :model="basicItems" 
+            <SplitButton
+              label="Normal"
+              :model="basicItems"
               icon="pi pi-plus"
               @click="() => lastAction = 'Normal size clicked'"
             />
-            <SplitButton 
-              label="Large" 
-              :model="basicItems" 
-              icon="pi pi-plus" 
+            <SplitButton
+              label="Large"
+              :model="basicItems"
+              icon="pi pi-plus"
               size="large"
               @click="() => lastAction = 'Large size clicked'"
             />
@@ -506,10 +510,10 @@ async function handleProjectAction(action: string) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <div class="flex flex-wrap gap-3">
-            <SplitButton 
-              :model="basicItems" 
-              @click="() => lastAction = 'Custom template clicked'" 
+            <SplitButton
+              :model="basicItems"
               severity="contrast"
+              @click="() => lastAction = 'Custom template clicked'"
             >
               <span class="flex items-center font-bold gap-2">
                 <Icon name="lucide:zap" size="16" class="text-yellow-500" />
@@ -517,13 +521,13 @@ async function handleProjectAction(action: string) {
               </span>
             </SplitButton>
 
-            <SplitButton 
-              :model="iconItems" 
-              @click="() => lastAction = 'Brand template clicked'" 
+            <SplitButton
+              :model="iconItems"
               severity="info"
+              @click="() => lastAction = 'Brand template clicked'"
             >
               <div class="flex items-center gap-2">
-                <div class="w-4 h-4 bg-gradient-to-br from-primary-400 to-primary-600 rounded"></div>
+                <div class="w-4 h-4 bg-gradient-to-br from-primary-400 to-primary-600 rounded" />
                 <span class="font-semibold">Brand Action</span>
               </div>
             </SplitButton>
@@ -551,10 +555,12 @@ async function handleProjectAction(action: string) {
         <div class="flex flex-col gap-8">
           <!-- Document Management -->
           <div class="flex flex-col gap-4">
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0">Document Management</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+              Document Management
+            </h4>
             <div class="flex flex-wrap gap-3">
-              <SplitButton 
-                label="Save Document" 
+              <SplitButton
+                label="Save Document"
                 icon="pi pi-save"
                 severity="success"
                 :model="documentItems"
@@ -562,7 +568,7 @@ async function handleProjectAction(action: string) {
                 @click="handleDocumentSave"
               />
             </div>
-            
+
             <div v-if="apiResult" class="p-3 bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/20 rounded-lg">
               <small class="text-green-800 dark:text-green-200">
                 <strong>API Response:</strong> {{ apiResult }}
@@ -572,10 +578,12 @@ async function handleProjectAction(action: string) {
 
           <!-- User Management -->
           <div class="flex flex-col gap-4">
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0">User Management</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+              User Management
+            </h4>
             <div class="flex flex-wrap gap-3">
-              <SplitButton 
-                label="Create User" 
+              <SplitButton
+                label="Create User"
                 icon="pi pi-user-plus"
                 severity="info"
                 :model="userItems"
@@ -587,10 +595,12 @@ async function handleProjectAction(action: string) {
 
           <!-- Project Management -->
           <div class="flex flex-col gap-4">
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0">Project Management</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+              Project Management
+            </h4>
             <div class="flex flex-wrap gap-3">
-              <SplitButton 
-                :label="`Deploy ${selectedProject}`" 
+              <SplitButton
+                :label="`Deploy ${selectedProject}`"
                 icon="pi pi-cloud-upload"
                 severity="warn"
                 :model="projectItems"
@@ -598,7 +608,7 @@ async function handleProjectAction(action: string) {
                 @click="handleDeployProject"
               />
             </div>
-            
+
             <div class="p-3 bg-surface-100 dark:bg-surface-800 border border-surface-200 dark:border-surface-700 rounded-lg">
               <small class="text-surface-700 dark:text-surface-300">
                 <strong>Current Project:</strong> {{ selectedProject }}

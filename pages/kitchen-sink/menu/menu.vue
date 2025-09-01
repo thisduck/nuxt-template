@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
+import { ref } from 'vue';
 
 const toast = useToast();
 
@@ -11,28 +11,28 @@ const basicItems = ref([
     icon: 'pi pi-plus',
     command: () => {
       toast.add({ severity: 'success', summary: 'Menu Action', detail: 'New item selected', life: 3000 });
-    }
+    },
   },
   {
     label: 'Search',
     icon: 'pi pi-search',
     command: () => {
       toast.add({ severity: 'info', summary: 'Menu Action', detail: 'Search initiated', life: 3000 });
-    }
+    },
   },
   {
     label: 'Delete',
     icon: 'pi pi-trash',
     command: () => {
       toast.add({ severity: 'warn', summary: 'Menu Action', detail: 'Delete action', life: 3000 });
-    }
-  }
+    },
+  },
 ]);
 
 // Grouped menu items
 const groupedItems = ref([
   {
-    separator: true
+    separator: true,
   },
   {
     label: 'Documents',
@@ -43,7 +43,7 @@ const groupedItems = ref([
         shortcut: '⌘+N',
         command: () => {
           toast.add({ severity: 'success', summary: 'Documents', detail: 'New document created', life: 3000 });
-        }
+        },
       },
       {
         label: 'Search',
@@ -51,9 +51,9 @@ const groupedItems = ref([
         shortcut: '⌘+S',
         command: () => {
           toast.add({ severity: 'info', summary: 'Documents', detail: 'Search documents', life: 3000 });
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
   {
     label: 'Profile',
@@ -64,7 +64,7 @@ const groupedItems = ref([
         shortcut: '⌘+O',
         command: () => {
           toast.add({ severity: 'info', summary: 'Profile', detail: 'Settings opened', life: 3000 });
-        }
+        },
       },
       {
         label: 'Messages',
@@ -72,7 +72,7 @@ const groupedItems = ref([
         badge: 2,
         command: () => {
           toast.add({ severity: 'info', summary: 'Profile', detail: 'Messages opened', life: 3000 });
-        }
+        },
       },
       {
         label: 'Logout',
@@ -80,10 +80,10 @@ const groupedItems = ref([
         shortcut: '⌘+Q',
         command: () => {
           toast.add({ severity: 'warn', summary: 'Profile', detail: 'Logged out', life: 3000 });
-        }
-      }
-    ]
-  }
+        },
+      },
+    ],
+  },
 ]);
 
 // Popup menu
@@ -94,32 +94,32 @@ const popupItems = ref([
     icon: 'pi pi-save',
     command: () => {
       toast.add({ severity: 'success', summary: 'File', detail: 'File saved', life: 3000 });
-    }
+    },
   },
   {
     label: 'Update',
     icon: 'pi pi-refresh',
     command: () => {
       toast.add({ severity: 'info', summary: 'File', detail: 'File updated', life: 3000 });
-    }
+    },
   },
   {
     label: 'Delete',
     icon: 'pi pi-trash',
     command: () => {
       toast.add({ severity: 'error', summary: 'File', detail: 'File deleted', life: 3000 });
-    }
-  }
+    },
+  },
 ]);
 
-const toggleMenu = (event: Event) => {
+function toggleMenu(event: Event) {
   menu.value.toggle(event);
-};
+}
 
 // Template menu items
 const templateItems = ref([
   {
-    separator: true
+    separator: true,
   },
   {
     label: 'Documents',
@@ -130,7 +130,7 @@ const templateItems = ref([
         shortcut: '⌘+N',
         command: () => {
           toast.add({ severity: 'success', summary: 'Template Menu', detail: 'New document', life: 3000 });
-        }
+        },
       },
       {
         label: 'Search',
@@ -138,9 +138,9 @@ const templateItems = ref([
         shortcut: '⌘+S',
         command: () => {
           toast.add({ severity: 'info', summary: 'Template Menu', detail: 'Search documents', life: 3000 });
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
   {
     label: 'Profile',
@@ -151,7 +151,7 @@ const templateItems = ref([
         shortcut: '⌘+O',
         command: () => {
           toast.add({ severity: 'info', summary: 'Template Menu', detail: 'Settings', life: 3000 });
-        }
+        },
       },
       {
         label: 'Messages',
@@ -159,7 +159,7 @@ const templateItems = ref([
         badge: 2,
         command: () => {
           toast.add({ severity: 'info', summary: 'Template Menu', detail: 'Messages', life: 3000 });
-        }
+        },
       },
       {
         label: 'Logout',
@@ -167,10 +167,10 @@ const templateItems = ref([
         shortcut: '⌘+Q',
         command: () => {
           toast.add({ severity: 'warn', summary: 'Template Menu', detail: 'Logout', life: 3000 });
-        }
-      }
-    ]
-  }
+        },
+      },
+    ],
+  },
 ]);
 
 // Command menu items
@@ -180,39 +180,39 @@ const commandItems = ref([
     icon: 'pi pi-plus',
     command: () => {
       toast.add({ severity: 'success', summary: 'Command', detail: 'New item created', life: 3000 });
-    }
+    },
   },
   {
     label: 'Search',
     icon: 'pi pi-search',
     command: () => {
       toast.add({ severity: 'info', summary: 'Command', detail: 'Search executed', life: 3000 });
-    }
+    },
   },
   {
     label: 'Print',
     icon: 'pi pi-print',
     command: () => {
       toast.add({ severity: 'info', summary: 'Command', detail: 'Print started', life: 3000 });
-    }
+    },
   },
   {
-    separator: true
+    separator: true,
   },
   {
     label: 'Archive',
     icon: 'pi pi-archive',
     command: () => {
       toast.add({ severity: 'warn', summary: 'Command', detail: 'Item archived', life: 3000 });
-    }
+    },
   },
   {
     label: 'Delete',
     icon: 'pi pi-trash',
     command: () => {
       toast.add({ severity: 'error', summary: 'Command', detail: 'Item deleted', life: 3000 });
-    }
-  }
+    },
+  },
 ]);
 
 // Router menu items
@@ -223,26 +223,26 @@ const routerItems = ref([
       {
         label: 'Router Link',
         icon: 'pi pi-external-link',
-        route: '/kitchen-sink'
+        route: '/kitchen-sink',
       },
       {
         label: 'Programmatic',
         icon: 'pi pi-upload',
         command: () => {
           navigateTo('/kitchen-sink/form');
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
   {
-    separator: true
+    separator: true,
   },
   {
     label: 'External',
     icon: 'pi pi-globe',
     url: 'https://primevue.org',
-    target: '_blank'
-  }
+    target: '_blank',
+  },
 ]);
 
 // Navigation menu items for different categories
@@ -253,7 +253,7 @@ const fileMenuItems = ref([
     shortcut: 'Ctrl+N',
     command: () => {
       toast.add({ severity: 'success', summary: 'File', detail: 'New file created', life: 3000 });
-    }
+    },
   },
   {
     label: 'Open File',
@@ -261,7 +261,7 @@ const fileMenuItems = ref([
     shortcut: 'Ctrl+O',
     command: () => {
       toast.add({ severity: 'info', summary: 'File', detail: 'File opened', life: 3000 });
-    }
+    },
   },
   {
     label: 'Save',
@@ -269,10 +269,10 @@ const fileMenuItems = ref([
     shortcut: 'Ctrl+S',
     command: () => {
       toast.add({ severity: 'success', summary: 'File', detail: 'File saved', life: 3000 });
-    }
+    },
   },
   {
-    separator: true
+    separator: true,
   },
   {
     label: 'Recent Files',
@@ -283,26 +283,26 @@ const fileMenuItems = ref([
         icon: 'pi pi-file-pdf',
         command: () => {
           toast.add({ severity: 'info', summary: 'Recent Files', detail: 'Document.pdf opened', life: 3000 });
-        }
+        },
       },
       {
         label: 'Spreadsheet.xlsx',
         icon: 'pi pi-file-excel',
         command: () => {
           toast.add({ severity: 'info', summary: 'Recent Files', detail: 'Spreadsheet.xlsx opened', life: 3000 });
-        }
+        },
       },
       {
         label: 'Presentation.pptx',
         icon: 'pi pi-file',
         command: () => {
           toast.add({ severity: 'info', summary: 'Recent Files', detail: 'Presentation.pptx opened', life: 3000 });
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
   {
-    separator: true
+    separator: true,
   },
   {
     label: 'Exit',
@@ -310,8 +310,8 @@ const fileMenuItems = ref([
     shortcut: 'Alt+F4',
     command: () => {
       toast.add({ severity: 'warn', summary: 'File', detail: 'Application exit', life: 3000 });
-    }
-  }
+    },
+  },
 ]);
 
 const editMenuItems = ref([
@@ -321,7 +321,7 @@ const editMenuItems = ref([
     shortcut: 'Ctrl+Z',
     command: () => {
       toast.add({ severity: 'info', summary: 'Edit', detail: 'Undo action', life: 3000 });
-    }
+    },
   },
   {
     label: 'Redo',
@@ -329,10 +329,10 @@ const editMenuItems = ref([
     shortcut: 'Ctrl+Y',
     command: () => {
       toast.add({ severity: 'info', summary: 'Edit', detail: 'Redo action', life: 3000 });
-    }
+    },
   },
   {
-    separator: true
+    separator: true,
   },
   {
     label: 'Cut',
@@ -340,7 +340,7 @@ const editMenuItems = ref([
     shortcut: 'Ctrl+X',
     command: () => {
       toast.add({ severity: 'info', summary: 'Edit', detail: 'Cut text', life: 3000 });
-    }
+    },
   },
   {
     label: 'Copy',
@@ -348,7 +348,7 @@ const editMenuItems = ref([
     shortcut: 'Ctrl+C',
     command: () => {
       toast.add({ severity: 'info', summary: 'Edit', detail: 'Copy text', life: 3000 });
-    }
+    },
   },
   {
     label: 'Paste',
@@ -356,10 +356,10 @@ const editMenuItems = ref([
     shortcut: 'Ctrl+V',
     command: () => {
       toast.add({ severity: 'info', summary: 'Edit', detail: 'Paste text', life: 3000 });
-    }
+    },
   },
   {
-    separator: true
+    separator: true,
   },
   {
     label: 'Find',
@@ -367,7 +367,7 @@ const editMenuItems = ref([
     shortcut: 'Ctrl+F',
     command: () => {
       toast.add({ severity: 'info', summary: 'Edit', detail: 'Find dialog opened', life: 3000 });
-    }
+    },
   },
   {
     label: 'Replace',
@@ -375,8 +375,8 @@ const editMenuItems = ref([
     shortcut: 'Ctrl+H',
     command: () => {
       toast.add({ severity: 'info', summary: 'Edit', detail: 'Replace dialog opened', life: 3000 });
-    }
-  }
+    },
+  },
 ]);
 
 const viewMenuItems = ref([
@@ -386,7 +386,7 @@ const viewMenuItems = ref([
     shortcut: 'Ctrl++',
     command: () => {
       toast.add({ severity: 'info', summary: 'View', detail: 'Zoomed in', life: 3000 });
-    }
+    },
   },
   {
     label: 'Zoom Out',
@@ -394,7 +394,7 @@ const viewMenuItems = ref([
     shortcut: 'Ctrl+-',
     command: () => {
       toast.add({ severity: 'info', summary: 'View', detail: 'Zoomed out', life: 3000 });
-    }
+    },
   },
   {
     label: 'Reset Zoom',
@@ -402,10 +402,10 @@ const viewMenuItems = ref([
     shortcut: 'Ctrl+0',
     command: () => {
       toast.add({ severity: 'info', summary: 'View', detail: 'Zoom reset', life: 3000 });
-    }
+    },
   },
   {
-    separator: true
+    separator: true,
   },
   {
     label: 'Full Screen',
@@ -413,10 +413,10 @@ const viewMenuItems = ref([
     shortcut: 'F11',
     command: () => {
       toast.add({ severity: 'info', summary: 'View', detail: 'Full screen mode', life: 3000 });
-    }
+    },
   },
   {
-    separator: true
+    separator: true,
   },
   {
     label: 'Layout',
@@ -427,24 +427,24 @@ const viewMenuItems = ref([
         icon: 'pi pi-bars',
         command: () => {
           toast.add({ severity: 'info', summary: 'Layout', detail: 'Sidebar toggled', life: 3000 });
-        }
+        },
       },
       {
         label: 'Toolbar',
         icon: 'pi pi-wrench',
         command: () => {
           toast.add({ severity: 'info', summary: 'Layout', detail: 'Toolbar toggled', life: 3000 });
-        }
+        },
       },
       {
         label: 'Status Bar',
         icon: 'pi pi-info',
         command: () => {
           toast.add({ severity: 'info', summary: 'Layout', detail: 'Status bar toggled', life: 3000 });
-        }
-      }
-    ]
-  }
+        },
+      },
+    ],
+  },
 ]);
 </script>
 
@@ -473,7 +473,7 @@ const viewMenuItems = ref([
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Menu requires a collection of menuitems as its model.
       </p>
-      
+
       <div class="card">
         <Menu :model="basicItems" class="w-full md:w-48" />
       </div>
@@ -487,7 +487,7 @@ const viewMenuItems = ref([
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Menu supports single level of grouping by defining children with the items property.
       </p>
-      
+
       <div class="card">
         <Menu :model="groupedItems" class="w-full md:w-60" />
       </div>
@@ -501,21 +501,21 @@ const viewMenuItems = ref([
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Overlay mode is enabled by adding popup property and calling toggle function of the menu ref with an event of the target.
       </p>
-      
+
       <div class="card">
-        <Button 
-          type="button" 
-          icon="pi pi-ellipsis-v" 
+        <Button
+          type="button"
+          icon="pi pi-ellipsis-v"
           label="Show Menu"
-          @click="toggleMenu" 
-          aria-haspopup="true" 
-          aria-controls="popup_menu" 
+          aria-haspopup="true"
+          aria-controls="popup_menu"
+          @click="toggleMenu"
         />
-        <Menu 
-          ref="menu" 
-          id="popup_menu" 
-          :model="popupItems" 
-          :popup="true" 
+        <Menu
+          id="popup_menu"
+          ref="menu"
+          :model="popupItems"
+          :popup="true"
           class="w-48"
         />
       </div>
@@ -529,7 +529,7 @@ const viewMenuItems = ref([
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Menu offers item customization with the item template. Additional slots named start and end are provided to embed content before or after the menu.
       </p>
-      
+
       <div class="card">
         <Menu :model="templateItems" class="w-full md:w-60">
           <template #start>
@@ -570,7 +570,7 @@ const viewMenuItems = ref([
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         The command property defines the callback to run when an item is activated by click or a key event.
       </p>
-      
+
       <div class="card">
         <Menu :model="commandItems" class="w-full md:w-48" />
       </div>
@@ -584,12 +584,12 @@ const viewMenuItems = ref([
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Items with navigation are defined with templating to be able to use a router link component, an external link or programmatic navigation.
       </p>
-      
+
       <div class="card">
         <Menu :model="routerItems" class="w-full md:w-48">
           <template #item="{ item, props }">
             <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
-              <a v-ripple :href="href" v-bind="props.action" @click="navigate" class="flex items-center">
+              <a v-ripple :href="href" v-bind="props.action" class="flex items-center" @click="navigate">
                 <span :class="item.icon" />
                 <span class="ml-2">{{ item.label }}</span>
               </a>
@@ -611,24 +611,30 @@ const viewMenuItems = ref([
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Real-world example showing typical application menu structure with File, Edit, and View menus.
       </p>
-      
+
       <div class="card">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <!-- File Menu -->
           <div class="flex flex-col gap-3">
-            <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100">File Menu</h3>
+            <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100">
+              File Menu
+            </h3>
             <Menu :model="fileMenuItems" class="w-full" />
           </div>
 
           <!-- Edit Menu -->
           <div class="flex flex-col gap-3">
-            <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100">Edit Menu</h3>
+            <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100">
+              Edit Menu
+            </h3>
             <Menu :model="editMenuItems" class="w-full" />
           </div>
 
           <!-- View Menu -->
           <div class="flex flex-col gap-3">
-            <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100">View Menu</h3>
+            <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100">
+              View Menu
+            </h3>
             <Menu :model="viewMenuItems" class="w-full" />
           </div>
         </div>
@@ -643,17 +649,19 @@ const viewMenuItems = ref([
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Different styling approaches for menus in various contexts.
       </p>
-      
+
       <div class="card">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- Compact Menu -->
           <div class="flex flex-col gap-3">
-            <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100">Compact Style</h3>
+            <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100">
+              Compact Style
+            </h3>
             <div class="border border-surface-200 dark:border-surface-700 rounded-lg p-2">
               <Menu :model="basicItems" class="w-full border-0">
                 <template #item="{ item, props }">
                   <a v-ripple class="flex items-center p-2 text-sm hover:bg-surface-100 dark:hover:bg-surface-800 rounded" v-bind="props.action">
-                    <span :class="[item.icon, 'text-xs']" />
+                    <span class="text-xs" :class="[item.icon]" />
                     <span class="ml-2">{{ item.label }}</span>
                   </a>
                 </template>
@@ -663,12 +671,14 @@ const viewMenuItems = ref([
 
           <!-- Spacious Menu -->
           <div class="flex flex-col gap-3">
-            <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100">Spacious Style</h3>
+            <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100">
+              Spacious Style
+            </h3>
             <div class="bg-surface-50 dark:bg-surface-800 rounded-lg p-3">
               <Menu :model="basicItems" class="w-full border-0">
                 <template #item="{ item, props }">
                   <a v-ripple class="flex items-center p-4 hover:bg-surface-100 dark:hover:bg-surface-700 rounded-lg mb-1 transition-colors" v-bind="props.action">
-                    <span :class="[item.icon, 'text-lg text-primary-500']" />
+                    <span class="text-lg text-primary-500" :class="[item.icon]" />
                     <span class="ml-3 font-medium">{{ item.label }}</span>
                   </a>
                 </template>

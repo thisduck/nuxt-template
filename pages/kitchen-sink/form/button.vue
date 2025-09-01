@@ -23,7 +23,7 @@ async function handleApiAction(action: string) {
   isProcessing.value = true;
   lastAction.value = action;
   actionResult.value = '';
-  
+
   try {
     // Simulate API call using existing hello endpoint
     const result = await $trpc.hello.query({ text: action });
@@ -58,7 +58,7 @@ const isUploading = ref(false);
 function simulateUpload() {
   isUploading.value = true;
   uploadProgress.value = 0;
-  
+
   const interval = setInterval(() => {
     uploadProgress.value += 10;
     if (uploadProgress.value >= 100) {
@@ -126,7 +126,9 @@ function simulateUpload() {
         <div class="flex flex-col gap-6">
           <!-- Icon Only -->
           <div class="flex flex-col gap-3">
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0">Icon Only</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+              Icon Only
+            </h4>
             <div class="flex flex-wrap gap-3">
               <Button icon="pi pi-home" aria-label="Home" />
               <Button icon="pi pi-user" aria-label="Profile" />
@@ -136,7 +138,9 @@ function simulateUpload() {
 
           <!-- Icon with Label -->
           <div class="flex flex-col gap-3">
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0">Icon with Label</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+              Icon with Label
+            </h4>
             <div class="flex flex-wrap gap-3">
               <Button label="Profile" icon="pi pi-user" />
               <Button label="Save" icon="pi pi-check" icon-pos="right" />
@@ -164,18 +168,18 @@ function simulateUpload() {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <div class="flex flex-wrap gap-3">
-            <Button 
-              label="Search" 
-              icon="pi pi-search" 
-              :loading="isLoading" 
-              @click="handleLoadingClick" 
+            <Button
+              label="Search"
+              icon="pi pi-search"
+              :loading="isLoading"
+              @click="handleLoadingClick"
             />
-            <Button 
-              label="Process" 
-              icon="pi pi-cog" 
-              :loading="isLoading" 
+            <Button
+              label="Process"
+              icon="pi pi-cog"
+              :loading="isLoading"
               severity="secondary"
-              @click="handleLoadingClick" 
+              @click="handleLoadingClick"
             />
           </div>
           <small class="text-surface-600 dark:text-surface-300">
@@ -328,7 +332,9 @@ function simulateUpload() {
         <div class="flex flex-col gap-6">
           <!-- Regular Text -->
           <div class="flex flex-col gap-3">
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0">Text Buttons</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+              Text Buttons
+            </h4>
             <div class="flex flex-wrap gap-3">
               <Button label="Primary" variant="text" />
               <Button label="Secondary" severity="secondary" variant="text" />
@@ -339,7 +345,9 @@ function simulateUpload() {
 
           <!-- Raised Text -->
           <div class="flex flex-col gap-3">
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0">Raised Text Buttons</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+              Raised Text Buttons
+            </h4>
             <div class="flex flex-wrap gap-3">
               <Button label="Primary" variant="text" raised />
               <Button label="Secondary" severity="secondary" variant="text" raised />
@@ -394,7 +402,9 @@ function simulateUpload() {
         <div class="flex flex-col gap-6">
           <!-- Standard Icon Buttons -->
           <div class="flex flex-col gap-3">
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0">Standard</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+              Standard
+            </h4>
             <div class="flex flex-wrap gap-3">
               <Button icon="pi pi-check" aria-label="Confirm" />
               <Button icon="pi pi-bookmark" severity="secondary" aria-label="Bookmark" />
@@ -408,7 +418,9 @@ function simulateUpload() {
 
           <!-- Rounded Icon Buttons -->
           <div class="flex flex-col gap-3">
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0">Rounded</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+              Rounded
+            </h4>
             <div class="flex flex-wrap gap-3">
               <Button icon="pi pi-check" rounded aria-label="Confirm" />
               <Button icon="pi pi-bookmark" severity="secondary" rounded aria-label="Bookmark" />
@@ -422,7 +434,9 @@ function simulateUpload() {
 
           <!-- Outlined Icon Buttons -->
           <div class="flex flex-col gap-3">
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0">Outlined</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+              Outlined
+            </h4>
             <div class="flex flex-wrap gap-3">
               <Button icon="pi pi-check" rounded variant="outlined" aria-label="Confirm" />
               <Button icon="pi pi-bookmark" severity="secondary" rounded variant="outlined" aria-label="Bookmark" />
@@ -434,7 +448,9 @@ function simulateUpload() {
 
           <!-- Text Icon Buttons -->
           <div class="flex flex-col gap-3">
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0">Text</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+              Text
+            </h4>
             <div class="flex flex-wrap gap-3">
               <Button icon="pi pi-check" variant="text" rounded aria-label="Confirm" />
               <Button icon="pi pi-bookmark" severity="secondary" variant="text" rounded aria-label="Bookmark" />
@@ -538,10 +554,10 @@ function simulateUpload() {
                 <span class="font-bold">Star Me!</span>
               </div>
             </Button>
-            
+
             <Button variant="outlined">
               <div class="flex items-center gap-2">
-                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                <div class="w-3 h-3 bg-green-500 rounded-full" />
                 <span>Online Status</span>
               </div>
             </Button>
@@ -577,31 +593,33 @@ function simulateUpload() {
         <div class="flex flex-col gap-6">
           <!-- API Action Buttons -->
           <div class="flex flex-col gap-4">
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0">API Actions</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+              API Actions
+            </h4>
             <div class="flex flex-wrap gap-3">
-              <Button 
-                label="Save Data" 
+              <Button
+                label="Save Data"
                 icon="pi pi-save"
                 severity="success"
                 :loading="isProcessing && lastAction === 'save'"
                 @click="handleApiAction('save')"
               />
-              <Button 
-                label="Delete Record" 
+              <Button
+                label="Delete Record"
                 icon="pi pi-trash"
                 severity="danger"
                 :loading="isProcessing && lastAction === 'delete'"
                 @click="handleApiAction('delete')"
               />
-              <Button 
-                label="Sync Data" 
+              <Button
+                label="Sync Data"
                 icon="pi pi-sync"
                 severity="info"
                 :loading="isProcessing && lastAction === 'sync'"
                 @click="handleApiAction('sync')"
               />
             </div>
-            
+
             <div v-if="actionResult" class="p-3 bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/20 rounded-lg">
               <small class="text-green-800 dark:text-green-200">
                 <strong>API Response:</strong> {{ actionResult }}
@@ -611,33 +629,37 @@ function simulateUpload() {
 
           <!-- Notification Management -->
           <div class="flex flex-col gap-4">
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0">Notification Actions</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+              Notification Actions
+            </h4>
             <div class="space-y-3">
               <div v-for="notification in notifications" :key="notification.id" class="flex items-center justify-between p-3 border border-surface-200 dark:border-surface-700 rounded-lg">
                 <div class="flex items-center gap-3">
-                  <i :class="{
-                    'pi pi-check-circle text-green-500': notification.type === 'success',
-                    'pi pi-info-circle text-blue-500': notification.type === 'info',
-                    'pi pi-exclamation-triangle text-yellow-500': notification.type === 'warn'
-                  }" />
+                  <i
+                    :class="{
+                      'pi pi-check-circle text-green-500': notification.type === 'success',
+                      'pi pi-info-circle text-blue-500': notification.type === 'info',
+                      'pi pi-exclamation-triangle text-yellow-500': notification.type === 'warn',
+                    }"
+                  />
                   <span class="text-sm">{{ notification.message }}</span>
                 </div>
-                <Button 
-                  icon="pi pi-times" 
-                  variant="text" 
+                <Button
+                  icon="pi pi-times"
+                  variant="text"
                   size="small"
                   aria-label="Dismiss"
                   @click="dismissNotification(notification.id)"
                 />
               </div>
-              
+
               <div v-if="notifications.length === 0" class="text-center py-4 text-surface-500">
                 All notifications cleared!
               </div>
-              
+
               <div class="flex justify-end">
-                <Button 
-                  label="Clear All" 
+                <Button
+                  label="Clear All"
                   icon="pi pi-times"
                   severity="secondary"
                   size="small"
@@ -650,26 +672,28 @@ function simulateUpload() {
 
           <!-- File Upload Simulation -->
           <div class="flex flex-col gap-4">
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0">File Operations</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+              File Operations
+            </h4>
             <div class="flex items-center gap-4">
-              <Button 
-                label="Upload File" 
+              <Button
+                label="Upload File"
                 icon="pi pi-upload"
                 severity="info"
                 :loading="isUploading"
                 :disabled="isUploading"
                 @click="simulateUpload"
               />
-              
+
               <div v-if="isUploading" class="flex-1">
                 <div class="text-sm text-surface-600 dark:text-surface-300 mb-1">
                   Uploading... {{ uploadProgress }}%
                 </div>
                 <div class="w-full bg-surface-200 dark:bg-surface-700 rounded-full h-2">
-                  <div 
+                  <div
                     class="bg-primary-500 h-2 rounded-full transition-all duration-300"
-                    :style="{ width: uploadProgress + '%' }"
-                  ></div>
+                    :style="{ width: `${uploadProgress}%` }"
+                  />
                 </div>
               </div>
             </div>

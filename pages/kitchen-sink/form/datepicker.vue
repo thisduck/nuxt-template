@@ -39,7 +39,7 @@ const selectedYear = ref();
 const selectedInlineDate = ref();
 
 // Custom Template
-const selectedTemplateDate = ref();
+const _selectedTemplateDate = ref();
 
 // States
 const selectedValidDate = ref();
@@ -50,7 +50,7 @@ const selectedDisabledDate = ref();
 const selectedFilledDate = ref();
 
 // tRPC Backend
-const { $trpc } = useNuxtApp();
+const { $trpc: _$trpc } = useNuxtApp();
 const selectedEventDate = ref();
 const events = ref([]);
 
@@ -73,15 +73,15 @@ onMounted(async () => {
 
 // Check if date has events
 function hasEvent(date) {
-  return events.value.some(event => 
-    event.date.toDateString() === date.toDateString()
+  return events.value.some(event =>
+    event.date.toDateString() === date.toDateString(),
   );
 }
 
 // Get events for a specific date
 function getEventsForDate(date) {
-  return events.value.filter(event => 
-    event.date.toDateString() === date.toDateString()
+  return events.value.filter(event =>
+    event.date.toDateString() === date.toDateString(),
   );
 }
 </script>
@@ -116,8 +116,8 @@ function getEventsForDate(date) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label class="font-semibold text-surface-900 dark:text-surface-0">Select Date</label>
-          <DatePicker 
-            v-model="selectedDate" 
+          <DatePicker
+            v-model="selectedDate"
             placeholder="Select a date"
             class="w-full md:w-auto"
           />
@@ -140,8 +140,8 @@ function getEventsForDate(date) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label class="font-semibold text-surface-900 dark:text-surface-0">Birth Date (Required)</label>
-          <DatePicker 
-            v-model="selectedFormDate" 
+          <DatePicker
+            v-model="selectedFormDate"
             placeholder="Select your birth date"
             :invalid="!isFormDateValid"
             class="w-full md:w-auto"
@@ -168,8 +168,8 @@ function getEventsForDate(date) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label class="font-semibold text-surface-900 dark:text-surface-0">Custom Date Format (dd/mm/yy)</label>
-          <DatePicker 
-            v-model="selectedCustomDate" 
+          <DatePicker
+            v-model="selectedCustomDate"
             date-format="dd/mm/yy"
             placeholder="DD/MM/YY"
             class="w-full md:w-auto"
@@ -193,8 +193,8 @@ function getEventsForDate(date) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label class="font-semibold text-surface-900 dark:text-surface-0">Date with Icon</label>
-          <DatePicker 
-            v-model="selectedIconDate" 
+          <DatePicker
+            v-model="selectedIconDate"
             show-icon
             placeholder="Select a date"
             class="w-full md:w-auto"
@@ -218,8 +218,8 @@ function getEventsForDate(date) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label class="font-semibold text-surface-900 dark:text-surface-0">Date Range (±30 days)</label>
-          <DatePicker 
-            v-model="selectedMinMaxDate" 
+          <DatePicker
+            v-model="selectedMinMaxDate"
             :min-date="minDate"
             :max-date="maxDate"
             show-icon
@@ -245,8 +245,8 @@ function getEventsForDate(date) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label class="font-semibold text-surface-900 dark:text-surface-0">Select Multiple Dates</label>
-          <DatePicker 
-            v-model="selectedMultipleDates" 
+          <DatePicker
+            v-model="selectedMultipleDates"
             selection-mode="multiple"
             show-icon
             placeholder="Select multiple dates"
@@ -271,8 +271,8 @@ function getEventsForDate(date) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label class="font-semibold text-surface-900 dark:text-surface-0">Select Date Range</label>
-          <DatePicker 
-            v-model="selectedDateRange" 
+          <DatePicker
+            v-model="selectedDateRange"
             selection-mode="range"
             show-icon
             placeholder="Select date range"
@@ -297,8 +297,8 @@ function getEventsForDate(date) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label class="font-semibold text-surface-900 dark:text-surface-0">Date and Time</label>
-          <DatePicker 
-            v-model="selectedDateTime" 
+          <DatePicker
+            v-model="selectedDateTime"
             show-time
             show-icon
             placeholder="Select date and time"
@@ -323,9 +323,9 @@ function getEventsForDate(date) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label class="font-semibold text-surface-900 dark:text-surface-0">Select Month</label>
-          <DatePicker 
-            v-model="selectedMonth" 
-            view="month" 
+          <DatePicker
+            v-model="selectedMonth"
+            view="month"
             date-format="mm/yy"
             show-icon
             placeholder="Select month"
@@ -350,9 +350,9 @@ function getEventsForDate(date) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label class="font-semibold text-surface-900 dark:text-surface-0">Select Year</label>
-          <DatePicker 
-            v-model="selectedYear" 
-            view="year" 
+          <DatePicker
+            v-model="selectedYear"
+            view="year"
             date-format="yy"
             show-icon
             placeholder="Select year"
@@ -377,8 +377,8 @@ function getEventsForDate(date) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label class="font-semibold text-surface-900 dark:text-surface-0">Inline Calendar</label>
-          <DatePicker 
-            v-model="selectedInlineDate" 
+          <DatePicker
+            v-model="selectedInlineDate"
             inline
           />
           <small class="text-surface-600 dark:text-surface-300">
@@ -400,8 +400,8 @@ function getEventsForDate(date) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label class="font-semibold text-surface-900 dark:text-surface-0">Filled DatePicker</label>
-          <DatePicker 
-            v-model="selectedFilledDate" 
+          <DatePicker
+            v-model="selectedFilledDate"
             variant="filled"
             show-icon
             placeholder="Select a date"
@@ -426,9 +426,11 @@ function getEventsForDate(date) {
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
-            <h3 class="font-semibold text-surface-900 dark:text-surface-0">Valid</h3>
-            <DatePicker 
-              v-model="selectedValidDate" 
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Valid
+            </h3>
+            <DatePicker
+              v-model="selectedValidDate"
               show-icon
               placeholder="Valid state"
               class="w-full"
@@ -439,9 +441,11 @@ function getEventsForDate(date) {
 
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
-            <h3 class="font-semibold text-surface-900 dark:text-surface-0">Invalid</h3>
-            <DatePicker 
-              v-model="selectedInvalidDate" 
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Invalid
+            </h3>
+            <DatePicker
+              v-model="selectedInvalidDate"
               show-icon
               placeholder="Invalid state"
               :invalid="true"
@@ -453,9 +457,11 @@ function getEventsForDate(date) {
 
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
-            <h3 class="font-semibold text-surface-900 dark:text-surface-0">Disabled</h3>
-            <DatePicker 
-              v-model="selectedDisabledDate" 
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Disabled
+            </h3>
+            <DatePicker
+              v-model="selectedDisabledDate"
               show-icon
               placeholder="Disabled state"
               disabled
@@ -482,8 +488,8 @@ function getEventsForDate(date) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label class="font-semibold text-surface-900 dark:text-surface-0">Select Event Date</label>
-          <DatePicker 
-            v-model="selectedEventDate" 
+          <DatePicker
+            v-model="selectedEventDate"
             show-icon
             placeholder="Select date to view events"
             class="w-full md:w-auto"
@@ -491,29 +497,31 @@ function getEventsForDate(date) {
             <template #date="{ date }">
               <div class="relative">
                 <span>{{ date.day }}</span>
-                <div 
+                <div
                   v-if="hasEvent(new Date(date.year, date.month, date.day))"
                   class="absolute -top-1 -right-1 w-2 h-2 bg-primary-500 rounded-full"
-                ></div>
+                />
               </div>
             </template>
           </DatePicker>
-          
+
           <div v-if="selectedEventDate" class="mt-4 p-4 bg-primary-50 dark:bg-primary-500/10 rounded-lg border border-primary-200 dark:border-primary-500/20">
             <h4 class="font-semibold text-primary-900 dark:text-primary-100 mb-2">
               Events for {{ selectedEventDate.toLocaleDateString() }}
             </h4>
             <div v-if="getEventsForDate(selectedEventDate).length > 0" class="space-y-2">
-              <div 
-                v-for="event in getEventsForDate(selectedEventDate)" 
+              <div
+                v-for="event in getEventsForDate(selectedEventDate)"
                 :key="event.id"
                 class="flex items-center gap-2 text-primary-800 dark:text-primary-200"
               >
-                <i :class="{
-                  'pi pi-users': event.type === 'meeting',
-                  'pi pi-clock': event.type === 'deadline', 
-                  'pi pi-calendar': event.type === 'event'
-                }" />
+                <i
+                  :class="{
+                    'pi pi-users': event.type === 'meeting',
+                    'pi pi-clock': event.type === 'deadline',
+                    'pi pi-calendar': event.type === 'event',
+                  }"
+                />
                 <span>{{ event.title }}</span>
               </div>
             </div>
@@ -521,7 +529,7 @@ function getEventsForDate(date) {
               No events scheduled for this date
             </div>
           </div>
-          
+
           <small class="text-surface-600 dark:text-surface-300">
             Dates with events show a blue dot indicator
           </small>

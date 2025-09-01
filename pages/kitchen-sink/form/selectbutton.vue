@@ -128,8 +128,8 @@ onMounted(async () => {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label class="font-semibold text-surface-900 dark:text-surface-0">Trip Type (Required)</label>
-          <SelectButton 
-            v-model="selectedFormValue" 
+          <SelectButton
+            v-model="selectedFormValue"
             :options="basicOptions"
             :invalid="!selectedFormValue"
           />
@@ -155,9 +155,9 @@ onMounted(async () => {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
           <label class="font-semibold text-surface-900 dark:text-surface-0">Features</label>
-          <SelectButton 
-            v-model="selectedMultiple" 
-            :options="multipleOptions" 
+          <SelectButton
+            v-model="selectedMultiple"
+            :options="multipleOptions"
             option-label="name"
             option-value="value"
             multiple
@@ -182,9 +182,9 @@ onMounted(async () => {
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
             <label class="font-semibold text-surface-900 dark:text-surface-0">Text Alignment</label>
-            <SelectButton 
-              v-model="selectedTemplate" 
-              :options="templateOptions" 
+            <SelectButton
+              v-model="selectedTemplate"
+              :options="templateOptions"
               option-label="value"
               data-key="value"
             >
@@ -201,9 +201,9 @@ onMounted(async () => {
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
             <label class="font-semibold text-surface-900 dark:text-surface-0">View Mode</label>
-            <SelectButton 
-              v-model="selectedView" 
-              :options="viewOptions" 
+            <SelectButton
+              v-model="selectedView"
+              :options="viewOptions"
               option-label="label"
               option-value="value"
               data-key="value"
@@ -263,9 +263,9 @@ onMounted(async () => {
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
             <label class="font-semibold text-surface-900 dark:text-surface-0">Theme Selector</label>
-            <SelectButton 
-              v-model="selectedTheme" 
-              :options="themeOptions" 
+            <SelectButton
+              v-model="selectedTheme"
+              :options="themeOptions"
               option-label="label"
               option-value="value"
               allow-empty
@@ -286,18 +286,20 @@ onMounted(async () => {
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
             <label class="font-semibold text-surface-900 dark:text-surface-0">Priority Level</label>
-            <SelectButton 
-              v-model="selectedValue" 
+            <SelectButton
+              v-model="selectedValue"
               :options="['Low', 'Medium', 'High', 'Critical']"
               class="priority-buttons"
             >
               <template #option="{ option }">
-                <span :class="{
-                  'text-green-600': option === 'Low',
-                  'text-yellow-600': option === 'Medium', 
-                  'text-orange-600': option === 'High',
-                  'text-red-600': option === 'Critical'
-                }">
+                <span
+                  :class="{
+                    'text-green-600': option === 'Low',
+                    'text-yellow-600': option === 'Medium',
+                    'text-orange-600': option === 'High',
+                    'text-red-600': option === 'Critical',
+                  }"
+                >
                   {{ option }}
                 </span>
               </template>
@@ -322,9 +324,11 @@ onMounted(async () => {
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
-            <h3 class="font-semibold text-surface-900 dark:text-surface-0">Invalid</h3>
-            <SelectButton 
-              v-model="selectedInvalid" 
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Invalid
+            </h3>
+            <SelectButton
+              v-model="selectedInvalid"
               :options="basicOptions"
               allow-empty
               :invalid="selectedInvalid === null"
@@ -335,9 +339,11 @@ onMounted(async () => {
 
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
-            <h3 class="font-semibold text-surface-900 dark:text-surface-0">Disabled</h3>
-            <SelectButton 
-              v-model="selectedDisabled" 
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Disabled
+            </h3>
+            <SelectButton
+              v-model="selectedDisabled"
               :options="disabledOptions"
               disabled
             />
@@ -347,9 +353,11 @@ onMounted(async () => {
 
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
-            <h3 class="font-semibold text-surface-900 dark:text-surface-0">Partial Disable</h3>
-            <SelectButton 
-              v-model="selectedValue" 
+            <h3 class="font-semibold text-surface-900 dark:text-surface-0">
+              Partial Disable
+            </h3>
+            <SelectButton
+              v-model="selectedValue"
               :options="partiallyDisabledOptions"
               option-label="name"
               option-value="value"
@@ -376,7 +384,9 @@ onMounted(async () => {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-6">
           <div class="flex items-center gap-2">
-            <h3 class="text-xl font-semibold text-surface-900 dark:text-surface-0">Programming Languages</h3>
+            <h3 class="text-xl font-semibold text-surface-900 dark:text-surface-0">
+              Programming Languages
+            </h3>
             <Tag :value="`${availableLanguages.length} available`" severity="info" />
           </div>
 
@@ -384,8 +394,8 @@ onMounted(async () => {
             <!-- Single Selection -->
             <div class="flex flex-col gap-4">
               <label class="font-semibold text-surface-900 dark:text-surface-0">Primary Language</label>
-              <SelectButton 
-                v-model="selectedValue" 
+              <SelectButton
+                v-model="selectedValue"
                 :options="availableLanguages.slice(0, 3)"
                 option-label="name"
                 option-value="name"
@@ -406,8 +416,8 @@ onMounted(async () => {
             <!-- Multiple Selection -->
             <div class="flex flex-col gap-4">
               <label class="font-semibold text-surface-900 dark:text-surface-0">Known Languages</label>
-              <SelectButton 
-                v-model="selectedLanguages" 
+              <SelectButton
+                v-model="selectedLanguages"
                 :options="availableLanguages"
                 option-label="name"
                 option-value="name"

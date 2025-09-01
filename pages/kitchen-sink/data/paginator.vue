@@ -4,7 +4,7 @@ const basicFirst = ref(0);
 const basicRows = ref(10);
 const basicTotal = ref(120);
 
-// Template example state  
+// Template example state
 const templateFirst = ref(0);
 const templateRows = ref(1);
 const templateTotal = ref(12);
@@ -41,7 +41,7 @@ const allData = ref(Array.from({ length: 50 }, (_, i) => ({
   description: `Description for item ${i + 1}`,
   category: ['Electronics', 'Books', 'Clothing', 'Sports', 'Home'][i % 5],
   price: Math.floor(Math.random() * 500) + 50,
-  status: ['Active', 'Inactive', 'Pending'][i % 3]
+  status: ['Active', 'Inactive', 'Pending'][i % 3],
 })));
 
 // Computed data for current page
@@ -91,7 +91,7 @@ function onHeadlessPageChange(event) {
 function formatCurrency(value) {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD'
+    currency: 'USD',
   }).format(value);
 }
 
@@ -141,11 +141,11 @@ function getSeverity(status) {
           <div class="text-sm text-surface-600 dark:text-surface-300">
             Current state: First = {{ basicFirst }}, Rows = {{ basicRows }}, Total = {{ basicTotal }}
           </div>
-          <Paginator 
+          <Paginator
             v-model:first="basicFirst"
-            :rows="basicRows" 
-            :totalRecords="basicTotal" 
-            :rowsPerPageOptions="[5, 10, 20, 30]"
+            :rows="basicRows"
+            :total-records="basicTotal"
+            :rows-per-page-options="[5, 10, 20, 30]"
             @page="onBasicPageChange"
           />
         </div>
@@ -163,14 +163,14 @@ function getSeverity(status) {
 
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-4">
-          <Paginator 
-            v-model:first="templateFirst" 
-            :rows="templateRows" 
-            :totalRecords="templateTotal" 
+          <Paginator
+            v-model:first="templateFirst"
+            :rows="templateRows"
+            :total-records="templateTotal"
             template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
             @page="onTemplatePageChange"
           />
-          
+
           <div class="p-4 text-center border border-surface-200 dark:border-surface-700 rounded-lg">
             <div class="flex items-center justify-center w-full h-48 bg-surface-100 dark:bg-surface-700 rounded-lg">
               <div class="text-center">
@@ -198,11 +198,13 @@ function getSeverity(status) {
         <div class="flex flex-col gap-6">
           <!-- Default Report -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">Default Report Template</h4>
-            <Paginator 
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">
+              Default Report Template
+            </h4>
+            <Paginator
               v-model:first="reportFirst"
-              :rows="reportRows" 
-              :totalRecords="reportTotal" 
+              :rows="reportRows"
+              :total-records="reportTotal"
               template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
               @page="onReportPageChange"
             />
@@ -210,26 +212,30 @@ function getSeverity(status) {
 
           <!-- Custom Report -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">Custom Report Template</h4>
-            <Paginator 
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">
+              Custom Report Template
+            </h4>
+            <Paginator
               v-model:first="reportFirst"
-              :rows="reportRows" 
-              :totalRecords="reportTotal" 
+              :rows="reportRows"
+              :total-records="reportTotal"
               template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
-              currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+              current-page-report-template="Showing {first} to {last} of {totalRecords}"
               @page="onReportPageChange"
             />
           </div>
 
           <!-- Extended Report -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">Extended Report Template</h4>
-            <Paginator 
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">
+              Extended Report Template
+            </h4>
+            <Paginator
               v-model:first="reportFirst"
-              :rows="reportRows" 
-              :totalRecords="reportTotal" 
+              :rows="reportRows"
+              :total-records="reportTotal"
               template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
-              currentPageReportTemplate="Page {currentPage} of {totalPages} | {first}-{last} of {totalRecords} records | {rows} per page"
+              current-page-report-template="Page {currentPage} of {totalPages} | {first}-{last} of {totalRecords} records | {rows} per page"
               @page="onReportPageChange"
             />
           </div>
@@ -257,17 +263,17 @@ function getSeverity(status) {
               <li>Large (>1300px): Full template with Jump controls</li>
             </ul>
           </div>
-          
+
           <Paginator
             v-model:first="responsiveFirst"
             :template="{
               '640px': 'PrevPageLink CurrentPageReport NextPageLink',
               '960px': 'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
               '1300px': 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink',
-              default: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink JumpToPageDropdown JumpToPageInput'
+              'default': 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink JumpToPageDropdown JumpToPageInput',
             }"
             :rows="responsiveRows"
-            :totalRecords="responsiveTotal"
+            :total-records="responsiveTotal"
             @page="onResponsivePageChange"
           />
         </div>
@@ -284,11 +290,11 @@ function getSeverity(status) {
       </p>
 
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
-        <Paginator 
+        <Paginator
           v-model:first="customFirst"
-          :rows="customRows" 
-          :totalRecords="customTotal" 
-          :rowsPerPageOptions="[5, 10, 20, 30]"
+          :rows="customRows"
+          :total-records="customTotal"
+          :rows-per-page-options="[5, 10, 20, 30]"
           @page="onCustomPageChange"
         >
           <template #start="slotProps">
@@ -322,32 +328,34 @@ function getSeverity(status) {
         <div class="flex flex-col gap-6">
           <!-- Custom Rounded Design -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">Custom Rounded Design</h4>
-            <Paginator 
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">
+              Custom Rounded Design
+            </h4>
+            <Paginator
               v-model:first="headlessFirst"
-              :rows="headlessRows" 
-              :totalRecords="headlessTotal"
+              :rows="headlessRows"
+              :total-records="headlessTotal"
               @page="onHeadlessPageChange"
             >
               <template #container="{ first, last, page, pageCount, prevPageCallback, nextPageCallback, totalRecords }">
                 <div class="flex items-center gap-4 border border-primary bg-transparent rounded-full w-full py-1 px-2 justify-between">
-                  <Button 
-                    icon="pi pi-chevron-left" 
-                    rounded 
-                    variant="text" 
-                    @click="prevPageCallback" 
-                    :disabled="page === 0" 
+                  <Button
+                    icon="pi pi-chevron-left"
+                    rounded
+                    variant="text"
+                    :disabled="page === 0"
+                    @click="prevPageCallback"
                   />
                   <div class="text-color font-medium">
                     <span class="hidden sm:block">Showing {{ first + 1 }} to {{ last }} of {{ totalRecords }}</span>
                     <span class="block sm:hidden">Page {{ page + 1 }} of {{ pageCount }}</span>
                   </div>
-                  <Button 
-                    icon="pi pi-chevron-right" 
-                    rounded 
-                    variant="text" 
-                    @click="nextPageCallback" 
-                    :disabled="page === pageCount - 1" 
+                  <Button
+                    icon="pi pi-chevron-right"
+                    rounded
+                    variant="text"
+                    :disabled="page === pageCount - 1"
+                    @click="nextPageCallback"
                   />
                 </div>
               </template>
@@ -356,14 +364,16 @@ function getSeverity(status) {
 
           <!-- Card Style Design -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">Card Style Design</h4>
-            <Paginator 
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">
+              Card Style Design
+            </h4>
+            <Paginator
               v-model:first="headlessFirst"
-              :rows="headlessRows" 
-              :totalRecords="headlessTotal"
+              :rows="headlessRows"
+              :total-records="headlessTotal"
               @page="onHeadlessPageChange"
             >
-              <template #container="{ first, last, page, pageCount, prevPageCallback, nextPageCallback, firstPageCallback, lastPageCallback, totalRecords }">
+              <template #container="{ first, page, pageCount, prevPageCallback, nextPageCallback, firstPageCallback, lastPageCallback, totalRecords }">
                 <div class="bg-surface-50 dark:bg-surface-800 rounded-lg p-4">
                   <div class="flex items-center justify-between mb-3">
                     <div class="text-sm font-medium text-surface-900 dark:text-surface-0">
@@ -374,36 +384,36 @@ function getSeverity(status) {
                     </div>
                   </div>
                   <div class="flex items-center justify-center gap-2">
-                    <Button 
-                      icon="pi pi-angle-double-left" 
-                      variant="outlined" 
+                    <Button
+                      icon="pi pi-angle-double-left"
+                      variant="outlined"
                       size="small"
-                      @click="firstPageCallback" 
-                      :disabled="page === 0" 
+                      :disabled="page === 0"
+                      @click="firstPageCallback"
                     />
-                    <Button 
-                      icon="pi pi-angle-left" 
-                      variant="outlined" 
+                    <Button
+                      icon="pi pi-angle-left"
+                      variant="outlined"
                       size="small"
-                      @click="prevPageCallback" 
-                      :disabled="page === 0" 
+                      :disabled="page === 0"
+                      @click="prevPageCallback"
                     />
                     <div class="px-4 py-2 bg-primary text-primary-contrast rounded font-medium text-sm">
                       {{ page + 1 }}
                     </div>
-                    <Button 
-                      icon="pi pi-angle-right" 
-                      variant="outlined" 
+                    <Button
+                      icon="pi pi-angle-right"
+                      variant="outlined"
                       size="small"
-                      @click="nextPageCallback" 
-                      :disabled="page === pageCount - 1" 
+                      :disabled="page === pageCount - 1"
+                      @click="nextPageCallback"
                     />
-                    <Button 
-                      icon="pi pi-angle-double-right" 
-                      variant="outlined" 
+                    <Button
+                      icon="pi pi-angle-double-right"
+                      variant="outlined"
                       size="small"
-                      @click="lastPageCallback" 
-                      :disabled="page === pageCount - 1" 
+                      :disabled="page === pageCount - 1"
+                      @click="lastPageCallback"
                     />
                   </div>
                   <div class="flex items-center justify-center mt-3">
@@ -435,8 +445,8 @@ function getSeverity(status) {
         <div class="flex flex-col gap-6">
           <!-- Data Display -->
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            <div 
-              v-for="item in currentPageData" 
+            <div
+              v-for="item in currentPageData"
               :key="item.id"
               class="p-4 border border-surface-200 dark:border-surface-700 rounded-lg bg-surface-0 dark:bg-surface-900"
             >
@@ -462,13 +472,13 @@ function getSeverity(status) {
 
           <!-- Paginator -->
           <div class="border-t border-surface-200 dark:border-surface-700 pt-4">
-            <Paginator 
+            <Paginator
               v-model:first="dataFirst"
-              :rows="dataRows" 
-              :totalRecords="dataTotal" 
-              :rowsPerPageOptions="[5, 10, 15, 20]"
+              :rows="dataRows"
+              :total-records="dataTotal"
+              :rows-per-page-options="[5, 10, 15, 20]"
               template="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
-              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} items"
+              current-page-report-template="Showing {first} to {last} of {totalRecords} items"
               @page="onPageChange"
             />
           </div>
@@ -476,20 +486,36 @@ function getSeverity(status) {
           <!-- Statistics -->
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-surface-200 dark:border-surface-700">
             <div class="text-center p-3 bg-surface-50 dark:bg-surface-800 rounded-lg">
-              <div class="text-lg font-bold text-surface-900 dark:text-surface-0">{{ dataTotal }}</div>
-              <div class="text-xs text-surface-600 dark:text-surface-300">Total Items</div>
+              <div class="text-lg font-bold text-surface-900 dark:text-surface-0">
+                {{ dataTotal }}
+              </div>
+              <div class="text-xs text-surface-600 dark:text-surface-300">
+                Total Items
+              </div>
             </div>
             <div class="text-center p-3 bg-surface-50 dark:bg-surface-800 rounded-lg">
-              <div class="text-lg font-bold text-surface-900 dark:text-surface-0">{{ Math.ceil(dataTotal / dataRows) }}</div>
-              <div class="text-xs text-surface-600 dark:text-surface-300">Total Pages</div>
+              <div class="text-lg font-bold text-surface-900 dark:text-surface-0">
+                {{ Math.ceil(dataTotal / dataRows) }}
+              </div>
+              <div class="text-xs text-surface-600 dark:text-surface-300">
+                Total Pages
+              </div>
             </div>
             <div class="text-center p-3 bg-surface-50 dark:bg-surface-800 rounded-lg">
-              <div class="text-lg font-bold text-surface-900 dark:text-surface-0">{{ Math.floor(dataFirst / dataRows) + 1 }}</div>
-              <div class="text-xs text-surface-600 dark:text-surface-300">Current Page</div>
+              <div class="text-lg font-bold text-surface-900 dark:text-surface-0">
+                {{ Math.floor(dataFirst / dataRows) + 1 }}
+              </div>
+              <div class="text-xs text-surface-600 dark:text-surface-300">
+                Current Page
+              </div>
             </div>
             <div class="text-center p-3 bg-surface-50 dark:bg-surface-800 rounded-lg">
-              <div class="text-lg font-bold text-surface-900 dark:text-surface-0">{{ dataRows }}</div>
-              <div class="text-xs text-surface-600 dark:text-surface-300">Items Per Page</div>
+              <div class="text-lg font-bold text-surface-900 dark:text-surface-0">
+                {{ dataRows }}
+              </div>
+              <div class="text-xs text-surface-600 dark:text-surface-300">
+                Items Per Page
+              </div>
             </div>
           </div>
         </div>
@@ -508,7 +534,9 @@ function getSeverity(status) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">Navigation Elements</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">
+              Navigation Elements
+            </h4>
             <ul class="space-y-2 text-sm">
               <li class="flex items-center gap-2">
                 <code class="px-2 py-1 bg-surface-100 dark:bg-surface-800 rounded text-xs">FirstPageLink</code>
@@ -532,9 +560,11 @@ function getSeverity(status) {
               </li>
             </ul>
           </div>
-          
+
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">Control Elements</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">
+              Control Elements
+            </h4>
             <ul class="space-y-2 text-sm">
               <li class="flex items-center gap-2">
                 <code class="px-2 py-1 bg-surface-100 dark:bg-surface-800 rounded text-xs">RowsPerPageDropdown</code>
@@ -557,7 +587,9 @@ function getSeverity(status) {
         </div>
 
         <div class="mt-6 p-4 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 rounded-lg">
-          <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">Default Template</h5>
+          <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">
+            Default Template
+          </h5>
           <code class="text-sm text-blue-800 dark:text-blue-200">
             "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
           </code>

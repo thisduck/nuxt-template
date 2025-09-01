@@ -8,7 +8,7 @@ const basicProducts = ref([
   { code: 'P002', name: 'Bluetooth Speaker', category: 'Electronics', quantity: 23, price: 89.99, status: 'Low Stock' },
   { code: 'P003', name: 'USB-C Cable', category: 'Accessories', quantity: 156, price: 19.99, status: 'In Stock' },
   { code: 'P004', name: 'Laptop Stand', category: 'Accessories', quantity: 67, price: 49.99, status: 'In Stock' },
-  { code: 'P005', name: 'Mechanical Keyboard', category: 'Electronics', quantity: 12, price: 199.99, status: 'Low Stock' }
+  { code: 'P005', name: 'Mechanical Keyboard', category: 'Electronics', quantity: 12, price: 199.99, status: 'Low Stock' },
 ]);
 
 // Dynamic columns
@@ -16,58 +16,58 @@ const dynamicColumns = ref([
   { field: 'code', header: 'Product Code' },
   { field: 'name', header: 'Product Name' },
   { field: 'category', header: 'Category' },
-  { field: 'quantity', header: 'Stock' }
+  { field: 'quantity', header: 'Stock' },
 ]);
 
 // Template products with more data
 const templateProducts = ref([
-  { 
-    id: 1, 
-    name: 'iPhone 15 Pro', 
+  {
+    id: 1,
+    name: 'iPhone 15 Pro',
     image: 'iphone-15-pro.jpg',
-    price: 999, 
-    category: 'Smartphone', 
-    rating: 4.8, 
+    price: 999,
+    category: 'Smartphone',
+    rating: 4.8,
     inventoryStatus: 'In Stock',
-    description: 'Latest iPhone with advanced camera system'
+    description: 'Latest iPhone with advanced camera system',
   },
-  { 
-    id: 2, 
-    name: 'MacBook Pro', 
+  {
+    id: 2,
+    name: 'MacBook Pro',
     image: 'macbook-pro.jpg',
-    price: 2499, 
-    category: 'Laptop', 
-    rating: 4.9, 
+    price: 2499,
+    category: 'Laptop',
+    rating: 4.9,
     inventoryStatus: 'In Stock',
-    description: 'Powerful laptop for professional work'
+    description: 'Powerful laptop for professional work',
   },
-  { 
-    id: 3, 
-    name: 'AirPods Pro', 
+  {
+    id: 3,
+    name: 'AirPods Pro',
     image: 'airpods-pro.jpg',
-    price: 249, 
-    category: 'Audio', 
-    rating: 4.5, 
+    price: 249,
+    category: 'Audio',
+    rating: 4.5,
     inventoryStatus: 'Low Stock',
-    description: 'Noise-cancelling wireless earbuds'
+    description: 'Noise-cancelling wireless earbuds',
   },
-  { 
-    id: 4, 
-    name: 'iPad Air', 
+  {
+    id: 4,
+    name: 'iPad Air',
     image: 'ipad-air.jpg',
-    price: 599, 
-    category: 'Tablet', 
-    rating: 4.6, 
+    price: 599,
+    category: 'Tablet',
+    rating: 4.6,
     inventoryStatus: 'Out of Stock',
-    description: 'Versatile tablet for creativity'
-  }
+    description: 'Versatile tablet for creativity',
+  },
 ]);
 
 // Size options
 const sizeOptions = ref([
   { label: 'Small', value: 'small' },
   { label: 'Normal', value: null },
-  { label: 'Large', value: 'large' }
+  { label: 'Large', value: 'large' },
 ]);
 const selectedSize = ref({ label: 'Normal', value: null });
 
@@ -81,7 +81,7 @@ const filters = ref({
   name: { value: null, matchMode: 'contains' },
   category: { value: null, matchMode: 'contains' },
   status: { value: null, matchMode: 'equals' },
-  price: { value: null, matchMode: 'equals' }
+  price: { value: null, matchMode: 'equals' },
 });
 
 // Safe access to global filter
@@ -91,10 +91,10 @@ const globalFilterValue = computed({
     if (filters.value?.global) {
       filters.value.global.value = value;
     }
-  }
+  },
 });
 
-const statuses = ['In Stock', 'Low Stock', 'Out of Stock'];
+const _statuses = ['In Stock', 'Low Stock', 'Out of Stock'];
 
 // Selection
 const selectedProduct = ref(null);
@@ -114,8 +114,8 @@ const expandedProducts = ref([
     inventoryStatus: 'In Stock',
     orders: [
       { id: 'ORD-001', customer: 'John Doe', date: '2024-01-15', status: 'Delivered', amount: 999 },
-      { id: 'ORD-002', customer: 'Jane Smith', date: '2024-01-20', status: 'Processing', amount: 1998 }
-    ]
+      { id: 'ORD-002', customer: 'Jane Smith', date: '2024-01-20', status: 'Processing', amount: 1998 },
+    ],
   },
   {
     id: 2,
@@ -126,9 +126,9 @@ const expandedProducts = ref([
     rating: 4.9,
     inventoryStatus: 'In Stock',
     orders: [
-      { id: 'ORD-003', customer: 'Bob Johnson', date: '2024-01-18', status: 'Shipped', amount: 2499 }
-    ]
-  }
+      { id: 'ORD-003', customer: 'Bob Johnson', date: '2024-01-18', status: 'Shipped', amount: 2499 },
+    ],
+  },
 ]);
 
 // Editing
@@ -155,7 +155,7 @@ const searchQuery = ref('');
 function formatCurrency(value) {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD'
+    currency: 'USD',
   }).format(value);
 }
 
@@ -173,26 +173,26 @@ function getSeverityForInventory(product) {
 }
 
 // Row selection handlers
-function onRowSelect(event) {
-  console.log('Row selected:', event.data);
+function onRowSelect(_event) {
+  // Row selected: _event.data
 }
 
-function onRowUnselect(event) {
-  console.log('Row unselected:', event.data);
+function onRowUnselect(_event) {
+  // Row unselected: _event.data
 }
 
-function selectRow(data) {
+function _selectRow(data) {
   selectedProduct.value = data;
-  console.log('Selected product:', data);
+  // Selected product: data
 }
 
 // Row expansion handlers
-function onRowExpand(event) {
-  console.log('Row expanded:', event.data.name);
+function onRowExpand(_event) {
+  // Row expanded: _event.data.name
 }
 
-function onRowCollapse(event) {
-  console.log('Row collapsed:', event.data.name);
+function onRowCollapse(_event) {
+  // Row collapsed: _event.data.name
 }
 
 function expandAll() {
@@ -210,21 +210,21 @@ function collapseAll() {
 function onRowEditSave(event) {
   const { newData, index } = event;
   templateProducts.value[index] = newData;
-  console.log('Product updated:', newData);
+  // Product updated: newData
 }
 
-function onRowEditCancel(event) {
-  console.log('Edit cancelled for:', event.data.name);
+function onRowEditCancel(_event) {
+  // Edit cancelled for: _event.data.name
 }
 
 // Clear filter
-function clearFilter() {
+function _clearFilter() {
   filters.value = {
     global: { value: null, matchMode: 'contains' },
     name: { value: null, matchMode: 'contains' },
     category: { value: null, matchMode: 'contains' },
     status: { value: null, matchMode: 'equals' },
-    price: { value: null, matchMode: 'equals' }
+    price: { value: null, matchMode: 'equals' },
   };
 }
 
@@ -232,21 +232,21 @@ function clearFilter() {
 async function loadApiProducts() {
   isLoadingApi.value = true;
   lastApiAction.value = 'Loading products...';
-  
+
   try {
     const result = await $trpc.getFilteredProducts.query({
       filter: searchQuery.value || undefined,
       page: currentPage.value,
       size: pageSize.value,
       sortField: sortField.value || undefined,
-      sortOrder: sortOrder.value || undefined
+      sortOrder: sortOrder.value || undefined,
     });
-    
+
     apiProducts.value = result.data.map(product => ({
       ...product,
-      status: product.stock > 50 ? 'In Stock' : product.stock > 20 ? 'Low Stock' : 'Out of Stock'
+      status: product.stock > 50 ? 'In Stock' : product.stock > 20 ? 'Low Stock' : 'Out of Stock',
     }));
-    
+
     totalRecords.value = result.totalRecords;
     lastApiAction.value = `Loaded ${result.data.length} of ${result.totalRecords} products (Page ${result.page + 1})`;
   } catch (error) {
@@ -284,7 +284,7 @@ function onSearch() {
 async function addNewProduct() {
   isLoadingApi.value = true;
   lastApiAction.value = 'Adding new product...';
-  
+
   try {
     // Simulate adding a product
     await new Promise(resolve => setTimeout(resolve, 1000));
@@ -294,7 +294,7 @@ async function addNewProduct() {
       category: 'Electronics',
       price: Math.floor(Math.random() * 500) + 100,
       stock: Math.floor(Math.random() * 200) + 10,
-      status: 'In Stock'
+      status: 'In Stock',
     };
     apiProducts.value.unshift(newProduct);
     lastApiAction.value = 'Product added successfully';
@@ -308,7 +308,7 @@ async function addNewProduct() {
 // Load data on mount
 onMounted(async () => {
   await loadApiProducts();
-  
+
   // Load pagination customers
   setTimeout(() => {
     paginationCustomers.value = Array.from({ length: 50 }, (_, i) => ({
@@ -317,7 +317,7 @@ onMounted(async () => {
       country: { name: ['USA', 'Canada', 'UK', 'Germany', 'France'][i % 5] },
       company: `Company ${i + 1}`,
       representative: { name: `Rep ${i % 10 + 1}` },
-      status: ['Active', 'Inactive', 'Pending'][i % 3]
+      status: ['Active', 'Inactive', 'Pending'][i % 3],
     }));
     isLoadingCustomers.value = false;
   }, 1000);
@@ -394,37 +394,37 @@ onMounted(async () => {
               <Button icon="pi pi-refresh" rounded raised @click="() => {}" />
             </div>
           </template>
-          
+
           <Column field="name" header="Name" />
-          
+
           <Column header="Image">
-            <template #body="slotProps">
+            <template #body>
               <div class="flex items-center justify-center w-16 h-16 bg-surface-100 dark:bg-surface-700 rounded-lg">
                 <i class="pi pi-image text-2xl text-surface-400" />
               </div>
             </template>
           </Column>
-          
+
           <Column field="price" header="Price">
             <template #body="slotProps">
               {{ formatCurrency(slotProps.data.price) }}
             </template>
           </Column>
-          
+
           <Column field="category" header="Category" />
-          
+
           <Column field="rating" header="Reviews">
             <template #body="slotProps">
               <Rating :model-value="slotProps.data.rating" readonly />
             </template>
           </Column>
-          
+
           <Column header="Status">
             <template #body="slotProps">
               <Tag :value="slotProps.data.inventoryStatus" :severity="getSeverityForInventory(slotProps.data)" />
             </template>
           </Column>
-          
+
           <template #footer>
             In total there are {{ templateProducts ? templateProducts.length : 0 }} products.
           </template>
@@ -447,7 +447,7 @@ onMounted(async () => {
             <label class="font-semibold">Size:</label>
             <SelectButton v-model="selectedSize" :options="sizeOptions" option-label="label" />
           </div>
-          
+
           <DataTable :value="basicProducts" :size="selectedSize.value" table-style="min-width: 50rem">
             <Column field="code" header="Code" />
             <Column field="name" header="Name" />
@@ -509,12 +509,14 @@ onMounted(async () => {
         <div class="flex flex-col gap-6">
           <!-- Basic Pagination -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">Basic Pagination</h4>
-            <DataTable 
-              :value="paginationCustomers" 
-              paginator 
-              :rows="5" 
-              :rows-per-page-options="[5, 10, 20, 50]" 
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">
+              Basic Pagination
+            </h4>
+            <DataTable
+              :value="paginationCustomers"
+              paginator
+              :rows="5"
+              :rows-per-page-options="[5, 10, 20, 50]"
               table-style="min-width: 50rem"
               :loading="isLoadingCustomers"
             >
@@ -527,12 +529,14 @@ onMounted(async () => {
 
           <!-- Custom Paginator Template -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">Custom Paginator Template</h4>
-            <DataTable 
-              :value="paginationCustomers" 
-              paginator 
-              :rows="5" 
-              :rows-per-page-options="[5, 10, 20, 50]" 
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">
+              Custom Paginator Template
+            </h4>
+            <DataTable
+              :value="paginationCustomers"
+              paginator
+              :rows="5"
+              :rows-per-page-options="[5, 10, 20, 50]"
               table-style="min-width: 50rem"
               paginator-template="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
               current-page-report-template="{first} to {last} of {totalRecords}"
@@ -543,7 +547,7 @@ onMounted(async () => {
               <template #paginatorend>
                 <Button type="button" icon="pi pi-download" text />
               </template>
-              
+
               <Column field="name" header="Name" style="width: 25%" />
               <Column field="country.name" header="Country" style="width: 25%" />
               <Column field="company" header="Company" style="width: 25%" />
@@ -567,7 +571,9 @@ onMounted(async () => {
         <div class="flex flex-col gap-6">
           <!-- Single Column Sorting -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">Single Column Sorting</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">
+              Single Column Sorting
+            </h4>
             <DataTable :value="basicProducts" table-style="min-width: 50rem">
               <Column field="code" header="Code" sortable style="width: 25%" />
               <Column field="name" header="Name" sortable style="width: 25%" />
@@ -578,7 +584,9 @@ onMounted(async () => {
 
           <!-- Multiple Column Sorting -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">Multiple Column Sorting (Hold Cmd/Ctrl)</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">
+              Multiple Column Sorting (Hold Cmd/Ctrl)
+            </h4>
             <DataTable :value="basicProducts" sort-mode="multiple" table-style="min-width: 50rem">
               <Column field="code" header="Code" sortable style="width: 25%" />
               <Column field="name" header="Name" sortable style="width: 25%" />
@@ -589,7 +597,9 @@ onMounted(async () => {
 
           <!-- Removable Sort -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">Removable Sort (Third click removes sort)</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">
+              Removable Sort (Third click removes sort)
+            </h4>
             <DataTable :value="basicProducts" removable-sort table-style="min-width: 50rem">
               <Column field="code" header="Code" sortable style="width: 25%" />
               <Column field="name" header="Name" sortable style="width: 25%" />
@@ -611,12 +621,12 @@ onMounted(async () => {
       </p>
 
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
-        <DataTable 
-          v-model:filters="filters" 
-          :value="basicProducts" 
-          paginator 
-          :rows="10" 
-          data-key="code" 
+        <DataTable
+          v-model:filters="filters"
+          :value="basicProducts"
+          paginator
+          :rows="10"
+          data-key="code"
           :global-filter-fields="['name', 'category', 'code']"
         >
           <template #header>
@@ -627,11 +637,11 @@ onMounted(async () => {
               </div>
             </div>
           </template>
-          
+
           <template #empty>
             No products found.
           </template>
-          
+
           <Column field="code" header="Code" style="min-width: 12rem" />
           <Column field="name" header="Name" style="min-width: 12rem" />
           <Column field="category" header="Category" style="min-width: 12rem" />
@@ -657,17 +667,19 @@ onMounted(async () => {
         <div class="flex flex-col gap-6">
           <!-- Single Selection -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">Single Selection</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">
+              Single Selection
+            </h4>
             <div class="flex items-center gap-3 mb-3">
               <label>Meta Key Selection:</label>
               <ToggleSwitch v-model="metaKeySelection" input-id="meta-key" />
             </div>
-            <DataTable 
-              v-model:selection="selectedProduct" 
-              :value="basicProducts" 
-              selection-mode="single" 
+            <DataTable
+              v-model:selection="selectedProduct"
+              :value="basicProducts"
+              selection-mode="single"
               :meta-key-selection="metaKeySelection"
-              data-key="code" 
+              data-key="code"
               table-style="min-width: 50rem"
               @row-select="onRowSelect"
               @row-unselect="onRowUnselect"
@@ -677,7 +689,7 @@ onMounted(async () => {
               <Column field="category" header="Category" />
               <Column field="quantity" header="Quantity" />
             </DataTable>
-            
+
             <div v-if="selectedProduct" class="mt-3 p-3 bg-blue-50 dark:bg-blue-500/10 rounded-lg">
               <small class="text-blue-800 dark:text-blue-200">
                 <strong>Selected:</strong> {{ selectedProduct.name }} ({{ selectedProduct.code }})
@@ -687,12 +699,14 @@ onMounted(async () => {
 
           <!-- Multiple Selection -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">Multiple Selection</h4>
-            <DataTable 
-              v-model:selection="selectedProducts" 
-              :value="basicProducts" 
-              selection-mode="multiple" 
-              data-key="code" 
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">
+              Multiple Selection
+            </h4>
+            <DataTable
+              v-model:selection="selectedProducts"
+              :value="basicProducts"
+              selection-mode="multiple"
+              data-key="code"
               table-style="min-width: 50rem"
             >
               <Column field="code" header="Code" />
@@ -700,7 +714,7 @@ onMounted(async () => {
               <Column field="category" header="Category" />
               <Column field="quantity" header="Quantity" />
             </DataTable>
-            
+
             <div v-if="selectedProducts.length > 0" class="mt-3 p-3 bg-green-50 dark:bg-green-500/10 rounded-lg">
               <small class="text-green-800 dark:text-green-200">
                 <strong>Selected:</strong> {{ selectedProducts.length }} products
@@ -710,11 +724,13 @@ onMounted(async () => {
 
           <!-- Checkbox Selection -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">Checkbox Selection</h4>
-            <DataTable 
-              v-model:selection="selectedProducts" 
-              :value="basicProducts" 
-              data-key="code" 
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-3">
+              Checkbox Selection
+            </h4>
+            <DataTable
+              v-model:selection="selectedProducts"
+              :value="basicProducts"
+              data-key="code"
               table-style="min-width: 50rem"
             >
               <Column selection-mode="multiple" header-style="width: 3rem" />
@@ -738,13 +754,13 @@ onMounted(async () => {
       </p>
 
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
-        <DataTable 
-          v-model:expanded-rows="expandedRows" 
-          :value="expandedProducts" 
+        <DataTable
+          v-model:expanded-rows="expandedRows"
+          :value="expandedProducts"
           data-key="id"
-          @row-expand="onRowExpand" 
-          @row-collapse="onRowCollapse" 
           table-style="min-width: 60rem"
+          @row-expand="onRowExpand"
+          @row-collapse="onRowCollapse"
         >
           <template #header>
             <div class="flex flex-wrap justify-end gap-2">
@@ -752,41 +768,43 @@ onMounted(async () => {
               <Button variant="text" icon="pi pi-minus" label="Collapse All" @click="collapseAll" />
             </div>
           </template>
-          
+
           <Column expander style="width: 5rem" />
           <Column field="name" header="Name" />
-          
+
           <Column header="Image">
-            <template #body="slotProps">
+            <template #body>
               <div class="flex items-center justify-center w-16 h-16 bg-surface-100 dark:bg-surface-700 rounded-lg">
                 <i class="pi pi-image text-2xl text-surface-400" />
               </div>
             </template>
           </Column>
-          
+
           <Column field="price" header="Price">
             <template #body="slotProps">
               {{ formatCurrency(slotProps.data.price) }}
             </template>
           </Column>
-          
+
           <Column field="category" header="Category" />
-          
+
           <Column field="rating" header="Reviews">
             <template #body="slotProps">
               <Rating :model-value="slotProps.data.rating" readonly />
             </template>
           </Column>
-          
+
           <Column header="Status">
             <template #body="slotProps">
               <Tag :value="slotProps.data.inventoryStatus" :severity="getSeverityForInventory(slotProps.data)" />
             </template>
           </Column>
-          
+
           <template #expansion="slotProps">
             <div class="p-4">
-              <h5 class="font-semibold mb-3">Orders for {{ slotProps.data.name }}</h5>
+              <h5 class="font-semibold mb-3">
+                Orders for {{ slotProps.data.name }}
+              </h5>
               <DataTable :value="slotProps.data.orders">
                 <Column field="id" header="Order ID" sortable />
                 <Column field="customer" header="Customer" sortable />
@@ -818,20 +836,20 @@ onMounted(async () => {
       </p>
 
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
-        <DataTable 
-          :value="templateProducts" 
-          edit-mode="row" 
+        <DataTable
           v-model:editing-rows="editingRows"
+          :value="templateProducts"
+          edit-mode="row"
+          table-style="min-width: 50rem"
           @row-edit-save="onRowEditSave"
           @row-edit-cancel="onRowEditCancel"
-          table-style="min-width: 50rem"
         >
           <Column field="name" header="Name">
             <template #editor="{ data, field }">
               <InputText v-model="data[field]" autofocus />
             </template>
           </Column>
-          
+
           <Column field="price" header="Price">
             <template #body="{ data }">
               {{ formatCurrency(data.price) }}
@@ -840,13 +858,13 @@ onMounted(async () => {
               <InputNumber v-model="data[field]" mode="currency" currency="USD" locale="en-US" autofocus />
             </template>
           </Column>
-          
+
           <Column field="category" header="Category">
             <template #editor="{ data, field }">
               <Select v-model="data[field]" :options="['Smartphone', 'Laptop', 'Audio', 'Tablet']" placeholder="Select Category" />
             </template>
           </Column>
-          
+
           <Column field="rating" header="Rating">
             <template #body="{ data }">
               <Rating :model-value="data.rating" readonly />
@@ -855,7 +873,7 @@ onMounted(async () => {
               <Rating v-model="data[field]" />
             </template>
           </Column>
-          
+
           <Column :row-editor="true" style="width: 10%; min-width: 8rem" body-style="text-center" />
         </DataTable>
       </div>
@@ -878,25 +896,27 @@ onMounted(async () => {
           <!-- Actions -->
           <div class="flex flex-wrap items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-              <h4 class="font-semibold text-surface-900 dark:text-surface-0">Product Management</h4>
+              <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+                Product Management
+              </h4>
               <div v-if="isLoadingApi" class="flex items-center gap-2">
                 <i class="pi pi-spin pi-spinner text-primary-500" />
                 <span class="text-sm text-primary-600">Loading...</span>
               </div>
             </div>
             <div class="flex gap-2">
-              <Button 
-                icon="pi pi-refresh" 
-                label="Refresh" 
-                severity="secondary" 
+              <Button
+                icon="pi pi-refresh"
+                label="Refresh"
+                severity="secondary"
+                :loading="isLoadingApi"
                 @click="refreshApiProducts"
-                :loading="isLoadingApi"
               />
-              <Button 
-                icon="pi pi-plus" 
-                label="Add Product" 
-                @click="addNewProduct"
+              <Button
+                icon="pi pi-plus"
+                label="Add Product"
                 :loading="isLoadingApi"
+                @click="addNewProduct"
               />
             </div>
           </div>
@@ -905,32 +925,32 @@ onMounted(async () => {
           <div class="flex items-center gap-3 mb-4">
             <div class="relative flex-1 max-w-sm">
               <i class="pi pi-search absolute left-3 top-1/2 transform -translate-y-1/2 text-surface-400" />
-              <InputText 
-                v-model="searchQuery" 
-                placeholder="Search products..." 
+              <InputText
+                v-model="searchQuery"
+                placeholder="Search products..."
                 class="pl-10 w-full"
                 @keyup.enter="onSearch"
               />
             </div>
-            <Button 
-              icon="pi pi-search" 
-              label="Search" 
+            <Button
+              icon="pi pi-search"
+              label="Search"
               @click="onSearch"
             />
-            <Button 
-              icon="pi pi-times" 
-              label="Clear" 
-              severity="secondary" 
+            <Button
+              icon="pi pi-times"
+              label="Clear"
+              severity="secondary"
               @click="() => { searchQuery = ''; onSearch(); }"
             />
           </div>
 
           <!-- API DataTable with Server-side Operations -->
-          <DataTable 
-            :value="apiProducts" 
+          <DataTable
+            :value="apiProducts"
             lazy
-            paginator 
-            :rows="pageSize" 
+            paginator
+            :rows="pageSize"
             :total-records="totalRecords"
             :loading="isLoadingApi"
             table-style="min-width: 50rem"
@@ -943,38 +963,40 @@ onMounted(async () => {
             <template #loading>
               Loading product data. Please wait.
             </template>
-            
+
             <template #empty>
               <div class="text-center py-8">
                 <i class="pi pi-inbox text-4xl text-surface-400 mb-4" />
-                <p class="text-surface-500">No products found.</p>
-                <Button label="Add First Product" icon="pi pi-plus" @click="addNewProduct" class="mt-3" />
+                <p class="text-surface-500">
+                  No products found.
+                </p>
+                <Button label="Add First Product" icon="pi pi-plus" class="mt-3" @click="addNewProduct" />
               </div>
             </template>
 
             <Column field="id" header="ID" sortable style="width: 8rem" />
             <Column field="name" header="Product Name" sortable />
             <Column field="category" header="Category" sortable />
-            
+
             <Column field="price" header="Price" sortable>
               <template #body="{ data }">
                 {{ formatCurrency(data.price) }}
               </template>
             </Column>
-            
+
             <Column field="stock" header="Stock" sortable>
               <template #body="{ data }">
                 <div class="flex items-center gap-2">
                   <span>{{ data.stock }}</span>
-                  <Tag 
-                    :value="data.stock > 50 ? 'High' : data.stock > 20 ? 'Medium' : 'Low'" 
+                  <Tag
+                    :value="data.stock > 50 ? 'High' : data.stock > 20 ? 'Medium' : 'Low'"
                     :severity="data.stock > 50 ? 'success' : data.stock > 20 ? 'warn' : 'danger'"
                     size="small"
                   />
                 </div>
               </template>
             </Column>
-            
+
             <Column field="status" header="Status">
               <template #body="{ data }">
                 <Tag :value="data.status" :severity="getSeverity(data.status)" />
@@ -982,7 +1004,7 @@ onMounted(async () => {
             </Column>
 
             <Column header="Actions" style="width: 10rem">
-              <template #body="{ data }">
+              <template #body>
                 <div class="flex gap-2">
                   <Button icon="pi pi-pencil" severity="info" text rounded @click="() => {}" />
                   <Button icon="pi pi-trash" severity="danger" text rounded @click="() => {}" />
@@ -1001,26 +1023,36 @@ onMounted(async () => {
           <!-- Summary Stats -->
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div class="text-center p-4 bg-surface-50 dark:bg-surface-800 rounded-lg">
-              <div class="text-2xl font-bold text-surface-900 dark:text-surface-0">{{ apiProducts.length }}</div>
-              <div class="text-sm text-surface-600 dark:text-surface-300">Total Products</div>
+              <div class="text-2xl font-bold text-surface-900 dark:text-surface-0">
+                {{ apiProducts.length }}
+              </div>
+              <div class="text-sm text-surface-600 dark:text-surface-300">
+                Total Products
+              </div>
             </div>
             <div class="text-center p-4 bg-green-50 dark:bg-green-500/10 rounded-lg">
               <div class="text-2xl font-bold text-green-700 dark:text-green-400">
                 {{ apiProducts.filter(p => p.status === 'In Stock').length }}
               </div>
-              <div class="text-sm text-green-600 dark:text-green-300">In Stock</div>
+              <div class="text-sm text-green-600 dark:text-green-300">
+                In Stock
+              </div>
             </div>
             <div class="text-center p-4 bg-yellow-50 dark:bg-yellow-500/10 rounded-lg">
               <div class="text-2xl font-bold text-yellow-700 dark:text-yellow-400">
                 {{ apiProducts.filter(p => p.status === 'Low Stock').length }}
               </div>
-              <div class="text-sm text-yellow-600 dark:text-yellow-300">Low Stock</div>
+              <div class="text-sm text-yellow-600 dark:text-yellow-300">
+                Low Stock
+              </div>
             </div>
             <div class="text-center p-4 bg-red-50 dark:bg-red-500/10 rounded-lg">
               <div class="text-2xl font-bold text-red-700 dark:text-red-400">
                 {{ apiProducts.filter(p => p.status === 'Out of Stock').length }}
               </div>
-              <div class="text-sm text-red-600 dark:text-red-300">Out of Stock</div>
+              <div class="text-sm text-red-600 dark:text-red-300">
+                Out of Stock
+              </div>
             </div>
           </div>
         </div>

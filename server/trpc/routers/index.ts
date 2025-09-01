@@ -38,8 +38,8 @@ export const appRouter = createTRPCRouter({
       }
 
       return products.filter(product =>
-        product.name.toLowerCase().includes(opts.input.query.toLowerCase()) ||
-        product.category.toLowerCase().includes(opts.input.query.toLowerCase())
+        product.name.toLowerCase().includes(opts.input.query.toLowerCase())
+        || product.category.toLowerCase().includes(opts.input.query.toLowerCase()),
       );
     }),
   getCategories: baseProcedure
@@ -90,7 +90,7 @@ export const appRouter = createTRPCRouter({
         { id: 25, name: 'Nikon D850', category: 'Electronics', price: 2999, stock: 11, brand: 'Nikon' },
         { id: 26, name: 'DJI Mini 3 Pro', category: 'Electronics', price: 759, stock: 44, brand: 'DJI' },
 
-        // Shoes  
+        // Shoes
         { id: 6, name: 'Nike Air Max', category: 'Shoes', price: 129, stock: 234, brand: 'Nike' },
         { id: 7, name: 'Adidas Ultraboost', category: 'Shoes', price: 189, stock: 178, brand: 'Adidas' },
         { id: 14, name: 'Converse Chuck Taylor', category: 'Shoes', price: 65, stock: 289, brand: 'Converse' },
@@ -137,9 +137,9 @@ export const appRouter = createTRPCRouter({
       // Apply text filter
       if (opts.input.filter?.trim()) {
         filteredProducts = allProducts.filter(product =>
-          product.name.toLowerCase().includes(opts.input.filter.toLowerCase()) ||
-          product.category.toLowerCase().includes(opts.input.filter.toLowerCase()) ||
-          product.brand.toLowerCase().includes(opts.input.filter.toLowerCase())
+          product.name.toLowerCase().includes(opts.input.filter.toLowerCase())
+          || product.category.toLowerCase().includes(opts.input.filter.toLowerCase())
+          || product.brand.toLowerCase().includes(opts.input.filter.toLowerCase()),
         );
       }
 
@@ -149,11 +149,13 @@ export const appRouter = createTRPCRouter({
           const field = opts.input.sortField!;
           const aVal = a[field as keyof typeof a];
           const bVal = b[field as keyof typeof b];
-          
+
           let comparison = 0;
-          if (aVal < bVal) comparison = -1;
-          if (aVal > bVal) comparison = 1;
-          
+          if (aVal < bVal)
+            comparison = -1;
+          if (aVal > bVal)
+            comparison = 1;
+
           return opts.input.sortOrder === 1 ? comparison : -comparison;
         });
       }
@@ -168,7 +170,7 @@ export const appRouter = createTRPCRouter({
         data: paginatedProducts,
         totalRecords,
         page: opts.input.page,
-        size: opts.input.size
+        size: opts.input.size,
       };
     }),
   getFilteredTags: baseProcedure
@@ -206,8 +208,8 @@ export const appRouter = createTRPCRouter({
       }
 
       return tags.filter(tag =>
-        tag.name.toLowerCase().includes(opts.input.filter.toLowerCase()) ||
-        tag.category.toLowerCase().includes(opts.input.filter.toLowerCase())
+        tag.name.toLowerCase().includes(opts.input.filter.toLowerCase())
+        || tag.category.toLowerCase().includes(opts.input.filter.toLowerCase()),
       );
     }),
   getPriorities: baseProcedure
@@ -241,7 +243,7 @@ export const appRouter = createTRPCRouter({
     )
     .mutation((opts) => {
       // In a real app, this would save to database
-      console.log('Updating user settings:', opts.input);
+      // Updating user settings: opts.input
       return { success: true, settings: opts.input };
     }),
   getProgrammingLanguages: baseProcedure

@@ -4,12 +4,12 @@ const dynamicChips = ref([
   { id: 1, label: 'Vue.js', icon: 'pi pi-star' },
   { id: 2, label: 'React', icon: 'pi pi-star' },
   { id: 3, label: 'Angular', icon: 'pi pi-star' },
-  { id: 4, label: 'Nuxt', icon: 'pi pi-star', removable: true }
+  { id: 4, label: 'Nuxt', icon: 'pi pi-star', removable: true },
 ]);
 
-const removeChip = (id: number) => {
+function removeChip(id: number) {
   dynamicChips.value = dynamicChips.value.filter(chip => chip.id !== id);
-};
+}
 
 // Interactive chip builder
 const chipBuilder = ref({
@@ -17,24 +17,24 @@ const chipBuilder = ref({
   icon: '',
   image: '',
   removable: false,
-  type: 'label'
+  type: 'label',
 });
 
 const typeOptions = [
   { label: 'Label Only', value: 'label' },
   { label: 'With Icon', value: 'icon' },
   { label: 'With Image', value: 'image' },
-  { label: 'Custom Template', value: 'template' }
+  { label: 'Custom Template', value: 'template' },
 ];
 
 // Chip categories for filtering demo
 const categories = ref([
   { name: 'Frontend', chips: ['Vue.js', 'React', 'Angular', 'Svelte'], active: [] },
   { name: 'Backend', chips: ['Node.js', 'Python', 'Java', 'PHP'], active: [] },
-  { name: 'Database', chips: ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis'], active: [] }
+  { name: 'Database', chips: ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis'], active: [] },
 ]);
 
-const toggleCategoryChip = (categoryName: string, chipName: string) => {
+function toggleCategoryChip(categoryName: string, chipName: string) {
   const category = categories.value.find(c => c.name === categoryName);
   if (category) {
     const index = category.active.indexOf(chipName);
@@ -44,40 +44,40 @@ const toggleCategoryChip = (categoryName: string, chipName: string) => {
       category.active.push(chipName);
     }
   }
-};
+}
 
-const isChipActive = (categoryName: string, chipName: string) => {
+function isChipActive(categoryName: string, chipName: string) {
   const category = categories.value.find(c => c.name === categoryName);
   return category ? category.active.includes(chipName) : false;
-};
+}
 
 // Tag input simulation
 const tagInput = ref('');
 const tags = ref(['JavaScript', 'TypeScript', 'CSS']);
 
-const addTag = () => {
+function addTag() {
   if (tagInput.value.trim() && !tags.value.includes(tagInput.value.trim())) {
     tags.value.push(tagInput.value.trim());
     tagInput.value = '';
   }
-};
+}
 
-const removeTag = (tag: string) => {
+function removeTag(tag: string) {
   const index = tags.value.indexOf(tag);
   if (index > -1) {
     tags.value.splice(index, 1);
   }
-};
+}
 
 // Status chips
 const userStatuses = ref([
   { name: 'John Doe', status: 'online', avatar: 'https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png' },
   { name: 'Jane Smith', status: 'busy', avatar: 'https://primefaces.org/cdn/primevue/images/avatar/asiyajavayant.png' },
   { name: 'Bob Johnson', status: 'away', avatar: 'https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png' },
-  { name: 'Alice Brown', status: 'offline', avatar: 'https://primefaces.org/cdn/primevue/images/avatar/xuxuefeng.png' }
+  { name: 'Alice Brown', status: 'offline', avatar: 'https://primefaces.org/cdn/primevue/images/avatar/xuxuefeng.png' },
 ]);
 
-const getStatusColor = (status: string) => {
+function getStatusColor(status: string) {
   switch (status) {
     case 'online': return 'bg-green-500';
     case 'busy': return 'bg-red-500';
@@ -85,7 +85,7 @@ const getStatusColor = (status: string) => {
     case 'offline': return 'bg-gray-400';
     default: return 'bg-gray-400';
   }
-};
+}
 </script>
 
 <template>
@@ -113,7 +113,7 @@ const getStatusColor = (status: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         A basic chip with a text is created with the label property. When removable is added, a delete icon is displayed.
       </p>
-      
+
       <div class="card">
         <div class="flex items-center gap-2 flex-wrap">
           <Chip label="Action" />
@@ -133,11 +133,13 @@ const getStatusColor = (status: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         A font icon next to the label can be displayed with the icon property.
       </p>
-      
+
       <div class="card space-y-4">
         <!-- Basic Icon Chips -->
         <div>
-          <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100 mb-3">Basic Icons</h3>
+          <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100 mb-3">
+            Basic Icons
+          </h3>
           <div class="flex items-center gap-2 flex-wrap">
             <Chip label="Apple" icon="pi pi-apple" />
             <Chip label="Facebook" icon="pi pi-facebook" />
@@ -148,7 +150,9 @@ const getStatusColor = (status: string) => {
 
         <!-- Custom Remove Icon -->
         <div>
-          <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100 mb-3">Custom Remove Icon</h3>
+          <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100 mb-3">
+            Custom Remove Icon
+          </h3>
           <div class="flex items-center gap-2 flex-wrap">
             <Chip label="GitHub" icon="pi pi-github" removable>
               <template #removeicon="{ removeCallback, keydownCallback }">
@@ -165,10 +169,14 @@ const getStatusColor = (status: string) => {
 
         <!-- Different Icon Categories -->
         <div>
-          <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100 mb-3">Different Categories</h3>
+          <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100 mb-3">
+            Different Categories
+          </h3>
           <div class="space-y-3">
             <div>
-              <p class="text-sm font-medium text-surface-600 dark:text-surface-400 mb-2">Social Media</p>
+              <p class="text-sm font-medium text-surface-600 dark:text-surface-400 mb-2">
+                Social Media
+              </p>
               <div class="flex items-center gap-2 flex-wrap">
                 <Chip label="Twitter" icon="pi pi-twitter" />
                 <Chip label="Instagram" icon="pi pi-image" />
@@ -176,7 +184,9 @@ const getStatusColor = (status: string) => {
               </div>
             </div>
             <div>
-              <p class="text-sm font-medium text-surface-600 dark:text-surface-400 mb-2">Development</p>
+              <p class="text-sm font-medium text-surface-600 dark:text-surface-400 mb-2">
+                Development
+              </p>
               <div class="flex items-center gap-2 flex-wrap">
                 <Chip label="Code" icon="pi pi-code" />
                 <Chip label="Terminal" icon="pi pi-desktop" />
@@ -196,7 +206,7 @@ const getStatusColor = (status: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         The image property is used to display an image like an avatar.
       </p>
-      
+
       <div class="card">
         <div class="flex items-center gap-2 flex-wrap">
           <Chip label="Amy Elsner" image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" />
@@ -215,21 +225,21 @@ const getStatusColor = (status: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         The default slot allows displaying custom content inside a chip.
       </p>
-      
+
       <div class="card">
         <div class="flex items-center gap-2 flex-wrap">
           <Chip class="py-0 pl-0 pr-4">
             <span class="bg-primary text-primary-contrast rounded-full w-8 h-8 flex items-center justify-center">P</span>
             <span class="ml-2 font-medium">PRIME</span>
           </Chip>
-          
+
           <Chip class="py-0 pl-0 pr-4">
             <div class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center">
-              <i class="pi pi-check text-sm"></i>
+              <i class="pi pi-check text-sm" />
             </div>
             <span class="ml-2 font-medium">VERIFIED</span>
           </Chip>
-          
+
           <Chip class="py-0 pl-0 pr-4">
             <div class="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-xs font-bold">
               99+
@@ -248,13 +258,13 @@ const getStatusColor = (status: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Interactive example showing chips that can be dynamically added and removed.
       </p>
-      
+
       <div class="card">
         <div class="flex items-center gap-2 flex-wrap">
-          <Chip 
-            v-for="chip in dynamicChips" 
+          <Chip
+            v-for="chip in dynamicChips"
             :key="chip.id"
-            :label="chip.label" 
+            :label="chip.label"
             :icon="chip.icon"
             :removable="chip.removable"
             @remove="removeChip(chip.id)"
@@ -271,24 +281,24 @@ const getStatusColor = (status: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Simulate a tag input field where chips represent tags that can be added and removed.
       </p>
-      
+
       <div class="card">
         <div class="flex flex-col gap-4">
           <div class="flex gap-2">
-            <InputText 
-              v-model="tagInput" 
-              placeholder="Add a tag..." 
-              @keyup.enter="addTag"
+            <InputText
+              v-model="tagInput"
+              placeholder="Add a tag..."
               class="flex-1"
+              @keyup.enter="addTag"
             />
-            <Button label="Add" @click="addTag" :disabled="!tagInput.trim()" />
+            <Button label="Add" :disabled="!tagInput.trim()" @click="addTag" />
           </div>
-          
+
           <div class="flex items-center gap-2 flex-wrap">
-            <Chip 
-              v-for="tag in tags" 
+            <Chip
+              v-for="tag in tags"
               :key="tag"
-              :label="tag" 
+              :label="tag"
               removable
               @remove="removeTag(tag)"
             />
@@ -305,21 +315,22 @@ const getStatusColor = (status: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Use chips as toggleable filters for different categories.
       </p>
-      
+
       <div class="card">
         <div class="space-y-4">
           <div v-for="category in categories" :key="category.name">
-            <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100 mb-2">{{ category.name }}</h3>
+            <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100 mb-2">
+              {{ category.name }}
+            </h3>
             <div class="flex items-center gap-2 flex-wrap">
               <Chip
                 v-for="chip in category.chips"
                 :key="chip"
                 :label="chip"
-                :class="[
-                  'cursor-pointer transition-all',
-                  isChipActive(category.name, chip) 
-                    ? 'bg-primary text-primary-contrast' 
-                    : 'hover:bg-surface-100 dark:hover:bg-surface-700'
+                class="cursor-pointer transition-all" :class="[
+                  isChipActive(category.name, chip)
+                    ? 'bg-primary text-primary-contrast'
+                    : 'hover:bg-surface-100 dark:hover:bg-surface-700',
                 ]"
                 @click="toggleCategoryChip(category.name, chip)"
               />
@@ -337,13 +348,13 @@ const getStatusColor = (status: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Display user status with avatar chips and status indicators.
       </p>
-      
+
       <div class="card">
         <div class="space-y-3">
           <div v-for="user in userStatuses" :key="user.name" class="flex items-center gap-3">
             <div class="relative">
               <Chip :label="user.name" :image="user.avatar" />
-              <div class="absolute -top-1 -right-1 w-4 h-4 rounded-full border-2 border-white dark:border-surface-800" :class="getStatusColor(user.status)"></div>
+              <div class="absolute -top-1 -right-1 w-4 h-4 rounded-full border-2 border-white dark:border-surface-800" :class="getStatusColor(user.status)" />
             </div>
             <Badge :value="user.status" :severity="user.status === 'online' ? 'success' : user.status === 'busy' ? 'danger' : user.status === 'away' ? 'warn' : 'secondary'" />
           </div>
@@ -359,29 +370,29 @@ const getStatusColor = (status: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Customize chip properties to see different combinations.
       </p>
-      
+
       <div class="card">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <div class="flex flex-col gap-2">
             <label class="text-sm font-medium text-surface-700 dark:text-surface-300">Type</label>
             <Select v-model="chipBuilder.type" :options="typeOptions" option-label="label" option-value="value" />
           </div>
-          
+
           <div class="flex flex-col gap-2">
             <label class="text-sm font-medium text-surface-700 dark:text-surface-300">Label</label>
             <InputText v-model="chipBuilder.label" />
           </div>
-          
+
           <div v-if="chipBuilder.type === 'icon'" class="flex flex-col gap-2">
             <label class="text-sm font-medium text-surface-700 dark:text-surface-300">Icon</label>
             <InputText v-model="chipBuilder.icon" placeholder="pi pi-star" />
           </div>
-          
+
           <div v-if="chipBuilder.type === 'image'" class="flex flex-col gap-2">
             <label class="text-sm font-medium text-surface-700 dark:text-surface-300">Image URL</label>
             <InputText v-model="chipBuilder.image" placeholder="Image URL" />
           </div>
-          
+
           <div class="flex flex-col gap-2">
             <label class="text-sm font-medium text-surface-700 dark:text-surface-300">Removable</label>
             <div class="flex items-center mt-2">
@@ -390,9 +401,11 @@ const getStatusColor = (status: string) => {
             </div>
           </div>
         </div>
-        
+
         <div class="bg-surface-50 dark:bg-surface-800 p-4 rounded-lg">
-          <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100 mb-3">Preview</h3>
+          <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100 mb-3">
+            Preview
+          </h3>
           <div class="flex justify-center">
             <Chip
               v-if="chipBuilder.type === 'template'"
@@ -423,14 +436,20 @@ const getStatusColor = (status: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Common use cases for chips in applications.
       </p>
-      
+
       <div class="card space-y-6">
         <!-- Product Tags -->
         <div>
-          <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100 mb-3">Product Tags</h3>
+          <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100 mb-3">
+            Product Tags
+          </h3>
           <div class="border border-surface-200 dark:border-surface-700 rounded-lg p-4">
-            <h4 class="font-semibold mb-2">MacBook Pro 14"</h4>
-            <p class="text-sm text-surface-600 dark:text-surface-300 mb-3">Professional laptop for developers and creators</p>
+            <h4 class="font-semibold mb-2">
+              MacBook Pro 14"
+            </h4>
+            <p class="text-sm text-surface-600 dark:text-surface-300 mb-3">
+              Professional laptop for developers and creators
+            </p>
             <div class="flex items-center gap-2 flex-wrap">
               <Chip label="Apple" icon="pi pi-apple" />
               <Chip label="Laptop" />
@@ -443,13 +462,19 @@ const getStatusColor = (status: string) => {
 
         <!-- User Skills -->
         <div>
-          <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100 mb-3">User Skills</h3>
+          <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100 mb-3">
+            User Skills
+          </h3>
           <div class="border border-surface-200 dark:border-surface-700 rounded-lg p-4">
             <div class="flex items-center gap-3 mb-3">
               <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
               <div>
-                <h4 class="font-semibold">Amy Elsner</h4>
-                <p class="text-sm text-surface-600 dark:text-surface-300">Senior Frontend Developer</p>
+                <h4 class="font-semibold">
+                  Amy Elsner
+                </h4>
+                <p class="text-sm text-surface-600 dark:text-surface-300">
+                  Senior Frontend Developer
+                </p>
               </div>
             </div>
             <div class="flex items-center gap-2 flex-wrap">
@@ -464,11 +489,17 @@ const getStatusColor = (status: string) => {
 
         <!-- Content Categories -->
         <div>
-          <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100 mb-3">Content Categories</h3>
+          <h3 class="text-lg font-semibold text-surface-800 dark:text-surface-100 mb-3">
+            Content Categories
+          </h3>
           <div class="space-y-3">
             <div class="border border-surface-200 dark:border-surface-700 rounded-lg p-4">
-              <h4 class="font-semibold mb-2">Getting Started with Vue 3</h4>
-              <p class="text-sm text-surface-600 dark:text-surface-300 mb-3">Learn the fundamentals of Vue 3 and build your first application</p>
+              <h4 class="font-semibold mb-2">
+                Getting Started with Vue 3
+              </h4>
+              <p class="text-sm text-surface-600 dark:text-surface-300 mb-3">
+                Learn the fundamentals of Vue 3 and build your first application
+              </p>
               <div class="flex items-center gap-2 flex-wrap">
                 <Chip label="Tutorial" />
                 <Chip label="Beginner" />
@@ -477,8 +508,12 @@ const getStatusColor = (status: string) => {
               </div>
             </div>
             <div class="border border-surface-200 dark:border-surface-700 rounded-lg p-4">
-              <h4 class="font-semibold mb-2">Advanced TypeScript Patterns</h4>
-              <p class="text-sm text-surface-600 dark:text-surface-300 mb-3">Deep dive into advanced TypeScript concepts and patterns</p>
+              <h4 class="font-semibold mb-2">
+                Advanced TypeScript Patterns
+              </h4>
+              <p class="text-sm text-surface-600 dark:text-surface-300 mb-3">
+                Deep dive into advanced TypeScript concepts and patterns
+              </p>
               <div class="flex items-center gap-2 flex-wrap">
                 <Chip label="Advanced" />
                 <Chip label="TypeScript" />
@@ -499,7 +534,7 @@ const getStatusColor = (status: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Chip component accessibility considerations and keyboard support.
       </p>
-      
+
       <div class="card">
         <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-lg p-4">
           <div class="flex items-start gap-3">

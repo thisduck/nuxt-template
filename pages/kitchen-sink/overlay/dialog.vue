@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { useToast } from 'primevue/usetoast';
 import { ref } from 'vue';
-import { useToast } from "primevue/usetoast";
 
 const toast = useToast();
 
@@ -32,14 +32,14 @@ const headlessVisible = ref(false);
 // Custom dialogs
 const settingsVisible = ref(false);
 const imageGalleryVisible = ref(false);
-const confirmationVisible = ref(false);
+const _confirmationVisible = ref(false);
 const wizardVisible = ref(false);
 const wizardStep = ref(1);
 
 // Form data
 const username = ref('');
 const email = ref('');
-const password = ref('');
+const _password = ref('');
 const firstName = ref('');
 const lastName = ref('');
 const phone = ref('');
@@ -112,7 +112,7 @@ function resetForm() {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Dialog is used as a container and visibility is controlled with a binding to visible property.
       </p>
-      
+
       <div class="card">
         <Button label="Show Basic Dialog" @click="basicVisible = true" />
 
@@ -142,7 +142,7 @@ function resetForm() {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Header and Footer sections allow customization via templating.
       </p>
-      
+
       <div class="card">
         <Button label="Show Template Dialog" @click="templateVisible = true" />
 
@@ -163,8 +163,8 @@ function resetForm() {
             <InputText id="email2" v-model="email" class="flex-auto" autocomplete="off" />
           </div>
           <template #footer>
-            <Button label="Cancel" text severity="secondary" @click="templateVisible = false" autofocus />
-            <Button label="Save" outlined severity="secondary" @click="saveProfile" autofocus />
+            <Button label="Cancel" text severity="secondary" autofocus @click="templateVisible = false" />
+            <Button label="Save" outlined severity="secondary" autofocus @click="saveProfile" />
           </template>
         </Dialog>
       </div>
@@ -178,21 +178,21 @@ function resetForm() {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         The position property defines the location relative to the screen.
       </p>
-      
+
       <div class="card">
         <div class="flex flex-wrap justify-center gap-2 mb-2">
-          <Button label="Left" icon="pi pi-arrow-right" @click="openPosition('left')" severity="secondary" style="min-width: 10rem" />
-          <Button label="Right" icon="pi pi-arrow-left" @click="openPosition('right')" severity="secondary" style="min-width: 10rem" />
+          <Button label="Left" icon="pi pi-arrow-right" severity="secondary" style="min-width: 10rem" @click="openPosition('left')" />
+          <Button label="Right" icon="pi pi-arrow-left" severity="secondary" style="min-width: 10rem" @click="openPosition('right')" />
         </div>
         <div class="flex flex-wrap justify-center gap-2 mb-2">
-          <Button label="TopLeft" icon="pi pi-arrow-down-right" @click="openPosition('topleft')" severity="secondary" style="min-width: 10rem" />
-          <Button label="Top" icon="pi pi-arrow-down" @click="openPosition('top')" severity="secondary" style="min-width: 10rem" />
-          <Button label="TopRight" icon="pi pi-arrow-down-left" @click="openPosition('topright')" severity="secondary" style="min-width: 10rem" />
+          <Button label="TopLeft" icon="pi pi-arrow-down-right" severity="secondary" style="min-width: 10rem" @click="openPosition('topleft')" />
+          <Button label="Top" icon="pi pi-arrow-down" severity="secondary" style="min-width: 10rem" @click="openPosition('top')" />
+          <Button label="TopRight" icon="pi pi-arrow-down-left" severity="secondary" style="min-width: 10rem" @click="openPosition('topright')" />
         </div>
         <div class="flex flex-wrap justify-center gap-2">
-          <Button label="BottomLeft" icon="pi pi-arrow-up-right" @click="openPosition('bottomleft')" severity="secondary" style="min-width: 10rem" />
-          <Button label="Bottom" icon="pi pi-arrow-up" @click="openPosition('bottom')" severity="secondary" style="min-width: 10rem" />
-          <Button label="BottomRight" icon="pi pi-arrow-up-left" @click="openPosition('bottomright')" severity="secondary" style="min-width: 10rem" />
+          <Button label="BottomLeft" icon="pi pi-arrow-up-right" severity="secondary" style="min-width: 10rem" @click="openPosition('bottomleft')" />
+          <Button label="Bottom" icon="pi pi-arrow-up" severity="secondary" style="min-width: 10rem" @click="openPosition('bottom')" />
+          <Button label="BottomRight" icon="pi pi-arrow-up-left" severity="secondary" style="min-width: 10rem" @click="openPosition('bottomright')" />
         </div>
 
         <Dialog v-model:visible="positionVisible" header="Edit Profile" :style="{ width: '25rem' }" :position="position" :modal="true" :draggable="false">
@@ -221,7 +221,7 @@ function resetForm() {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Adding maximizable property enables the full screen mode.
       </p>
-      
+
       <div class="card">
         <Button label="Show Maximizable Dialog" @click="maximizableVisible = true" />
 
@@ -231,7 +231,9 @@ function resetForm() {
             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </p>
           <div class="mt-4">
-            <h4 class="text-lg font-semibold mb-2">Features</h4>
+            <h4 class="text-lg font-semibold mb-2">
+              Features
+            </h4>
             <ul class="list-disc list-inside space-y-1 text-surface-600 dark:text-surface-300">
               <li>Maximize to fullscreen for better viewing</li>
               <li>Responsive design with breakpoints</li>
@@ -251,7 +253,7 @@ function resetForm() {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         When content exceeds viewport, Dialog automatically becomes scrollable.
       </p>
-      
+
       <div class="card">
         <Button label="Show Long Content Dialog" @click="longContentVisible = true" />
 
@@ -296,7 +298,7 @@ function resetForm() {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Mask layer behind the Dialog is configured with the modal property. By default, no modal layer is added.
       </p>
-      
+
       <div class="card">
         <Button label="Show Non-Modal Dialog" @click="nonModalVisible = true" />
 
@@ -331,7 +333,7 @@ function resetForm() {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Dialog width can be adjusted per screen size with the breakpoints option.
       </p>
-      
+
       <div class="card">
         <Button label="Show Responsive Dialog" @click="responsiveVisible = true" />
 
@@ -341,7 +343,9 @@ function resetForm() {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </p>
           <div class="mt-4 p-4 bg-surface-50 dark:bg-surface-800 rounded">
-            <h4 class="font-semibold mb-2">Breakpoints:</h4>
+            <h4 class="font-semibold mb-2">
+              Breakpoints:
+            </h4>
             <ul class="text-sm text-surface-600 dark:text-surface-300 space-y-1">
               <li>• Desktop (1200px+): 50vw</li>
               <li>• Tablet (576px-1199px): 75vw</li>
@@ -360,7 +364,7 @@ function resetForm() {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Headless mode allows implementing entire UI instead of the default elements.
       </p>
-      
+
       <div class="card">
         <Button label="Login" icon="pi pi-user" @click="headlessVisible = true" />
 
@@ -368,7 +372,7 @@ function resetForm() {
           <template #container="{ closeCallback }">
             <div class="flex flex-col px-8 py-8 gap-6 rounded-2xl" style="background-image: radial-gradient(circle at left top, var(--p-primary-400), var(--p-primary-700))">
               <Icon name="lucide:bolt" size="40" class="block mx-auto text-primary-200" />
-              
+
               <div class="inline-flex flex-col gap-2">
                 <label for="username4" class="text-primary-50 font-semibold">Username</label>
                 <InputText id="username4" class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" />
@@ -378,8 +382,8 @@ function resetForm() {
                 <InputText id="password4" class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" type="password" />
               </div>
               <div class="flex items-center gap-4">
-                <Button label="Cancel" @click="closeCallback" text class="!p-4 w-full !text-primary-50 !border !border-white/30 hover:!bg-white/10" />
-                <Button label="Sign-In" @click="closeCallback" text class="!p-4 w-full !text-primary-50 !border !border-white/30 hover:!bg-white/10" />
+                <Button label="Cancel" text class="!p-4 w-full !text-primary-50 !border !border-white/30 hover:!bg-white/10" @click="closeCallback" />
+                <Button label="Sign-In" text class="!p-4 w-full !text-primary-50 !border !border-white/30 hover:!bg-white/10" @click="closeCallback" />
               </div>
             </div>
           </template>
@@ -395,22 +399,30 @@ function resetForm() {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Real-world dialog implementations for various use cases.
       </p>
-      
+
       <div class="card">
         <div class="flex flex-wrap gap-2">
           <Button label="Settings Dialog" icon="pi pi-cog" @click="settingsVisible = true" />
-          <Button label="Image Gallery" icon="pi pi-images" @click="imageGalleryVisible = true" severity="secondary" />
-          <Button label="Multi-Step Wizard" icon="pi pi-forward" @click="wizardVisible = true" severity="info" />
+          <Button label="Image Gallery" icon="pi pi-images" severity="secondary" @click="imageGalleryVisible = true" />
+          <Button label="Multi-Step Wizard" icon="pi pi-forward" severity="info" @click="wizardVisible = true" />
         </div>
 
         <!-- Advanced Settings Dialog -->
         <Dialog v-model:visible="settingsVisible" modal header="Application Settings" :style="{ width: '40rem' }" :breakpoints="{ '960px': '75vw', '575px': '90vw' }">
           <Tabs value="general">
             <TabList>
-              <Tab value="general">General</Tab>
-              <Tab value="appearance">Appearance</Tab>
-              <Tab value="privacy">Privacy</Tab>
-              <Tab value="notifications">Notifications</Tab>
+              <Tab value="general">
+                General
+              </Tab>
+              <Tab value="appearance">
+                Appearance
+              </Tab>
+              <Tab value="privacy">
+                Privacy
+              </Tab>
+              <Tab value="notifications">
+                Notifications
+              </Tab>
             </TabList>
             <TabPanels>
               <TabPanel value="general">
@@ -442,10 +454,10 @@ function resetForm() {
                   <div>
                     <label class="block text-sm font-medium mb-2">Theme Color</label>
                     <div class="flex gap-2">
-                      <div class="w-8 h-8 rounded bg-blue-500 cursor-pointer border-2 border-blue-600"></div>
-                      <div class="w-8 h-8 rounded bg-green-500 cursor-pointer"></div>
-                      <div class="w-8 h-8 rounded bg-purple-500 cursor-pointer"></div>
-                      <div class="w-8 h-8 rounded bg-red-500 cursor-pointer"></div>
+                      <div class="w-8 h-8 rounded bg-blue-500 cursor-pointer border-2 border-blue-600" />
+                      <div class="w-8 h-8 rounded bg-green-500 cursor-pointer" />
+                      <div class="w-8 h-8 rounded bg-purple-500 cursor-pointer" />
+                      <div class="w-8 h-8 rounded bg-red-500 cursor-pointer" />
                     </div>
                   </div>
                 </div>
@@ -507,7 +519,9 @@ function resetForm() {
         <Dialog v-model:visible="wizardVisible" modal :header="`Wizard - Step ${wizardStep} of 3`" :style="{ width: '35rem' }" :closable="false">
           <!-- Step 1: Personal Info -->
           <div v-if="wizardStep === 1" class="space-y-4">
-            <h3 class="text-lg font-semibold mb-4">Personal Information</h3>
+            <h3 class="text-lg font-semibold mb-4">
+              Personal Information
+            </h3>
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-medium mb-2">First Name</label>
@@ -526,7 +540,9 @@ function resetForm() {
 
           <!-- Step 2: Contact Info -->
           <div v-if="wizardStep === 2" class="space-y-4">
-            <h3 class="text-lg font-semibold mb-4">Contact Information</h3>
+            <h3 class="text-lg font-semibold mb-4">
+              Contact Information
+            </h3>
             <div>
               <label class="block text-sm font-medium mb-2">Phone</label>
               <InputText v-model="phone" placeholder="Enter phone number" fluid />
@@ -543,7 +559,9 @@ function resetForm() {
 
           <!-- Step 3: Review -->
           <div v-if="wizardStep === 3" class="space-y-4">
-            <h3 class="text-lg font-semibold mb-4">Review Information</h3>
+            <h3 class="text-lg font-semibold mb-4">
+              Review Information
+            </h3>
             <div class="bg-surface-50 dark:bg-surface-800 p-4 rounded space-y-2">
               <div><strong>Name:</strong> {{ firstName }} {{ lastName }}</div>
               <div><strong>Email:</strong> {{ email }}</div>
@@ -560,7 +578,7 @@ function resetForm() {
               </div>
               <div class="flex gap-2">
                 <Button label="Cancel" severity="secondary" text @click="wizardVisible = false; resetForm()" />
-                <Button :label="wizardStep === 3 ? 'Complete' : 'Next'" :icon="wizardStep === 3 ? 'pi pi-check' : 'pi pi-angle-right'" iconPos="right" @click="nextStep" />
+                <Button :label="wizardStep === 3 ? 'Complete' : 'Next'" :icon="wizardStep === 3 ? 'pi pi-check' : 'pi pi-angle-right'" icon-pos="right" @click="nextStep" />
               </div>
             </div>
           </template>

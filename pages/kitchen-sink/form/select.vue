@@ -59,7 +59,6 @@ const groupedCities = ref([
   },
 ]);
 
-
 // Filter
 const selectedFilteredCountry = ref(null);
 
@@ -122,12 +121,12 @@ async function onFilterProducts(event) {
   if (filterDebounceTimeout.value) {
     clearTimeout(filterDebounceTimeout.value);
   }
-  
+
   // Debounce the API call
   filterDebounceTimeout.value = setTimeout(async () => {
     try {
-      filteredProducts.value = await $trpc.getFilteredProducts.query({ 
-        filter: event.value || '' 
+      filteredProducts.value = await $trpc.getFilteredProducts.query({
+        filter: event.value || '',
       });
     } catch (error) {
       console.error('Failed to filter products:', error);
@@ -428,7 +427,6 @@ async function onFilterProducts(event) {
             <small class="text-surface-600 dark:text-surface-300">This field is disabled.</small>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -534,10 +532,10 @@ async function onFilterProducts(event) {
           <div class="flex items-center gap-2">
             <label for="loading-select" class="font-semibold text-surface-900 dark:text-surface-0">Loading Example</label>
             <Button
-              @click="isLoading = !isLoading"
               :label="isLoading ? 'Stop Loading' : 'Start Loading'"
               size="small"
               severity="secondary"
+              @click="isLoading = !isLoading"
             />
           </div>
           <Select
@@ -634,8 +632,8 @@ async function onFilterProducts(event) {
               option-label="name"
               placeholder="Search products..."
               filter
-              @filter="onFilterProducts"
               class="w-full"
+              @filter="onFilterProducts"
             >
               <template #option="slotProps">
                 <div class="flex items-center justify-between p-2 w-full">

@@ -4,7 +4,7 @@ import { ref } from 'vue';
 // Basic breadcrumb
 const home = ref({
   icon: 'pi pi-home',
-  route: '/'
+  route: '/',
 });
 
 const items = ref([
@@ -12,38 +12,38 @@ const items = ref([
   { label: 'Computer', url: '#' },
   { label: 'Accessories', url: '#' },
   { label: 'Keyboard', url: '#' },
-  { label: 'Wireless' }
+  { label: 'Wireless' },
 ]);
 
 // Template breadcrumb with icons
 const homeWithIcon = ref({
   icon: 'pi pi-home',
-  url: '#'
+  url: '#',
 });
 
 const templateItems = ref([
   { label: 'Components', icon: 'pi pi-desktop', url: '#' },
   { label: 'Form', icon: 'pi pi-file-edit', url: '#' },
   { label: 'Input', icon: 'pi pi-pencil', url: '#' },
-  { label: 'InputText', icon: 'pi pi-file' }
+  { label: 'InputText', icon: 'pi pi-file' },
 ]);
 
 // Router breadcrumb
 const routerHome = ref({
   icon: 'pi pi-home',
-  route: '/'
+  route: '/',
 });
 
 const routerItems = ref([
   { label: 'Components', icon: 'pi pi-desktop', route: '/kitchen-sink' },
   { label: 'Form', icon: 'pi pi-file-edit', route: '/kitchen-sink/form' },
-  { label: 'InputText', route: '/kitchen-sink/form/input-text' }
+  { label: 'InputText', route: '/kitchen-sink/form/input-text' },
 ]);
 
 // File system breadcrumb
 const fileSystemHome = ref({
   icon: 'pi pi-folder',
-  url: '#'
+  url: '#',
 });
 
 const fileSystemItems = ref([
@@ -53,62 +53,62 @@ const fileSystemItems = ref([
   { label: 'my-project', icon: 'pi pi-folder', url: '#' },
   { label: 'src', icon: 'pi pi-folder', url: '#' },
   { label: 'components', icon: 'pi pi-folder', url: '#' },
-  { label: 'Header.vue', icon: 'pi pi-file' }
+  { label: 'Header.vue', icon: 'pi pi-file' },
 ]);
 
 // E-commerce breadcrumb
 const ecommerceHome = ref({
   icon: 'pi pi-home',
-  url: '#'
+  url: '#',
 });
 
 const ecommerceItems = ref([
   { label: 'Men', url: '#' },
   { label: 'Clothing', url: '#' },
   { label: 'Shirts', url: '#' },
-  { label: 'Casual Shirts' }
+  { label: 'Casual Shirts' },
 ]);
 
 // Admin panel breadcrumb
 const adminHome = ref({
   icon: 'pi pi-home',
-  url: '#'
+  url: '#',
 });
 
 const adminItems = ref([
   { label: 'Dashboard', icon: 'pi pi-chart-line', url: '#' },
   { label: 'Users', icon: 'pi pi-users', url: '#' },
   { label: 'Management', icon: 'pi pi-cog', url: '#' },
-  { label: 'Edit Profile', icon: 'pi pi-user-edit' }
+  { label: 'Edit Profile', icon: 'pi pi-user-edit' },
 ]);
 
 // Dynamic breadcrumb
 const dynamicHome = ref({
   icon: 'pi pi-home',
-  url: '#'
+  url: '#',
 });
 
 const dynamicItems = ref([
-  { label: 'Level 1', url: '#' }
+  { label: 'Level 1', url: '#' },
 ]);
 
-const addLevel = () => {
+function addLevel() {
   const level = dynamicItems.value.length + 1;
   dynamicItems.value.push({
     label: `Level ${level}`,
-    url: '#'
+    url: '#',
   });
-};
+}
 
-const removeLevel = () => {
+function removeLevel() {
   if (dynamicItems.value.length > 1) {
     dynamicItems.value.pop();
   }
-};
+}
 
-const resetBreadcrumb = () => {
+function resetBreadcrumb() {
   dynamicItems.value = [{ label: 'Level 1', url: '#' }];
-};
+}
 </script>
 
 <template>
@@ -136,7 +136,7 @@ const resetBreadcrumb = () => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Breadcrumb requires a collection of menuitems as its model, the root item is defined with the home property.
       </p>
-      
+
       <div class="card">
         <Breadcrumb :home="home" :model="items" />
       </div>
@@ -150,7 +150,7 @@ const resetBreadcrumb = () => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Custom content can be placed inside the items using the item template. The divider between the items has its own separator template.
       </p>
-      
+
       <div class="card">
         <Breadcrumb :home="homeWithIcon" :model="templateItems">
           <template #item="{ item }">
@@ -174,13 +174,13 @@ const resetBreadcrumb = () => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Items with navigation are defined with templating to be able to use a router link component.
       </p>
-      
+
       <div class="card">
         <Breadcrumb :home="routerHome" :model="routerItems">
           <template #item="{ item, props }">
             <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
-              <a :href="href" v-bind="props.action" @click="navigate" class="flex items-center">
-                <span v-if="item.icon" :class="[item.icon, 'text-primary-500']" />
+              <a :href="href" v-bind="props.action" class="flex items-center" @click="navigate">
+                <span v-if="item.icon" class="text-primary-500" :class="[item.icon]" />
                 <span class="text-primary-600 hover:text-primary-700 font-medium ml-2">{{ item.label }}</span>
               </a>
             </router-link>
@@ -201,7 +201,7 @@ const resetBreadcrumb = () => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Example of breadcrumb used for file system navigation with folder and file icons.
       </p>
-      
+
       <div class="card">
         <Breadcrumb :home="fileSystemHome" :model="fileSystemItems">
           <template #item="{ item }">
@@ -225,7 +225,7 @@ const resetBreadcrumb = () => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Breadcrumb navigation for e-commerce category hierarchy.
       </p>
-      
+
       <div class="card">
         <Breadcrumb :home="ecommerceHome" :model="ecommerceItems">
           <template #item="{ item }">
@@ -248,19 +248,21 @@ const resetBreadcrumb = () => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Breadcrumb for admin dashboard with colored icons and enhanced styling.
       </p>
-      
+
       <div class="card">
         <div class="bg-surface-50 dark:bg-surface-800 p-4 rounded-lg">
           <Breadcrumb :home="adminHome" :model="adminItems">
             <template #item="{ item }">
               <a class="flex items-center cursor-pointer p-2 rounded hover:bg-surface-100 dark:hover:bg-surface-700 transition-colors" :href="item.url">
-                <span v-if="item.icon" :class="[
-                  item.icon,
-                  item.icon === 'pi pi-chart-line' ? 'text-green-500' :
-                  item.icon === 'pi pi-users' ? 'text-blue-500' :
-                  item.icon === 'pi pi-cog' ? 'text-orange-500' :
-                  item.icon === 'pi pi-user-edit' ? 'text-purple-500' : 'text-surface-600'
-                ]" />
+                <span
+                  v-if="item.icon" :class="[
+                    item.icon,
+                    item.icon === 'pi pi-chart-line' ? 'text-green-500'
+                    : item.icon === 'pi pi-users' ? 'text-blue-500'
+                      : item.icon === 'pi pi-cog' ? 'text-orange-500'
+                        : item.icon === 'pi pi-user-edit' ? 'text-purple-500' : 'text-surface-600',
+                  ]"
+                />
                 <span class="ml-2 text-surface-800 dark:text-surface-100 font-medium">{{ item.label }}</span>
               </a>
             </template>
@@ -280,33 +282,33 @@ const resetBreadcrumb = () => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Interactive example showing how to dynamically add and remove breadcrumb items.
       </p>
-      
+
       <div class="card">
         <div class="flex flex-col gap-4">
           <div class="flex gap-2">
-            <Button 
-              label="Add Level" 
-              icon="pi pi-plus" 
-              @click="addLevel" 
-              size="small" 
+            <Button
+              label="Add Level"
+              icon="pi pi-plus"
+              size="small"
+              @click="addLevel"
             />
-            <Button 
-              label="Remove Level" 
-              icon="pi pi-minus" 
-              @click="removeLevel" 
-              severity="secondary" 
-              size="small" 
+            <Button
+              label="Remove Level"
+              icon="pi pi-minus"
+              severity="secondary"
+              size="small"
               :disabled="dynamicItems.length <= 1"
+              @click="removeLevel"
             />
-            <Button 
-              label="Reset" 
-              icon="pi pi-refresh" 
-              @click="resetBreadcrumb" 
-              severity="warn" 
-              size="small" 
+            <Button
+              label="Reset"
+              icon="pi pi-refresh"
+              severity="warn"
+              size="small"
+              @click="resetBreadcrumb"
             />
           </div>
-          
+
           <Breadcrumb :home="dynamicHome" :model="dynamicItems">
             <template #item="{ item }">
               <a class="cursor-pointer text-surface-700 hover:text-primary-600 transition-colors" :href="item.url">
@@ -314,7 +316,7 @@ const resetBreadcrumb = () => {
               </a>
             </template>
           </Breadcrumb>
-          
+
           <div class="text-sm text-surface-500 dark:text-surface-400">
             Current depth: {{ dynamicItems.length }} level{{ dynamicItems.length !== 1 ? 's' : '' }}
           </div>
@@ -330,13 +332,13 @@ const resetBreadcrumb = () => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Breadcrumb with responsive behavior that collapses on smaller screens.
       </p>
-      
+
       <div class="card">
         <div class="overflow-x-auto">
           <Breadcrumb :home="fileSystemHome" :model="fileSystemItems">
             <template #item="{ item }">
               <a class="flex items-center cursor-pointer whitespace-nowrap" :href="item.url">
-                <span :class="[item.icon, 'hidden sm:inline']" />
+                <span class="hidden sm:inline" :class="[item.icon]" />
                 <span class="ml-0 sm:ml-2 text-sm">{{ item.label }}</span>
               </a>
             </template>
@@ -360,11 +362,13 @@ const resetBreadcrumb = () => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Examples of different separator styles for breadcrumb navigation.
       </p>
-      
+
       <div class="card space-y-6">
         <!-- Arrow Separators -->
         <div>
-          <h3 class="text-lg font-medium text-surface-800 dark:text-surface-100 mb-3">Arrow Separators</h3>
+          <h3 class="text-lg font-medium text-surface-800 dark:text-surface-100 mb-3">
+            Arrow Separators
+          </h3>
           <Breadcrumb :home="ecommerceHome" :model="ecommerceItems.slice(0, 3)">
             <template #separator>
               <i class="pi pi-arrow-right mx-2 text-primary-500" />
@@ -374,7 +378,9 @@ const resetBreadcrumb = () => {
 
         <!-- Dot Separators -->
         <div>
-          <h3 class="text-lg font-medium text-surface-800 dark:text-surface-100 mb-3">Dot Separators</h3>
+          <h3 class="text-lg font-medium text-surface-800 dark:text-surface-100 mb-3">
+            Dot Separators
+          </h3>
           <Breadcrumb :home="adminHome" :model="adminItems.slice(0, 3)">
             <template #separator>
               <span class="mx-3 text-surface-400">•</span>
@@ -384,7 +390,9 @@ const resetBreadcrumb = () => {
 
         <!-- Custom Icon Separators -->
         <div>
-          <h3 class="text-lg font-medium text-surface-800 dark:text-surface-100 mb-3">Custom Icon Separators</h3>
+          <h3 class="text-lg font-medium text-surface-800 dark:text-surface-100 mb-3">
+            Custom Icon Separators
+          </h3>
           <Breadcrumb :home="routerHome" :model="routerItems.slice(0, 2)">
             <template #separator>
               <i class="pi pi-bookmark mx-2 text-orange-400" />

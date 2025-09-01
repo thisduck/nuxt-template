@@ -46,7 +46,7 @@ async function saveSettings() {
   try {
     settingsLoading.value = true;
     await $trpc.updateUserSettings.mutate(userSettings.value);
-    console.log('Settings saved successfully');
+    // Settings saved successfully
   } catch (error) {
     console.error('Failed to save settings:', error);
   } finally {
@@ -55,7 +55,7 @@ async function saveSettings() {
 }
 
 // Watch for changes and auto-save
-watch(userSettings, async (newSettings) => {
+watch(userSettings, async (_newSettings) => {
   if (!settingsLoading.value) {
     await saveSettings();
   }
@@ -149,9 +149,9 @@ watch(userSettings, async (newSettings) => {
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
             <div class="flex items-center gap-3">
-              <ToggleSwitch 
-                v-model="formSwitchChecked" 
-                input-id="form-switch" 
+              <ToggleSwitch
+                v-model="formSwitchChecked"
+                input-id="form-switch"
                 :invalid="!formSwitchChecked"
               />
               <label for="form-switch" class="font-semibold text-surface-900 dark:text-surface-0">
@@ -182,7 +182,7 @@ watch(userSettings, async (newSettings) => {
             <div class="flex items-center gap-3">
               <ToggleSwitch v-model="templateSwitchChecked" input-id="template-switch">
                 <template #handle="{ checked }">
-                  <i :class="['!text-xs pi', { 'pi-check': checked, 'pi-times': !checked }]" />
+                  <i class="!text-xs pi" :class="[{ 'pi-check': checked, 'pi-times': !checked }]" />
                 </template>
               </ToggleSwitch>
               <label for="template-switch" class="font-semibold text-surface-900 dark:text-surface-0">
@@ -208,10 +208,12 @@ watch(userSettings, async (newSettings) => {
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
             <div class="flex flex-col gap-4">
-              <h4 class="font-semibold text-surface-900 dark:text-surface-0">Invalid</h4>
+              <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+                Invalid
+              </h4>
               <div class="flex items-center gap-3">
-                <ToggleSwitch 
-                  v-model="invalidSwitchChecked" 
+                <ToggleSwitch
+                  v-model="invalidSwitchChecked"
                   input-id="invalid-switch"
                   :invalid="!invalidSwitchChecked"
                 />
@@ -223,10 +225,12 @@ watch(userSettings, async (newSettings) => {
 
           <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
             <div class="flex flex-col gap-4">
-              <h4 class="font-semibold text-surface-900 dark:text-surface-0">Disabled</h4>
+              <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+                Disabled
+              </h4>
               <div class="flex items-center gap-3">
-                <ToggleSwitch 
-                  v-model="disabledSwitchChecked" 
+                <ToggleSwitch
+                  v-model="disabledSwitchChecked"
                   input-id="disabled-switch"
                   disabled
                 />
@@ -260,9 +264,9 @@ watch(userSettings, async (newSettings) => {
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
             <div class="flex items-center gap-3">
-              <ToggleButton 
-                v-model="basicButtonChecked" 
-                on-label="On" 
+              <ToggleButton
+                v-model="basicButtonChecked"
+                on-label="On"
                 off-label="Off"
                 class="min-w-20"
               />
@@ -287,9 +291,9 @@ watch(userSettings, async (newSettings) => {
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
             <div class="flex items-center gap-3">
-              <ToggleButton 
-                v-model="customButtonChecked" 
-                on-label="Locked" 
+              <ToggleButton
+                v-model="customButtonChecked"
+                on-label="Locked"
                 off-label="Unlocked"
                 on-icon="pi pi-lock"
                 off-icon="pi pi-lock-open"
@@ -318,9 +322,9 @@ watch(userSettings, async (newSettings) => {
           <div class="flex flex-col gap-4">
             <div class="flex flex-wrap items-center gap-4">
               <div class="flex flex-col items-center gap-2">
-                <ToggleButton 
-                  v-model="smallButtonChecked" 
-                  on-label="On" 
+                <ToggleButton
+                  v-model="smallButtonChecked"
+                  on-label="On"
                   off-label="Off"
                   size="small"
                   class="min-w-16"
@@ -328,18 +332,18 @@ watch(userSettings, async (newSettings) => {
                 <small class="text-surface-600 dark:text-surface-300">Small</small>
               </div>
               <div class="flex flex-col items-center gap-2">
-                <ToggleButton 
-                  v-model="normalButtonChecked" 
-                  on-label="On" 
+                <ToggleButton
+                  v-model="normalButtonChecked"
+                  on-label="On"
                   off-label="Off"
                   class="min-w-20"
                 />
                 <small class="text-surface-600 dark:text-surface-300">Normal</small>
               </div>
               <div class="flex flex-col items-center gap-2">
-                <ToggleButton 
-                  v-model="largeButtonChecked" 
-                  on-label="On" 
+                <ToggleButton
+                  v-model="largeButtonChecked"
+                  on-label="On"
                   off-label="Off"
                   size="large"
                   class="min-w-24"
@@ -363,9 +367,9 @@ watch(userSettings, async (newSettings) => {
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
           <div class="flex flex-col gap-4">
             <div class="flex items-center gap-3">
-              <ToggleButton 
-                v-model="formButtonChecked" 
-                on-label="Accept All" 
+              <ToggleButton
+                v-model="formButtonChecked"
+                on-label="Accept All"
                 off-label="Reject All"
                 :invalid="!formButtonChecked"
                 class="w-48"
@@ -393,11 +397,13 @@ watch(userSettings, async (newSettings) => {
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
             <div class="flex flex-col gap-4">
-              <h4 class="font-semibold text-surface-900 dark:text-surface-0">Invalid</h4>
+              <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+                Invalid
+              </h4>
               <div class="flex items-center gap-3">
-                <ToggleButton 
-                  v-model="invalidButtonChecked" 
-                  on-icon="pi pi-check" 
+                <ToggleButton
+                  v-model="invalidButtonChecked"
+                  on-icon="pi pi-check"
                   off-icon="pi pi-times"
                   :invalid="!invalidButtonChecked"
                   class="w-40"
@@ -410,11 +416,13 @@ watch(userSettings, async (newSettings) => {
 
           <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
             <div class="flex flex-col gap-4">
-              <h4 class="font-semibold text-surface-900 dark:text-surface-0">Disabled</h4>
+              <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+                Disabled
+              </h4>
               <div class="flex items-center gap-3">
-                <ToggleButton 
-                  v-model="disabledButtonChecked" 
-                  on-icon="pi pi-check" 
+                <ToggleButton
+                  v-model="disabledButtonChecked"
+                  on-icon="pi pi-check"
                   off-icon="pi pi-times"
                   disabled
                   class="w-40"
@@ -443,7 +451,9 @@ watch(userSettings, async (newSettings) => {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col gap-6">
           <div class="flex items-center gap-2">
-            <h3 class="text-xl font-semibold text-surface-900 dark:text-surface-0">User Settings</h3>
+            <h3 class="text-xl font-semibold text-surface-900 dark:text-surface-0">
+              User Settings
+            </h3>
             <div v-if="settingsLoading" class="flex items-center gap-2">
               <i class="pi pi-spin pi-spinner text-primary-500" />
               <small class="text-surface-500">Syncing...</small>
@@ -453,14 +463,16 @@ watch(userSettings, async (newSettings) => {
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- ToggleSwitch Settings -->
             <div class="flex flex-col gap-4">
-              <h4 class="font-medium text-surface-900 dark:text-surface-0">Switch Controls</h4>
+              <h4 class="font-medium text-surface-900 dark:text-surface-0">
+                Switch Controls
+              </h4>
               <div class="space-y-4">
                 <div class="flex items-center justify-between">
                   <label class="font-medium text-surface-900 dark:text-surface-0">
                     Push Notifications
                   </label>
-                  <ToggleSwitch 
-                    v-model="userSettings.notifications" 
+                  <ToggleSwitch
+                    v-model="userSettings.notifications"
                     :disabled="settingsLoading"
                   />
                 </div>
@@ -468,12 +480,12 @@ watch(userSettings, async (newSettings) => {
                   <label class="font-medium text-surface-900 dark:text-surface-0">
                     Dark Mode
                   </label>
-                  <ToggleSwitch 
-                    v-model="userSettings.darkMode" 
+                  <ToggleSwitch
+                    v-model="userSettings.darkMode"
                     :disabled="settingsLoading"
                   >
                     <template #handle="{ checked }">
-                      <i :class="['!text-xs pi', { 'pi-moon': checked, 'pi-sun': !checked }]" />
+                      <i class="!text-xs pi" :class="[{ 'pi-moon': checked, 'pi-sun': !checked }]" />
                     </template>
                   </ToggleSwitch>
                 </div>
@@ -481,8 +493,8 @@ watch(userSettings, async (newSettings) => {
                   <label class="font-medium text-surface-900 dark:text-surface-0">
                     Auto Save
                   </label>
-                  <ToggleSwitch 
-                    v-model="userSettings.autoSave" 
+                  <ToggleSwitch
+                    v-model="userSettings.autoSave"
                     :disabled="settingsLoading"
                   />
                 </div>
@@ -491,15 +503,17 @@ watch(userSettings, async (newSettings) => {
 
             <!-- ToggleButton Settings -->
             <div class="flex flex-col gap-4">
-              <h4 class="font-medium text-surface-900 dark:text-surface-0">Button Controls</h4>
+              <h4 class="font-medium text-surface-900 dark:text-surface-0">
+                Button Controls
+              </h4>
               <div class="space-y-4">
                 <div class="flex flex-col gap-2">
                   <label class="font-medium text-surface-900 dark:text-surface-0">
                     Email Alerts
                   </label>
-                  <ToggleButton 
-                    v-model="userSettings.emailAlerts" 
-                    on-label="Enabled" 
+                  <ToggleButton
+                    v-model="userSettings.emailAlerts"
+                    on-label="Enabled"
                     off-label="Disabled"
                     on-icon="pi pi-envelope"
                     off-icon="pi pi-envelope-open"
@@ -511,9 +525,9 @@ watch(userSettings, async (newSettings) => {
                   <label class="font-medium text-surface-900 dark:text-surface-0">
                     Sound Effects
                   </label>
-                  <ToggleButton 
-                    v-model="userSettings.soundEffects" 
-                    on-label="On" 
+                  <ToggleButton
+                    v-model="userSettings.soundEffects"
+                    on-label="On"
                     off-label="Off"
                     on-icon="pi pi-volume-up"
                     off-icon="pi pi-volume-off"

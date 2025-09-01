@@ -1,30 +1,30 @@
 <script setup lang="ts">
 // Content sections for demonstration
 const sampleContent = {
-  section1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  section2: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-  section3: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
-  section4: "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus."
+  section1: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  section2: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
+  section3: 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.',
+  section4: 'Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus.',
 };
 
 // Form data for login example
 const loginForm = ref({
   username: '',
-  password: ''
+  password: '',
 });
 
 // Features list for showcase
 const features = ref([
   { title: 'Performance', description: 'Optimized for speed and efficiency', icon: 'pi-bolt' },
   { title: 'Security', description: 'Enterprise-grade security features', icon: 'pi-shield' },
-  { title: 'Scalability', description: 'Grows with your business needs', icon: 'pi-chart-line' }
+  { title: 'Scalability', description: 'Grows with your business needs', icon: 'pi-chart-line' },
 ]);
 
 // Stats for dashboard
 const stats = ref([
   { label: 'Users', value: '2.5K', trend: '+12%' },
   { label: 'Revenue', value: '$45K', trend: '+8%' },
-  { label: 'Orders', value: '1.2K', trend: '+15%' }
+  { label: 'Orders', value: '1.2K', trend: '+15%' },
 ]);
 </script>
 
@@ -203,8 +203,12 @@ const stats = ref([
       </p>
 
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
-        <h3 class="text-lg font-semibold text-surface-900 dark:text-surface-0">User Profile</h3>
-        <p class="text-surface-600 dark:text-surface-300">Personal information and preferences.</p>
+        <h3 class="text-lg font-semibold text-surface-900 dark:text-surface-0">
+          User Profile
+        </h3>
+        <p class="text-surface-600 dark:text-surface-300">
+          Personal information and preferences.
+        </p>
 
         <Divider align="center">
           <div class="flex items-center gap-2 px-3 py-1 bg-surface-100 dark:bg-surface-800 rounded-full">
@@ -216,11 +220,15 @@ const stats = ref([
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
           <div>
             <label class="font-medium text-surface-700 dark:text-surface-200">Full Name</label>
-            <p class="text-surface-600 dark:text-surface-300">John Doe</p>
+            <p class="text-surface-600 dark:text-surface-300">
+              John Doe
+            </p>
           </div>
           <div>
             <label class="font-medium text-surface-700 dark:text-surface-200">Email</label>
-            <p class="text-surface-600 dark:text-surface-300">john@example.com</p>
+            <p class="text-surface-600 dark:text-surface-300">
+              john@example.com
+            </p>
           </div>
         </div>
 
@@ -268,29 +276,31 @@ const stats = ref([
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex flex-col md:flex-row max-w-4xl mx-auto">
           <div class="w-full md:w-5/12 flex flex-col items-center justify-center gap-4 py-8">
-            <h3 class="text-xl font-semibold text-surface-900 dark:text-surface-0 mb-4">Sign In</h3>
+            <h3 class="text-xl font-semibold text-surface-900 dark:text-surface-0 mb-4">
+              Sign In
+            </h3>
             <div class="flex flex-col gap-2 w-full max-w-sm">
               <label for="username" class="font-medium text-surface-700 dark:text-surface-200">Username</label>
-              <InputText 
-                id="username" 
+              <InputText
+                id="username"
                 v-model="loginForm.username"
-                type="text" 
+                type="text"
                 placeholder="Enter your username"
               />
             </div>
             <div class="flex flex-col gap-2 w-full max-w-sm">
               <label for="password" class="font-medium text-surface-700 dark:text-surface-200">Password</label>
-              <InputText 
-                id="password" 
+              <InputText
+                id="password"
                 v-model="loginForm.password"
-                type="password" 
+                type="password"
                 placeholder="Enter your password"
               />
             </div>
             <div class="flex w-full max-w-sm">
-              <Button 
-                label="Login" 
-                icon="pi pi-sign-in" 
+              <Button
+                label="Login"
+                icon="pi pi-sign-in"
                 class="w-full"
               />
             </div>
@@ -306,14 +316,16 @@ const stats = ref([
           </div>
 
           <div class="w-full md:w-5/12 flex flex-col items-center justify-center py-8">
-            <h3 class="text-xl font-semibold text-surface-900 dark:text-surface-0 mb-6">New User?</h3>
+            <h3 class="text-xl font-semibold text-surface-900 dark:text-surface-0 mb-6">
+              New User?
+            </h3>
             <p class="text-center text-surface-600 dark:text-surface-300 mb-6 max-w-sm">
               Create an account to access all features and personalize your experience.
             </p>
-            <Button 
-              label="Sign Up" 
-              icon="pi pi-user-plus" 
-              severity="secondary" 
+            <Button
+              label="Sign Up"
+              icon="pi pi-user-plus"
+              severity="secondary"
               class="w-full max-w-sm"
             />
           </div>
@@ -332,17 +344,25 @@ const stats = ref([
 
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="text-center mb-8">
-          <h3 class="text-2xl font-bold text-surface-900 dark:text-surface-0">Why Choose Us?</h3>
-          <p class="text-surface-600 dark:text-surface-300 mt-2">Discover the key features that make us stand out</p>
+          <h3 class="text-2xl font-bold text-surface-900 dark:text-surface-0">
+            Why Choose Us?
+          </h3>
+          <p class="text-surface-600 dark:text-surface-300 mt-2">
+            Discover the key features that make us stand out
+          </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div v-for="(feature, index) in features" :key="feature.title" class="text-center">
+          <div v-for="feature in features" :key="feature.title" class="text-center">
             <div class="flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900/20 rounded-full mx-auto mb-4">
               <i :class="`pi ${feature.icon} text-2xl text-primary-600 dark:text-primary-400`" />
             </div>
-            <h4 class="text-lg font-semibold text-surface-900 dark:text-surface-0 mb-2">{{ feature.title }}</h4>
-            <p class="text-surface-600 dark:text-surface-300">{{ feature.description }}</p>
+            <h4 class="text-lg font-semibold text-surface-900 dark:text-surface-0 mb-2">
+              {{ feature.title }}
+            </h4>
+            <p class="text-surface-600 dark:text-surface-300">
+              {{ feature.description }}
+            </p>
           </div>
         </div>
 
@@ -356,9 +376,15 @@ const stats = ref([
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
           <div v-for="stat in stats" :key="stat.label" class="p-4">
-            <div class="text-3xl font-bold text-surface-900 dark:text-surface-0">{{ stat.value }}</div>
-            <div class="text-surface-500 dark:text-surface-400">{{ stat.label }}</div>
-            <div class="text-green-600 text-sm font-medium">{{ stat.trend }}</div>
+            <div class="text-3xl font-bold text-surface-900 dark:text-surface-0">
+              {{ stat.value }}
+            </div>
+            <div class="text-surface-500 dark:text-surface-400">
+              {{ stat.label }}
+            </div>
+            <div class="text-green-600 text-sm font-medium">
+              {{ stat.trend }}
+            </div>
           </div>
         </div>
       </div>
@@ -378,8 +404,12 @@ const stats = ref([
           <div class="flex-1 flex items-center justify-center p-6 bg-surface-50 dark:bg-surface-800 rounded-l-lg">
             <div class="text-center">
               <i class="pi pi-desktop text-4xl text-primary-500 mb-4" />
-              <h4 class="font-semibold text-surface-900 dark:text-surface-0">Desktop App</h4>
-              <p class="text-surface-600 dark:text-surface-300">Full-featured desktop application</p>
+              <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+                Desktop App
+              </h4>
+              <p class="text-surface-600 dark:text-surface-300">
+                Full-featured desktop application
+              </p>
             </div>
           </div>
 
@@ -392,8 +422,12 @@ const stats = ref([
           <div class="flex-1 flex items-center justify-center p-6">
             <div class="text-center">
               <i class="pi pi-mobile text-4xl text-secondary-500 mb-4" />
-              <h4 class="font-semibold text-surface-900 dark:text-surface-0">Mobile App</h4>
-              <p class="text-surface-600 dark:text-surface-300">Native mobile experience</p>
+              <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+                Mobile App
+              </h4>
+              <p class="text-surface-600 dark:text-surface-300">
+                Native mobile experience
+              </p>
             </div>
           </div>
 
@@ -406,8 +440,12 @@ const stats = ref([
           <div class="flex-1 flex items-center justify-center p-6 bg-surface-50 dark:bg-surface-800 rounded-r-lg">
             <div class="text-center">
               <i class="pi pi-globe text-4xl text-green-500 mb-4" />
-              <h4 class="font-semibold text-surface-900 dark:text-surface-0">Web App</h4>
-              <p class="text-surface-600 dark:text-surface-300">Browser-based solution</p>
+              <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+                Web App
+              </h4>
+              <p class="text-surface-600 dark:text-surface-300">
+                Browser-based solution
+              </p>
             </div>
           </div>
         </div>
@@ -424,7 +462,9 @@ const stats = ref([
       </p>
 
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
-        <p class="m-0 text-surface-600 dark:text-surface-300">Content with colorful dividers below.</p>
+        <p class="m-0 text-surface-600 dark:text-surface-300">
+          Content with colorful dividers below.
+        </p>
 
         <Divider class="custom-divider-primary">
           <span class="bg-primary text-primary-contrast px-3 py-1 rounded-full text-sm font-semibold">
@@ -432,7 +472,9 @@ const stats = ref([
           </span>
         </Divider>
 
-        <p class="m-0 text-surface-600 dark:text-surface-300">Another section with different styling.</p>
+        <p class="m-0 text-surface-600 dark:text-surface-300">
+          Another section with different styling.
+        </p>
 
         <Divider class="custom-divider-secondary">
           <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
@@ -440,7 +482,9 @@ const stats = ref([
           </span>
         </Divider>
 
-        <p class="m-0 text-surface-600 dark:text-surface-300">Final section with warning styling.</p>
+        <p class="m-0 text-surface-600 dark:text-surface-300">
+          Final section with warning styling.
+        </p>
 
         <Divider class="custom-divider-warning">
           <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
@@ -448,7 +492,9 @@ const stats = ref([
           </span>
         </Divider>
 
-        <p class="m-0 text-surface-600 dark:text-surface-300">End of custom styled content.</p>
+        <p class="m-0 text-surface-600 dark:text-surface-300">
+          End of custom styled content.
+        </p>
       </div>
     </div>
   </div>

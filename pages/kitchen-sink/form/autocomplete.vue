@@ -35,27 +35,27 @@ const groupedCities = ref([
     items: [
       { label: 'New York', value: 'New York' },
       { label: 'Los Angeles', value: 'Los Angeles' },
-      { label: 'Chicago', value: 'Chicago' }
-    ]
+      { label: 'Chicago', value: 'Chicago' },
+    ],
   },
   {
-    label: 'United Kingdom', 
+    label: 'United Kingdom',
     code: 'gb',
     items: [
       { label: 'London', value: 'London' },
       { label: 'Manchester', value: 'Manchester' },
-      { label: 'Birmingham', value: 'Birmingham' }
-    ]
+      { label: 'Birmingham', value: 'Birmingham' },
+    ],
   },
   {
     label: 'Australia',
-    code: 'au', 
+    code: 'au',
     items: [
       { label: 'Sydney', value: 'Sydney' },
       { label: 'Melbourne', value: 'Melbourne' },
-      { label: 'Brisbane', value: 'Brisbane' }
-    ]
-  }
+      { label: 'Brisbane', value: 'Brisbane' },
+    ],
+  },
 ]);
 const filteredGroupedCities = ref([]);
 
@@ -223,9 +223,9 @@ function searchGroupedCities(event) {
     } else {
       filteredGroupedCities.value = groupedCities.value.map(group => ({
         ...group,
-        items: group.items.filter(city => 
-          city.label.toLowerCase().includes(event.query.toLowerCase())
-        )
+        items: group.items.filter(city =>
+          city.label.toLowerCase().includes(event.query.toLowerCase()),
+        ),
       })).filter(group => group.items.length > 0);
     }
   }, 250);

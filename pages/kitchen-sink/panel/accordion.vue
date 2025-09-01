@@ -4,21 +4,21 @@ const basicValue = ref('0');
 
 // Dynamic tabs data
 const dynamicTabs = ref([
-  { 
-    title: 'Title 1', 
-    value: '0', 
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
+  {
+    title: 'Title 1',
+    value: '0',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   },
-  { 
-    title: 'Title 2', 
-    value: '1', 
-    content: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.' 
+  {
+    title: 'Title 2',
+    value: '1',
+    content: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.',
   },
-  { 
-    title: 'Title 3', 
-    value: '2', 
-    content: 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti.' 
-  }
+  {
+    title: 'Title 3',
+    value: '2',
+    content: 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti.',
+  },
 ]);
 
 // Multiple selection state
@@ -34,22 +34,22 @@ const customPanels = ref([
     name: 'Amy Elsner',
     avatar: 'amyelsner.png',
     badge: 3,
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   },
   {
     value: '1',
     name: 'Onyama Limba',
     avatar: 'onyamalimba.png',
     badge: 4,
-    content: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.'
+    content: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.',
   },
   {
     value: '2',
     name: 'Ioni Bowcher',
     avatar: 'ionibowcher.png',
     badge: 2,
-    content: 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti.'
-  }
+    content: 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti.',
+  },
 ]);
 
 // FAQ data for real-world example
@@ -58,32 +58,32 @@ const faqItems = ref([
     value: '0',
     question: 'What is PrimeVue?',
     answer: 'PrimeVue is a comprehensive UI component library for Vue.js applications. It offers 90+ components, 50+ themes, and various templates to accelerate development.',
-    category: 'General'
+    category: 'General',
   },
   {
     value: '1',
     question: 'Is PrimeVue free to use?',
     answer: 'Yes, PrimeVue is open source and free to use under the MIT license. There are also premium templates and themes available for purchase.',
-    category: 'Licensing'
+    category: 'Licensing',
   },
   {
     value: '2',
     question: 'Does PrimeVue support TypeScript?',
     answer: 'Yes, PrimeVue has full TypeScript support with type definitions for all components, making it ideal for TypeScript projects.',
-    category: 'Technical'
+    category: 'Technical',
   },
   {
     value: '3',
     question: 'Can I use PrimeVue with Nuxt?',
     answer: 'Absolutely! PrimeVue has excellent integration with Nuxt through the official @primevue/nuxt-module, providing auto-imports and SSR support.',
-    category: 'Integration'
+    category: 'Integration',
   },
   {
     value: '4',
     question: 'How can I customize PrimeVue themes?',
     answer: 'PrimeVue offers multiple theming options including built-in themes, a Theme Designer tool, and CSS variables for easy customization.',
-    category: 'Styling'
-  }
+    category: 'Styling',
+  },
 ]);
 </script>
 
@@ -120,8 +120,8 @@ const faqItems = ref([
             <AccordionHeader>Header I</AccordionHeader>
             <AccordionContent>
               <p class="m-0">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
               </p>
             </AccordionContent>
@@ -130,8 +130,8 @@ const faqItems = ref([
             <AccordionHeader>Header II</AccordionHeader>
             <AccordionContent>
               <p class="m-0">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
-                eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. 
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
+                eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
                 Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
               </p>
             </AccordionContent>
@@ -140,8 +140,8 @@ const faqItems = ref([
             <AccordionHeader>Header III</AccordionHeader>
             <AccordionContent>
               <p class="m-0">
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti 
-                quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia 
+                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
+                quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia
                 deserunt mollitia animi, id est laborum et dolorum fuga.
               </p>
             </AccordionContent>
@@ -164,7 +164,9 @@ const faqItems = ref([
           <AccordionPanel v-for="tab in dynamicTabs" :key="tab.title" :value="tab.value">
             <AccordionHeader>{{ tab.title }}</AccordionHeader>
             <AccordionContent>
-              <p class="m-0">{{ tab.content }}</p>
+              <p class="m-0">
+                {{ tab.content }}
+              </p>
             </AccordionContent>
           </AccordionPanel>
         </Accordion>
@@ -186,7 +188,7 @@ const faqItems = ref([
             Multiple panels can be open. Currently open: {{ multipleValue.join(', ') }}
           </span>
         </div>
-        
+
         <Accordion v-model:value="multipleValue" multiple>
           <AccordionPanel value="0">
             <AccordionHeader>Header I</AccordionHeader>
@@ -274,26 +276,26 @@ const faqItems = ref([
 
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex mb-4 gap-2 justify-end">
-          <Button 
-            @click="controlledValue = '0'" 
-            rounded 
-            label="1" 
-            class="w-10 h-10 p-0" 
+          <Button
+            rounded
+            label="1"
+            class="w-10 h-10 p-0"
             :variant="controlledValue !== '0' ? 'outlined' : undefined"
+            @click="controlledValue = '0'"
           />
-          <Button 
-            @click="controlledValue = '1'" 
-            rounded 
-            label="2" 
-            class="w-10 h-10 p-0" 
+          <Button
+            rounded
+            label="2"
+            class="w-10 h-10 p-0"
             :variant="controlledValue !== '1' ? 'outlined' : undefined"
+            @click="controlledValue = '1'"
           />
-          <Button 
-            @click="controlledValue = '2'" 
-            rounded 
-            label="3" 
-            class="w-10 h-10 p-0" 
+          <Button
+            rounded
+            label="3"
+            class="w-10 h-10 p-0"
             :variant="controlledValue !== '2' ? 'outlined' : undefined"
+            @click="controlledValue = '2'"
           />
         </div>
 
@@ -339,21 +341,23 @@ const faqItems = ref([
       </p>
 
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
-        <Accordion value="0" expandIcon="pi pi-plus" collapseIcon="pi pi-minus">
+        <Accordion value="0" expand-icon="pi pi-plus" collapse-icon="pi pi-minus">
           <AccordionPanel v-for="panel in customPanels" :key="panel.value" :value="panel.value">
             <AccordionHeader>
               <span class="flex items-center gap-2 w-full">
-                <Avatar 
-                  :label="panel.name.split(' ').map(n => n[0]).join('')" 
-                  shape="circle" 
-                  :style="{ backgroundColor: '#' + Math.floor(Math.random()*16777215).toString(16) }"
+                <Avatar
+                  :label="panel.name.split(' ').map(n => n[0]).join('')"
+                  shape="circle"
+                  :style="{ backgroundColor: `#${Math.floor(Math.random() * 16777215).toString(16)}` }"
                 />
                 <span class="font-bold whitespace-nowrap">{{ panel.name }}</span>
                 <Badge :value="panel.badge" class="ml-auto mr-2" />
               </span>
             </AccordionHeader>
             <AccordionContent>
-              <p class="m-0">{{ panel.content }}</p>
+              <p class="m-0">
+                {{ panel.content }}
+              </p>
             </AccordionContent>
           </AccordionPanel>
         </Accordion>
@@ -388,14 +392,20 @@ const faqItems = ref([
               <div class="flex items-center gap-3 w-full">
                 <i class="pi pi-question-circle text-primary-500" />
                 <div class="flex-1">
-                  <div class="font-semibold">{{ item.question }}</div>
-                  <div class="text-sm text-surface-500 dark:text-surface-400 mt-1">{{ item.category }}</div>
+                  <div class="font-semibold">
+                    {{ item.question }}
+                  </div>
+                  <div class="text-sm text-surface-500 dark:text-surface-400 mt-1">
+                    {{ item.category }}
+                  </div>
                 </div>
               </div>
             </AccordionHeader>
             <AccordionContent>
               <div class="pl-9">
-                <p class="text-surface-700 dark:text-surface-200">{{ item.answer }}</p>
+                <p class="text-surface-700 dark:text-surface-200">
+                  {{ item.answer }}
+                </p>
                 <div class="mt-4 flex gap-2">
                   <Button label="Helpful" icon="pi pi-thumbs-up" size="small" variant="outlined" />
                   <Button label="Not Helpful" icon="pi pi-thumbs-down" size="small" variant="outlined" />
@@ -439,7 +449,7 @@ const faqItems = ref([
                   <InputText type="email" placeholder="your@email.com" />
                 </div>
                 <div class="flex items-center gap-2">
-                  <Checkbox inputId="newsletter" />
+                  <Checkbox input-id="newsletter" />
                   <label for="newsletter">Subscribe to newsletter</label>
                 </div>
               </div>
@@ -489,7 +499,7 @@ const faqItems = ref([
                   <Select :options="['15 minutes', '30 minutes', '1 hour', 'Never']" placeholder="Select" />
                 </div>
                 <div class="flex items-center gap-2">
-                  <Checkbox inputId="public-profile" />
+                  <Checkbox input-id="public-profile" />
                   <label for="public-profile">Make profile public</label>
                 </div>
               </div>
@@ -511,18 +521,24 @@ const faqItems = ref([
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Bordered Style -->
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
-          <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">Bordered Style</h4>
+          <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">
+            Bordered Style
+          </h4>
           <Accordion value="0" class="accordion-bordered">
             <AccordionPanel value="0">
               <AccordionHeader>Section 1</AccordionHeader>
               <AccordionContent>
-                <p class="m-0">Content with bordered style</p>
+                <p class="m-0">
+                  Content with bordered style
+                </p>
               </AccordionContent>
             </AccordionPanel>
             <AccordionPanel value="1">
               <AccordionHeader>Section 2</AccordionHeader>
               <AccordionContent>
-                <p class="m-0">Another section with borders</p>
+                <p class="m-0">
+                  Another section with borders
+                </p>
               </AccordionContent>
             </AccordionPanel>
           </Accordion>
@@ -530,18 +546,24 @@ const faqItems = ref([
 
         <!-- Filled Style -->
         <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
-          <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">Filled Style</h4>
+          <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">
+            Filled Style
+          </h4>
           <Accordion value="0" class="accordion-filled">
             <AccordionPanel value="0">
               <AccordionHeader>Section 1</AccordionHeader>
               <AccordionContent>
-                <p class="m-0">Content with filled background</p>
+                <p class="m-0">
+                  Content with filled background
+                </p>
               </AccordionContent>
             </AccordionPanel>
             <AccordionPanel value="1">
               <AccordionHeader>Section 2</AccordionHeader>
               <AccordionContent>
-                <p class="m-0">Another section with background</p>
+                <p class="m-0">
+                  Another section with background
+                </p>
               </AccordionContent>
             </AccordionPanel>
           </Accordion>

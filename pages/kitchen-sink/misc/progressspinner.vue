@@ -1,7 +1,7 @@
 <script setup lang="ts">
 useSeoMeta({
   title: 'ProgressSpinner - Kitchen Sink',
-  description: 'ProgressSpinner is a process status indicator.'
+  description: 'ProgressSpinner is a process status indicator.',
 });
 
 const isLoading = ref(false);
@@ -37,8 +37,12 @@ function simulateSaving() {
         <div class="flex items-center gap-4 mb-4">
           <Icon name="lucide:loader" size="32" class="text-primary-500" />
           <div>
-            <h1 class="text-3xl font-bold text-surface-900 dark:text-surface-0 mb-2">ProgressSpinner</h1>
-            <p class="text-surface-600 dark:text-surface-300">ProgressSpinner is a process status indicator.</p>
+            <h1 class="text-3xl font-bold text-surface-900 dark:text-surface-0 mb-2">
+              ProgressSpinner
+            </h1>
+            <p class="text-surface-600 dark:text-surface-300">
+              ProgressSpinner is a process status indicator.
+            </p>
           </div>
         </div>
       </div>
@@ -47,7 +51,9 @@ function simulateSaving() {
     <div class="flex-1 overflow-auto">
       <div class="max-w-4xl mx-auto p-6 space-y-8">
         <section>
-          <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-0">Basic</h2>
+          <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-0">
+            Basic
+          </h2>
           <p class="text-surface-600 dark:text-surface-400 mb-4">
             An infinite spin animation is displayed by default.
           </p>
@@ -59,49 +65,63 @@ function simulateSaving() {
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-0">Custom</h2>
+          <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-0">
+            Custom
+          </h2>
           <p class="text-surface-600 dark:text-surface-400 mb-4">
             ProgressSpinner can be customized with styling properties like style, strokeWidth, fill and animationDuration.
           </p>
           <div class="border border-surface-200 dark:border-surface-700 rounded-lg p-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
               <div class="flex flex-col items-center gap-4">
-                <ProgressSpinner 
-                  style="width: 50px; height: 50px" 
-                  strokeWidth="8" 
+                <ProgressSpinner
+                  style="width: 50px; height: 50px"
+                  stroke-width="8"
                   fill="transparent"
-                  animationDuration=".5s" 
-                  aria-label="Fast spinner" 
+                  animation-duration=".5s"
+                  aria-label="Fast spinner"
                 />
                 <div>
-                  <p class="font-medium">Fast (0.5s)</p>
-                  <p class="text-sm text-surface-500 dark:text-surface-400">Thick stroke</p>
+                  <p class="font-medium">
+                    Fast (0.5s)
+                  </p>
+                  <p class="text-sm text-surface-500 dark:text-surface-400">
+                    Thick stroke
+                  </p>
                 </div>
               </div>
               <div class="flex flex-col items-center gap-4">
-                <ProgressSpinner 
-                  style="width: 60px; height: 60px" 
-                  strokeWidth="4" 
+                <ProgressSpinner
+                  style="width: 60px; height: 60px"
+                  stroke-width="4"
                   fill="var(--p-surface-200)"
-                  animationDuration="1s" 
-                  aria-label="Medium spinner" 
+                  animation-duration="1s"
+                  aria-label="Medium spinner"
                 />
                 <div>
-                  <p class="font-medium">Medium (1s)</p>
-                  <p class="text-sm text-surface-500 dark:text-surface-400">With background</p>
+                  <p class="font-medium">
+                    Medium (1s)
+                  </p>
+                  <p class="text-sm text-surface-500 dark:text-surface-400">
+                    With background
+                  </p>
                 </div>
               </div>
               <div class="flex flex-col items-center gap-4">
-                <ProgressSpinner 
-                  style="width: 40px; height: 40px" 
-                  strokeWidth="2" 
+                <ProgressSpinner
+                  style="width: 40px; height: 40px"
+                  stroke-width="2"
                   fill="transparent"
-                  animationDuration="2s" 
-                  aria-label="Slow spinner" 
+                  animation-duration="2s"
+                  aria-label="Slow spinner"
                 />
                 <div>
-                  <p class="font-medium">Slow (2s)</p>
-                  <p class="text-sm text-surface-500 dark:text-surface-400">Thin stroke</p>
+                  <p class="font-medium">
+                    Slow (2s)
+                  </p>
+                  <p class="text-sm text-surface-500 dark:text-surface-400">
+                    Thin stroke
+                  </p>
                 </div>
               </div>
             </div>
@@ -109,63 +129,81 @@ function simulateSaving() {
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-0">Sizes</h2>
+          <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-0">
+            Sizes
+          </h2>
           <p class="text-surface-600 dark:text-surface-400 mb-4">
             Different sizes for various use cases.
           </p>
           <div class="border border-surface-200 dark:border-surface-700 rounded-lg p-6">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div class="flex flex-col items-center gap-4">
-                <ProgressSpinner 
-                  style="width: 20px; height: 20px" 
-                  strokeWidth="3" 
-                  aria-label="Small spinner" 
+                <ProgressSpinner
+                  style="width: 20px; height: 20px"
+                  stroke-width="3"
+                  aria-label="Small spinner"
                 />
-                <p class="font-medium">Small</p>
+                <p class="font-medium">
+                  Small
+                </p>
               </div>
               <div class="flex flex-col items-center gap-4">
-                <ProgressSpinner 
-                  style="width: 32px; height: 32px" 
-                  strokeWidth="4" 
-                  aria-label="Default spinner" 
+                <ProgressSpinner
+                  style="width: 32px; height: 32px"
+                  stroke-width="4"
+                  aria-label="Default spinner"
                 />
-                <p class="font-medium">Default</p>
+                <p class="font-medium">
+                  Default
+                </p>
               </div>
               <div class="flex flex-col items-center gap-4">
-                <ProgressSpinner 
-                  style="width: 48px; height: 48px" 
-                  strokeWidth="4" 
-                  aria-label="Large spinner" 
+                <ProgressSpinner
+                  style="width: 48px; height: 48px"
+                  stroke-width="4"
+                  aria-label="Large spinner"
                 />
-                <p class="font-medium">Large</p>
+                <p class="font-medium">
+                  Large
+                </p>
               </div>
               <div class="flex flex-col items-center gap-4">
-                <ProgressSpinner 
-                  style="width: 64px; height: 64px" 
-                  strokeWidth="5" 
-                  aria-label="Extra large spinner" 
+                <ProgressSpinner
+                  style="width: 64px; height: 64px"
+                  stroke-width="5"
+                  aria-label="Extra large spinner"
                 />
-                <p class="font-medium">Extra Large</p>
+                <p class="font-medium">
+                  Extra Large
+                </p>
               </div>
             </div>
           </div>
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-0">Real-World Examples</h2>
-          
+          <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-0">
+            Real-World Examples
+          </h2>
+
           <div class="space-y-6">
             <div>
-              <h3 class="text-xl font-semibold mb-3 text-surface-800 dark:text-surface-200">Loading Content</h3>
+              <h3 class="text-xl font-semibold mb-3 text-surface-800 dark:text-surface-200">
+                Loading Content
+              </h3>
               <Card>
                 <template #content>
                   <div class="space-y-4">
                     <div class="flex items-center justify-between">
                       <div>
-                        <h4 class="font-medium">Fetch Data</h4>
-                        <p class="text-sm text-surface-500 dark:text-surface-400">Load content from server</p>
+                        <h4 class="font-medium">
+                          Fetch Data
+                        </h4>
+                        <p class="text-sm text-surface-500 dark:text-surface-400">
+                          Load content from server
+                        </p>
                       </div>
-                      <Button @click="simulateLoading" :disabled="isLoading">
+                      <Button :disabled="isLoading" @click="simulateLoading">
                         Load Data
                       </Button>
                     </div>
@@ -184,26 +222,32 @@ function simulateSaving() {
             </div>
 
             <div>
-              <h3 class="text-xl font-semibold mb-3 text-surface-800 dark:text-surface-200">Processing Task</h3>
+              <h3 class="text-xl font-semibold mb-3 text-surface-800 dark:text-surface-200">
+                Processing Task
+              </h3>
               <Card>
                 <template #content>
                   <div class="space-y-4">
                     <div class="flex items-center justify-between">
                       <div>
-                        <h4 class="font-medium">Process Images</h4>
-                        <p class="text-sm text-surface-500 dark:text-surface-400">Compress and optimize images</p>
+                        <h4 class="font-medium">
+                          Process Images
+                        </h4>
+                        <p class="text-sm text-surface-500 dark:text-surface-400">
+                          Compress and optimize images
+                        </p>
                       </div>
-                      <Button @click="simulateProcessing" :disabled="isProcessing" severity="secondary">
+                      <Button :disabled="isProcessing" severity="secondary" @click="simulateProcessing">
                         Start Processing
                       </Button>
                     </div>
                     <div v-if="isProcessing" class="flex items-center justify-center py-8">
                       <div class="flex items-center gap-3">
-                        <ProgressSpinner 
-                          style="width: 32px; height: 32px" 
-                          strokeWidth="4"
+                        <ProgressSpinner
+                          style="width: 32px; height: 32px"
+                          stroke-width="4"
                           fill="transparent"
-                          animationDuration="1.5s"
+                          animation-duration="1.5s"
                         />
                         <span class="text-surface-600 dark:text-surface-400">Processing images...</span>
                       </div>
@@ -217,7 +261,9 @@ function simulateSaving() {
             </div>
 
             <div>
-              <h3 class="text-xl font-semibold mb-3 text-surface-800 dark:text-surface-200">Saving Form</h3>
+              <h3 class="text-xl font-semibold mb-3 text-surface-800 dark:text-surface-200">
+                Saving Form
+              </h3>
               <Card>
                 <template #content>
                   <div class="space-y-4">
@@ -233,16 +279,16 @@ function simulateSaving() {
                     </div>
                     <div class="flex items-center justify-between pt-4">
                       <div class="flex items-center gap-3">
-                        <ProgressSpinner 
-                          v-if="isSaving" 
-                          style="width: 20px; height: 20px" 
-                          strokeWidth="3"
+                        <ProgressSpinner
+                          v-if="isSaving"
+                          style="width: 20px; height: 20px"
+                          stroke-width="3"
                         />
                         <span v-if="isSaving" class="text-sm text-surface-600 dark:text-surface-400">
                           Saving...
                         </span>
                       </div>
-                      <Button @click="simulateSaving" :disabled="isSaving">
+                      <Button :disabled="isSaving" @click="simulateSaving">
                         Save Changes
                       </Button>
                     </div>
@@ -252,7 +298,9 @@ function simulateSaving() {
             </div>
 
             <div>
-              <h3 class="text-xl font-semibold mb-3 text-surface-800 dark:text-surface-200">Loading States</h3>
+              <h3 class="text-xl font-semibold mb-3 text-surface-800 dark:text-surface-200">
+                Loading States
+              </h3>
               <Card>
                 <template #content>
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -263,7 +311,7 @@ function simulateSaving() {
                       </h4>
                       <div class="flex items-center justify-center h-24 bg-surface-50 dark:bg-surface-800 rounded-lg">
                         <div class="flex items-center gap-2">
-                          <ProgressSpinner style="width: 16px; height: 16px" strokeWidth="3" />
+                          <ProgressSpinner style="width: 16px; height: 16px" stroke-width="3" />
                           <span class="text-sm">Querying...</span>
                         </div>
                       </div>
@@ -275,10 +323,10 @@ function simulateSaving() {
                       </h4>
                       <div class="flex items-center justify-center h-24 bg-surface-50 dark:bg-surface-800 rounded-lg">
                         <div class="flex items-center gap-2">
-                          <ProgressSpinner 
-                            style="width: 18px; height: 18px" 
-                            strokeWidth="2"
-                            animationDuration="0.8s"
+                          <ProgressSpinner
+                            style="width: 18px; height: 18px"
+                            stroke-width="2"
+                            animation-duration="0.8s"
                           />
                           <span class="text-sm">Fetching...</span>
                         </div>
@@ -291,10 +339,10 @@ function simulateSaving() {
                       </h4>
                       <div class="flex items-center justify-center h-24 bg-surface-50 dark:bg-surface-800 rounded-lg">
                         <div class="flex items-center gap-2">
-                          <ProgressSpinner 
-                            style="width: 20px; height: 20px" 
-                            strokeWidth="4"
-                            animationDuration="1.2s"
+                          <ProgressSpinner
+                            style="width: 20px; height: 20px"
+                            stroke-width="4"
+                            animation-duration="1.2s"
                           />
                           <span class="text-sm">Uploading...</span>
                         </div>
@@ -307,10 +355,10 @@ function simulateSaving() {
                       </h4>
                       <div class="flex items-center justify-center h-24 bg-surface-50 dark:bg-surface-800 rounded-lg">
                         <div class="flex items-center gap-2">
-                          <ProgressSpinner 
-                            style="width: 22px; height: 22px" 
-                            strokeWidth="3"
-                            animationDuration="2s"
+                          <ProgressSpinner
+                            style="width: 22px; height: 22px"
+                            stroke-width="3"
+                            animation-duration="2s"
                           />
                           <span class="text-sm">Processing...</span>
                         </div>

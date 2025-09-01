@@ -1,7 +1,7 @@
 <script setup lang="ts">
 useSeoMeta({
   title: 'ProgressBar - Kitchen Sink',
-  description: 'ProgressBar is a process status indicator.'
+  description: 'ProgressBar is a process status indicator.',
 });
 
 const dynamicValue = ref(0);
@@ -72,8 +72,12 @@ function simulateDownload() {
         <div class="flex items-center gap-4 mb-4">
           <Icon name="lucide:activity" size="32" class="text-primary-500" />
           <div>
-            <h1 class="text-3xl font-bold text-surface-900 dark:text-surface-0 mb-2">ProgressBar</h1>
-            <p class="text-surface-600 dark:text-surface-300">ProgressBar is a process status indicator.</p>
+            <h1 class="text-3xl font-bold text-surface-900 dark:text-surface-0 mb-2">
+              ProgressBar
+            </h1>
+            <p class="text-surface-600 dark:text-surface-300">
+              ProgressBar is a process status indicator.
+            </p>
           </div>
         </div>
       </div>
@@ -82,57 +86,77 @@ function simulateDownload() {
     <div class="flex-1 overflow-auto">
       <div class="max-w-4xl mx-auto p-6 space-y-8">
         <section>
-          <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-0">Basic</h2>
+          <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-0">
+            Basic
+          </h2>
           <p class="text-surface-600 dark:text-surface-400 mb-4">
             ProgressBar is used with the value property.
           </p>
           <div class="border border-surface-200 dark:border-surface-700 rounded-lg p-6 space-y-4">
             <div>
-              <p class="mb-2 text-surface-700 dark:text-surface-300">50% Progress</p>
+              <p class="mb-2 text-surface-700 dark:text-surface-300">
+                50% Progress
+              </p>
               <ProgressBar :value="50" />
             </div>
             <div>
-              <p class="mb-2 text-surface-700 dark:text-surface-300">75% Progress</p>
+              <p class="mb-2 text-surface-700 dark:text-surface-300">
+                75% Progress
+              </p>
               <ProgressBar :value="75" />
             </div>
             <div>
-              <p class="mb-2 text-surface-700 dark:text-surface-300">100% Complete</p>
+              <p class="mb-2 text-surface-700 dark:text-surface-300">
+                100% Complete
+              </p>
               <ProgressBar :value="100" />
             </div>
           </div>
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-0">Dynamic</h2>
+          <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-0">
+            Dynamic
+          </h2>
           <p class="text-surface-600 dark:text-surface-400 mb-4">
             Value is reactive so updating it dynamically changes the bar as well.
           </p>
           <div class="border border-surface-200 dark:border-surface-700 rounded-lg p-6">
-            <p class="mb-2 text-surface-700 dark:text-surface-300">Auto-incrementing progress</p>
+            <p class="mb-2 text-surface-700 dark:text-surface-300">
+              Auto-incrementing progress
+            </p>
             <ProgressBar :value="dynamicValue" />
           </div>
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-0">Template</h2>
+          <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-0">
+            Template
+          </h2>
           <p class="text-surface-600 dark:text-surface-400 mb-4">
             Custom content inside the ProgressBar is defined with the default slot.
           </p>
           <div class="border border-surface-200 dark:border-surface-700 rounded-lg p-6 space-y-4">
             <div>
-              <p class="mb-2 text-surface-700 dark:text-surface-300">Progress with value display</p>
+              <p class="mb-2 text-surface-700 dark:text-surface-300">
+                Progress with value display
+              </p>
               <ProgressBar :value="templateValue">
                 {{ templateValue }}/100
               </ProgressBar>
             </div>
             <div>
-              <p class="mb-2 text-surface-700 dark:text-surface-300">Progress with percentage</p>
+              <p class="mb-2 text-surface-700 dark:text-surface-300">
+                Progress with percentage
+              </p>
               <ProgressBar :value="67">
                 {{ Math.round(67) }}%
               </ProgressBar>
             </div>
             <div>
-              <p class="mb-2 text-surface-700 dark:text-surface-300">Progress with status</p>
+              <p class="mb-2 text-surface-700 dark:text-surface-300">
+                Progress with status
+              </p>
               <ProgressBar :value="85">
                 <template v-if="85 < 50">
                   <span class="text-red-600">Needs Attention</span>
@@ -149,32 +173,44 @@ function simulateDownload() {
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-0">Indeterminate</h2>
+          <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-0">
+            Indeterminate
+          </h2>
           <p class="text-surface-600 dark:text-surface-400 mb-4">
             For progresses with no value to track, set the mode property to indeterminate.
           </p>
           <div class="border border-surface-200 dark:border-surface-700 rounded-lg p-6 space-y-6">
             <div>
-              <p class="mb-2 text-surface-700 dark:text-surface-300">Loading...</p>
+              <p class="mb-2 text-surface-700 dark:text-surface-300">
+                Loading...
+              </p>
               <ProgressBar mode="indeterminate" style="height: 6px" />
             </div>
             <div>
-              <p class="mb-2 text-surface-700 dark:text-surface-300">Processing data...</p>
+              <p class="mb-2 text-surface-700 dark:text-surface-300">
+                Processing data...
+              </p>
               <ProgressBar mode="indeterminate" style="height: 8px" />
             </div>
             <div>
-              <p class="mb-2 text-surface-700 dark:text-surface-300">Synchronizing...</p>
+              <p class="mb-2 text-surface-700 dark:text-surface-300">
+                Synchronizing...
+              </p>
               <ProgressBar mode="indeterminate" style="height: 10px" />
             </div>
           </div>
         </section>
 
         <section>
-          <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-0">Real-World Examples</h2>
-          
+          <h2 class="text-2xl font-bold mb-4 text-surface-900 dark:text-surface-0">
+            Real-World Examples
+          </h2>
+
           <div class="space-y-6">
             <div>
-              <h3 class="text-xl font-semibold mb-3 text-surface-800 dark:text-surface-200">File Upload</h3>
+              <h3 class="text-xl font-semibold mb-3 text-surface-800 dark:text-surface-200">
+                File Upload
+              </h3>
               <Card>
                 <template #content>
                   <div class="space-y-4">
@@ -182,11 +218,15 @@ function simulateDownload() {
                       <div class="flex items-center gap-3">
                         <Icon name="lucide:upload" size="20" class="text-primary-500" />
                         <div>
-                          <p class="font-medium">document.pdf</p>
-                          <p class="text-sm text-surface-500 dark:text-surface-400">2.4 MB</p>
+                          <p class="font-medium">
+                            document.pdf
+                          </p>
+                          <p class="text-sm text-surface-500 dark:text-surface-400">
+                            2.4 MB
+                          </p>
                         </div>
                       </div>
-                      <Button @click="simulateUpload" size="small" severity="secondary">
+                      <Button size="small" severity="secondary" @click="simulateUpload">
                         Start Upload
                       </Button>
                     </div>
@@ -199,7 +239,9 @@ function simulateDownload() {
             </div>
 
             <div>
-              <h3 class="text-xl font-semibold mb-3 text-surface-800 dark:text-surface-200">Task Completion</h3>
+              <h3 class="text-xl font-semibold mb-3 text-surface-800 dark:text-surface-200">
+                Task Completion
+              </h3>
               <Card>
                 <template #content>
                   <div class="space-y-4">
@@ -207,11 +249,15 @@ function simulateDownload() {
                       <div class="flex items-center gap-3">
                         <Icon name="lucide:check-square" size="20" class="text-primary-500" />
                         <div>
-                          <p class="font-medium">Project Milestone</p>
-                          <p class="text-sm text-surface-500 dark:text-surface-400">Development Sprint #3</p>
+                          <p class="font-medium">
+                            Project Milestone
+                          </p>
+                          <p class="text-sm text-surface-500 dark:text-surface-400">
+                            Development Sprint #3
+                          </p>
                         </div>
                       </div>
-                      <Button @click="simulateTask" size="small" severity="secondary">
+                      <Button size="small" severity="secondary" @click="simulateTask">
                         Update Progress
                       </Button>
                     </div>
@@ -238,7 +284,9 @@ function simulateDownload() {
             </div>
 
             <div>
-              <h3 class="text-xl font-semibold mb-3 text-surface-800 dark:text-surface-200">Download Progress</h3>
+              <h3 class="text-xl font-semibold mb-3 text-surface-800 dark:text-surface-200">
+                Download Progress
+              </h3>
               <Card>
                 <template #content>
                   <div class="space-y-4">
@@ -246,11 +294,15 @@ function simulateDownload() {
                       <div class="flex items-center gap-3">
                         <Icon name="lucide:download" size="20" class="text-primary-500" />
                         <div>
-                          <p class="font-medium">software-update.zip</p>
-                          <p class="text-sm text-surface-500 dark:text-surface-400">152.7 MB</p>
+                          <p class="font-medium">
+                            software-update.zip
+                          </p>
+                          <p class="text-sm text-surface-500 dark:text-surface-400">
+                            152.7 MB
+                          </p>
                         </div>
                       </div>
-                      <Button @click="simulateDownload" size="small" severity="secondary">
+                      <Button size="small" severity="secondary" @click="simulateDownload">
                         Download
                       </Button>
                     </div>
@@ -263,7 +315,9 @@ function simulateDownload() {
             </div>
 
             <div>
-              <h3 class="text-xl font-semibold mb-3 text-surface-800 dark:text-surface-200">System Status</h3>
+              <h3 class="text-xl font-semibold mb-3 text-surface-800 dark:text-surface-200">
+                System Status
+              </h3>
               <Card>
                 <template #content>
                   <div class="space-y-6">

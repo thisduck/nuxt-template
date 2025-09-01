@@ -6,14 +6,14 @@ const basicText = ref('');
 const profile = ref({
   name: 'John Doe',
   email: 'john@example.com',
-  bio: 'Software Developer passionate about Vue.js and modern web technologies.'
+  bio: 'Software Developer passionate about Vue.js and modern web technologies.',
 });
 
 // Lazy loading data
 const products = ref([]);
 const dataLoaded = ref(false);
 
-const loadData = () => {
+function loadData() {
   if (!dataLoaded.value) {
     // Simulate API call
     setTimeout(() => {
@@ -21,59 +21,59 @@ const loadData = () => {
         { code: 'P001', name: 'Laptop', category: 'Electronics', quantity: 50 },
         { code: 'P002', name: 'Mouse', category: 'Electronics', quantity: 200 },
         { code: 'P003', name: 'Keyboard', category: 'Electronics', quantity: 150 },
-        { code: 'P004', name: 'Monitor', category: 'Electronics', quantity: 75 }
+        { code: 'P004', name: 'Monitor', category: 'Electronics', quantity: 75 },
       ];
       dataLoaded.value = true;
     }, 1000);
   }
-};
+}
 
 // Settings management
 const settings = ref({
   notifications: true,
   theme: 'dark',
-  language: 'en'
+  language: 'en',
 });
 
 const themeOptions = [
   { label: 'Light', value: 'light' },
   { label: 'Dark', value: 'dark' },
-  { label: 'Auto', value: 'auto' }
+  { label: 'Auto', value: 'auto' },
 ];
 
 const languageOptions = [
   { label: 'English', value: 'en' },
   { label: 'Spanish', value: 'es' },
   { label: 'French', value: 'fr' },
-  { label: 'German', value: 'de' }
+  { label: 'German', value: 'de' },
 ];
 
 // Editable list
 const tasks = ref([
   { id: 1, title: 'Complete project documentation', completed: false },
   { id: 2, title: 'Review pull requests', completed: true },
-  { id: 3, title: 'Update dependencies', completed: false }
+  { id: 3, title: 'Update dependencies', completed: false },
 ]);
 
-const updateTask = (id: number, newTitle: string) => {
+function updateTask(id: number, newTitle: string) {
   const task = tasks.value.find(t => t.id === id);
   if (task) {
     task.title = newTitle;
   }
-};
+}
 
 // Rich content editing
 const richContent = ref({
   title: 'Welcome to our platform',
   description: 'Discover amazing features and capabilities',
-  content: 'This is a comprehensive platform designed to help you achieve your goals with ease and efficiency.'
+  content: 'This is a comprehensive platform designed to help you achieve your goals with ease and efficiency.',
 });
 
 // Price editing
 const pricing = ref({
   basic: 9.99,
   pro: 19.99,
-  enterprise: 49.99
+  enterprise: 49.99,
 });
 
 // Comments system
@@ -83,23 +83,23 @@ const comments = ref([
     author: 'Alice Johnson',
     text: 'This is a great feature!',
     timestamp: '2 hours ago',
-    avatar: 'https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png'
+    avatar: 'https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png',
   },
   {
     id: 2,
     author: 'Bob Smith',
     text: 'Very intuitive and easy to use.',
     timestamp: '4 hours ago',
-    avatar: 'https://primefaces.org/cdn/primevue/images/avatar/asiyajavayant.png'
-  }
+    avatar: 'https://primefaces.org/cdn/primevue/images/avatar/asiyajavayant.png',
+  },
 ]);
 
-const updateComment = (id: number, newText: string) => {
+function updateComment(id: number, newText: string) {
   const comment = comments.value.find(c => c.id === id);
   if (comment) {
     comment.text = newText;
   }
-};
+}
 </script>
 
 <template>
@@ -127,17 +127,17 @@ const updateComment = (id: number, newText: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Inplace component requires display and content templates to define the content of each state.
       </p>
-      
+
       <div class="card">
         <Inplace>
-          <template #display> 
+          <template #display>
             <span class="cursor-pointer hover:text-primary-500 transition-colors">View Content</span>
           </template>
           <template #content>
             <p class="m-0">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
               Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>
           </template>
@@ -153,7 +153,7 @@ const updateComment = (id: number, newText: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         The closeCallback switches the state back to display mode when called from an event.
       </p>
-      
+
       <div class="card">
         <Inplace>
           <template #display>
@@ -180,17 +180,17 @@ const updateComment = (id: number, newText: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Any content such as an image can be placed inside an Inplace.
       </p>
-      
+
       <div class="card">
         <Inplace>
           <template #display>
             <span class="inline-flex items-center gap-2 cursor-pointer hover:text-primary-500 transition-colors">
-              <i class="pi pi-image"></i>
+              <i class="pi pi-image" />
               <span>View Photo</span>
             </span>
           </template>
           <template #content>
-            <img class="w-full sm:w-80 shadow-md rounded-lg" alt="Nature" src="https://primefaces.org/cdn/primevue/images/nature/nature8.jpg" />
+            <img class="w-full sm:w-80 shadow-md rounded-lg" alt="Nature" src="https://primefaces.org/cdn/primevue/images/nature/nature8.jpg">
           </template>
         </Inplace>
       </div>
@@ -204,22 +204,22 @@ const updateComment = (id: number, newText: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         The open event is used to initialize content such as loading data in a lazy manner.
       </p>
-      
+
       <div class="card">
         <Inplace @open="loadData">
-          <template #display> 
+          <template #display>
             <span class="cursor-pointer hover:text-primary-500 transition-colors">View Data</span>
           </template>
           <template #content>
             <div v-if="!dataLoaded" class="flex items-center gap-2 p-4">
-              <ProgressSpinner style="width: 20px; height: 20px" strokeWidth="4" />
+              <ProgressSpinner style="width: 20px; height: 20px" stroke-width="4" />
               <span>Loading data...</span>
             </div>
             <DataTable v-else :value="products" class="p-datatable-sm">
-              <Column field="code" header="Code"></Column>
-              <Column field="name" header="Name"></Column>
-              <Column field="category" header="Category"></Column>
-              <Column field="quantity" header="Quantity"></Column>
+              <Column field="code" header="Code" />
+              <Column field="name" header="Name" />
+              <Column field="category" header="Category" />
+              <Column field="quantity" header="Quantity" />
             </DataTable>
           </template>
         </Inplace>
@@ -234,7 +234,7 @@ const updateComment = (id: number, newText: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Real-world example of inline profile editing with multiple fields.
       </p>
-      
+
       <div class="card space-y-4">
         <div class="flex items-center gap-4">
           <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" size="large" shape="circle" />
@@ -255,7 +255,7 @@ const updateComment = (id: number, newText: string) => {
                 </template>
               </Inplace>
             </div>
-            
+
             <div class="flex items-center gap-2">
               <span class="text-sm font-medium text-surface-600 dark:text-surface-400">Email:</span>
               <Inplace>
@@ -272,7 +272,7 @@ const updateComment = (id: number, newText: string) => {
                 </template>
               </Inplace>
             </div>
-            
+
             <div class="flex items-start gap-2">
               <span class="text-sm font-medium text-surface-600 dark:text-surface-400 mt-1">Bio:</span>
               <Inplace>
@@ -305,14 +305,16 @@ const updateComment = (id: number, newText: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Inline editing of application settings with different input types.
       </p>
-      
+
       <div class="card space-y-4">
         <div class="flex items-center justify-between">
           <span class="font-medium">Notifications</span>
           <Inplace>
             <template #display>
-              <Badge :value="settings.notifications ? 'Enabled' : 'Disabled'" 
-                     :severity="settings.notifications ? 'success' : 'secondary'" />
+              <Badge
+                :value="settings.notifications ? 'Enabled' : 'Disabled'"
+                :severity="settings.notifications ? 'success' : 'secondary'"
+              />
             </template>
             <template #content="{ closeCallback }">
               <div class="inline-flex items-center gap-2">
@@ -322,7 +324,7 @@ const updateComment = (id: number, newText: string) => {
             </template>
           </Inplace>
         </div>
-        
+
         <div class="flex items-center justify-between">
           <span class="font-medium">Theme</span>
           <Inplace>
@@ -337,13 +339,15 @@ const updateComment = (id: number, newText: string) => {
             </template>
           </Inplace>
         </div>
-        
+
         <div class="flex items-center justify-between">
           <span class="font-medium">Language</span>
           <Inplace>
             <template #display>
-              <Chip :label="languageOptions.find(l => l.value === settings.language)?.label" 
-                    class="cursor-pointer hover:bg-primary hover:text-primary-contrast transition-colors" />
+              <Chip
+                :label="languageOptions.find(l => l.value === settings.language)?.label"
+                class="cursor-pointer hover:bg-primary hover:text-primary-contrast transition-colors"
+              />
             </template>
             <template #content="{ closeCallback }">
               <div class="inline-flex items-center gap-2">
@@ -364,7 +368,7 @@ const updateComment = (id: number, newText: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Inline editing of task items with completion status.
       </p>
-      
+
       <div class="card">
         <div class="space-y-3">
           <div v-for="task in tasks" :key="task.id" class="flex items-center gap-3 p-3 border border-surface-200 dark:border-surface-700 rounded">
@@ -372,23 +376,29 @@ const updateComment = (id: number, newText: string) => {
             <div class="flex-1">
               <Inplace>
                 <template #display>
-                  <span class="cursor-pointer hover:text-primary-500 transition-colors"
-                        :class="{ 'line-through text-surface-400': task.completed }">
+                  <span
+                    class="cursor-pointer hover:text-primary-500 transition-colors"
+                    :class="{ 'line-through text-surface-400': task.completed }"
+                  >
                     {{ task.title }}
                   </span>
                 </template>
                 <template #content="{ closeCallback }">
                   <div class="inline-flex items-center gap-2 w-full">
-                    <InputText v-model="task.title" autofocus class="flex-1" 
-                               @keyup.enter="() => { updateTask(task.id, task.title); closeCallback(); }" />
-                    <Button icon="pi pi-check" severity="success" size="small" 
-                            @click="() => { updateTask(task.id, task.title); closeCallback(); }" />
+                    <InputText
+                      v-model="task.title" autofocus class="flex-1"
+                      @keyup.enter="() => { updateTask(task.id, task.title); closeCallback(); }"
+                    />
+                    <Button
+                      icon="pi pi-check" severity="success" size="small"
+                      @click="() => { updateTask(task.id, task.title); closeCallback(); }"
+                    />
                   </div>
                 </template>
               </Inplace>
             </div>
             <div class="text-xs text-surface-500">
-              <i class="pi pi-clock mr-1"></i>
+              <i class="pi pi-clock mr-1" />
               Task {{ task.id }}
             </div>
           </div>
@@ -404,11 +414,13 @@ const updateComment = (id: number, newText: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Inline price editing for different plan tiers.
       </p>
-      
+
       <div class="card">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="border border-surface-200 dark:border-surface-700 rounded-lg p-6 text-center">
-            <h3 class="text-xl font-semibold mb-4">Basic</h3>
+            <h3 class="text-xl font-semibold mb-4">
+              Basic
+            </h3>
             <div class="text-3xl font-bold text-primary-600 mb-4">
               <Inplace>
                 <template #display>
@@ -418,8 +430,10 @@ const updateComment = (id: number, newText: string) => {
                 </template>
                 <template #content="{ closeCallback }">
                   <div class="inline-flex items-center gap-2">
-                    <InputNumber v-model="pricing.basic" mode="currency" currency="USD" locale="en-US" 
-                                 autofocus @keyup.enter="closeCallback" />
+                    <InputNumber
+                      v-model="pricing.basic" mode="currency" currency="USD" locale="en-US"
+                      autofocus @keyup.enter="closeCallback"
+                    />
                     <Button icon="pi pi-check" severity="success" size="small" @click="closeCallback" />
                   </div>
                 </template>
@@ -428,12 +442,14 @@ const updateComment = (id: number, newText: string) => {
             </div>
             <Button label="Choose Plan" class="w-full" />
           </div>
-          
+
           <div class="border-2 border-primary-500 rounded-lg p-6 text-center relative">
             <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
               <Badge value="Popular" severity="info" />
             </div>
-            <h3 class="text-xl font-semibold mb-4">Pro</h3>
+            <h3 class="text-xl font-semibold mb-4">
+              Pro
+            </h3>
             <div class="text-3xl font-bold text-primary-600 mb-4">
               <Inplace>
                 <template #display>
@@ -443,8 +459,10 @@ const updateComment = (id: number, newText: string) => {
                 </template>
                 <template #content="{ closeCallback }">
                   <div class="inline-flex items-center gap-2">
-                    <InputNumber v-model="pricing.pro" mode="currency" currency="USD" locale="en-US" 
-                                 autofocus @keyup.enter="closeCallback" />
+                    <InputNumber
+                      v-model="pricing.pro" mode="currency" currency="USD" locale="en-US"
+                      autofocus @keyup.enter="closeCallback"
+                    />
                     <Button icon="pi pi-check" severity="success" size="small" @click="closeCallback" />
                   </div>
                 </template>
@@ -453,9 +471,11 @@ const updateComment = (id: number, newText: string) => {
             </div>
             <Button label="Choose Plan" class="w-full" />
           </div>
-          
+
           <div class="border border-surface-200 dark:border-surface-700 rounded-lg p-6 text-center">
-            <h3 class="text-xl font-semibold mb-4">Enterprise</h3>
+            <h3 class="text-xl font-semibold mb-4">
+              Enterprise
+            </h3>
             <div class="text-3xl font-bold text-primary-600 mb-4">
               <Inplace>
                 <template #display>
@@ -465,8 +485,10 @@ const updateComment = (id: number, newText: string) => {
                 </template>
                 <template #content="{ closeCallback }">
                   <div class="inline-flex items-center gap-2">
-                    <InputNumber v-model="pricing.enterprise" mode="currency" currency="USD" locale="en-US" 
-                                 autofocus @keyup.enter="closeCallback" />
+                    <InputNumber
+                      v-model="pricing.enterprise" mode="currency" currency="USD" locale="en-US"
+                      autofocus @keyup.enter="closeCallback"
+                    />
                     <Button icon="pi pi-check" severity="success" size="small" @click="closeCallback" />
                   </div>
                 </template>
@@ -487,11 +509,13 @@ const updateComment = (id: number, newText: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Inline comment editing with user avatars and timestamps.
       </p>
-      
+
       <div class="card">
         <div class="space-y-4">
-          <div v-for="comment in comments" :key="comment.id" 
-               class="flex gap-3 p-4 border border-surface-200 dark:border-surface-700 rounded-lg">
+          <div
+            v-for="comment in comments" :key="comment.id"
+            class="flex gap-3 p-4 border border-surface-200 dark:border-surface-700 rounded-lg"
+          >
             <Avatar :image="comment.avatar" shape="circle" />
             <div class="flex-1">
               <div class="flex items-center gap-2 mb-2">
@@ -508,8 +532,10 @@ const updateComment = (id: number, newText: string) => {
                   <div class="space-y-2">
                     <Textarea v-model="comment.text" rows="3" autofocus class="w-full" />
                     <div class="flex gap-2">
-                      <Button label="Save" severity="success" size="small" 
-                              @click="() => { updateComment(comment.id, comment.text); closeCallback(); }" />
+                      <Button
+                        label="Save" severity="success" size="small"
+                        @click="() => { updateComment(comment.id, comment.text); closeCallback(); }"
+                      />
                       <Button label="Cancel" severity="secondary" size="small" @click="closeCallback" />
                     </div>
                   </div>
@@ -529,7 +555,7 @@ const updateComment = (id: number, newText: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Inline editing of structured content with multiple text fields.
       </p>
-      
+
       <div class="card">
         <div class="space-y-6">
           <div>
@@ -542,14 +568,16 @@ const updateComment = (id: number, newText: string) => {
                 </template>
                 <template #content="{ closeCallback }">
                   <div class="flex items-center gap-2">
-                    <InputText v-model="richContent.title" autofocus class="text-2xl font-bold w-96" 
-                               @keyup.enter="closeCallback" />
+                    <InputText
+                      v-model="richContent.title" autofocus class="text-2xl font-bold w-96"
+                      @keyup.enter="closeCallback"
+                    />
                     <Button icon="pi pi-check" severity="success" size="small" @click="closeCallback" />
                   </div>
                 </template>
               </Inplace>
             </h3>
-            
+
             <p class="text-lg text-surface-600 dark:text-surface-300 mb-4">
               <Inplace>
                 <template #display>
@@ -559,14 +587,16 @@ const updateComment = (id: number, newText: string) => {
                 </template>
                 <template #content="{ closeCallback }">
                   <div class="flex items-center gap-2">
-                    <InputText v-model="richContent.description" autofocus class="w-96" 
-                               @keyup.enter="closeCallback" />
+                    <InputText
+                      v-model="richContent.description" autofocus class="w-96"
+                      @keyup.enter="closeCallback"
+                    />
                     <Button icon="pi pi-check" severity="success" size="small" @click="closeCallback" />
                   </div>
                 </template>
               </Inplace>
             </p>
-            
+
             <p class="text-surface-700 dark:text-surface-200">
               <Inplace>
                 <template #display>
@@ -598,7 +628,7 @@ const updateComment = (id: number, newText: string) => {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Inplace component accessibility considerations and keyboard support.
       </p>
-      
+
       <div class="card">
         <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-lg p-4">
           <div class="flex items-start gap-3">

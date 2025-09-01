@@ -134,12 +134,12 @@ async function onFilterTags(event) {
   if (filterDebounceTimeout.value) {
     clearTimeout(filterDebounceTimeout.value);
   }
-  
+
   // Debounce the API call
   filterDebounceTimeout.value = setTimeout(async () => {
     try {
-      filteredTags.value = await $trpc.getFilteredTags.query({ 
-        filter: event.value || '' 
+      filteredTags.value = await $trpc.getFilteredTags.query({
+        filter: event.value || '',
       });
     } catch (error) {
       console.error('Failed to filter tags:', error);
@@ -421,9 +421,9 @@ function onChange(event) {
             placeholder="Select Cities"
             :select-all="selectAll"
             :max-selected-labels="3"
+            class="w-full"
             @selectall-change="onSelectAllChange"
             @change="onChange"
-            class="w-full"
           />
           <small class="text-surface-600 dark:text-surface-300">
             Use the header checkbox to select/deselect all options
@@ -523,7 +523,6 @@ function onChange(event) {
             <small class="text-surface-600 dark:text-surface-300">This field is disabled.</small>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -602,10 +601,10 @@ function onChange(event) {
           <div class="flex items-center gap-2">
             <label for="loading-multiselect" class="font-semibold text-surface-900 dark:text-surface-0">Loading Example</label>
             <Button
-              @click="isLoading = !isLoading"
               :label="isLoading ? 'Stop Loading' : 'Start Loading'"
               size="small"
               severity="secondary"
+              @click="isLoading = !isLoading"
             />
           </div>
           <MultiSelect
@@ -676,16 +675,16 @@ function onChange(event) {
             placeholder="Search and select technologies..."
             display="chip"
             filter
-            @filter="onFilterTags"
             :max-selected-labels="5"
+            @filter="onFilterTags"
           >
             <template #option="slotProps">
               <div class="flex items-center justify-between p-2 w-full">
                 <div class="flex items-center gap-2">
-                  <div 
+                  <div
                     class="w-4 h-4 rounded"
                     :style="{ backgroundColor: slotProps.option.color }"
-                  ></div>
+                  />
                   <div class="flex flex-col">
                     <span class="font-medium">{{ slotProps.option.name }}</span>
                     <small class="text-surface-500">{{ slotProps.option.category }}</small>
@@ -695,10 +694,10 @@ function onChange(event) {
             </template>
             <template #chip="slotProps">
               <div class="flex items-center gap-1 px-2 py-1">
-                <div 
+                <div
                   class="w-3 h-3 rounded"
                   :style="{ backgroundColor: slotProps.value.color }"
-                ></div>
+                />
                 <span>{{ slotProps.value.name }}</span>
               </div>
             </template>

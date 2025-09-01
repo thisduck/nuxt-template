@@ -4,43 +4,43 @@ const basicEvents = ref([
   { status: 'Ordered', date: '15/10/2020 10:30', icon: 'pi pi-shopping-cart', color: '#9C27B0' },
   { status: 'Processing', date: '15/10/2020 14:00', icon: 'pi pi-cog', color: '#673AB7' },
   { status: 'Shipped', date: '15/10/2020 16:15', icon: 'pi pi-truck', color: '#FF9800' },
-  { status: 'Delivered', date: '16/10/2020 10:00', icon: 'pi pi-check', color: '#607D8B' }
+  { status: 'Delivered', date: '16/10/2020 10:00', icon: 'pi pi-check', color: '#607D8B' },
 ]);
 
 // Template events with more details
 const templateEvents = ref([
-  { 
-    status: 'Ordered', 
-    date: '15/10/2020 10:30', 
-    icon: 'pi pi-shopping-cart', 
+  {
+    status: 'Ordered',
+    date: '15/10/2020 10:30',
+    icon: 'pi pi-shopping-cart',
     color: '#9C27B0',
     image: 'bamboo-watch.jpg',
-    description: 'Your order has been placed and is being processed.'
+    description: 'Your order has been placed and is being processed.',
   },
-  { 
-    status: 'Processing', 
-    date: '15/10/2020 14:00', 
-    icon: 'pi pi-cog', 
+  {
+    status: 'Processing',
+    date: '15/10/2020 14:00',
+    icon: 'pi pi-cog',
     color: '#673AB7',
     image: 'game-controller.jpg',
-    description: 'Your order is being prepared for shipment.'
+    description: 'Your order is being prepared for shipment.',
   },
-  { 
-    status: 'Shipped', 
-    date: '15/10/2020 16:15', 
-    icon: 'pi pi-truck', 
+  {
+    status: 'Shipped',
+    date: '15/10/2020 16:15',
+    icon: 'pi pi-truck',
     color: '#FF9800',
     image: 'headphones.jpg',
-    description: 'Your package has been shipped and is on its way.'
+    description: 'Your package has been shipped and is on its way.',
   },
-  { 
-    status: 'Delivered', 
-    date: '16/10/2020 10:00', 
-    icon: 'pi pi-check', 
+  {
+    status: 'Delivered',
+    date: '16/10/2020 10:00',
+    icon: 'pi pi-check',
     color: '#607D8B',
     image: 'shoes.jpg',
-    description: 'Your package has been delivered successfully.'
-  }
+    description: 'Your package has been delivered successfully.',
+  },
 ]);
 
 // Horizontal timeline events
@@ -55,7 +55,7 @@ const projectEvents = ref([
     color: '#4CAF50',
     team: 'All Teams',
     milestone: 'Initial planning and resource allocation',
-    tasks: ['Requirements gathering', 'Team formation', 'Budget approval']
+    tasks: ['Requirements gathering', 'Team formation', 'Budget approval'],
   },
   {
     status: 'Design Phase',
@@ -64,7 +64,7 @@ const projectEvents = ref([
     color: '#2196F3',
     team: 'Design Team',
     milestone: 'UI/UX design and prototyping',
-    tasks: ['Wireframes', 'Mockups', 'User testing']
+    tasks: ['Wireframes', 'Mockups', 'User testing'],
   },
   {
     status: 'Development',
@@ -73,7 +73,7 @@ const projectEvents = ref([
     color: '#FF5722',
     team: 'Development Team',
     milestone: 'Core feature implementation',
-    tasks: ['Backend APIs', 'Frontend components', 'Database setup']
+    tasks: ['Backend APIs', 'Frontend components', 'Database setup'],
   },
   {
     status: 'Testing',
@@ -82,7 +82,7 @@ const projectEvents = ref([
     color: '#9C27B0',
     team: 'QA Team',
     milestone: 'Quality assurance and bug fixes',
-    tasks: ['Unit testing', 'Integration testing', 'UAT']
+    tasks: ['Unit testing', 'Integration testing', 'UAT'],
   },
   {
     status: 'Deployment',
@@ -91,8 +91,8 @@ const projectEvents = ref([
     color: '#00BCD4',
     team: 'DevOps Team',
     milestone: 'Production deployment',
-    tasks: ['Server setup', 'CI/CD pipeline', 'Monitoring']
-  }
+    tasks: ['Server setup', 'CI/CD pipeline', 'Monitoring'],
+  },
 ]);
 
 // Activity timeline
@@ -103,7 +103,7 @@ const activityEvents = ref([
     time: '2 hours ago',
     icon: 'pi pi-plus',
     color: '#4CAF50',
-    details: 'Task: Implement user authentication'
+    details: 'Task: Implement user authentication',
   },
   {
     user: 'Jane Smith',
@@ -111,7 +111,7 @@ const activityEvents = ref([
     time: '4 hours ago',
     icon: 'pi pi-comment',
     color: '#2196F3',
-    details: 'Looks good to me! Ready to merge.'
+    details: 'Looks good to me! Ready to merge.',
   },
   {
     user: 'Bob Johnson',
@@ -119,7 +119,7 @@ const activityEvents = ref([
     time: '6 hours ago',
     icon: 'pi pi-check-circle',
     color: '#9C27B0',
-    details: 'PR #41: Add dark mode support'
+    details: 'PR #41: Add dark mode support',
   },
   {
     user: 'Alice Brown',
@@ -127,8 +127,8 @@ const activityEvents = ref([
     time: '1 day ago',
     icon: 'pi pi-cloud-upload',
     color: '#FF9800',
-    details: 'Version 2.1.0 released'
-  }
+    details: 'Version 2.1.0 released',
+  },
 ]);
 </script>
 
@@ -181,7 +181,9 @@ const activityEvents = ref([
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <!-- Left Aligned -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">Left (Default)</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">
+              Left (Default)
+            </h4>
             <Timeline :value="basicEvents" class="w-full">
               <template #content="slotProps">
                 <div class="text-sm">
@@ -193,7 +195,9 @@ const activityEvents = ref([
 
           <!-- Right Aligned -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">Right</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">
+              Right
+            </h4>
             <Timeline :value="basicEvents" align="right" class="w-full">
               <template #content="slotProps">
                 <div class="text-sm">
@@ -205,7 +209,9 @@ const activityEvents = ref([
 
           <!-- Alternate -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">Alternate</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">
+              Alternate
+            </h4>
             <Timeline :value="basicEvents" align="alternate" class="w-full">
               <template #content="slotProps">
                 <div class="text-sm">
@@ -233,7 +239,9 @@ const activityEvents = ref([
             <small class="text-surface-500 dark:text-surface-400">{{ slotProps.item.date }}</small>
           </template>
           <template #content="slotProps">
-            <div class="font-medium">{{ slotProps.item.status }}</div>
+            <div class="font-medium">
+              {{ slotProps.item.status }}
+            </div>
           </template>
         </Timeline>
       </div>
@@ -254,8 +262,8 @@ const activityEvents = ref([
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <Timeline :value="templateEvents" align="alternate" class="customized-timeline">
           <template #marker="slotProps">
-            <span 
-              class="flex w-12 h-12 items-center justify-center text-white rounded-full z-10 shadow-lg border-4 border-surface-0 dark:border-surface-900" 
+            <span
+              class="flex w-12 h-12 items-center justify-center text-white rounded-full z-10 shadow-lg border-4 border-surface-0 dark:border-surface-900"
               :style="{ backgroundColor: slotProps.item.color }"
             >
               <i :class="slotProps.item.icon" />
@@ -266,8 +274,10 @@ const activityEvents = ref([
               <template #title>
                 <div class="flex items-center justify-between">
                   <span>{{ slotProps.item.status }}</span>
-                  <Tag :value="slotProps.index === 0 ? 'New' : slotProps.index === templateEvents.length - 1 ? 'Complete' : 'In Progress'" 
-                       :severity="slotProps.index === 0 ? 'success' : slotProps.index === templateEvents.length - 1 ? 'info' : 'warn'" />
+                  <Tag
+                    :value="slotProps.index === 0 ? 'New' : slotProps.index === templateEvents.length - 1 ? 'Complete' : 'In Progress'"
+                    :severity="slotProps.index === 0 ? 'success' : slotProps.index === templateEvents.length - 1 ? 'info' : 'warn'"
+                  />
                 </div>
               </template>
               <template #subtitle>
@@ -307,7 +317,9 @@ const activityEvents = ref([
         <div class="flex flex-col gap-8">
           <!-- Top Aligned -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">Top Aligned</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">
+              Top Aligned
+            </h4>
             <Timeline :value="yearEvents" layout="horizontal" align="top">
               <template #content="slotProps">
                 <div class="px-3 py-2 bg-primary-100 dark:bg-primary-900/20 rounded-lg">
@@ -319,7 +331,9 @@ const activityEvents = ref([
 
           <!-- Bottom Aligned -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">Bottom Aligned</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">
+              Bottom Aligned
+            </h4>
             <Timeline :value="yearEvents" layout="horizontal" align="bottom">
               <template #content="slotProps">
                 <div class="px-3 py-2 bg-surface-100 dark:bg-surface-800 rounded-lg">
@@ -331,7 +345,9 @@ const activityEvents = ref([
 
           <!-- Alternate -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">Alternate</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">
+              Alternate
+            </h4>
             <Timeline :value="yearEvents" layout="horizontal" align="alternate">
               <template #opposite>
                 &nbsp;
@@ -364,8 +380,8 @@ const activityEvents = ref([
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <Timeline :value="projectEvents" align="alternate">
           <template #marker="slotProps">
-            <span 
-              class="flex w-14 h-14 items-center justify-center text-white rounded-full z-10 shadow-xl border-4 border-surface-0 dark:border-surface-900" 
+            <span
+              class="flex w-14 h-14 items-center justify-center text-white rounded-full z-10 shadow-xl border-4 border-surface-0 dark:border-surface-900"
               :style="{ backgroundColor: slotProps.item.color }"
             >
               <i :class="slotProps.item.icon" class="text-xl" />
@@ -373,8 +389,12 @@ const activityEvents = ref([
           </template>
           <template #opposite="slotProps">
             <div class="text-right">
-              <div class="font-bold text-lg text-surface-900 dark:text-surface-0">{{ slotProps.item.date }}</div>
-              <div class="text-sm text-surface-500 dark:text-surface-400">{{ slotProps.item.team }}</div>
+              <div class="font-bold text-lg text-surface-900 dark:text-surface-0">
+                {{ slotProps.item.date }}
+              </div>
+              <div class="text-sm text-surface-500 dark:text-surface-400">
+                {{ slotProps.item.team }}
+              </div>
             </div>
           </template>
           <template #content="slotProps">
@@ -417,8 +437,8 @@ const activityEvents = ref([
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <Timeline :value="activityEvents">
           <template #marker="slotProps">
-            <span 
-              class="flex w-10 h-10 items-center justify-center text-white rounded-full z-10 shadow-md" 
+            <span
+              class="flex w-10 h-10 items-center justify-center text-white rounded-full z-10 shadow-md"
               :style="{ backgroundColor: slotProps.item.color }"
             >
               <i :class="slotProps.item.icon" class="text-sm" />
@@ -437,7 +457,9 @@ const activityEvents = ref([
                 </div>
               </div>
               <div class="ml-10 p-3 bg-surface-50 dark:bg-surface-800 rounded-lg">
-                <p class="text-sm text-surface-700 dark:text-surface-200">{{ slotProps.item.details }}</p>
+                <p class="text-sm text-surface-700 dark:text-surface-200">
+                  {{ slotProps.item.details }}
+                </p>
               </div>
             </div>
           </template>
@@ -458,7 +480,9 @@ const activityEvents = ref([
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <!-- Dashed Line -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">Dashed Connector</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">
+              Dashed Connector
+            </h4>
             <Timeline :value="basicEvents.slice(0, 3)" class="timeline-dashed">
               <template #content="slotProps">
                 {{ slotProps.item.status }}
@@ -468,7 +492,9 @@ const activityEvents = ref([
 
           <!-- Thick Line -->
           <div>
-            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">Thick Connector</h4>
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0 mb-4">
+              Thick Connector
+            </h4>
             <Timeline :value="basicEvents.slice(0, 3)" class="timeline-thick">
               <template #content="slotProps">
                 {{ slotProps.item.status }}

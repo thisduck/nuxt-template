@@ -42,13 +42,19 @@ const option10 = ref(false);
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Stepper consists of a combination of StepList, Step, StepPanels and StepPanel components.
       </p>
-      
+
       <div class="card">
         <Stepper value="1">
           <StepList>
-            <Step value="1">Header I</Step>
-            <Step value="2">Header II</Step>
-            <Step value="3">Header III</Step>
+            <Step value="1">
+              Header I
+            </Step>
+            <Step value="2">
+              Header II
+            </Step>
+            <Step value="3">
+              Header III
+            </Step>
           </StepList>
           <StepPanels>
             <StepPanel v-slot="{ activateCallback }" value="1">
@@ -58,7 +64,7 @@ const option10 = ref(false);
                 </div>
               </div>
               <div class="flex pt-6 justify-end">
-                <Button label="Next" icon="pi pi-arrow-right" iconPos="right" @click="activateCallback('2')" />
+                <Button label="Next" icon="pi pi-arrow-right" icon-pos="right" @click="activateCallback('2')" />
               </div>
             </StepPanel>
             <StepPanel v-slot="{ activateCallback }" value="2">
@@ -69,7 +75,7 @@ const option10 = ref(false);
               </div>
               <div class="flex pt-6 justify-between">
                 <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="activateCallback('1')" />
-                <Button label="Next" icon="pi pi-arrow-right" iconPos="right" @click="activateCallback('3')" />
+                <Button label="Next" icon="pi pi-arrow-right" icon-pos="right" @click="activateCallback('3')" />
               </div>
             </StepPanel>
             <StepPanel v-slot="{ activateCallback }" value="3">
@@ -95,7 +101,7 @@ const option10 = ref(false);
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Vertical layout requires StepItem as a wrapper of Step and StepPanel components.
       </p>
-      
+
       <div class="card">
         <Stepper value="1">
           <StepItem value="1">
@@ -150,13 +156,19 @@ const option10 = ref(false);
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         When linear property is present, current step must be completed in order to move to the next step.
       </p>
-      
+
       <div class="card">
         <Stepper value="1" linear>
           <StepList>
-            <Step value="1">Header I</Step>
-            <Step value="2">Header II</Step>
-            <Step value="3">Header III</Step>
+            <Step value="1">
+              Header I
+            </Step>
+            <Step value="2">
+              Header II
+            </Step>
+            <Step value="3">
+              Header III
+            </Step>
           </StepList>
           <StepPanels>
             <StepPanel v-slot="{ activateCallback }" value="1">
@@ -177,7 +189,7 @@ const option10 = ref(false);
               </div>
               <div class="flex pt-6 justify-between">
                 <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="activateCallback('1')" />
-                <Button label="Next" icon="pi pi-arrow-right" iconPos="right" @click="activateCallback('3')" />
+                <Button label="Next" icon="pi pi-arrow-right" icon-pos="right" @click="activateCallback('3')" />
               </div>
             </StepPanel>
             <StepPanel v-slot="{ activateCallback }" value="3">
@@ -203,13 +215,19 @@ const option10 = ref(false);
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Use Stepper with a StepList only for custom requirements where a progress indicator is needed.
       </p>
-      
+
       <div class="card">
         <Stepper value="2" class="basis-[50rem]">
           <StepList>
-            <Step value="1">Design</Step>
-            <Step value="2">Development</Step>
-            <Step value="3">QA</Step>
+            <Step value="1">
+              Design
+            </Step>
+            <Step value="2">
+              Development
+            </Step>
+            <Step value="3">
+              QA
+            </Step>
           </StepList>
         </Stepper>
       </div>
@@ -223,17 +241,16 @@ const option10 = ref(false);
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Custom content for a step is defined with the default slot. Use the asChild property for complete customization.
       </p>
-      
+
       <div class="card">
         <Stepper v-model:value="activeStep" class="basis-[40rem]">
           <StepList>
-            <Step v-slot="{ activateCallback, value, a11yAttrs }" asChild :value="1">
+            <Step v-slot="{ activateCallback, value, a11yAttrs }" as-child :value="1">
               <div class="flex flex-row flex-auto gap-2" v-bind="a11yAttrs.root">
-                <button class="bg-transparent border-0 inline-flex flex-col gap-2" @click="activateCallback" v-bind="a11yAttrs.header">
+                <button class="bg-transparent border-0 inline-flex flex-col gap-2" v-bind="a11yAttrs.header" @click="activateCallback">
                   <span
-                    :class="[
-                      'rounded-full border-2 w-12 h-12 inline-flex items-center justify-center',
-                      { 'bg-primary text-primary-contrast border-primary': value <= activeStep, 'border-surface-200 dark:border-surface-700': value > activeStep }
+                    class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center" :class="[
+                      { 'bg-primary text-primary-contrast border-primary': value <= activeStep, 'border-surface-200 dark:border-surface-700': value > activeStep },
                     ]"
                   >
                     <i class="pi pi-user" />
@@ -242,13 +259,12 @@ const option10 = ref(false);
                 <Divider />
               </div>
             </Step>
-            <Step v-slot="{ activateCallback, value, a11yAttrs }" asChild :value="2">
+            <Step v-slot="{ activateCallback, value, a11yAttrs }" as-child :value="2">
               <div class="flex flex-row flex-auto gap-2 pl-2" v-bind="a11yAttrs.root">
-                <button class="bg-transparent border-0 inline-flex flex-col gap-2" @click="activateCallback" v-bind="a11yAttrs.header">
+                <button class="bg-transparent border-0 inline-flex flex-col gap-2" v-bind="a11yAttrs.header" @click="activateCallback">
                   <span
-                    :class="[
-                      'rounded-full border-2 w-12 h-12 inline-flex items-center justify-center',
-                      { 'bg-primary text-primary-contrast border-primary': value <= activeStep, 'border-surface-200 dark:border-surface-700': value > activeStep }
+                    class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center" :class="[
+                      { 'bg-primary text-primary-contrast border-primary': value <= activeStep, 'border-surface-200 dark:border-surface-700': value > activeStep },
                     ]"
                   >
                     <i class="pi pi-star" />
@@ -257,13 +273,12 @@ const option10 = ref(false);
                 <Divider />
               </div>
             </Step>
-            <Step v-slot="{ activateCallback, value, a11yAttrs }" asChild :value="3">
+            <Step v-slot="{ activateCallback, value, a11yAttrs }" as-child :value="3">
               <div class="flex flex-row pl-2" v-bind="a11yAttrs.root">
-                <button class="bg-transparent border-0 inline-flex flex-col gap-2" @click="activateCallback" v-bind="a11yAttrs.header">
+                <button class="bg-transparent border-0 inline-flex flex-col gap-2" v-bind="a11yAttrs.header" @click="activateCallback">
                   <span
-                    :class="[
-                      'rounded-full border-2 w-12 h-12 inline-flex items-center justify-center',
-                      { 'bg-primary text-primary-contrast border-primary': value <= activeStep, 'border-surface-200 dark:border-surface-700': value > activeStep }
+                    class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center" :class="[
+                      { 'bg-primary text-primary-contrast border-primary': value <= activeStep, 'border-surface-200 dark:border-surface-700': value > activeStep },
                     ]"
                   >
                     <i class="pi pi-id-card" />
@@ -275,7 +290,9 @@ const option10 = ref(false);
           <StepPanels>
             <StepPanel v-slot="{ activateCallback }" :value="1">
               <div class="flex flex-col gap-2 mx-auto" style="min-height: 16rem; max-width: 20rem">
-                <div class="text-center mt-4 mb-4 text-xl font-semibold">Create your account</div>
+                <div class="text-center mt-4 mb-4 text-xl font-semibold">
+                  Create your account
+                </div>
                 <div class="field">
                   <InputText id="input" v-model="name" type="text" placeholder="Name" fluid />
                 </div>
@@ -287,35 +304,39 @@ const option10 = ref(false);
                 </div>
               </div>
               <div class="flex pt-6 justify-end">
-                <Button label="Next" icon="pi pi-arrow-right" iconPos="right" @click="activateCallback(2)" />
+                <Button label="Next" icon="pi pi-arrow-right" icon-pos="right" @click="activateCallback(2)" />
               </div>
             </StepPanel>
             <StepPanel v-slot="{ activateCallback }" :value="2">
               <div class="flex flex-col gap-2 mx-auto" style="min-height: 16rem; max-width: 24rem">
-                <div class="text-center mt-4 mb-4 text-xl font-semibold">Choose your interests</div>
+                <div class="text-center mt-4 mb-4 text-xl font-semibold">
+                  Choose your interests
+                </div>
                 <div class="flex flex-wrap justify-center gap-4">
-                  <ToggleButton v-model="option1" onLabel="Nature" offLabel="Nature" />
-                  <ToggleButton v-model="option2" onLabel="Art" offLabel="Art" />
-                  <ToggleButton v-model="option3" onLabel="Music" offLabel="Music" />
-                  <ToggleButton v-model="option4" onLabel="Design" offLabel="Design" />
-                  <ToggleButton v-model="option5" onLabel="Photography" offLabel="Photography" />
-                  <ToggleButton v-model="option6" onLabel="Movies" offLabel="Movies" />
-                  <ToggleButton v-model="option7" onLabel="Sports" offLabel="Sports" />
-                  <ToggleButton v-model="option8" onLabel="Gaming" offLabel="Gaming" />
-                  <ToggleButton v-model="option9" onLabel="Traveling" offLabel="Traveling" />
-                  <ToggleButton v-model="option10" onLabel="Dancing" offLabel="Dancing" />
+                  <ToggleButton v-model="option1" on-label="Nature" off-label="Nature" />
+                  <ToggleButton v-model="option2" on-label="Art" off-label="Art" />
+                  <ToggleButton v-model="option3" on-label="Music" off-label="Music" />
+                  <ToggleButton v-model="option4" on-label="Design" off-label="Design" />
+                  <ToggleButton v-model="option5" on-label="Photography" off-label="Photography" />
+                  <ToggleButton v-model="option6" on-label="Movies" off-label="Movies" />
+                  <ToggleButton v-model="option7" on-label="Sports" off-label="Sports" />
+                  <ToggleButton v-model="option8" on-label="Gaming" off-label="Gaming" />
+                  <ToggleButton v-model="option9" on-label="Traveling" off-label="Traveling" />
+                  <ToggleButton v-model="option10" on-label="Dancing" off-label="Dancing" />
                 </div>
               </div>
               <div class="flex pt-6 justify-between">
                 <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="activateCallback(1)" />
-                <Button label="Next" icon="pi pi-arrow-right" iconPos="right" @click="activateCallback(3)" />
+                <Button label="Next" icon="pi pi-arrow-right" icon-pos="right" @click="activateCallback(3)" />
               </div>
             </StepPanel>
             <StepPanel v-slot="{ activateCallback }" :value="3">
               <div class="flex flex-col gap-2 mx-auto" style="min-height: 16rem; max-width: 24rem">
-                <div class="text-center mt-4 mb-4 text-xl font-semibold">Account created successfully</div>
+                <div class="text-center mt-4 mb-4 text-xl font-semibold">
+                  Account created successfully
+                </div>
                 <div class="flex justify-center">
-                  <img alt="logo" src="https://primefaces.org/cdn/primevue/images/stepper/content.svg" />
+                  <img alt="logo" src="https://primefaces.org/cdn/primevue/images/stepper/content.svg">
                 </div>
               </div>
               <div class="flex pt-6 justify-start">
@@ -335,19 +356,29 @@ const option10 = ref(false);
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         A practical example of using Stepper for a multi-step form with validation and data collection.
       </p>
-      
+
       <div class="card">
         <Stepper value="1" linear>
           <StepList>
-            <Step value="1">Personal Info</Step>
-            <Step value="2">Contact Details</Step>
-            <Step value="3">Preferences</Step>
-            <Step value="4">Review</Step>
+            <Step value="1">
+              Personal Info
+            </Step>
+            <Step value="2">
+              Contact Details
+            </Step>
+            <Step value="3">
+              Preferences
+            </Step>
+            <Step value="4">
+              Review
+            </Step>
           </StepList>
           <StepPanels>
             <StepPanel v-slot="{ activateCallback }" value="1">
               <div class="flex flex-col gap-4 mx-auto" style="min-height: 20rem; max-width: 24rem">
-                <div class="text-center mb-4 text-xl font-semibold">Personal Information</div>
+                <div class="text-center mb-4 text-xl font-semibold">
+                  Personal Information
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div class="field">
                     <label for="firstName" class="block text-sm font-medium mb-2">First Name</label>
@@ -368,13 +399,15 @@ const option10 = ref(false);
                 </div>
               </div>
               <div class="flex pt-6 justify-end">
-                <Button label="Next" icon="pi pi-arrow-right" iconPos="right" @click="activateCallback('2')" />
+                <Button label="Next" icon="pi pi-arrow-right" icon-pos="right" @click="activateCallback('2')" />
               </div>
             </StepPanel>
-            
+
             <StepPanel v-slot="{ activateCallback }" value="2">
               <div class="flex flex-col gap-4 mx-auto" style="min-height: 20rem; max-width: 24rem">
-                <div class="text-center mb-4 text-xl font-semibold">Contact Details</div>
+                <div class="text-center mb-4 text-xl font-semibold">
+                  Contact Details
+                </div>
                 <div class="field">
                   <label for="contactEmail" class="block text-sm font-medium mb-2">Email Address</label>
                   <InputText id="contactEmail" type="email" placeholder="john@example.com" fluid />
@@ -394,26 +427,28 @@ const option10 = ref(false);
               </div>
               <div class="flex pt-6 justify-between">
                 <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="activateCallback('1')" />
-                <Button label="Next" icon="pi pi-arrow-right" iconPos="right" @click="activateCallback('3')" />
+                <Button label="Next" icon="pi pi-arrow-right" icon-pos="right" @click="activateCallback('3')" />
               </div>
             </StepPanel>
-            
+
             <StepPanel v-slot="{ activateCallback }" value="3">
               <div class="flex flex-col gap-4 mx-auto" style="min-height: 20rem; max-width: 24rem">
-                <div class="text-center mb-4 text-xl font-semibold">Preferences</div>
+                <div class="text-center mb-4 text-xl font-semibold">
+                  Preferences
+                </div>
                 <div class="field">
                   <label class="block text-sm font-medium mb-2">Notification Preferences</label>
                   <div class="flex flex-col gap-2">
                     <div class="flex items-center">
-                      <Checkbox inputId="emailNotif" />
+                      <Checkbox input-id="emailNotif" />
                       <label for="emailNotif" class="ml-2">Email notifications</label>
                     </div>
                     <div class="flex items-center">
-                      <Checkbox inputId="smsNotif" />
+                      <Checkbox input-id="smsNotif" />
                       <label for="smsNotif" class="ml-2">SMS notifications</label>
                     </div>
                     <div class="flex items-center">
-                      <Checkbox inputId="pushNotif" />
+                      <Checkbox input-id="pushNotif" />
                       <label for="pushNotif" class="ml-2">Push notifications</label>
                     </div>
                   </div>
@@ -429,34 +464,54 @@ const option10 = ref(false);
               </div>
               <div class="flex pt-6 justify-between">
                 <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="activateCallback('2')" />
-                <Button label="Next" icon="pi pi-arrow-right" iconPos="right" @click="activateCallback('4')" />
+                <Button label="Next" icon="pi pi-arrow-right" icon-pos="right" @click="activateCallback('4')" />
               </div>
             </StepPanel>
-            
+
             <StepPanel v-slot="{ activateCallback }" value="4">
               <div class="flex flex-col gap-4 mx-auto" style="min-height: 20rem; max-width: 24rem">
-                <div class="text-center mb-4 text-xl font-semibold">Review & Submit</div>
+                <div class="text-center mb-4 text-xl font-semibold">
+                  Review & Submit
+                </div>
                 <div class="bg-surface-50 dark:bg-surface-800 p-4 rounded-lg">
-                  <h4 class="font-semibold mb-2">Personal Information</h4>
-                  <p class="text-sm text-surface-600 dark:text-surface-300">John Doe</p>
-                  <p class="text-sm text-surface-600 dark:text-surface-300">Born: January 1, 1990</p>
-                  
-                  <h4 class="font-semibold mb-2 mt-4">Contact Details</h4>
-                  <p class="text-sm text-surface-600 dark:text-surface-300">john@example.com</p>
-                  <p class="text-sm text-surface-600 dark:text-surface-300">+1 (555) 123-4567</p>
-                  
-                  <h4 class="font-semibold mb-2 mt-4">Preferences</h4>
-                  <p class="text-sm text-surface-600 dark:text-surface-300">Email notifications: Yes</p>
-                  <p class="text-sm text-surface-600 dark:text-surface-300">Language: English</p>
+                  <h4 class="font-semibold mb-2">
+                    Personal Information
+                  </h4>
+                  <p class="text-sm text-surface-600 dark:text-surface-300">
+                    John Doe
+                  </p>
+                  <p class="text-sm text-surface-600 dark:text-surface-300">
+                    Born: January 1, 1990
+                  </p>
+
+                  <h4 class="font-semibold mb-2 mt-4">
+                    Contact Details
+                  </h4>
+                  <p class="text-sm text-surface-600 dark:text-surface-300">
+                    john@example.com
+                  </p>
+                  <p class="text-sm text-surface-600 dark:text-surface-300">
+                    +1 (555) 123-4567
+                  </p>
+
+                  <h4 class="font-semibold mb-2 mt-4">
+                    Preferences
+                  </h4>
+                  <p class="text-sm text-surface-600 dark:text-surface-300">
+                    Email notifications: Yes
+                  </p>
+                  <p class="text-sm text-surface-600 dark:text-surface-300">
+                    Language: English
+                  </p>
                 </div>
                 <div class="flex items-center gap-2 mt-4">
-                  <Checkbox inputId="terms" />
+                  <Checkbox input-id="terms" />
                   <label for="terms" class="text-sm">I agree to the Terms and Conditions</label>
                 </div>
               </div>
               <div class="flex pt-6 justify-between">
                 <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="activateCallback('3')" />
-                <Button label="Submit" icon="pi pi-check" iconPos="right" />
+                <Button label="Submit" icon="pi pi-check" icon-pos="right" />
               </div>
             </StepPanel>
           </StepPanels>

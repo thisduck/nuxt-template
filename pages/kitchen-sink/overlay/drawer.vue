@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 
 const basicVisible = ref(false);
-const positionVisible = ref(false);
+const _positionVisible = ref(false);
 const visibleLeft = ref(false);
 const visibleRight = ref(false);
 const visibleTop = ref(false);
@@ -16,10 +16,14 @@ const position = ref('left');
 
 function openPosition(pos: string) {
   position.value = pos;
-  if (pos === 'left') visibleLeft.value = true;
-  if (pos === 'right') visibleRight.value = true;
-  if (pos === 'top') visibleTop.value = true;
-  if (pos === 'bottom') visibleBottom.value = true;
+  if (pos === 'left')
+    visibleLeft.value = true;
+  if (pos === 'right')
+    visibleRight.value = true;
+  if (pos === 'top')
+    visibleTop.value = true;
+  if (pos === 'bottom')
+    visibleBottom.value = true;
 }
 </script>
 
@@ -48,15 +52,15 @@ function openPosition(pos: string) {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Drawer is used as a container and visibility is controlled with a binding to visible.
       </p>
-      
+
       <div class="card flex justify-center">
         <Drawer v-model:visible="basicVisible" header="Basic Drawer">
           <p class="text-surface-700 dark:text-surface-300 leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </p>
           <p class="text-surface-700 dark:text-surface-300 leading-relaxed mt-4">
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </p>
         </Drawer>
@@ -72,7 +76,7 @@ function openPosition(pos: string) {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Drawer location is configured with the position property that can take left, right, top and bottom as valid values.
       </p>
-      
+
       <div class="card">
         <div class="flex gap-2 justify-center mb-6">
           <Button icon="pi pi-arrow-right" label="Left" @click="openPosition('left')" />
@@ -83,28 +87,28 @@ function openPosition(pos: string) {
 
         <Drawer v-model:visible="visibleLeft" header="Left Drawer">
           <p class="text-surface-700 dark:text-surface-300 leading-relaxed">
-            This drawer slides in from the left side. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+            This drawer slides in from the left side. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
         </Drawer>
 
         <Drawer v-model:visible="visibleRight" header="Right Drawer" position="right">
           <p class="text-surface-700 dark:text-surface-300 leading-relaxed">
-            This drawer slides in from the right side. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+            This drawer slides in from the right side. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
         </Drawer>
 
         <Drawer v-model:visible="visibleTop" header="Top Drawer" position="top" style="height: auto">
           <p class="text-surface-700 dark:text-surface-300 leading-relaxed">
-            This drawer slides in from the top. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+            This drawer slides in from the top. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
         </Drawer>
 
         <Drawer v-model:visible="visibleBottom" header="Bottom Drawer" position="bottom" style="height: auto">
           <p class="text-surface-700 dark:text-surface-300 leading-relaxed">
-            This drawer slides in from the bottom. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+            This drawer slides in from the bottom. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
         </Drawer>
@@ -119,7 +123,7 @@ function openPosition(pos: string) {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Drawer dimension can be defined with style or class properties, this responsive example utilizes Tailwind.
       </p>
-      
+
       <div class="card flex justify-center">
         <Drawer v-model:visible="sizeVisible" header="Responsive Drawer" class="!w-full md:!w-80 lg:!w-[30rem]">
           <p class="text-surface-700 dark:text-surface-300 leading-relaxed">
@@ -146,17 +150,19 @@ function openPosition(pos: string) {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         The full screen mode is enabled when position property is set as 'full'.
       </p>
-      
+
       <div class="card flex justify-center">
         <Drawer v-model:visible="fullscreenVisible" header="Full Screen Drawer" position="full">
           <div class="space-y-6">
             <p class="text-surface-700 dark:text-surface-300 leading-relaxed text-lg">
               This drawer takes up the entire screen, providing a full overlay experience.
             </p>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="space-y-4">
-                <h3 class="text-xl font-semibold text-surface-800 dark:text-surface-100">Features</h3>
+                <h3 class="text-xl font-semibold text-surface-800 dark:text-surface-100">
+                  Features
+                </h3>
                 <ul class="list-disc list-inside space-y-2 text-surface-700 dark:text-surface-300">
                   <li>Complete screen coverage</li>
                   <li>Perfect for detailed forms</li>
@@ -164,9 +170,11 @@ function openPosition(pos: string) {
                   <li>Maximum content visibility</li>
                 </ul>
               </div>
-              
+
               <div class="space-y-4">
-                <h3 class="text-xl font-semibold text-surface-800 dark:text-surface-100">Use Cases</h3>
+                <h3 class="text-xl font-semibold text-surface-800 dark:text-surface-100">
+                  Use Cases
+                </h3>
                 <ul class="list-disc list-inside space-y-2 text-surface-700 dark:text-surface-300">
                   <li>Settings panels</li>
                   <li>Data entry forms</li>
@@ -194,44 +202,56 @@ function openPosition(pos: string) {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Custom content at the header and footer sections is displayed with templating.
       </p>
-      
+
       <div class="card flex justify-center">
         <Drawer v-model:visible="templateVisible">
           <template #header>
             <div class="flex items-center gap-3">
               <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
               <div>
-                <div class="font-bold text-surface-900 dark:text-surface-0">Amy Elsner</div>
-                <div class="text-sm text-surface-600 dark:text-surface-400">Product Manager</div>
+                <div class="font-bold text-surface-900 dark:text-surface-0">
+                  Amy Elsner
+                </div>
+                <div class="text-sm text-surface-600 dark:text-surface-400">
+                  Product Manager
+                </div>
               </div>
             </div>
           </template>
-          
+
           <div class="space-y-4">
             <p class="text-surface-700 dark:text-surface-300 leading-relaxed">
-              Welcome to your personalized dashboard. Here you can manage your account settings, 
+              Welcome to your personalized dashboard. Here you can manage your account settings,
               view your activity, and access important features.
             </p>
-            
+
             <div class="space-y-3">
               <div class="flex items-center gap-3 p-3 bg-surface-50 dark:bg-surface-800 rounded-lg">
-                <i class="pi pi-bell text-primary-500"></i>
+                <i class="pi pi-bell text-primary-500" />
                 <div>
-                  <div class="font-medium text-surface-900 dark:text-surface-0">Notifications</div>
-                  <div class="text-sm text-surface-600 dark:text-surface-400">3 unread messages</div>
+                  <div class="font-medium text-surface-900 dark:text-surface-0">
+                    Notifications
+                  </div>
+                  <div class="text-sm text-surface-600 dark:text-surface-400">
+                    3 unread messages
+                  </div>
                 </div>
               </div>
-              
+
               <div class="flex items-center gap-3 p-3 bg-surface-50 dark:bg-surface-800 rounded-lg">
-                <i class="pi pi-chart-line text-success-500"></i>
+                <i class="pi pi-chart-line text-success-500" />
                 <div>
-                  <div class="font-medium text-surface-900 dark:text-surface-0">Analytics</div>
-                  <div class="text-sm text-surface-600 dark:text-surface-400">View your performance data</div>
+                  <div class="font-medium text-surface-900 dark:text-surface-0">
+                    Analytics
+                  </div>
+                  <div class="text-sm text-surface-600 dark:text-surface-400">
+                    View your performance data
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          
+
           <template #footer>
             <div class="flex gap-2">
               <Button label="Account Settings" icon="pi pi-user" class="flex-1" severity="secondary" />
@@ -251,7 +271,7 @@ function openPosition(pos: string) {
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Headless mode is enabled by defining a container slot that lets you implement entire UI instead of the default elements.
       </p>
-      
+
       <div class="card flex justify-center">
         <Drawer v-model:visible="headlessVisible">
           <template #container="{ closeCallback }">
@@ -263,77 +283,89 @@ function openPosition(pos: string) {
                     <Icon name="lucide:bolt" size="20" class="text-white" />
                   </div>
                   <div>
-                    <div class="font-bold text-lg text-surface-900 dark:text-surface-0">Navigation Menu</div>
-                    <div class="text-sm text-surface-600 dark:text-surface-400">Custom sidebar design</div>
+                    <div class="font-bold text-lg text-surface-900 dark:text-surface-0">
+                      Navigation Menu
+                    </div>
+                    <div class="text-sm text-surface-600 dark:text-surface-400">
+                      Custom sidebar design
+                    </div>
                   </div>
                 </div>
-                <Button 
-                  type="button" 
-                  @click="closeCallback" 
-                  icon="pi pi-times" 
-                  rounded 
+                <Button
+                  type="button"
+                  icon="pi pi-times"
+                  rounded
                   text
                   class="w-8 h-8"
+                  @click="closeCallback"
                 />
               </div>
-              
+
               <!-- Navigation Content -->
               <div class="flex-1 overflow-y-auto p-4">
                 <div class="space-y-6">
                   <!-- Primary Navigation -->
                   <div>
-                    <h3 class="text-xs font-semibold text-surface-500 dark:text-surface-400 uppercase tracking-wider mb-3">Main</h3>
+                    <h3 class="text-xs font-semibold text-surface-500 dark:text-surface-400 uppercase tracking-wider mb-3">
+                      Main
+                    </h3>
                     <div class="space-y-1">
                       <a class="flex items-center gap-3 p-3 rounded-lg text-surface-700 hover:bg-surface-100 dark:text-surface-300 dark:hover:bg-surface-700 transition-colors cursor-pointer">
-                        <i class="pi pi-home w-5"></i>
+                        <i class="pi pi-home w-5" />
                         <span class="font-medium">Dashboard</span>
                       </a>
                       <a class="flex items-center gap-3 p-3 rounded-lg text-surface-700 hover:bg-surface-100 dark:text-surface-300 dark:hover:bg-surface-700 transition-colors cursor-pointer">
-                        <i class="pi pi-chart-line w-5"></i>
+                        <i class="pi pi-chart-line w-5" />
                         <span class="font-medium">Analytics</span>
                         <Badge value="New" severity="success" class="ml-auto" />
                       </a>
                       <a class="flex items-center gap-3 p-3 rounded-lg text-surface-700 hover:bg-surface-100 dark:text-surface-300 dark:hover:bg-surface-700 transition-colors cursor-pointer">
-                        <i class="pi pi-users w-5"></i>
+                        <i class="pi pi-users w-5" />
                         <span class="font-medium">Team</span>
                       </a>
                       <a class="flex items-center gap-3 p-3 rounded-lg text-surface-700 hover:bg-surface-100 dark:text-surface-300 dark:hover:bg-surface-700 transition-colors cursor-pointer">
-                        <i class="pi pi-folder w-5"></i>
+                        <i class="pi pi-folder w-5" />
                         <span class="font-medium">Projects</span>
                         <span class="ml-auto text-sm text-surface-500">12</span>
                       </a>
                     </div>
                   </div>
-                  
+
                   <!-- Secondary Navigation -->
                   <div>
-                    <h3 class="text-xs font-semibold text-surface-500 dark:text-surface-400 uppercase tracking-wider mb-3">Tools</h3>
+                    <h3 class="text-xs font-semibold text-surface-500 dark:text-surface-400 uppercase tracking-wider mb-3">
+                      Tools
+                    </h3>
                     <div class="space-y-1">
                       <a class="flex items-center gap-3 p-3 rounded-lg text-surface-700 hover:bg-surface-100 dark:text-surface-300 dark:hover:bg-surface-700 transition-colors cursor-pointer">
-                        <i class="pi pi-calendar w-5"></i>
+                        <i class="pi pi-calendar w-5" />
                         <span class="font-medium">Calendar</span>
                       </a>
                       <a class="flex items-center gap-3 p-3 rounded-lg text-surface-700 hover:bg-surface-100 dark:text-surface-300 dark:hover:bg-surface-700 transition-colors cursor-pointer">
-                        <i class="pi pi-envelope w-5"></i>
+                        <i class="pi pi-envelope w-5" />
                         <span class="font-medium">Messages</span>
                         <Badge value="5" severity="danger" class="ml-auto" />
                       </a>
                       <a class="flex items-center gap-3 p-3 rounded-lg text-surface-700 hover:bg-surface-100 dark:text-surface-300 dark:hover:bg-surface-700 transition-colors cursor-pointer">
-                        <i class="pi pi-cog w-5"></i>
+                        <i class="pi pi-cog w-5" />
                         <span class="font-medium">Settings</span>
                       </a>
                     </div>
                   </div>
                 </div>
               </div>
-              
+
               <!-- Custom Footer -->
               <div class="p-4 border-t border-surface-200 dark:border-surface-700">
                 <div class="flex items-center gap-3 p-3 rounded-lg bg-surface-100 dark:bg-surface-700">
                   <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" size="small" />
                   <div class="flex-1">
-                    <div class="text-sm font-medium text-surface-900 dark:text-surface-0">Amy Elsner</div>
-                    <div class="text-xs text-surface-600 dark:text-surface-400">amy@example.com</div>
+                    <div class="text-sm font-medium text-surface-900 dark:text-surface-0">
+                      Amy Elsner
+                    </div>
+                    <div class="text-xs text-surface-600 dark:text-surface-400">
+                      amy@example.com
+                    </div>
                   </div>
                   <Button icon="pi pi-sign-out" text rounded size="small" />
                 </div>

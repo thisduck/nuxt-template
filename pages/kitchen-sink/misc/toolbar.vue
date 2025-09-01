@@ -4,16 +4,16 @@ import { ref } from 'vue';
 const saveMenuItems = ref([
   {
     label: 'Save',
-    icon: 'pi pi-save'
+    icon: 'pi pi-save',
   },
   {
     label: 'Save As',
-    icon: 'pi pi-copy'
+    icon: 'pi pi-copy',
   },
   {
     label: 'Export',
-    icon: 'pi pi-download'
-  }
+    icon: 'pi pi-download',
+  },
 ]);
 
 const fileMenuItems = ref([
@@ -23,68 +23,68 @@ const fileMenuItems = ref([
     items: [
       { label: 'Document', icon: 'pi pi-file' },
       { label: 'Folder', icon: 'pi pi-folder' },
-      { label: 'Project', icon: 'pi pi-briefcase' }
-    ]
+      { label: 'Project', icon: 'pi pi-briefcase' },
+    ],
   },
   {
     label: 'Open',
-    icon: 'pi pi-folder-open'
+    icon: 'pi pi-folder-open',
   },
   {
-    separator: true
+    separator: true,
   },
   {
     label: 'Save',
-    icon: 'pi pi-save'
+    icon: 'pi pi-save',
   },
   {
     label: 'Save As',
-    icon: 'pi pi-copy'
-  }
+    icon: 'pi pi-copy',
+  },
 ]);
 
-const editMenuItems = ref([
+const _editMenuItems = ref([
   {
     label: 'Undo',
-    icon: 'pi pi-undo'
+    icon: 'pi pi-undo',
   },
   {
-    label: 'Redo', 
-    icon: 'pi pi-refresh'
+    label: 'Redo',
+    icon: 'pi pi-refresh',
   },
   {
-    separator: true
+    separator: true,
   },
   {
     label: 'Cut',
-    icon: 'pi pi-scissors'
+    icon: 'pi pi-scissors',
   },
   {
     label: 'Copy',
-    icon: 'pi pi-copy'
+    icon: 'pi pi-copy',
   },
   {
     label: 'Paste',
-    icon: 'pi pi-file'
-  }
+    icon: 'pi pi-file',
+  },
 ]);
 
-const viewMenuItems = ref([
+const _viewMenuItems = ref([
   {
     label: 'Zoom In',
-    icon: 'pi pi-search-plus'
+    icon: 'pi pi-search-plus',
   },
   {
     label: 'Zoom Out',
-    icon: 'pi pi-search-minus'
+    icon: 'pi pi-search-minus',
   },
   {
-    separator: true
+    separator: true,
   },
   {
     label: 'Fullscreen',
-    icon: 'pi pi-window-maximize'
-  }
+    icon: 'pi pi-window-maximize',
+  },
 ]);
 
 const volume = ref(50);
@@ -116,7 +116,7 @@ const rowsPerPage = ref('25');
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Toolbar provides start, center and end properties to place content at these sections.
       </p>
-      
+
       <div class="card">
         <Toolbar>
           <template #start>
@@ -149,7 +149,7 @@ const rowsPerPage = ref('25');
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         A customized toolbar with navigation bar functionality and rounded corners.
       </p>
-      
+
       <div class="card">
         <Toolbar style="border-radius: 3rem; padding: 1rem 1rem 1rem 1.5rem">
           <template #start>
@@ -179,7 +179,7 @@ const rowsPerPage = ref('25');
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         A comprehensive toolbar example resembling a typical application interface.
       </p>
-      
+
       <div class="card">
         <Toolbar class="mb-4">
           <template #start>
@@ -191,16 +191,16 @@ const rowsPerPage = ref('25');
 
           <template #center>
             <div class="flex items-center gap-2">
-              <Button icon="pi pi-file" v-tooltip="'New Document'" text />
-              <Button icon="pi pi-folder-open" v-tooltip="'Open'" text />
-              <Button icon="pi pi-save" v-tooltip="'Save'" text />
+              <Button v-tooltip="'New Document'" icon="pi pi-file" text />
+              <Button v-tooltip="'Open'" icon="pi pi-folder-open" text />
+              <Button v-tooltip="'Save'" icon="pi pi-save" text />
               <Divider layout="vertical" />
-              <Button icon="pi pi-undo" v-tooltip="'Undo'" text />
-              <Button icon="pi pi-refresh" v-tooltip="'Redo'" text />
+              <Button v-tooltip="'Undo'" icon="pi pi-undo" text />
+              <Button v-tooltip="'Redo'" icon="pi pi-refresh" text />
               <Divider layout="vertical" />
-              <Button icon="pi pi-bold" v-tooltip="'Bold'" text />
-              <Button icon="pi pi-italic" v-tooltip="'Italic'" text />
-              <Button icon="pi pi-underline" v-tooltip="'Underline'" text />
+              <Button v-tooltip="'Bold'" icon="pi pi-bold" text />
+              <Button v-tooltip="'Italic'" icon="pi pi-italic" text />
+              <Button v-tooltip="'Underline'" icon="pi pi-underline" text />
             </div>
           </template>
 
@@ -209,7 +209,7 @@ const rowsPerPage = ref('25');
               <Badge value="3" severity="danger">
                 <Button icon="pi pi-bell" text />
               </Badge>
-              <Button icon="pi pi-cog" v-tooltip="'Settings'" text />
+              <Button v-tooltip="'Settings'" icon="pi pi-cog" text />
             </div>
           </template>
         </Toolbar>
@@ -224,7 +224,7 @@ const rowsPerPage = ref('25');
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Toolbar configured as a traditional menu bar with dropdown menus.
       </p>
-      
+
       <div class="card">
         <Toolbar>
           <template #start>
@@ -237,7 +237,7 @@ const rowsPerPage = ref('25');
                   </a>
                 </template>
               </Menu>
-              
+
               <Button label="File" text plain class="p-2" />
               <Button label="Edit" text plain class="p-2" />
               <Button label="View" text plain class="p-2" />
@@ -250,8 +250,8 @@ const rowsPerPage = ref('25');
 
           <template #end>
             <div class="flex items-center gap-2">
-              <Button icon="pi pi-question-circle" v-tooltip="'Help'" text size="small" />
-              <Button icon="pi pi-times" v-tooltip="'Close'" text size="small" />
+              <Button v-tooltip="'Help'" icon="pi pi-question-circle" text size="small" />
+              <Button v-tooltip="'Close'" icon="pi pi-times" text size="small" />
             </div>
           </template>
         </Toolbar>
@@ -266,15 +266,19 @@ const rowsPerPage = ref('25');
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Toolbar designed for media player functionality with playback controls.
       </p>
-      
+
       <div class="card">
         <Toolbar class="bg-surface-900 text-surface-0" style="border-radius: 1rem;">
           <template #start>
             <div class="flex items-center gap-2">
               <Icon name="lucide:music" size="24" class="text-primary-400" />
               <div>
-                <div class="text-sm font-medium">Now Playing</div>
-                <div class="text-xs text-surface-300">Song Title - Artist Name</div>
+                <div class="text-sm font-medium">
+                  Now Playing
+                </div>
+                <div class="text-xs text-surface-300">
+                  Song Title - Artist Name
+                </div>
               </div>
             </div>
           </template>
@@ -291,7 +295,7 @@ const rowsPerPage = ref('25');
             <div class="flex items-center gap-2">
               <Button icon="pi pi-volume-up" text size="small" class="text-surface-0" />
               <Slider v-model="volume" class="w-20" />
-              <Button icon="pi pi-list" v-tooltip="'Playlist'" text size="small" class="text-surface-0" />
+              <Button v-tooltip="'Playlist'" icon="pi pi-list" text size="small" class="text-surface-0" />
             </div>
           </template>
         </Toolbar>
@@ -306,7 +310,7 @@ const rowsPerPage = ref('25');
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Toolbar that adapts to different screen sizes with collapsible content.
       </p>
-      
+
       <div class="card">
         <Toolbar>
           <template #start>
@@ -349,7 +353,7 @@ const rowsPerPage = ref('25');
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Toolbar commonly used above data tables for bulk actions and filters.
       </p>
-      
+
       <div class="card">
         <Toolbar class="mb-4">
           <template #start>
@@ -363,7 +367,7 @@ const rowsPerPage = ref('25');
           <template #center>
             <div class="flex items-center gap-2">
               <span class="text-sm text-surface-600 dark:text-surface-300">Show:</span>
-              <Select :options="['10', '25', '50', '100']" v-model="rowsPerPage" placeholder="Rows" class="w-20" />
+              <Select v-model="rowsPerPage" :options="['10', '25', '50', '100']" placeholder="Rows" class="w-20" />
               <Divider layout="vertical" />
               <MultiSelect :options="['Active', 'Inactive', 'Pending']" placeholder="Status" class="w-40" />
             </div>
@@ -377,8 +381,8 @@ const rowsPerPage = ref('25');
                 </InputIcon>
                 <InputText placeholder="Global Search" />
               </IconField>
-              <Button icon="pi pi-filter" v-tooltip="'Advanced Filters'" text />
-              <Button icon="pi pi-refresh" v-tooltip="'Refresh'" text />
+              <Button v-tooltip="'Advanced Filters'" icon="pi pi-filter" text />
+              <Button v-tooltip="'Refresh'" icon="pi pi-refresh" text />
             </div>
           </template>
         </Toolbar>
@@ -398,31 +402,31 @@ const rowsPerPage = ref('25');
       <p class="text-surface-600 dark:text-surface-300 mb-4">
         Toolbar can be oriented vertically using CSS flex-direction.
       </p>
-      
+
       <div class="card">
         <div class="flex gap-4">
           <Toolbar class="flex-col h-96 w-16" style="flex-direction: column;">
             <template #start>
               <div class="flex flex-col gap-2">
-                <Button icon="pi pi-file" v-tooltip.right="'New File'" text />
-                <Button icon="pi pi-folder" v-tooltip.right="'Open Folder'" text />
-                <Button icon="pi pi-save" v-tooltip.right="'Save'" text />
+                <Button v-tooltip.right="'New File'" icon="pi pi-file" text />
+                <Button v-tooltip.right="'Open Folder'" icon="pi pi-folder" text />
+                <Button v-tooltip.right="'Save'" icon="pi pi-save" text />
               </div>
             </template>
 
             <template #center>
               <div class="flex flex-col gap-2">
                 <Divider />
-                <Button icon="pi pi-copy" v-tooltip.right="'Copy'" text />
-                <Button icon="pi pi-scissors" v-tooltip.right="'Cut'" text />
-                <Button icon="pi pi-file" v-tooltip.right="'Paste'" text />
+                <Button v-tooltip.right="'Copy'" icon="pi pi-copy" text />
+                <Button v-tooltip.right="'Cut'" icon="pi pi-scissors" text />
+                <Button v-tooltip.right="'Paste'" icon="pi pi-file" text />
               </div>
             </template>
 
             <template #end>
               <div class="flex flex-col gap-2">
-                <Button icon="pi pi-cog" v-tooltip.right="'Settings'" text />
-                <Button icon="pi pi-question-circle" v-tooltip.right="'Help'" text />
+                <Button v-tooltip.right="'Settings'" icon="pi pi-cog" text />
+                <Button v-tooltip.right="'Help'" icon="pi pi-question-circle" text />
               </div>
             </template>
           </Toolbar>

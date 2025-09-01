@@ -10,7 +10,7 @@ const products = ref([
     image: 'macbook.jpg',
     description: 'Powerful laptop for professional work and creative tasks.',
     status: 'In Stock',
-    features: ['M3 Pro Chip', '18-hour battery', 'Liquid Retina XDR display']
+    features: ['M3 Pro Chip', '18-hour battery', 'Liquid Retina XDR display'],
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const products = ref([
     image: 'iphone.jpg',
     description: 'Latest iPhone with advanced camera system and titanium design.',
     status: 'Pre-order',
-    features: ['A17 Pro Chip', 'Titanium Design', 'Pro Camera System']
+    features: ['A17 Pro Chip', 'Titanium Design', 'Pro Camera System'],
   },
   {
     id: 3,
@@ -32,8 +32,8 @@ const products = ref([
     image: 'airpods.jpg',
     description: 'Noise-cancelling wireless earbuds with spatial audio.',
     status: 'Limited Stock',
-    features: ['Active Noise Cancellation', 'Spatial Audio', 'MagSafe Charging']
-  }
+    features: ['Active Noise Cancellation', 'Spatial Audio', 'MagSafe Charging'],
+  },
 ]);
 
 // Team members for profile cards
@@ -46,7 +46,7 @@ const teamMembers = ref([
     email: 'amy@company.com',
     skills: ['Vue.js', 'React', 'TypeScript'],
     projects: 12,
-    location: 'San Francisco, CA'
+    location: 'San Francisco, CA',
   },
   {
     id: 2,
@@ -56,7 +56,7 @@ const teamMembers = ref([
     email: 'onyama@company.com',
     skills: ['Node.js', 'Python', 'PostgreSQL'],
     projects: 8,
-    location: 'New York, NY'
+    location: 'New York, NY',
   },
   {
     id: 3,
@@ -66,8 +66,8 @@ const teamMembers = ref([
     email: 'ioni@company.com',
     skills: ['Figma', 'Adobe XD', 'Sketch'],
     projects: 15,
-    location: 'Austin, TX'
-  }
+    location: 'Austin, TX',
+  },
 ]);
 
 // Blog posts for content cards
@@ -82,7 +82,7 @@ const blogPosts = ref([
     category: 'Tutorial',
     tags: ['Vue.js', 'PrimeVue', 'Tutorial'],
     likes: 42,
-    comments: 8
+    comments: 8,
   },
   {
     id: 2,
@@ -94,7 +94,7 @@ const blogPosts = ref([
     category: 'Guide',
     tags: ['DataTable', 'Components', 'Advanced'],
     likes: 38,
-    comments: 12
+    comments: 12,
   },
   {
     id: 3,
@@ -106,8 +106,8 @@ const blogPosts = ref([
     category: 'Design',
     tags: ['Theming', 'CSS', 'Customization'],
     likes: 29,
-    comments: 5
-  }
+    comments: 5,
+  },
 ]);
 
 // Statistics for dashboard cards
@@ -115,7 +115,7 @@ const stats = ref([
   { label: 'Total Users', value: '12,456', icon: 'pi-users', color: '#3B82F6', change: '+12%' },
   { label: 'Revenue', value: '$45,678', icon: 'pi-dollar', color: '#10B981', change: '+8%' },
   { label: 'Orders', value: '1,234', icon: 'pi-shopping-cart', color: '#F59E0B', change: '+15%' },
-  { label: 'Bounce Rate', value: '2.4%', icon: 'pi-chart-line', color: '#EF4444', change: '-3%' }
+  { label: 'Bounce Rate', value: '2.4%', icon: 'pi-chart-line', color: '#EF4444', change: '-3%' },
 ]);
 
 // Utility functions
@@ -137,7 +137,7 @@ function getSeverity(status) {
 function formatCurrency(value) {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD'
+    currency: 'USD',
   }).format(value);
 }
 
@@ -176,11 +176,13 @@ function getInitials(name) {
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
         <div class="flex justify-center">
           <Card class="w-full max-w-md">
-            <template #title>Simple Card</template>
+            <template #title>
+              Simple Card
+            </template>
             <template #content>
               <p class="m-0 text-surface-600 dark:text-surface-300">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae 
-                numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, 
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae
+                numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse,
                 cupiditate neque quas!
               </p>
             </template>
@@ -206,12 +208,16 @@ function getInitials(name) {
                 <i class="pi pi-user text-6xl text-white" />
               </div>
             </template>
-            <template #title>Advanced Card</template>
-            <template #subtitle>Card subtitle</template>
+            <template #title>
+              Advanced Card
+            </template>
+            <template #subtitle>
+              Card subtitle
+            </template>
             <template #content>
               <p class="m-0 text-surface-600 dark:text-surface-300">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae 
-                numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, 
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae
+                numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse,
                 cupiditate neque quas!
               </p>
             </template>
@@ -262,9 +268,13 @@ function getInitials(name) {
               </div>
             </template>
             <template #content>
-              <p class="text-surface-600 dark:text-surface-300 mb-4">{{ product.description }}</p>
+              <p class="text-surface-600 dark:text-surface-300 mb-4">
+                {{ product.description }}
+              </p>
               <div class="mb-4">
-                <h5 class="font-semibold text-surface-900 dark:text-surface-0 mb-2">Features:</h5>
+                <h5 class="font-semibold text-surface-900 dark:text-surface-0 mb-2">
+                  Features:
+                </h5>
                 <ul class="list-disc list-inside space-y-1">
                   <li v-for="feature in product.features" :key="feature" class="text-sm text-surface-600 dark:text-surface-300">
                     {{ feature }}
@@ -303,15 +313,19 @@ function getInitials(name) {
           <Card v-for="member in teamMembers" :key="member.id">
             <template #header>
               <div class="flex flex-col items-center pt-6 pb-4">
-                <Avatar 
-                  :label="getInitials(member.name)" 
-                  size="xlarge" 
+                <Avatar
+                  :label="getInitials(member.name)"
+                  size="xlarge"
                   shape="circle"
-                  :style="{ backgroundColor: '#' + Math.floor(Math.random()*16777215).toString(16) }"
+                  :style="{ backgroundColor: `#${Math.floor(Math.random() * 16777215).toString(16)}` }"
                 />
                 <div class="mt-4 text-center">
-                  <h3 class="font-bold text-xl text-surface-900 dark:text-surface-0">{{ member.name }}</h3>
-                  <p class="text-surface-500 dark:text-surface-400">{{ member.role }}</p>
+                  <h3 class="font-bold text-xl text-surface-900 dark:text-surface-0">
+                    {{ member.name }}
+                  </h3>
+                  <p class="text-surface-500 dark:text-surface-400">
+                    {{ member.role }}
+                  </p>
                 </div>
               </div>
             </template>
@@ -326,14 +340,20 @@ function getInitials(name) {
                   <span class="text-sm text-surface-600 dark:text-surface-300">{{ member.location }}</span>
                 </div>
                 <div>
-                  <h5 class="font-semibold text-surface-900 dark:text-surface-0 mb-2">Skills:</h5>
+                  <h5 class="font-semibold text-surface-900 dark:text-surface-0 mb-2">
+                    Skills:
+                  </h5>
                   <div class="flex flex-wrap gap-1">
                     <Tag v-for="skill in member.skills" :key="skill" :value="skill" severity="secondary" />
                   </div>
                 </div>
                 <div class="text-center">
-                  <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">{{ member.projects }}</div>
-                  <div class="text-sm text-surface-500 dark:text-surface-400">Projects Completed</div>
+                  <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">
+                    {{ member.projects }}
+                  </div>
+                  <div class="text-sm text-surface-500 dark:text-surface-400">
+                    Projects Completed
+                  </div>
                 </div>
               </div>
             </template>
@@ -368,7 +388,9 @@ function getInitials(name) {
                 <i class="pi pi-file-edit text-4xl text-white" />
               </div>
             </template>
-            <template #title>{{ post.title }}</template>
+            <template #title>
+              {{ post.title }}
+            </template>
             <template #subtitle>
               <div class="flex items-center justify-between text-sm">
                 <span>By {{ post.author }}</span>
@@ -376,7 +398,9 @@ function getInitials(name) {
               </div>
             </template>
             <template #content>
-              <p class="text-surface-600 dark:text-surface-300 mb-4">{{ post.excerpt }}</p>
+              <p class="text-surface-600 dark:text-surface-300 mb-4">
+                {{ post.excerpt }}
+              </p>
               <div class="flex flex-wrap gap-1 mb-4">
                 <Tag v-for="tag in post.tags" :key="tag" :value="tag" severity="secondary" />
               </div>
@@ -422,12 +446,16 @@ function getInitials(name) {
           <Card v-for="stat in stats" :key="stat.label" class="text-center">
             <template #content>
               <div class="flex flex-col items-center gap-4">
-                <div class="flex items-center justify-center w-16 h-16 rounded-full" :style="{ backgroundColor: stat.color + '20' }">
+                <div class="flex items-center justify-center w-16 h-16 rounded-full" :style="{ backgroundColor: `${stat.color}20` }">
                   <i :class="`pi ${stat.icon} text-2xl`" :style="{ color: stat.color }" />
                 </div>
                 <div>
-                  <div class="text-2xl font-bold text-surface-900 dark:text-surface-0">{{ stat.value }}</div>
-                  <div class="text-surface-500 dark:text-surface-400">{{ stat.label }}</div>
+                  <div class="text-2xl font-bold text-surface-900 dark:text-surface-0">
+                    {{ stat.value }}
+                  </div>
+                  <div class="text-surface-500 dark:text-surface-400">
+                    {{ stat.label }}
+                  </div>
                 </div>
                 <div class="flex items-center gap-1 text-sm" :class="stat.change.startsWith('+') ? 'text-green-600' : 'text-red-600'">
                   <i :class="stat.change.startsWith('+') ? 'pi pi-arrow-up' : 'pi pi-arrow-down'" />
@@ -461,7 +489,9 @@ function getInitials(name) {
                 <span>Settings</span>
               </div>
             </template>
-            <template #subtitle>Configure your preferences</template>
+            <template #subtitle>
+              Configure your preferences
+            </template>
             <template #content>
               <div class="space-y-4">
                 <div class="flex flex-col gap-2">
@@ -512,8 +542,12 @@ function getInitials(name) {
                   <i class="pi pi-info-circle text-blue-600 dark:text-blue-400" />
                 </div>
                 <div>
-                  <h4 class="font-semibold text-surface-900 dark:text-surface-0">Information</h4>
-                  <p class="text-surface-600 dark:text-surface-300 m-0">This is a minimal card design.</p>
+                  <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+                    Information
+                  </h4>
+                  <p class="text-surface-600 dark:text-surface-300 m-0">
+                    This is a minimal card design.
+                  </p>
                 </div>
               </div>
             </template>
@@ -527,8 +561,12 @@ function getInitials(name) {
                   <i class="pi pi-check-circle text-green-600 dark:text-green-400" />
                 </div>
                 <div>
-                  <h4 class="font-semibold text-surface-900 dark:text-surface-0">Success</h4>
-                  <p class="text-surface-600 dark:text-surface-300 m-0">Operation completed successfully.</p>
+                  <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+                    Success
+                  </h4>
+                  <p class="text-surface-600 dark:text-surface-300 m-0">
+                    Operation completed successfully.
+                  </p>
                 </div>
               </div>
             </template>
@@ -542,8 +580,12 @@ function getInitials(name) {
                   <i class="pi pi-exclamation-triangle text-orange-600 dark:text-orange-400" />
                 </div>
                 <div>
-                  <h4 class="font-semibold text-surface-900 dark:text-surface-0">Warning</h4>
-                  <p class="text-surface-600 dark:text-surface-300 m-0">Please review this information.</p>
+                  <h4 class="font-semibold text-surface-900 dark:text-surface-0">
+                    Warning
+                  </h4>
+                  <p class="text-surface-600 dark:text-surface-300 m-0">
+                    Please review this information.
+                  </p>
                 </div>
               </div>
             </template>
