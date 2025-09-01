@@ -56,6 +56,7 @@ const navigationItems = ref([
       { label: 'Dialog', path: '/kitchen-sink/overlay/dialog', icon: 'pi pi-window-maximize' },
       { label: 'Drawer', path: '/kitchen-sink/overlay/drawer', icon: 'pi pi-bars' },
       { label: 'Popover', path: '/kitchen-sink/overlay/popover', icon: 'pi pi-comment' },
+      { label: 'Tooltip', path: '/kitchen-sink/overlay/tooltip', icon: 'pi pi-info-circle' },
     ],
   },
   {
