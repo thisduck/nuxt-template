@@ -85,9 +85,15 @@ const sortOptions = ref([
 const isLoading = ref(false);
 const showSkeleton = ref(false);
 
-// API Products
+// API Products with server-side pagination
 const apiProducts = ref([]);
 const isLoadingApi = ref(false);
+const totalRecords = ref(0);
+const currentPage = ref(0);
+const pageSize = ref(6);
+const sortField = ref('');
+const sortOrder = ref(0);
+const searchQuery = ref('');
 
 // Utility functions
 function getSeverity(product) {
@@ -131,11 +137,18 @@ function toggleSkeleton() {
   showSkeleton.value = !showSkeleton.value;
 }
 
-// Load API products
+// Load API products with server-side pagination
 async function loadApiProducts() {
   isLoadingApi.value = true;
   try {
-    const result = await $trpc.getFilteredProducts.query({ size: 12 });
+    const result = await $trpc.getFilteredProducts.query({
+      filter: searchQuery.value || undefined,
+      page: currentPage.value,
+      size: pageSize.value,
+      sortField: sortField.value || undefined,
+      sortOrder: sortOrder.value || undefined
+    });
+    
     apiProducts.value = result.data.map(product => ({
       ...product,
       inventoryStatus: product.stock > 50 ? 'INSTOCK' : product.stock > 20 ? 'LOWSTOCK' : 'OUTOFSTOCK',
@@ -143,11 +156,42 @@ async function loadApiProducts() {
       rating: (Math.random() * 2 + 3).toFixed(1), // Random rating between 3-5
       description: `Premium ${product.name} in ${product.category} category`
     }));
+    
+    totalRecords.value = result.totalRecords;
   } catch (error) {
     console.error('Failed to load products:', error);
   } finally {
     isLoadingApi.value = false;
   }
+}
+
+// Pagination event handler
+async function onApiPageChange(event) {
+  currentPage.value = event.page;
+  pageSize.value = event.rows;
+  await loadApiProducts();
+}
+
+// Search handler
+async function onApiSearch() {
+  currentPage.value = 0; // Reset to first page when searching
+  await loadApiProducts();
+}
+
+// Sort handler for API products
+async function onApiSortChange(event) {
+  const value = event.value.value;
+  
+  if (value.indexOf('!') === 0) {
+    sortOrder.value = -1;
+    sortField.value = value.substring(1, value.length);
+  } else {
+    sortOrder.value = 1;
+    sortField.value = value;
+  }
+  
+  currentPage.value = 0; // Reset to first page when sorting
+  await loadApiProducts();
 }
 
 // Add to wishlist
@@ -621,24 +665,64 @@ onMounted(() => {
       </p>
 
       <div class="bg-surface-0 dark:bg-surface-900 p-6 rounded-2xl border border-surface-200 dark:border-surface-700">
-        <div class="flex items-center justify-between mb-6">
-          <h4 class="font-semibold text-surface-900 dark:text-surface-0">Product Catalog</h4>
-          <div class="flex items-center gap-3">
-            <div v-if="isLoadingApi" class="flex items-center gap-2">
-              <i class="pi pi-spin pi-spinner text-primary-500" />
-              <span class="text-sm text-primary-600">Loading...</span>
+        <div class="flex flex-col gap-4 mb-6">
+          <!-- Header -->
+          <div class="flex items-center justify-between">
+            <h4 class="font-semibold text-surface-900 dark:text-surface-0">Product Catalog</h4>
+            <div class="flex items-center gap-3">
+              <div v-if="isLoadingApi" class="flex items-center gap-2">
+                <i class="pi pi-spin pi-spinner text-primary-500" />
+                <span class="text-sm text-primary-600">Loading...</span>
+              </div>
+              <Button 
+                icon="pi pi-refresh" 
+                label="Refresh" 
+                severity="secondary" 
+                @click="loadApiProducts"
+                :loading="isLoadingApi"
+              />
             </div>
-            <Button 
-              icon="pi pi-refresh" 
-              label="Refresh" 
-              severity="secondary" 
-              @click="loadApiProducts"
-              :loading="isLoadingApi"
-            />
+          </div>
+          
+          <!-- Search and Sort Controls -->
+          <div class="flex flex-col sm:flex-row gap-4">
+            <div class="relative flex-1 max-w-sm">
+              <i class="pi pi-search absolute left-3 top-1/2 transform -translate-y-1/2 text-surface-400" />
+              <InputText 
+                v-model="searchQuery" 
+                placeholder="Search products..." 
+                class="pl-10 w-full"
+                @keyup.enter="onApiSearch"
+              />
+            </div>
+            <div class="flex gap-2">
+              <Button 
+                icon="pi pi-search" 
+                label="Search" 
+                @click="onApiSearch"
+                :loading="isLoadingApi"
+              />
+              <Select 
+                v-model="sortKey" 
+                :options="sortOptions" 
+                option-label="label" 
+                placeholder="Sort By..." 
+                @change="onApiSortChange($event)" 
+                class="min-w-[150px]"
+              />
+            </div>
           </div>
         </div>
 
-        <DataView :value="apiProducts" :layout="layout" paginator :rows="6">
+        <DataView 
+          :value="apiProducts" 
+          :layout="layout" 
+          lazy
+          paginator 
+          :rows="pageSize" 
+          :total-records="totalRecords"
+          :rows-per-page-options="[3, 6, 9, 12]"
+          @page="onApiPageChange">
           <template #header>
             <div class="flex justify-end">
               <SelectButton v-model="layout" :options="layoutOptions" :allowEmpty="false">
@@ -755,6 +839,33 @@ onMounted(() => {
             </div>
           </template>
         </DataView>
+
+        <!-- Server-side Pagination Status -->
+        <div class="mt-6 p-4 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 rounded-lg">
+          <h5 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">Server-side Pagination Status</h5>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+            <div>
+              <span class="text-blue-800 dark:text-blue-200 font-medium">Current Page:</span>
+              <span class="text-blue-600 dark:text-blue-300 ml-1">{{ currentPage + 1 }}</span>
+            </div>
+            <div>
+              <span class="text-blue-800 dark:text-blue-200 font-medium">Page Size:</span>
+              <span class="text-blue-600 dark:text-blue-300 ml-1">{{ pageSize }}</span>
+            </div>
+            <div>
+              <span class="text-blue-800 dark:text-blue-200 font-medium">Total Records:</span>
+              <span class="text-blue-600 dark:text-blue-300 ml-1">{{ totalRecords }}</span>
+            </div>
+            <div>
+              <span class="text-blue-800 dark:text-blue-200 font-medium">Total Pages:</span>
+              <span class="text-blue-600 dark:text-blue-300 ml-1">{{ Math.ceil(totalRecords / pageSize) }}</span>
+            </div>
+          </div>
+          <div class="mt-2 text-xs text-blue-700 dark:text-blue-200">
+            <strong>Note:</strong> This DataView uses server-side pagination - each page change triggers a new tRPC network request.
+            Open browser DevTools Network tab to see the API calls!
+          </div>
+        </div>
       </div>
     </div>
   </div>
