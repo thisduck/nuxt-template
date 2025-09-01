@@ -22,6 +22,7 @@ const navigationItems = ref([
       { label: 'Toggle', path: '/kitchen-sink/form/toggle', icon: 'pi pi-power-off' },
       { label: 'SelectButton', path: '/kitchen-sink/form/selectbutton', icon: 'pi pi-stop' },
       { label: 'DatePicker', path: '/kitchen-sink/form/datepicker', icon: 'pi pi-calendar' },
+      { label: 'FileUpload', path: '/kitchen-sink/form/fileupload', icon: 'pi pi-upload' },
     ],
   },
   {
