@@ -1,5 +1,4 @@
-import process from 'node:process';
-
+/* eslint-disable node/prefer-global/process */
 export default defineNuxtPlugin(() => {
   // Mark as hydrated to prevent FOUC
   if (process.client) {
