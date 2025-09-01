@@ -43,7 +43,7 @@ const navigationItems = ref([
       { label: 'Panel', path: '/kitchen-sink/panel/panel', icon: 'pi pi-window-maximize' },
       { label: 'Card', path: '/kitchen-sink/panel/card', icon: 'pi pi-id-card' },
       { label: 'Accordion', path: '/kitchen-sink/panel/accordion', icon: 'pi pi-bars' },
-      { label: 'TabView', path: '/kitchen-sink/panel/tabview', icon: 'pi pi-clone' },
+      { label: 'Tabs', path: '/kitchen-sink/panel/tabs', icon: 'pi pi-clone' },
     ],
   },
   {
@@ -52,6 +52,7 @@ const navigationItems = ref([
     expanded: true,
     items: [
       { label: 'Divider', path: '/kitchen-sink/misc/divider', icon: 'pi pi-minus' },
+      { label: 'Stepper', path: '/kitchen-sink/misc/stepper', icon: 'pi pi-list-check' },
     ],
   },
 ]);
