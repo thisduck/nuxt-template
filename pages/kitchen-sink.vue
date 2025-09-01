@@ -52,6 +52,7 @@ const navigationItems = ref([
     expanded: true,
     items: [
       { label: 'ConfirmDialog', path: '/kitchen-sink/overlay/confirmdialog', icon: 'pi pi-question-circle' },
+      { label: 'ConfirmPopup', path: '/kitchen-sink/overlay/confirmpopup', icon: 'pi pi-comment' },
     ],
   },
   {
