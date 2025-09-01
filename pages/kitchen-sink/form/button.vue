@@ -132,7 +132,11 @@ function simulateUpload() {
             <div class="flex flex-wrap gap-3">
               <Button icon="pi pi-home" aria-label="Home" />
               <Button icon="pi pi-user" aria-label="Profile" />
-              <Button icon="pi pi-settings" aria-label="Settings" />
+              <Button aria-label="Settings">
+                <template #icon>
+                  <Icon name="lucide:settings" size="18" />
+                </template>
+              </Button>
             </div>
           </div>
 
