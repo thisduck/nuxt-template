@@ -109,9 +109,11 @@ onMounted(async () => {
   try {
     categories.value = await $trpc.getCategories.query();
     // Load initial products
-    filteredProducts.value = await $trpc.getFilteredProducts.query({ filter: '' });
+    const result = await $trpc.getFilteredProducts.query({ filter: '' });
+    filteredProducts.value = Array.isArray(result) ? result : [];
   } catch (error) {
     console.error('Failed to load data:', error);
+    filteredProducts.value = [];
   }
 });
 
@@ -125,11 +127,13 @@ async function onFilterProducts(event) {
   // Debounce the API call
   filterDebounceTimeout.value = setTimeout(async () => {
     try {
-      filteredProducts.value = await $trpc.getFilteredProducts.query({
+      const result = await $trpc.getFilteredProducts.query({
         filter: event.value || '',
       });
+      filteredProducts.value = Array.isArray(result) ? result : [];
     } catch (error) {
       console.error('Failed to filter products:', error);
+      filteredProducts.value = [];
     }
   }, 300);
 }
@@ -675,7 +679,7 @@ async function onFilterProducts(event) {
             option-label="label"
             placeholder="Select from 100k items"
             filter
-            virtual-scroller-options="{ itemSize: 38 }"
+            :virtual-scroller-options="{ itemSize: 38 }"
             class="w-full"
           />
           <small class="text-surface-600 dark:text-surface-300">

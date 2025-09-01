@@ -79,7 +79,7 @@ function onError(_event) {
     <!-- Header -->
     <div class="flex flex-col gap-4">
       <div class="flex items-center gap-4">
-        <Icon name="pi:upload" size="32" class="text-primary-500" />
+        <Icon name="lucide:upload" size="32" class="text-primary-500" />
         <div class="flex flex-col">
           <h1 class="text-3xl font-bold text-surface-900 dark:text-surface-0">
             File Upload
