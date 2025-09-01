@@ -46,6 +46,14 @@ const navigationItems = ref([
       { label: 'TabView', path: '/kitchen-sink/panel/tabview', icon: 'pi pi-clone' },
     ],
   },
+  {
+    title: 'Misc Components',
+    icon: 'pi pi-ellipsis-h',
+    expanded: true,
+    items: [
+      { label: 'Divider', path: '/kitchen-sink/misc/divider', icon: 'pi pi-minus' },
+    ],
+  },
 ]);
 
 function toggleSection(section: any) {
