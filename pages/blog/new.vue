@@ -4,6 +4,8 @@ import { zodResolver } from '@primevue/forms/resolvers/zod';
 import * as z from 'zod';
 
 const router = useRouter();
+const toast = useToast();
+const { $trpc } = useNuxtApp();
 
 // Form schema
 const blogPostSchema = z.object({
@@ -17,13 +19,41 @@ const initialValues = {
   body: '',
 };
 
-function onSubmit(event: any) {
+const isLoading = ref(false);
+
+async function onSubmit(event: any) {
   if (!event.valid) {
     return;
   }
   
-  console.log('Form submitted:', event.values);
-  // TODO: Handle form submission
+  isLoading.value = true;
+  
+  try {
+    const newPost = await $trpc.blog.createPost.mutate({
+      title: event.values.title,
+      body: event.values.body,
+    });
+
+    toast.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Blog post created successfully!',
+      life: 3000,
+    });
+
+    // Redirect to blog index
+    router.push('/blog');
+  } catch (error) {
+    toast.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Failed to create blog post',
+      life: 3000,
+    });
+    console.error('Error creating post:', error);
+  } finally {
+    isLoading.value = false;
+  }
 }
 </script>
 
@@ -87,6 +117,7 @@ function onSubmit(event: any) {
                 type="submit" 
                 label="Publish Post" 
                 icon="pi pi-send"
+                :loading="isLoading"
               />
             </div>
           </div>
