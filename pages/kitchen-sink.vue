@@ -102,6 +102,7 @@ const navigationItems = ref([
       { label: 'Section Headers', path: '/kitchen-sink/ui-blocks/section-headers', icon: 'pi pi-bars' },
       { label: 'Feeds', path: '/kitchen-sink/ui-blocks/feeds', icon: 'pi pi-list' },
       { label: 'Grid Lists', path: '/kitchen-sink/ui-blocks/grid-lists', icon: 'pi pi-th-large' },
+      { label: 'Stacked Lists', path: '/kitchen-sink/ui-blocks/stacked-lists', icon: 'pi pi-bars' },
     ],
   },
 ]);
