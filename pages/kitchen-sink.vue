@@ -77,7 +77,9 @@ const navigationItems = ref([
     expanded: true,
     items: [
       { label: 'Divider', path: '/kitchen-sink/misc/divider', icon: 'pi pi-minus' },
+      { label: 'Message', path: '/kitchen-sink/misc/message', icon: 'pi pi-info-circle' },
       { label: 'Stepper', path: '/kitchen-sink/misc/stepper', icon: 'pi pi-list-check' },
+      { label: 'Toast', path: '/kitchen-sink/misc/toast', icon: 'pi pi-comment' },
       { label: 'Toolbar', path: '/kitchen-sink/misc/toolbar', icon: 'pi pi-bars' },
     ],
   },
