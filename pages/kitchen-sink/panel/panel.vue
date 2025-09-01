@@ -58,13 +58,6 @@ function toggle(event: Event) {
         </Panel>
       </div>
 
-      <div class="bg-surface-50 dark:bg-surface-800 rounded-lg p-4">
-        <pre class="text-sm"><code>&lt;Panel header="Header"&gt;
-  &lt;p class="m-0"&gt;
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-  &lt;/p&gt;
-&lt;/Panel&gt;</code></pre>
-      </div>
     </div>
 
     <!-- Toggleable Panel -->
@@ -85,13 +78,6 @@ function toggle(event: Event) {
         </Panel>
       </div>
 
-      <div class="bg-surface-50 dark:bg-surface-800 rounded-lg p-4">
-        <pre class="text-sm"><code>&lt;Panel header="Header" toggleable&gt;
-  &lt;p class="m-0"&gt;
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-  &lt;/p&gt;
-&lt;/Panel&gt;</code></pre>
-      </div>
     </div>
 
     <!-- Custom Template Panel -->
@@ -131,30 +117,6 @@ function toggle(event: Event) {
         </Panel>
       </div>
 
-      <div class="bg-surface-50 dark:bg-surface-800 rounded-lg p-4">
-        <pre class="text-sm"><code>&lt;Panel toggleable&gt;
-  &lt;template #header&gt;
-    &lt;div class="flex items-center gap-2"&gt;
-      &lt;Avatar image="..." shape="circle" /&gt;
-      &lt;span class="font-bold"&gt;Amy Elsner&lt;/span&gt;
-    &lt;/div&gt;
-  &lt;/template&gt;
-  &lt;template #footer&gt;
-    &lt;div class="flex flex-wrap items-center justify-between gap-4"&gt;
-      &lt;div class="flex items-center gap-2"&gt;
-        &lt;Button icon="pi pi-user" rounded text /&gt;
-        &lt;Button icon="pi pi-bookmark" severity="secondary" rounded text /&gt;
-      &lt;/div&gt;
-      &lt;span class="text-surface-500 dark:text-surface-400"&gt;Updated 2 hours ago&lt;/span&gt;
-    &lt;/div&gt;
-  &lt;/template&gt;
-  &lt;template #icons&gt;
-    &lt;Button icon="pi pi-cog" severity="secondary" rounded text @click="toggle" /&gt;
-    &lt;Menu ref="menu" :model="items" popup /&gt;
-  &lt;/template&gt;
-  &lt;p class="m-0"&gt;Content...&lt;/p&gt;
-&lt;/Panel&gt;</code></pre>
-      </div>
     </div>
 
     <!-- Multiple Panels Grid -->
