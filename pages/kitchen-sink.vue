@@ -76,6 +76,7 @@ const navigationItems = ref([
     icon: 'pi pi-ellipsis-h',
     expanded: true,
     items: [
+      { label: 'Avatar', path: '/kitchen-sink/misc/avatar', icon: 'pi pi-user' },
       { label: 'Divider', path: '/kitchen-sink/misc/divider', icon: 'pi pi-minus' },
       { label: 'Message', path: '/kitchen-sink/misc/message', icon: 'pi pi-info-circle' },
       { label: 'Stepper', path: '/kitchen-sink/misc/stepper', icon: 'pi pi-list-check' },
