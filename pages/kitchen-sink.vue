@@ -99,6 +99,7 @@ const navigationItems = ref([
     items: [
       { label: 'Card Headers', path: '/kitchen-sink/ui-blocks/card-headers', icon: 'pi pi-id-card' },
       { label: 'Page Headers', path: '/kitchen-sink/ui-blocks/page-headers', icon: 'pi pi-window-maximize' },
+      { label: 'Section Headers', path: '/kitchen-sink/ui-blocks/section-headers', icon: 'pi pi-bars' },
     ],
   },
 ]);
