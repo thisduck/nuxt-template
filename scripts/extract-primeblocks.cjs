@@ -93,42 +93,86 @@ function extractPrimeBlocks(htmlFilePath) {
     // Look for PrimeBlocks example sections pattern
     console.log('Searching for PrimeBlocks example sections...');
     
-    // Since this appears to be a client-side rendered app with obfuscated classes,
-    // let's look for text patterns and structured content instead
-    
-    // First, try to find any visible text content that might be example titles
-    const textContentMatches = htmlContent.match(/>([^<]*(?:title|subtitle|dropdown|icon|heading|card|example)[^<]*)</gi) || [];
-    console.log(`Found ${textContentMatches.length} potential text matches with keywords`);
-    if (textContentMatches.length > 0) {
-      textContentMatches.slice(0, 10).forEach((match, i) => {
-        const cleanText = match.replace(/^>|<.*$/g, '').trim();
-        if (cleanText.length > 2) {
-          console.log(`  ${i+1}. "${cleanText}"`);
-        }
-      });
-    }
-    
-    // Look for any structured JSON data that might contain example information
-    const jsonMatches = htmlContent.match(/\{[^}]*(?:"title"|"name"|"label")[^}]*\}/gi) || [];
-    console.log(`Found ${jsonMatches.length} JSON-like structures`);
-    if (jsonMatches.length > 0) {
-      jsonMatches.slice(0, 5).forEach((match, i) => {
-        console.log(`  ${i+1}. ${match.substring(0, 100)}...`);
-      });
-    }
-    
-    // Look for Vue/Nuxt component patterns or data
-    const vueDataMatches = htmlContent.match(/__NUXT__\s*=\s*(\{[\s\S]*?\});?/gi) || [];
-    if (vueDataMatches.length > 0) {
-      console.log('Found Nuxt data, analyzing...');
-      try {
-        // Try to extract and parse Nuxt data
-        const nuxtDataString = vueDataMatches[0].replace('__NUXT__=', '').replace(/;$/, '');
-        console.log('Nuxt data preview:', nuxtDataString.substring(0, 500) + '...');
-      } catch (e) {
-        console.log('Could not parse Nuxt data');
+    // Look for the specific pattern used in PrimeBlocks for example titles
+    // Pattern: <span class="QN9bKy X1m7me">Example Title</span>
+    const exampleTitlePattern = /<span[^>]*class="[^"]*QN9bKy[^"]*X1m7me[^"]*"[^>]*>([^<]+)<\/span>/gi;
+    const exampleTitles = [];
+    let titleMatch;
+    while ((titleMatch = exampleTitlePattern.exec(htmlContent)) !== null) {
+      const title = titleMatch[1].trim();
+      if (title && !title.includes('Free') && !title.includes('Pro')) {
+        exampleTitles.push(title);
       }
     }
+    
+    console.log(`Found ${exampleTitles.length} example titles:`);
+    exampleTitles.forEach((title, i) => {
+      console.log(`  ${i+1}. "${title}"`);
+    });
+    
+    // Now find the actual example blocks that contain these titles
+    // Look for the container structure that wraps each example
+    const exampleBlockPattern = /<div[^>]*class="[^"]*LgzVqE[^"]*P6au9E[^"]*WrTFgT[^"]*"[^>]*>([\s\S]*?)<\/div>/gi;
+    const exampleBlocks = [];
+    let blockMatch;
+    while ((blockMatch = exampleBlockPattern.exec(htmlContent)) !== null) {
+      const blockContent = blockMatch[0];
+      
+      // Extract title from this block
+      const titleInBlock = blockContent.match(/<span[^>]*class="[^"]*QN9bKy[^"]*X1m7me[^"]*"[^>]*>([^<]+)<\/span>/i);
+      if (titleInBlock) {
+        const title = titleInBlock[1].trim();
+        if (title && !title.includes('Free') && !title.includes('Pro')) {
+          exampleBlocks.push({
+            title: title,
+            content: blockContent,
+            // Try to extract the actual example HTML (the preview/demo part)
+            exampleHtml: extractExampleHtml(blockContent)
+          });
+        }
+      }
+    }
+    
+    console.log(`Found ${exampleBlocks.length} example blocks with content`);
+    
+    function extractExampleHtml(blockContent) {
+      // Look for the preview container - this varies but often contains the actual demo
+      // Pattern may include viewport selectors (desktop, tablet, mobile icons)
+      const previewPattern = /<div[^>]*class="[^"]*(?:preview|demo|example)[^"]*"[^>]*>([\s\S]*?)<\/div>/gi;
+      const previewMatch = previewPattern.exec(blockContent);
+      if (previewMatch) {
+        return previewMatch[1];
+      }
+      
+      // Fallback: look for content after the title and badge
+      const afterTitlePattern = /<span[^>]*class="[^"]*QN9bKy[^"]*X1m7me[^"]*"[^>]*>[^<]+<\/span>[\s\S]*?<span[^>]*Free<\/span>[\s\S]*?(<div[\s\S]*)/i;
+      const afterTitleMatch = afterTitlePattern.exec(blockContent);
+      if (afterTitleMatch) {
+        // Take a reasonable chunk after the title/badge
+        const remainingHtml = afterTitleMatch[1];
+        // Try to find a logical stopping point
+        const chunks = remainingHtml.split(/<\/div>/);
+        if (chunks.length > 2) {
+          return chunks.slice(0, 3).join('</div>') + '</div>';
+        }
+        return remainingHtml.substring(0, 1000);
+      }
+      
+      return blockContent.substring(0, 500);
+    }
+    
+    // Add the parsed examples to blocks
+    exampleBlocks.forEach((example, index) => {
+      blocks.push({
+        type: 'primeblocks_example',
+        title: example.title,
+        name: example.title,
+        preview: example.exampleHtml.substring(0, 300).replace(/\s+/g, ' ').trim() + '...',
+        fullContent: example.content,
+        exampleHtml: example.exampleHtml,
+        index: index + 1
+      });
+    });
     
     // PrimeBlocks typical patterns (keeping original as fallback)
     const primeBlocksPatterns = [
@@ -232,8 +276,8 @@ function extractPrimeBlocks(htmlFilePath) {
       }
     });
     
-    // Save detailed results to JSON
-    const outputFile = htmlFilePath.replace('.html', '_blocks.json');
+    // Save detailed results to JSON in current working directory
+    const outputFile = path.join(process.cwd(), `${path.basename(htmlFilePath, '.html')}_blocks.json`);
     const results = {
       sourceFile: htmlFilePath,
       extractedAt: new Date().toISOString(),
