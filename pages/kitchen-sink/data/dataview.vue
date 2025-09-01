@@ -91,8 +91,8 @@ const isLoadingApi = ref(false);
 const totalRecords = ref(0);
 const currentPage = ref(0);
 const pageSize = ref(6);
-const sortField = ref('');
-const sortOrder = ref(0);
+const apiSortField = ref('');
+const apiSortOrder = ref(0);
 const searchQuery = ref('');
 
 // Utility functions
@@ -145,8 +145,8 @@ async function loadApiProducts() {
       filter: searchQuery.value || undefined,
       page: currentPage.value,
       size: pageSize.value,
-      sortField: sortField.value || undefined,
-      sortOrder: sortOrder.value || undefined
+      sortField: apiSortField.value || undefined,
+      sortOrder: apiSortOrder.value || undefined
     });
     
     apiProducts.value = result.data.map(product => ({
@@ -183,11 +183,11 @@ async function onApiSortChange(event) {
   const value = event.value.value;
   
   if (value.indexOf('!') === 0) {
-    sortOrder.value = -1;
-    sortField.value = value.substring(1, value.length);
+    apiSortOrder.value = -1;
+    apiSortField.value = value.substring(1, value.length);
   } else {
-    sortOrder.value = 1;
-    sortField.value = value;
+    apiSortOrder.value = 1;
+    apiSortField.value = value;
   }
   
   currentPage.value = 0; // Reset to first page when sorting
