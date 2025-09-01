@@ -19,6 +19,11 @@ const navs = ref([
     to: '/kitchen-sink',
   },
   {
+    label: 'Blog',
+    icon: 'pi pi-file-edit',
+    to: '/blog',
+  },
+  {
     label: 'Examples',
     icon: 'pi pi-code',
     to: '/examples',

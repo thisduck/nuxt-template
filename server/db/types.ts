@@ -21,3 +21,4 @@ export interface UserTable {
 export type User = Selectable<UserTable>;
 export type UserUpdate = Updateable<UserTable>;
 export type UserInsert = Insertable<UserTable>;
+

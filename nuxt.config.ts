@@ -72,7 +72,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: {
-        style: 'font-size: 16px;',
+        style: 'font-size: 14px;',
       },
     },
   },

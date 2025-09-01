@@ -7,7 +7,7 @@ useSeoMeta({
 const dropdownItems = ref([
   { label: 'Settings', icon: 'pi pi-cog' },
   { label: 'Export', icon: 'pi pi-download' },
-  { label: 'Archive', icon: 'pi pi-archive' }
+  { label: 'Archive', icon: 'pi pi-archive' },
 ]);
 
 const iconDropdownItems = ref([
@@ -15,13 +15,13 @@ const iconDropdownItems = ref([
   { label: 'Edit', icon: 'pi pi-pencil' },
   { label: 'Share', icon: 'pi pi-share-alt' },
   { separator: true },
-  { label: 'Delete', icon: 'pi pi-trash', severity: 'danger' }
+  { label: 'Delete', icon: 'pi pi-trash', severity: 'danger' },
 ]);
 
 const frameworkOptions = ref([
   { label: 'Vue', value: 'vue' },
   { label: 'React', value: 'react' },
-  { label: 'Angular', value: 'angular' }
+  { label: 'Angular', value: 'angular' },
 ]);
 
 const selectedFramework = ref('vue');
@@ -43,7 +43,7 @@ const selectedFramework = ref('vue');
       <h2 class="text-xl font-semibold text-surface-900 dark:text-surface-0 mb-6">
         Title with Subtitle
       </h2>
-      
+
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card class="shadow-lg">
           <template #header>
@@ -60,17 +60,17 @@ const selectedFramework = ref('vue');
             <div class="px-6 pb-6">
               <div class="space-y-4">
                 <div class="flex items-center gap-3 p-3 rounded-lg bg-surface-50 dark:bg-surface-800">
-                  <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <div class="w-2 h-2 bg-green-500 rounded-full" />
                   <span class="text-sm flex-1">Task completed successfully</span>
                   <span class="text-xs text-surface-500">2m ago</span>
                 </div>
                 <div class="flex items-center gap-3 p-3 rounded-lg bg-surface-50 dark:bg-surface-800">
-                  <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <div class="w-2 h-2 bg-blue-500 rounded-full" />
                   <span class="text-sm flex-1">New comment added</span>
                   <span class="text-xs text-surface-500">15m ago</span>
                 </div>
                 <div class="flex items-center gap-3 p-3 rounded-lg bg-surface-50 dark:bg-surface-800">
-                  <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                  <div class="w-2 h-2 bg-orange-500 rounded-full" />
                   <span class="text-sm flex-1">File uploaded to project</span>
                   <span class="text-xs text-surface-500">1h ago</span>
                 </div>
@@ -94,16 +94,28 @@ const selectedFramework = ref('vue');
             <div class="px-6 pb-6">
               <div class="grid grid-cols-3 gap-4">
                 <div class="text-center">
-                  <div class="text-2xl font-bold text-primary-500 mb-1">24</div>
-                  <div class="text-sm text-surface-500 dark:text-surface-400">Tasks</div>
+                  <div class="text-2xl font-bold text-primary-500 mb-1">
+                    24
+                  </div>
+                  <div class="text-sm text-surface-500 dark:text-surface-400">
+                    Tasks
+                  </div>
                 </div>
                 <div class="text-center">
-                  <div class="text-2xl font-bold text-green-500 mb-1">87%</div>
-                  <div class="text-sm text-surface-500 dark:text-surface-400">Complete</div>
+                  <div class="text-2xl font-bold text-green-500 mb-1">
+                    87%
+                  </div>
+                  <div class="text-sm text-surface-500 dark:text-surface-400">
+                    Complete
+                  </div>
                 </div>
                 <div class="text-center">
-                  <div class="text-2xl font-bold text-orange-500 mb-1">3</div>
-                  <div class="text-sm text-surface-500 dark:text-surface-400">Issues</div>
+                  <div class="text-2xl font-bold text-orange-500 mb-1">
+                    3
+                  </div>
+                  <div class="text-sm text-surface-500 dark:text-surface-400">
+                    Issues
+                  </div>
                 </div>
               </div>
             </div>
@@ -117,7 +129,7 @@ const selectedFramework = ref('vue');
       <h2 class="text-xl font-semibold text-surface-900 dark:text-surface-0 mb-6">
         Dropdown, Icon and Subtitle
       </h2>
-      
+
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card class="shadow-lg">
           <template #header>
@@ -143,12 +155,20 @@ const selectedFramework = ref('vue');
             <div class="px-6 pb-6">
               <div class="grid grid-cols-2 gap-4">
                 <div class="text-center p-4 rounded-lg bg-green-50 dark:bg-green-900/10">
-                  <div class="text-2xl font-bold text-green-600 dark:text-green-400 mb-1">$12.4K</div>
-                  <div class="text-sm text-surface-600 dark:text-surface-400">Revenue</div>
+                  <div class="text-2xl font-bold text-green-600 dark:text-green-400 mb-1">
+                    $12.4K
+                  </div>
+                  <div class="text-sm text-surface-600 dark:text-surface-400">
+                    Revenue
+                  </div>
                 </div>
                 <div class="text-center p-4 rounded-lg bg-blue-50 dark:bg-blue-900/10">
-                  <div class="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-1">248</div>
-                  <div class="text-sm text-surface-600 dark:text-surface-400">Visitors</div>
+                  <div class="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-1">
+                    248
+                  </div>
+                  <div class="text-sm text-surface-600 dark:text-surface-400">
+                    Visitors
+                  </div>
                 </div>
               </div>
             </div>
@@ -171,11 +191,11 @@ const selectedFramework = ref('vue');
                   </p>
                 </div>
               </div>
-              <Dropdown 
-                v-model="selectedFramework" 
-                :options="frameworkOptions" 
-                optionLabel="label" 
-                optionValue="value"
+              <Dropdown
+                v-model="selectedFramework"
+                :options="frameworkOptions"
+                option-label="label"
+                option-value="value"
                 placeholder="Framework"
                 class="min-w-[140px]"
               />
@@ -187,16 +207,24 @@ const selectedFramework = ref('vue');
                 <div class="flex items-center gap-3 p-3 rounded-lg border border-surface-200 dark:border-surface-700">
                   <Avatar label="JD" class="bg-blue-500" size="small" />
                   <div class="flex-1">
-                    <div class="font-medium text-surface-900 dark:text-surface-0">John Doe</div>
-                    <div class="text-sm text-surface-500 dark:text-surface-400">Lead Developer</div>
+                    <div class="font-medium text-surface-900 dark:text-surface-0">
+                      John Doe
+                    </div>
+                    <div class="text-sm text-surface-500 dark:text-surface-400">
+                      Lead Developer
+                    </div>
                   </div>
                   <Tag value="Active" severity="success" />
                 </div>
                 <div class="flex items-center gap-3 p-3 rounded-lg border border-surface-200 dark:border-surface-700">
                   <Avatar label="JS" class="bg-purple-500" size="small" />
                   <div class="flex-1">
-                    <div class="font-medium text-surface-900 dark:text-surface-0">Jane Smith</div>
-                    <div class="text-sm text-surface-500 dark:text-surface-400">UI Designer</div>
+                    <div class="font-medium text-surface-900 dark:text-surface-0">
+                      Jane Smith
+                    </div>
+                    <div class="text-sm text-surface-500 dark:text-surface-400">
+                      UI Designer
+                    </div>
                   </div>
                   <Tag value="Busy" severity="warning" />
                 </div>
@@ -212,7 +240,7 @@ const selectedFramework = ref('vue');
       <h2 class="text-xl font-semibold text-surface-900 dark:text-surface-0 mb-6">
         With Action
       </h2>
-      
+
       <div class="space-y-6">
         <Card class="shadow-lg">
           <template #header>
@@ -236,28 +264,46 @@ const selectedFramework = ref('vue');
             <div class="px-6 pb-6">
               <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
                 <div class="text-center p-4 bg-surface-50 dark:bg-surface-800 rounded-lg">
-                  <div class="text-2xl font-bold text-primary-500 mb-1">24</div>
-                  <div class="text-sm text-surface-500 dark:text-surface-400">Total Tasks</div>
+                  <div class="text-2xl font-bold text-primary-500 mb-1">
+                    24
+                  </div>
+                  <div class="text-sm text-surface-500 dark:text-surface-400">
+                    Total Tasks
+                  </div>
                 </div>
                 <div class="text-center p-4 bg-surface-50 dark:bg-surface-800 rounded-lg">
-                  <div class="text-2xl font-bold text-green-500 mb-1">18</div>
-                  <div class="text-sm text-surface-500 dark:text-surface-400">Completed</div>
+                  <div class="text-2xl font-bold text-green-500 mb-1">
+                    18
+                  </div>
+                  <div class="text-sm text-surface-500 dark:text-surface-400">
+                    Completed
+                  </div>
                 </div>
                 <div class="text-center p-4 bg-surface-50 dark:bg-surface-800 rounded-lg">
-                  <div class="text-2xl font-bold text-orange-500 mb-1">4</div>
-                  <div class="text-sm text-surface-500 dark:text-surface-400">In Progress</div>
+                  <div class="text-2xl font-bold text-orange-500 mb-1">
+                    4
+                  </div>
+                  <div class="text-sm text-surface-500 dark:text-surface-400">
+                    In Progress
+                  </div>
                 </div>
                 <div class="text-center p-4 bg-surface-50 dark:bg-surface-800 rounded-lg">
-                  <div class="text-2xl font-bold text-red-500 mb-1">2</div>
-                  <div class="text-sm text-surface-500 dark:text-surface-400">Overdue</div>
+                  <div class="text-2xl font-bold text-red-500 mb-1">
+                    2
+                  </div>
+                  <div class="text-sm text-surface-500 dark:text-surface-400">
+                    Overdue
+                  </div>
                 </div>
               </div>
               <ProgressBar :value="75" class="mb-2" />
-              <div class="text-sm text-surface-500 dark:text-surface-400 text-center">75% Complete</div>
+              <div class="text-sm text-surface-500 dark:text-surface-400 text-center">
+                75% Complete
+              </div>
             </div>
           </template>
         </Card>
-        
+
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <Card class="shadow-lg">
             <template #header>
@@ -279,7 +325,7 @@ const selectedFramework = ref('vue');
               </div>
             </template>
           </Card>
-          
+
           <Card class="shadow-lg">
             <template #header>
               <div class="p-6 pb-0 flex justify-between items-center">
@@ -295,16 +341,24 @@ const selectedFramework = ref('vue');
                   <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-50 dark:hover:bg-surface-800">
                     <Icon name="lucide:file-text" class="text-blue-500" />
                     <div class="flex-1">
-                      <div class="font-medium text-sm">Project Requirements.pdf</div>
-                      <div class="text-xs text-surface-500 dark:text-surface-400">2 hours ago</div>
+                      <div class="font-medium text-sm">
+                        Project Requirements.pdf
+                      </div>
+                      <div class="text-xs text-surface-500 dark:text-surface-400">
+                        2 hours ago
+                      </div>
                     </div>
                     <Button icon="pi pi-download" severity="secondary" text size="small" />
                   </div>
                   <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-50 dark:hover:bg-surface-800">
                     <Icon name="lucide:image" class="text-green-500" />
                     <div class="flex-1">
-                      <div class="font-medium text-sm">Design Mockups.png</div>
-                      <div class="text-xs text-surface-500 dark:text-surface-400">5 hours ago</div>
+                      <div class="font-medium text-sm">
+                        Design Mockups.png
+                      </div>
+                      <div class="text-xs text-surface-500 dark:text-surface-400">
+                        5 hours ago
+                      </div>
                     </div>
                     <Button icon="pi pi-download" severity="secondary" text size="small" />
                   </div>
@@ -321,7 +375,7 @@ const selectedFramework = ref('vue');
       <h2 class="text-xl font-semibold text-surface-900 dark:text-surface-0 mb-6">
         With Dropdown
       </h2>
-      
+
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card class="shadow-lg">
           <template #header>
@@ -337,20 +391,34 @@ const selectedFramework = ref('vue');
             <div class="px-6 pb-6">
               <div class="grid grid-cols-2 gap-4 mb-4">
                 <div class="text-center">
-                  <div class="text-2xl font-bold text-primary-500 mb-1">$24.5K</div>
-                  <div class="text-sm text-surface-500 dark:text-surface-400">This Month</div>
-                  <div class="text-xs text-green-500 mt-1">↑ 12%</div>
+                  <div class="text-2xl font-bold text-primary-500 mb-1">
+                    $24.5K
+                  </div>
+                  <div class="text-sm text-surface-500 dark:text-surface-400">
+                    This Month
+                  </div>
+                  <div class="text-xs text-green-500 mt-1">
+                    ↑ 12%
+                  </div>
                 </div>
                 <div class="text-center">
-                  <div class="text-2xl font-bold text-surface-700 dark:text-surface-300 mb-1">1,247</div>
-                  <div class="text-sm text-surface-500 dark:text-surface-400">Orders</div>
-                  <div class="text-xs text-green-500 mt-1">↑ 8%</div>
+                  <div class="text-2xl font-bold text-surface-700 dark:text-surface-300 mb-1">
+                    1,247
+                  </div>
+                  <div class="text-sm text-surface-500 dark:text-surface-400">
+                    Orders
+                  </div>
+                  <div class="text-xs text-green-500 mt-1">
+                    ↑ 8%
+                  </div>
                 </div>
               </div>
               <div class="h-2 bg-surface-200 dark:bg-surface-700 rounded-full overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-primary-500 to-primary-600" style="width: 68%"></div>
+                <div class="h-full bg-gradient-to-r from-primary-500 to-primary-600" style="width: 68%" />
               </div>
-              <div class="text-center text-sm text-surface-500 dark:text-surface-400 mt-2">68% of monthly goal</div>
+              <div class="text-center text-sm text-surface-500 dark:text-surface-400 mt-2">
+                68% of monthly goal
+              </div>
             </div>
           </template>
         </Card>
@@ -361,13 +429,13 @@ const selectedFramework = ref('vue');
               <h3 class="text-xl font-semibold text-surface-900 dark:text-surface-0">
                 Performance
               </h3>
-              <Dropdown 
+              <Dropdown
                 :options="[
                   { label: 'Last 7 days', value: '7d' },
                   { label: 'Last 30 days', value: '30d' },
-                  { label: 'Last 90 days', value: '90d' }
-                ]" 
-                optionLabel="label" 
+                  { label: 'Last 90 days', value: '90d' },
+                ]"
+                option-label="label"
                 placeholder="Period"
                 class="min-w-[120px]"
               />
@@ -379,22 +447,34 @@ const selectedFramework = ref('vue');
                 <div class="flex justify-between items-center">
                   <span class="text-surface-700 dark:text-surface-300">Page Views</span>
                   <div class="text-right">
-                    <div class="font-semibold">12,450</div>
-                    <div class="text-xs text-green-500">+5.2%</div>
+                    <div class="font-semibold">
+                      12,450
+                    </div>
+                    <div class="text-xs text-green-500">
+                      +5.2%
+                    </div>
                   </div>
                 </div>
                 <div class="flex justify-between items-center">
                   <span class="text-surface-700 dark:text-surface-300">Unique Visitors</span>
                   <div class="text-right">
-                    <div class="font-semibold">3,240</div>
-                    <div class="text-xs text-green-500">+12.1%</div>
+                    <div class="font-semibold">
+                      3,240
+                    </div>
+                    <div class="text-xs text-green-500">
+                      +12.1%
+                    </div>
                   </div>
                 </div>
                 <div class="flex justify-between items-center">
                   <span class="text-surface-700 dark:text-surface-300">Bounce Rate</span>
                   <div class="text-right">
-                    <div class="font-semibold">24.5%</div>
-                    <div class="text-xs text-red-500">-2.3%</div>
+                    <div class="font-semibold">
+                      24.5%
+                    </div>
+                    <div class="text-xs text-red-500">
+                      -2.3%
+                    </div>
                   </div>
                 </div>
               </div>
@@ -409,7 +489,7 @@ const selectedFramework = ref('vue');
       <h2 class="text-xl font-semibold text-surface-900 dark:text-surface-0 mb-6">
         With Subtitle and Action
       </h2>
-      
+
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card class="shadow-lg">
           <template #header>
@@ -429,26 +509,38 @@ const selectedFramework = ref('vue');
             <div class="px-6 pb-6">
               <div class="space-y-4">
                 <div class="flex items-center gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/10">
-                  <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                  <div class="w-3 h-3 bg-green-500 rounded-full" />
                   <div class="flex-1">
-                    <div class="font-medium text-sm">Design Phase</div>
-                    <div class="text-xs text-surface-500 dark:text-surface-400">Completed on Dec 10</div>
+                    <div class="font-medium text-sm">
+                      Design Phase
+                    </div>
+                    <div class="text-xs text-surface-500 dark:text-surface-400">
+                      Completed on Dec 10
+                    </div>
                   </div>
                   <Tag value="Done" severity="success" />
                 </div>
                 <div class="flex items-center gap-3 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/10">
-                  <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                  <div class="w-3 h-3 bg-blue-500 rounded-full" />
                   <div class="flex-1">
-                    <div class="font-medium text-sm">Development</div>
-                    <div class="text-xs text-surface-500 dark:text-surface-400">In progress</div>
+                    <div class="font-medium text-sm">
+                      Development
+                    </div>
+                    <div class="text-xs text-surface-500 dark:text-surface-400">
+                      In progress
+                    </div>
                   </div>
                   <Tag value="Active" severity="info" />
                 </div>
                 <div class="flex items-center gap-3 p-3 rounded-lg bg-surface-50 dark:bg-surface-800">
-                  <div class="w-3 h-3 bg-surface-400 rounded-full"></div>
+                  <div class="w-3 h-3 bg-surface-400 rounded-full" />
                   <div class="flex-1">
-                    <div class="font-medium text-sm">Testing</div>
-                    <div class="text-xs text-surface-500 dark:text-surface-400">Starts Dec 20</div>
+                    <div class="font-medium text-sm">
+                      Testing
+                    </div>
+                    <div class="text-xs text-surface-500 dark:text-surface-400">
+                      Starts Dec 20
+                    </div>
                   </div>
                   <Tag value="Pending" severity="secondary" />
                 </div>
