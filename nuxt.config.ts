@@ -513,6 +513,20 @@ export default defineNuxtConfig({
       htmlAttrs: {
         style: 'font-size: 14px;',
       },
+      style: [
+        {
+          innerHTML: `
+            html { color-scheme: light dark; }
+            body { 
+              font-family: 'Inter', sans-serif; 
+              margin: 0; 
+              line-height: 1.6; 
+              visibility: visible !important;
+            }
+            * { box-sizing: border-box; }
+          `,
+        },
+      ],
     },
   },
 
@@ -520,6 +534,11 @@ export default defineNuxtConfig({
     options: {
       theme: {
         preset: CustomPreset,
+        options: {
+          prefix: 'p',
+          darkModeSelector: '.dark',
+          cssLayer: false,
+        },
       },
     },
   },

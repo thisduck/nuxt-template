@@ -2,6 +2,27 @@
 @import "tailwindcss-primeui";
 @import 'primeicons/primeicons.css';
 
+/* Critical styles to prevent FOUC */
+:root {
+  --font-family: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-family);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Ensure smooth theme transition */
+html {
+  color-scheme: light dark;
+}
+
+/* Smooth theme transitions */
+* {
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
