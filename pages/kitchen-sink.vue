@@ -31,7 +31,9 @@ const navigationItems = ref([
     items: [
       { label: 'DataTable', path: '/kitchen-sink/data/datatable', icon: 'pi pi-table' },
       { label: 'DataView', path: '/kitchen-sink/data/dataview', icon: 'pi pi-list' },
+      { label: 'Timeline', path: '/kitchen-sink/data/timeline', icon: 'pi pi-calendar' },
       { label: 'TreeTable', path: '/kitchen-sink/data/treetable', icon: 'pi pi-sitemap' },
+      { label: 'Paginator', path: '/kitchen-sink/data/paginator', icon: 'pi pi-angle-double-right' },
     ],
   },
   {
