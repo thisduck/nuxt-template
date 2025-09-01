@@ -58,7 +58,7 @@ async function onSubmit(event: any) {
 </script>
 
 <template>
-  <div class="max-w-4xl mx-auto p-6">
+  <div class="w-full max-w-6xl mx-auto p-6">
     <div class="flex items-center gap-4 mb-8">
       <Button 
         icon="pi pi-arrow-left" 

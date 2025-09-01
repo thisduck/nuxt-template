@@ -111,10 +111,26 @@ function prevPage() {
           <Card v-for="post in blogData.posts" :key="post.id" class="hover:shadow-lg transition-shadow">
             <template #content>
               <div class="p-6">
-                <h2 class="text-2xl font-semibold mb-2">{{ post.title }}</h2>
+                <h2 class="text-2xl font-semibold mb-2">
+                  <NuxtLink 
+                    :to="`/blog/${post.id}`" 
+                    class="text-inherit hover:text-primary transition-colors cursor-pointer"
+                  >
+                    {{ post.title }}
+                  </NuxtLink>
+                </h2>
                 <p class="text-sm mb-4">{{ formatDate(post.created_at) }}</p>
                 <div class="prose max-w-none">
                   <p>{{ post.body.substring(0, 300) }}{{ post.body.length > 300 ? '...' : '' }}</p>
+                </div>
+                <div class="mt-4">
+                  <Button 
+                    label="Read More" 
+                    variant="text" 
+                    size="small"
+                    @click="$router.push(`/blog/${post.id}`)"
+                    class="text-primary hover:text-primary-600"
+                  />
                 </div>
               </div>
             </template>
