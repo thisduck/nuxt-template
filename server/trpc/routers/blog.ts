@@ -81,4 +81,55 @@ export const blogRouter = createTRPCRouter({
 
       return post;
     }),
+
+  // Search blog posts
+  searchPosts: baseProcedure
+    .input(z.object({
+      query: z.string().min(1, 'Search query is required'),
+      page: z.number().min(0).default(0),
+      pageSize: z.number().min(1).max(50).default(8),
+    }))
+    .query(async (opts) => {
+      const { query, page, pageSize } = opts.input;
+      const offset = page * pageSize;
+
+      // Search in title and body using LIKE with wildcards
+      const searchPattern = `%${query}%`;
+
+      // Get total count of matching posts
+      const totalResult = await db
+        .selectFrom('blog_posts')
+        .select(db.fn.count('id').as('count'))
+        .where(eb => eb.or([
+          eb('title', 'like', searchPattern),
+          eb('body', 'like', searchPattern),
+        ]))
+        .executeTakeFirst();
+
+      const total = Number(totalResult?.count || 0);
+
+      // Get paginated search results
+      const posts = await db
+        .selectFrom('blog_posts')
+        .selectAll()
+        .where(eb => eb.or([
+          eb('title', 'like', searchPattern),
+          eb('body', 'like', searchPattern),
+        ]))
+        .orderBy('created_at', 'desc')
+        .limit(pageSize)
+        .offset(offset)
+        .execute();
+
+      return {
+        posts,
+        pagination: {
+          page,
+          pageSize,
+          total,
+          totalPages: Math.ceil(total / pageSize),
+        },
+        query,
+      };
+    }),
 });

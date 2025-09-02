@@ -3,43 +3,94 @@ const { $trpc } = useNuxtApp();
 const route = useRoute();
 const router = useRouter();
 
-// Get initial page from URL query parameter (1-based in URL, convert to 0-based internally)
+// Get initial values from URL query parameters
 const pageSize = 8;
 const urlPage = Number(route.query.page) || 1;
 const currentPage = ref(urlPage - 1); // Convert to 0-based for internal use
+const searchQuery = ref((route.query.search as string) || '');
 
 // Computed property for Paginator's first prop (0-based first record index)
 const paginatorFirst = computed(() => currentPage.value * pageSize);
 
-// Fetch blog posts from tRPC with pagination
-const { data: blogData, pending: loading, error, refresh } = await $trpc.blog.getPosts.useQuery({
+// Determine if we're in search mode
+const isSearchMode = computed(() => searchQuery.value.trim().length > 0);
+
+// Reactive query params for data fetching
+const queryParams = computed(() => ({
   page: currentPage.value,
   pageSize,
-});
+  ...(isSearchMode.value ? { query: searchQuery.value.trim() } : {}),
+}));
 
-// Watch for page changes and update URL + refetch
-watch(currentPage, async (newPage) => {
-  // Convert 0-based page to 1-based for URL
-  const urlPageNumber = newPage + 1;
-  await router.push({
-    query: {
-      ...route.query,
-      page: urlPageNumber === 1 ? undefined : urlPageNumber,
-    },
-  });
+// Fetch blog posts (either search or regular)
+const { data: blogData, pending: loading, error, refresh } = await $trpc.blog[
+  isSearchMode.value ? 'searchPosts' : 'getPosts'
+].useQuery(queryParams);
 
-  // Refetch data
+// Search functionality
+const searchTimeout = ref<NodeJS.Timeout | null>(null);
+
+function handleSearch(event: Event) {
+  const target = event.target as HTMLInputElement;
+  const query = target.value;
+
+  // Clear existing timeout
+  if (searchTimeout.value) {
+    clearTimeout(searchTimeout.value);
+  }
+
+  // Debounce search to avoid too many API calls
+  searchTimeout.value = setTimeout(() => {
+    searchQuery.value = query;
+    currentPage.value = 0; // Reset to first page on new search
+    updateURL();
+  }, 300);
+}
+
+function clearSearch() {
+  searchQuery.value = '';
+  currentPage.value = 0;
+  updateURL();
+}
+
+// Update URL with current state
+async function updateURL() {
+  const query: Record<string, string | undefined> = {};
+
+  // Add search query if exists
+  if (searchQuery.value.trim()) {
+    query.search = searchQuery.value.trim();
+  }
+
+  // Add page if not first page
+  const urlPageNumber = currentPage.value + 1;
+  if (urlPageNumber > 1) {
+    query.page = String(urlPageNumber);
+  }
+
+  await router.push({ query });
   await refresh();
+}
+
+// Watch for page changes
+watch(currentPage, async () => {
+  await updateURL();
 });
 
 // Watch for URL changes (like back/forward buttons)
-watch(() => route.query.page, (newPage) => {
-  const urlPageNumber = Number(newPage) || 1;
+watch(() => route.query, (newQuery) => {
+  const newSearch = (newQuery.search as string) || '';
+  const urlPageNumber = Number(newQuery.page) || 1;
   const zeroBasedPage = urlPageNumber - 1;
+
+  if (newSearch !== searchQuery.value) {
+    searchQuery.value = newSearch;
+  }
+
   if (zeroBasedPage !== currentPage.value) {
     currentPage.value = zeroBasedPage;
   }
-});
+}, { deep: true });
 
 function formatDate(date: Date | string) {
   const dateObj = typeof date === 'string' ? new Date(date) : date;
@@ -59,6 +110,7 @@ function onPaginatorChange(newFirst: number) {
 
 <template>
   <div class="w-full max-w-6xl mx-auto p-6">
+    <!-- Header -->
     <div class="flex items-center justify-between mb-8">
       <h1 class="text-3xl font-bold">
         Blog
@@ -68,6 +120,44 @@ function onPaginatorChange(newFirst: number) {
         icon="pi pi-plus"
         @click="$router.push('/blog/new')"
       />
+    </div>
+
+    <!-- Search Section -->
+    <div class="mb-8">
+      <Card>
+        <template #content>
+          <div class="p-6">
+            <div class="flex flex-col sm:flex-row gap-4">
+              <div class="flex-1">
+                <div class="relative">
+                  <InputText
+                    :model-value="searchQuery"
+                    placeholder="Search blog posts..."
+                    class="w-full pl-10"
+                    @input="handleSearch"
+                  />
+                  <i class="pi pi-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                </div>
+              </div>
+              <Button
+                v-if="isSearchMode"
+                label="Clear Search"
+                icon="pi pi-times"
+                variant="outlined"
+                @click="clearSearch"
+              />
+            </div>
+
+            <!-- Search Results Info -->
+            <div v-if="isSearchMode && blogData" class="mt-4 text-sm text-gray-600">
+              <span v-if="loading">Searching...</span>
+              <span v-else>
+                Found {{ blogData.pagination.total }} result{{ blogData.pagination.total === 1 ? '' : 's' }} for "{{ searchQuery }}"
+              </span>
+            </div>
+          </div>
+        </template>
+      </Card>
     </div>
 
     <!-- Loading State -->
@@ -152,18 +242,37 @@ function onPaginatorChange(newFirst: number) {
 
       <!-- Empty State -->
       <div v-else class="text-center py-16">
-        <i class="pi pi-file-edit text-6xl mb-4" />
-        <h3 class="text-xl font-semibold mb-2">
-          No blog posts yet
-        </h3>
-        <p class="mb-6">
-          Get started by creating your first blog post
-        </p>
-        <Button
-          label="Create Your First Post"
-          icon="pi pi-plus"
-          @click="$router.push('/blog/new')"
-        />
+        <template v-if="isSearchMode">
+          <!-- No Search Results -->
+          <i class="pi pi-search text-6xl mb-4 text-gray-400" />
+          <h3 class="text-xl font-semibold mb-2">
+            No results found
+          </h3>
+          <p class="mb-6 text-gray-600">
+            No blog posts match your search for "{{ searchQuery }}". Try different keywords or browse all posts.
+          </p>
+          <Button
+            label="Clear Search"
+            icon="pi pi-times"
+            variant="outlined"
+            @click="clearSearch"
+          />
+        </template>
+        <template v-else>
+          <!-- No Posts at All -->
+          <i class="pi pi-file-edit text-6xl mb-4" />
+          <h3 class="text-xl font-semibold mb-2">
+            No blog posts yet
+          </h3>
+          <p class="mb-6">
+            Get started by creating your first blog post
+          </p>
+          <Button
+            label="Create Your First Post"
+            icon="pi pi-plus"
+            @click="$router.push('/blog/new')"
+          />
+        </template>
       </div>
     </div>
   </div>
