@@ -234,7 +234,7 @@ async function loadApiProducts() {
   lastApiAction.value = 'Loading products...';
 
   try {
-    const result = await $trpc.getFilteredProducts.query({
+    const result = await $trpc.examples.getFilteredProducts.query({
       filter: searchQuery.value || undefined,
       page: currentPage.value,
       size: pageSize.value,

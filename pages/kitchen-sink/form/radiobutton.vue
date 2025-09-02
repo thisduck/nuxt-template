@@ -39,7 +39,7 @@ const priorities = ref([]);
 // Load priorities from backend
 onMounted(async () => {
   try {
-    priorities.value = await $trpc.getPriorities.query();
+    priorities.value = await $trpc.examples.getPriorities.query();
   } catch (error) {
     console.error('Failed to load priorities:', error);
     // Fallback data

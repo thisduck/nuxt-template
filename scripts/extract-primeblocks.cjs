@@ -2,6 +2,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
+const process = require('node:process');
 
 function extractPrimeBlocks(htmlFilePath) {
   try {
@@ -70,14 +71,12 @@ function extractPrimeBlocks(htmlFilePath) {
     ];
 
     const blocks = [];
-    let foundContent = false;
 
     // Try each pattern to find content
     for (const pattern of patterns) {
       const matches = [...htmlContent.matchAll(pattern)];
       if (matches.length > 0) {
         console.log(`Found ${matches.length} matches with pattern: ${pattern.source}`);
-        foundContent = true;
 
         matches.forEach((match, index) => {
           blocks.push({
@@ -97,12 +96,13 @@ function extractPrimeBlocks(htmlFilePath) {
     // Pattern: <span class="QN9bKy X1m7me">Example Title</span>
     const exampleTitlePattern = /<span[^>]*class="[^"]*QN9bKy[^"]*X1m7me[^"]*"[^>]*>([^<]+)<\/span>/gi;
     const exampleTitles = [];
-    let titleMatch;
-    while ((titleMatch = exampleTitlePattern.exec(htmlContent)) !== null) {
+    let titleMatch = exampleTitlePattern.exec(htmlContent);
+    while (titleMatch !== null) {
       const title = titleMatch[1].trim();
       if (title && !title.includes('Free') && !title.includes('Pro')) {
         exampleTitles.push(title);
       }
+      titleMatch = exampleTitlePattern.exec(htmlContent);
     }
 
     console.log(`Found ${exampleTitles.length} example titles:`);
@@ -112,10 +112,10 @@ function extractPrimeBlocks(htmlFilePath) {
 
     // Now find the actual example blocks that contain these titles
     // Look for the container structure that wraps each example
-    const exampleBlockPattern = /<div[^>]*class="[^"]*LgzVqE[^"]*P6au9E[^"]*WrTFgT[^"]*"[^>]*>([\s\S]*?)<\/div>/gi;
+    const exampleBlockPattern = /<div[^>]*class="[^"]*LgzVqE[^"]*P6au9E[^"]*WrTFgT[^"]*"[^>]*>[\s\S]*?<\/div>/gi;
     const exampleBlocks = [];
-    let blockMatch;
-    while ((blockMatch = exampleBlockPattern.exec(htmlContent)) !== null) {
+    let blockMatch = exampleBlockPattern.exec(htmlContent);
+    while (blockMatch !== null) {
       const blockContent = blockMatch[0];
 
       // Extract title from this block
@@ -131,6 +131,7 @@ function extractPrimeBlocks(htmlFilePath) {
           });
         }
       }
+      blockMatch = exampleBlockPattern.exec(htmlContent);
     }
 
     console.log(`Found ${exampleBlocks.length} example blocks with content`);
@@ -138,7 +139,7 @@ function extractPrimeBlocks(htmlFilePath) {
     function extractExampleHtml(blockContent) {
       // Look for the preview container - this varies but often contains the actual demo
       // Pattern may include viewport selectors (desktop, tablet, mobile icons)
-      const previewPattern = /<div[^>]*class="[^"]*(?:preview|demo|example)[^"]*"[^>]*>([\s\S]*?)<\/div>/gi;
+      const previewPattern = /<div[^>]*class="[^"]*(?:preview|demo|example)[^"]*"[^>]*>([\s\S]*?)<\/div>/i;
       const previewMatch = previewPattern.exec(blockContent);
       if (previewMatch) {
         return previewMatch[1];

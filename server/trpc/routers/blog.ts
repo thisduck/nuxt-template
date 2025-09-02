@@ -1,7 +1,7 @@
-import { z } from 'zod';
-import { baseProcedure, createTRPCRouter } from '~/server/trpc/init';
-import { db } from '~/server/environment/kysely';
 import type { BlogPostInsert } from '~/server/db/types';
+import { z } from 'zod';
+import { db } from '~/server/environment/kysely';
+import { baseProcedure, createTRPCRouter } from '~/server/trpc/init';
 
 export const blogRouter = createTRPCRouter({
   // Create a new blog post

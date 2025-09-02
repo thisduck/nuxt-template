@@ -34,4 +34,3 @@ export interface BlogPostTable {
 export type BlogPost = Selectable<BlogPostTable>;
 export type BlogPostUpdate = Updateable<BlogPostTable>;
 export type BlogPostInsert = Insertable<BlogPostTable>;
-

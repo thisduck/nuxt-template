@@ -281,7 +281,7 @@ function searchFilledCountries(event) {
 
 async function searchProducts(event) {
   try {
-    const results = await $trpc.searchProducts.query({ query: event.query });
+    const results = await $trpc.examples.searchProducts.query({ query: event.query });
     productSuggestions.value = results;
   } catch (error) {
     console.error('Failed to search products:', error);

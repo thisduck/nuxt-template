@@ -25,11 +25,11 @@ function formatDate(date: Date | string) {
   <div class="w-full max-w-6xl mx-auto p-6">
     <!-- Back to Blog Button -->
     <div class="mb-6">
-      <Button 
-        label="← Back to Blog" 
-        variant="text" 
-        @click="$router.push('/blog')"
+      <Button
+        label="← Back to Blog"
+        variant="text"
         class="text-primary hover:text-primary-600"
+        @click="$router.push('/blog')"
       />
     </div>
 
@@ -38,14 +38,14 @@ function formatDate(date: Date | string) {
       <Card>
         <template #content>
           <div class="p-6 space-y-4">
-            <div class="h-8 bg-gray-200 rounded w-3/4"></div>
-            <div class="h-4 bg-gray-200 rounded w-1/3"></div>
+            <div class="h-8 bg-gray-200 rounded w-3/4" />
+            <div class="h-4 bg-gray-200 rounded w-1/3" />
             <div class="space-y-3 mt-8">
-              <div class="h-4 bg-gray-200 rounded"></div>
-              <div class="h-4 bg-gray-200 rounded"></div>
-              <div class="h-4 bg-gray-200 rounded w-5/6"></div>
-              <div class="h-4 bg-gray-200 rounded"></div>
-              <div class="h-4 bg-gray-200 rounded w-4/5"></div>
+              <div class="h-4 bg-gray-200 rounded" />
+              <div class="h-4 bg-gray-200 rounded" />
+              <div class="h-4 bg-gray-200 rounded w-5/6" />
+              <div class="h-4 bg-gray-200 rounded" />
+              <div class="h-4 bg-gray-200 rounded w-4/5" />
             </div>
           </div>
         </template>
@@ -57,12 +57,16 @@ function formatDate(date: Date | string) {
       <Card>
         <template #content>
           <div class="p-6">
-            <i class="pi pi-exclamation-triangle text-6xl text-red-500 mb-4"></i>
-            <h3 class="text-xl font-semibold mb-2">Post not found</h3>
-            <p class="mb-6">{{ error.message }}</p>
-            <Button 
-              label="Back to Blog" 
-              icon="pi pi-arrow-left" 
+            <i class="pi pi-exclamation-triangle text-6xl text-red-500 mb-4" />
+            <h3 class="text-xl font-semibold mb-2">
+              Post not found
+            </h3>
+            <p class="mb-6">
+              {{ error.message }}
+            </p>
+            <Button
+              label="Back to Blog"
+              icon="pi pi-arrow-left"
               @click="$router.push('/blog')"
             />
           </div>
@@ -77,7 +81,9 @@ function formatDate(date: Date | string) {
           <div class="p-6">
             <!-- Post Header -->
             <header class="mb-8">
-              <h1 class="text-4xl font-bold mb-4">{{ post.title }}</h1>
+              <h1 class="text-4xl font-bold mb-4">
+                {{ post.title }}
+              </h1>
               <div class="text-sm text-gray-600">
                 <time :datetime="post.created_at">
                   Published on {{ formatDate(post.created_at) }}
@@ -90,7 +96,9 @@ function formatDate(date: Date | string) {
 
             <!-- Post Body -->
             <div class="prose max-w-none">
-              <div class="whitespace-pre-wrap">{{ post.body }}</div>
+              <div class="whitespace-pre-wrap">
+                {{ post.body }}
+              </div>
             </div>
           </div>
         </template>

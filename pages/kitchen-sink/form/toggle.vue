@@ -32,7 +32,7 @@ const userSettings = ref({
 onMounted(async () => {
   try {
     settingsLoading.value = true;
-    const settings = await $trpc.getUserSettings.query();
+    const settings = await $trpc.examples.getUserSettings.query();
     userSettings.value = { ...userSettings.value, ...settings };
   } catch (error) {
     console.error('Failed to load user settings:', error);
@@ -45,7 +45,7 @@ onMounted(async () => {
 async function saveSettings() {
   try {
     settingsLoading.value = true;
-    await $trpc.updateUserSettings.mutate(userSettings.value);
+    await $trpc.examples.updateUserSettings.mutate(userSettings.value);
     // Settings saved successfully
   } catch (error) {
     console.error('Failed to save settings:', error);

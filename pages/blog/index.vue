@@ -22,12 +22,12 @@ watch(currentPage, async (newPage) => {
   // Convert 0-based page to 1-based for URL
   const urlPageNumber = newPage + 1;
   await router.push({
-    query: { 
-      ...route.query, 
-      page: urlPageNumber === 1 ? undefined : urlPageNumber 
-    }
+    query: {
+      ...route.query,
+      page: urlPageNumber === 1 ? undefined : urlPageNumber,
+    },
   });
-  
+
   // Refetch data
   await refresh();
 });
@@ -55,27 +55,17 @@ function onPaginatorChange(newFirst: number) {
   const newPage = Math.floor(newFirst / pageSize);
   currentPage.value = newPage;
 }
-
-function nextPage() {
-  if (blogData.value && currentPage.value < blogData.value.pagination.totalPages - 1) {
-    currentPage.value++;
-  }
-}
-
-function prevPage() {
-  if (currentPage.value > 0) {
-    currentPage.value--;
-  }
-}
 </script>
 
 <template>
   <div class="w-full max-w-6xl mx-auto p-6">
     <div class="flex items-center justify-between mb-8">
-      <h1 class="text-3xl font-bold">Blog</h1>
-      <Button 
-        label="New Post" 
-        icon="pi pi-plus" 
+      <h1 class="text-3xl font-bold">
+        Blog
+      </h1>
+      <Button
+        label="New Post"
+        icon="pi pi-plus"
         @click="$router.push('/blog/new')"
       />
     </div>
@@ -85,11 +75,11 @@ function prevPage() {
       <Card v-for="i in 3" :key="i" class="animate-pulse">
         <template #content>
           <div class="space-y-4">
-            <div class="h-6 bg-gray-200 rounded w-3/4"></div>
-            <div class="h-4 bg-gray-200 rounded w-1/2"></div>
-            <div class="h-4 bg-gray-200 rounded"></div>
-            <div class="h-4 bg-gray-200 rounded"></div>
-            <div class="h-4 bg-gray-200 rounded w-2/3"></div>
+            <div class="h-6 bg-gray-200 rounded w-3/4" />
+            <div class="h-4 bg-gray-200 rounded w-1/2" />
+            <div class="h-4 bg-gray-200 rounded" />
+            <div class="h-4 bg-gray-200 rounded" />
+            <div class="h-4 bg-gray-200 rounded w-2/3" />
           </div>
         </template>
       </Card>
@@ -97,9 +87,13 @@ function prevPage() {
 
     <!-- Error State -->
     <div v-else-if="error" class="text-center py-16">
-      <i class="pi pi-exclamation-triangle text-6xl text-red-500 mb-4"></i>
-      <h3 class="text-xl font-semibold mb-2">Failed to load blog posts</h3>
-      <p class="mb-6">{{ error.message }}</p>
+      <i class="pi pi-exclamation-triangle text-6xl text-red-500 mb-4" />
+      <h3 class="text-xl font-semibold mb-2">
+        Failed to load blog posts
+      </h3>
+      <p class="mb-6">
+        {{ error.message }}
+      </p>
       <Button label="Try Again" icon="pi pi-refresh" @click="refresh()" />
     </div>
 
@@ -112,24 +106,26 @@ function prevPage() {
             <template #content>
               <div class="p-6">
                 <h2 class="text-2xl font-semibold mb-2">
-                  <NuxtLink 
-                    :to="`/blog/${post.id}`" 
+                  <NuxtLink
+                    :to="`/blog/${post.id}`"
                     class="text-inherit hover:text-primary transition-colors cursor-pointer"
                   >
                     {{ post.title }}
                   </NuxtLink>
                 </h2>
-                <p class="text-sm mb-4">{{ formatDate(post.created_at) }}</p>
+                <p class="text-sm mb-4">
+                  {{ formatDate(post.created_at) }}
+                </p>
                 <div class="prose max-w-none">
                   <p>{{ post.body.substring(0, 300) }}{{ post.body.length > 300 ? '...' : '' }}</p>
                 </div>
                 <div class="mt-4">
-                  <Button 
-                    label="Read More" 
-                    variant="text" 
+                  <Button
+                    label="Read More"
+                    variant="text"
                     size="small"
-                    @click="$router.push(`/blog/${post.id}`)"
                     class="text-primary hover:text-primary-600"
+                    @click="$router.push(`/blog/${post.id}`)"
                   />
                 </div>
               </div>
@@ -140,11 +136,11 @@ function prevPage() {
         <!-- Pagination Controls -->
         <div class="flex items-center justify-between">
           <div class="text-sm">
-            Showing {{ currentPage * pageSize + 1 }} to 
-            {{ Math.min((currentPage + 1) * pageSize, blogData.pagination.total) }} 
+            Showing {{ currentPage * pageSize + 1 }} to
+            {{ Math.min((currentPage + 1) * pageSize, blogData.pagination.total) }}
             of {{ blogData.pagination.total }} posts
           </div>
-          
+
           <Paginator
             v-model:first="paginatorFirst"
             :rows="pageSize"
@@ -156,12 +152,16 @@ function prevPage() {
 
       <!-- Empty State -->
       <div v-else class="text-center py-16">
-        <i class="pi pi-file-edit text-6xl mb-4"></i>
-        <h3 class="text-xl font-semibold mb-2">No blog posts yet</h3>
-        <p class="mb-6">Get started by creating your first blog post</p>
-        <Button 
-          label="Create Your First Post" 
-          icon="pi pi-plus" 
+        <i class="pi pi-file-edit text-6xl mb-4" />
+        <h3 class="text-xl font-semibold mb-2">
+          No blog posts yet
+        </h3>
+        <p class="mb-6">
+          Get started by creating your first blog post
+        </p>
+        <Button
+          label="Create Your First Post"
+          icon="pi pi-plus"
           @click="$router.push('/blog/new')"
         />
       </div>

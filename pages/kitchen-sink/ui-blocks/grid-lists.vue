@@ -519,7 +519,7 @@ function formatDate(dateString: string) {
         <template #content>
           <div class="border border-surface-200 dark:border-surface-700 rounded-lg overflow-hidden">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 divide-x divide-y divide-surface-200 dark:divide-surface-700">
-              <div v-for="(member, index) in teamMembers" :key="member.id" class="p-6 hover:bg-surface-50 dark:hover:bg-surface-800 transition-colors">
+              <div v-for="member in teamMembers" :key="member.id" class="p-6 hover:bg-surface-50 dark:hover:bg-surface-800 transition-colors">
                 <div class="text-center space-y-3">
                   <Avatar :image="member.avatar" size="large" shape="circle" class="mx-auto" />
                   <div>

@@ -25,11 +25,11 @@ async function onSubmit(event: any) {
   if (!event.valid) {
     return;
   }
-  
+
   isLoading.value = true;
-  
+
   try {
-    const newPost = await $trpc.blog.createPost.mutate({
+    await $trpc.blog.createPost.mutate({
       title: event.values.title,
       body: event.values.body,
     });
@@ -60,27 +60,29 @@ async function onSubmit(event: any) {
 <template>
   <div class="w-full max-w-6xl mx-auto p-6">
     <div class="flex items-center gap-4 mb-8">
-      <Button 
-        icon="pi pi-arrow-left" 
-        text 
+      <Button
+        icon="pi pi-arrow-left"
+        text
         @click="$router.push('/blog')"
       />
-      <h1 class="text-3xl font-bold">New Post</h1>
+      <h1 class="text-3xl font-bold">
+        New Post
+      </h1>
     </div>
 
     <Card>
       <template #content>
-        <Form 
-          :resolver="zodResolver(blogPostSchema)" 
+        <Form
+          v-slot="$form"
+          :resolver="zodResolver(blogPostSchema)"
           :initial-values="initialValues"
           @submit="onSubmit"
-          v-slot="$form"
         >
           <div class="space-y-6">
             <!-- Title Field -->
             <div>
               <label class="font-medium text-sm">Title</label>
-              <InputText 
+              <InputText
                 name="title"
                 type="text"
                 placeholder="Enter post title"
@@ -94,7 +96,7 @@ async function onSubmit(event: any) {
             <!-- Body Field -->
             <div>
               <label class="font-medium text-sm">Body</label>
-              <Textarea 
+              <Textarea
                 name="body"
                 placeholder="Write your post content here..."
                 rows="10"
@@ -107,15 +109,15 @@ async function onSubmit(event: any) {
 
             <!-- Submit Button -->
             <div class="flex justify-between gap-4">
-              <Button 
+              <Button
                 type="button"
-                label="Cancel" 
+                label="Cancel"
                 severity="secondary"
                 @click="$router.push('/blog')"
               />
-              <Button 
-                type="submit" 
-                label="Publish Post" 
+              <Button
+                type="submit"
+                label="Publish Post"
                 icon="pi pi-send"
                 :loading="isLoading"
               />

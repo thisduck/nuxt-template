@@ -61,7 +61,7 @@ const availableLanguages = ref([]);
 // Load programming languages from backend
 onMounted(async () => {
   try {
-    const languages = await $trpc.getProgrammingLanguages.query();
+    const languages = await $trpc.examples.getProgrammingLanguages.query();
     availableLanguages.value = languages;
   } catch (error) {
     console.error('Failed to load languages:', error);

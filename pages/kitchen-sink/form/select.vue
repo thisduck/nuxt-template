@@ -107,9 +107,9 @@ const filterDebounceTimeout = ref(null);
 // Load categories on mount
 onMounted(async () => {
   try {
-    categories.value = await $trpc.getCategories.query();
+    categories.value = await $trpc.examples.getCategories.query();
     // Load initial products
-    const result = await $trpc.getFilteredProducts.query({ filter: '' });
+    const result = await $trpc.examples.getFilteredProducts.query({ filter: '' });
     filteredProducts.value = Array.isArray(result) ? result : [];
   } catch (error) {
     console.error('Failed to load data:', error);
@@ -127,7 +127,7 @@ async function onFilterProducts(event) {
   // Debounce the API call
   filterDebounceTimeout.value = setTimeout(async () => {
     try {
-      const result = await $trpc.getFilteredProducts.query({
+      const result = await $trpc.examples.getFilteredProducts.query({
         filter: event.value || '',
       });
       filteredProducts.value = Array.isArray(result) ? result : [];

@@ -122,7 +122,7 @@ const filterDebounceTimeout = ref(null);
 // Load initial tags
 onMounted(async () => {
   try {
-    filteredTags.value = await $trpc.getFilteredTags.query({ filter: '' });
+    filteredTags.value = await $trpc.examples.getFilteredTags.query({ filter: '' });
   } catch (error) {
     console.error('Failed to load tags:', error);
   }
@@ -138,7 +138,7 @@ async function onFilterTags(event) {
   // Debounce the API call
   filterDebounceTimeout.value = setTimeout(async () => {
     try {
-      filteredTags.value = await $trpc.getFilteredTags.query({
+      filteredTags.value = await $trpc.examples.getFilteredTags.query({
         filter: event.value || '',
       });
     } catch (error) {

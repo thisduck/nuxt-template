@@ -2,8 +2,6 @@
 import { ref } from 'vue';
 
 const searchQuery = ref('');
-const filterStatus = ref('all');
-const sortBy = ref('name');
 
 const projects = ref([
   {
