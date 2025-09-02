@@ -1,10 +1,12 @@
 import { z } from 'zod';
 import { baseProcedure, createTRPCRouter } from '~/server/trpc/init';
 import { blogRouter } from './blog';
+import { commentsRouter } from './comments';
 import { examplesRouter } from './examples';
 
 export const appRouter = createTRPCRouter({
   blog: blogRouter,
+  comments: commentsRouter,
   examples: examplesRouter,
   hello: baseProcedure
     .input(

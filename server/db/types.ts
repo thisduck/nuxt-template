@@ -9,6 +9,7 @@ import type {
 export interface Database {
   users: UserTable
   blog_posts: BlogPostTable
+  comments: CommentTable
 }
 
 export interface UserTable {
@@ -34,3 +35,16 @@ export interface BlogPostTable {
 export type BlogPost = Selectable<BlogPostTable>;
 export type BlogPostUpdate = Updateable<BlogPostTable>;
 export type BlogPostInsert = Insertable<BlogPostTable>;
+
+export interface CommentTable {
+  id: Generated<number>
+  blog_post_id: number
+  name: string
+  body: string
+  created_at: ColumnType<Date, string | undefined, never>
+  updated_at: ColumnType<Date, string | undefined, never>
+}
+
+export type Comment = Selectable<CommentTable>;
+export type CommentUpdate = Updateable<CommentTable>;
+export type CommentInsert = Insertable<CommentTable>;
